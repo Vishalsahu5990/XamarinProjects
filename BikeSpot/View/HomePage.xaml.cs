@@ -12,10 +12,11 @@ namespace BikeSpot
 	{
 		public ICommand OpenMenuCommand { get; private set; }
 		List<Product> _listProduct = null;
-ProductItemsList _items = null;
-double itemWidth = 140;
+		ProductItemsList _items = null;
+		double itemWidth = 140;
 		bool flag = false;
-public HomePage()
+		private int _lastItemAppearedIdx;
+		public HomePage()
 		{
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
@@ -32,13 +33,16 @@ public HomePage()
 		{
 			base.OnAppearing();
 			if (!flag)
-			GetProducts().Wait();
+				GetProducts().Wait();
 			btnLoadMore.Clicked += BtnLoadMore_Clicked;
+			flowlistview1.FlowItemAppearing += Flowlistview1_FlowItemAppearing;
+
 		}
 		protected override void OnDisappearing()
 		{
 			base.OnDisappearing();
 			btnLoadMore.Clicked -= BtnLoadMore_Clicked;
+			flowlistview1.FlowItemAppearing -= Flowlistview1_FlowItemAppearing;
 		}
 
 		public HomePage(List<Product> listProduct)
@@ -50,24 +54,41 @@ public HomePage()
 			Icon = "menu.png";
 			Title = "menu";
 			NavigationPage.SetHasNavigationBar(this, false);
-
 			PrepareUI();
 
 
 		}
 
-		async	void Handle_FlowItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+		void Flowlistview1_FlowItemAppearing(object sender, ItemVisibilityEventArgs e)
 		{
-            var item = e.Item as Product;
-			if (item.listing_type == "advertisement")
+			var currentIdx = _items.Items.IndexOf(e.Item as Product);
+
+			if (currentIdx > _lastItemAppearedIdx)
 			{
+				System.Diagnostics.Debug.WriteLine("Up");
+				_items.Items[0].isEnableListview = true;
+			}
+			else
+			{
+				System.Diagnostics.Debug.WriteLine("Down");
+			}
+
+			_lastItemAppearedIdx = _items.Items.IndexOf(e.Item as Product);
+		}
+
+		async void Handle_FlowItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+		{
+			var item = e.Item as Product;
+			if (item.listing_type == "advertisement") 
+			{
+				_items.Items[0].isEnableListview = false;
 				if (!string.IsNullOrEmpty(item.redirect_url))
 					Device.OpenUri(new Uri(item.redirect_url));
 			}
 			else
 			{
 				await Navigation.PushAsync(new ProductDetailsPage(item));
-			}	
+			}
 		}
 
 
@@ -77,7 +98,7 @@ public HomePage()
 			try
 			{
 				flowlistview1.FlowColumnMinWidth = App.ScreenWidth;
-			    itemWidth = App.ScreenWidth / 2;
+				itemWidth = App.ScreenWidth / 2;
 
 
 				if (StaticMethods.IsIpad())
@@ -86,7 +107,7 @@ public HomePage()
 
 				}
 
-			
+
 				btnLoadMore.IsVisible = false;
 			}
 			catch (Exception ex)
@@ -107,20 +128,20 @@ public HomePage()
 
 			}
 		}
-async void filter_Tapped(object sender, System.EventArgs e)
-{
-	try
-	{
+		async void filter_Tapped(object sender, System.EventArgs e)
+		{
+			try
+			{
 				await Navigation.PushAsync(new FilterPage());
 
-	}
-	catch (Exception ex)
-	{
+			}
+			catch (Exception ex)
+			{
 
 
-	}
+			}
 		}
-async void add_bike_Tapped(object sender, System.EventArgs e)
+		async void add_bike_Tapped(object sender, System.EventArgs e)
 		{
 			try
 			{
@@ -146,93 +167,94 @@ async void add_bike_Tapped(object sender, System.EventArgs e)
 
 			}
 		}
-private async Task GetProducts()
-{
+		private async Task GetProducts()
+		{
 
-	StaticMethods.ShowLoader();
-	Task.Factory.StartNew(
-			// tasks allow you to use the lambda syntax to pass wor
-			() =>
-			{
-
-				_listProduct = WebService.GetAllProductList();
-
-
-			}).ContinueWith(async
-					t =>
-			{
-				try
-				{
-					string imgData = string.Empty;
-					if (_listProduct != null)
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(
+					// tasks allow you to use the lambda syntax to pass wor
+					() =>
 					{
-						for (int i = 0; i < _listProduct.Count; i++)
+
+						_listProduct = WebService.GetAllProductList();
+
+
+					}).ContinueWith(async
+					t =>
+					{
+						try
 						{
-							_listProduct[i].columnWidth = itemWidth;
-
-							for (int j = 0; j < _listProduct[i].list.Count; j++)
+							string imgData = string.Empty;
+							if (_listProduct != null)
 							{
-								if (_listProduct[i].list.Count <= 2)
+								for (int i = 0; i < _listProduct.Count; i++)
 								{
-									_listProduct[i].listviewHeight = itemWidth - 10;
-								}
-								else if (_listProduct[i].list.Count == 4)
-								{
-									_listProduct[i].listviewHeight = (itemWidth * 2) - 20;
-								}
-								else
-								{
-									_listProduct[i].listviewHeight = (itemWidth * 3) - 30;
-								}
+									_listProduct[i].columnWidth = itemWidth;
 
-								if (_listProduct[i].list[j].listing_type == "product")
-								{
-									if (_listProduct[i].list[j].add_to_top == "1")
+									for (int j = 0; j < _listProduct[i].list.Count; j++)
 									{
-										_listProduct[i].list[j].isTopEnable = true;
-										_listProduct[i].list[j].borderColor = "Red";
-									}
-									else
-									{
-										_listProduct[i].list[j].isTopEnable = false;
-										_listProduct[i].list[j].borderColor = "Silver";
-									}
-									if (!string.IsNullOrEmpty(_listProduct[i].list[j].product_image))
-									{
-										imgData = _listProduct[i].list[j].product_image;
+										if (_listProduct[i].list.Count <= 2)
+										{
+											_listProduct[i].listviewHeight = itemWidth - 10;
+										}
+										else if (_listProduct[i].list.Count == 4)
+										{
+											_listProduct[i].listviewHeight = (itemWidth * 2) - 20;
+										}
+										else
+										{
+											_listProduct[i].listviewHeight = (itemWidth * 3) - 30;
+										}
 
-									}
-									_listProduct[i].list[j].width = itemWidth - 15;
-									_listProduct[i].list[j].imageHeight = itemWidth - 50;
-									var array = imgData.Split(',');
-									if (array != null)
-									{
-										_listProduct[i].list[j].product_image = Constants.ImageUrl + array[0];
+										if (_listProduct[i].list[j].listing_type == "product")
+										{
+											if (_listProduct[i].list[j].add_to_top == "1")
+											{
+												_listProduct[i].list[j].isTopEnable = true;
+												_listProduct[i].list[j].borderColor = "Red";
+											}
+											else
+											{
+												_listProduct[i].list[j].isTopEnable = false;
+												_listProduct[i].list[j].borderColor = "Silver";
+											}
+											if (!string.IsNullOrEmpty(_listProduct[i].list[j].product_image))
+											{
+												imgData = _listProduct[i].list[j].product_image;
+
+											}
+											_listProduct[i].list[j].width = itemWidth - 15;
+											_listProduct[i].list[j].imageHeight = itemWidth - 50;
+											var array = imgData.Split(',');
+											if (array != null)
+											{
+												_listProduct[i].list[j].product_image = Constants.ImageUrl + array[0];
+											}
+										}
+										else
+										{
+											_listProduct[i].list[j].product_image = _listProduct[i].list[j].advertisement_img;
+											_listProduct[i].list[j].imageHeight = itemWidth - 20;
+											_listProduct[i].list[j].width = itemWidth - 15;
+											_listProduct[i].list[j].borderColor = "Silver";
+										}
 									}
 								}
-								else
-								{
-									_listProduct[i].list[j].product_image = _listProduct[i].list[j].advertisement_img;
-									_listProduct[i].list[j].imageHeight = itemWidth - 20;
-									_listProduct[i].list[j].width = itemWidth - 15;
-									_listProduct[i].list[j].borderColor = "Silver";
-								}
+								_items = new ProductItemsList(_listProduct);
+								flowlistview1.FlowItemsSource = _items.Items;
+						         _items.Items[0].isEnableListview = true;
 							}
 						}
-						_items = new ProductItemsList(_listProduct);
-						flowlistview1.FlowItemsSource = _items.Items;
-					}
-				}
-				catch (Exception ex)
-				{
+						catch (Exception ex)
+						{
 
-				}
+						}
 
 
-				StaticMethods.DismissLoader();
+						StaticMethods.DismissLoader();
 
-			}, TaskScheduler.FromCurrentSynchronizationContext()
-		);
+					}, TaskScheduler.FromCurrentSynchronizationContext()
+				);
 		}
 
 		async void BtnLoadMore_Clicked(object sender, EventArgs e)

@@ -42,7 +42,8 @@ namespace BikeSpot
 		public double listviewHeight { get; set; }
         public double imageHeight { get; set; } 
 		public string email { get; set; } 
-		public bool isTopEnable { get; set; } 
+		public bool isTopEnable { get; set; }
+		public bool isEnableListview { get; set; } 
 		public string borderColor { get; set; }
 		public List<Product> list { get; set; }    
 	}

@@ -678,6 +678,9 @@
     <BundleResource Include="Resources\navigationcart%403x.png" />
     <BundleResource Include="Resources\navigationcart.png" />
     <BundleResource Include="Resources\navigationcart%402x.png" />
+    <BundleResource Include="Resources\dummyprofile%403x.png" />
+    <BundleResource Include="Resources\dummyprofile%402x.png" />
+    <BundleResource Include="Resources\dummyprofile.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="elcimagepicker">

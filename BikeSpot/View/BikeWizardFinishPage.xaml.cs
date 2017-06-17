@@ -111,7 +111,7 @@ private async Task GetProducts()
 					if (_listProduct != null)
 					{
 						if (_listProduct.Count > 0)
-							await Navigation.PushAsync(new HomePage(_listProduct));
+							await Navigation.PushModalAsync(new HomePage(_listProduct));
 						else
 							StaticMethods.ShowToast("No products found!");
 

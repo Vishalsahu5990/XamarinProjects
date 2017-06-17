@@ -203,7 +203,7 @@ namespace BikeSpot
 						{
 							if (resultModel != null)
 							{
-								Navigation.PushAsync(new BikeWizardFinishPage(resultModel));
+						Navigation.PushModalAsync(new BikeWizardFinishPage(resultModel));
 					}
 						});
 

@@ -18,7 +18,7 @@ namespace BikeSpot
 		public Label _lblEmail { get { return lblEmail; } }
 
 		public StackLayout _slHome { get { return slHome; } }
-		public StackLayout _slProfile { get { return slProfile; } }
+		//public StackLayout _slProfile { get { return slProfile; } }
 		public StackLayout _slSell { get { return slSell; } }
 		public StackLayout _slRent { get { return slRent; } }
 		public StackLayout _slMessages { get { return slMessages; } }

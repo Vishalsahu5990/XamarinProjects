@@ -19,7 +19,15 @@ public class MyListviewRenderer : ListViewRenderer
 
 		var tableView = Control as UITableView;
 		tableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
-			tableView.ScrollEnabled = false;
+			//tableView.ScrollEnabled = false;
+
+			tableView.Scrolled+= TableView_Scrolled;
+
         }
-    }
+
+		void TableView_Scrolled(object sender, EventArgs e)
+		{
+
+		}
+	}
 }

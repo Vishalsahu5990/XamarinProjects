@@ -46,11 +46,11 @@
 						<controls:CircleImage
 							x:Name="imgProfile"
 							Aspect="AspectFill"
-							Source="profile.jpg"
-							HeightRequest="100" 
-			WidthRequest="100"
+							Source="dummyprofile"
+							HeightRequest="80" 
+			WidthRequest="80"
 			VerticalOptions="Start"
-									BorderColor="Transparent"
+									BorderColor="Transparent" 
 									BorderThickness="3"
 					HorizontalOptions="Start"
 						Margin="0,0,0,0"/> 
@@ -87,12 +87,12 @@
 				<Label Text="Home"
 				VerticalOptions="Center"
 				TextColor="Gray"
-				FontSize="20"
-								Margin="25,0,0,0"
+				FontSize="Medium"
+								Margin="15,0,0,0"
 							HorizontalTextAlignment="Center"/>
 			</StackLayout>
 						
-			<StackLayout x:Name="slProfile" Orientation="Horizontal" Spacing="15">
+			<!--<StackLayout x:Name="slProfile" Orientation="Horizontal" Spacing="15">
 		<Image Source="profile_nav" />
 				<Label Text="Profile"
 				VerticalOptions="Center"
@@ -100,46 +100,46 @@
 				FontSize="20"
 								Margin="25,0,0,0"
 							HorizontalTextAlignment="Center"/>
-			</StackLayout>
+			</StackLayout>-->
 		<StackLayout x:Name="slSell" Orientation="Horizontal" Spacing="15">
 		<Image Source="navigationcart"/>
 				<Label Text="Sell a bike"
 				VerticalOptions="Center"
 				TextColor="Gray"
-				FontSize="20"
-							Margin="25,0,0,0"/>
+				FontSize="Medium"
+							Margin="15,0,0,0"/>
 			</StackLayout>
 			<StackLayout x:Name="slRent" Orientation="Horizontal"  Spacing="15">
 		<Image Source="navigationbike"/>
 				<Label Text="Rent a bike"
 				VerticalOptions="Center"
 				TextColor="Gray"
-				FontSize="20"
-							Margin="25,0,0,0"/>
+				FontSize="Medium"
+							Margin="15,0,0,0"/>
 			</StackLayout>
 			<StackLayout x:Name="slMessages" Orientation="Horizontal" Spacing="15">
 		<Image Source="navigationenvelope"/>
 				<Label Text="Messages"
 				VerticalOptions="Center"
 				TextColor="Gray"
-				FontSize="20"
-							Margin="25,0,0,0"/>
+				FontSize="Medium"
+							Margin="15,0,0,0"/>
 			</StackLayout>
 			<StackLayout x:Name="slBikeWizard" Orientation="Horizontal" Spacing="15">
 		<Image Source="navigationmagic"/>
 				<Label Text="Bike Wizard"
 				VerticalOptions="Center"
 				TextColor="Gray"
-				FontSize="20"
-							Margin="25,0,0,0"/>
+				FontSize="Medium"
+							Margin="15,0,0,0"/>
 			</StackLayout>
 			<StackLayout x:Name="slUpgrades" Orientation="Horizontal" Spacing="15">
 		<Image Source="navigationwheel"/>
 				<Label Text="Upgrades"
 				VerticalOptions="Center"
 				TextColor="Gray"
-				FontSize="20"
-							Margin="25,0,0,0"/>
+				FontSize="Medium"
+							Margin="15,0,0,0"/>
 			</StackLayout>
 		</StackLayout>
 		<BoxView BackgroundColor="Gray"
@@ -153,32 +153,32 @@
 				<Label Text="Private / Retailer Account"
 				VerticalOptions="Center"
 				TextColor="Gray"
-				FontSize="20"/>
-			<Image Source="info-alt-128" HorizontalOptions="EndAndExpand" Margin="10"/>
+				FontSize="Medium"/>
+			<Image Source="navigationhyelp" HorizontalOptions="EndAndExpand" Margin="10"/>
 			</StackLayout>
 		<StackLayout x:Name="slFaq" Orientation="Horizontal" >
 
 				<Label Text="FAQ"
 				VerticalOptions="Center"
 				TextColor="Gray"
-				FontSize="20"/>
-			<Image Source="info-alt-128" HorizontalOptions="EndAndExpand" Margin="10"/>
+				FontSize="Medium"/>
+			<Image Source="navigationhyelp" HorizontalOptions="EndAndExpand" Margin="10"/>
 			</StackLayout>
 		<StackLayout x:Name="slContact"  Orientation="Horizontal"  >
 
 				<Label Text="Contact"
 				VerticalOptions="Center"
 				TextColor="Gray"
-				FontSize="20"/> 
-			<Image Source="info-alt-128" HorizontalOptions="EndAndExpand" Margin="10"/>
+				FontSize="Medium"/> 
+			<Image Source="navigationhyelp" HorizontalOptions="EndAndExpand" Margin="10"/>
 			</StackLayout>
 		<StackLayout x:Name="slSiteNotice" Orientation="Horizontal">
 
 				<Label Text="Site Notice"
 				VerticalOptions="Center"
 				TextColor="Gray"
-				FontSize="20"/>
-			<Image Source="info-alt-128" HorizontalOptions="EndAndExpand" Margin="10"/>
+				FontSize="Medium"/>
+			<Image Source="navigationhyelp" HorizontalOptions="EndAndExpand" Margin="10"/>
 			</StackLayout>
 				</StackLayout>
 
