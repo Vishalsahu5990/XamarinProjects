@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot" 
+	xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView" 
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+	x:Class="BikeSpot.HomePage"
+	Icon="menu.png" 
+	Title="Home"> 
+	<StackLayout VerticalOptions="FillAndExpand">
+		<StackLayout Padding="0,10,0,0" Orientation="Horizontal" HeightRequest="80" BackgroundColor="#20D1C8">
+			<StackLayout VerticalOptions="FillAndExpand">
+				<Image Source="menu" VerticalOptions="CenterAndExpand" Margin="20" />
+				<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="menu_Tapped" /> 
+				</StackLayout.GestureRecognizers>
+			</StackLayout>
+			<Image Aspect="AspectFill" Margin="20" Source="logo" HorizontalOptions="CenterAndExpand" />
+			<Image Source="search" />
+			<Image Source="filter-toggle" Margin="10,10,10,15">
+				<Image.GestureRecognizers>
+					<TapGestureRecognizer Tapped="filter_Tapped" /> 
+				</Image.GestureRecognizers> 
+			</Image> 
+		</StackLayout>  
+		<StackLayout> 
+		<ScrollView> 
+				<StackLayout   Spacing="0" Padding="0,0,0,50">
+					<StackLayout >
+					<flv:FlowListView BackgroundColor="Transparent"
+		Margin="0,10,0,0" 
+		SeparatorVisibility="None" 
+		HasUnevenRows="true" 
+		FlowItemTappedCommand="{Binding ItemTappedCommand}" 
+		FlowLastTappedItem="{Binding LastTappedItem}"
+		FlowItemsSource="{Binding _items.Items}"
+		x:Name="flowlistview1" 
+		FlowColumnMinWidth="320"
+		>
+							<flv:FlowListView.FlowColumnTemplate>
+								<DataTemplate>
+				
+									<Grid Padding="0" >
+										<Grid.RowDefinitions>
+											<RowDefinition Height="*" />
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+				<local:CustomScrollView>
+											<StackLayout>
+										
+										<StackLayout Orientation="Vertical" 
+													x:Name="_slViewCell"
+													HorizontalOptions="FillAndExpand" 
+													>
+			
+					
+      
+						<flv:FlowListView 
+							Margin="0,5,0,0"
+							BackgroundColor="Transparent" 
+							SeparatorVisibility="None" 
+							HasUnevenRows="true"
+							FlowItemTappedCommand="{Binding ItemTappedCommand}" 
+							FlowLastTappedItem="{Binding LastTappedItem}"
+							x:Name="flowlistviewViewCellGrid" 
+							FlowItemsSource="{Binding list}"
+							FlowColumnMinWidth="{Binding columnWidth}"
+						    HeightRequest="{Binding listviewHeight}"
+							FlowItemTapped="Handle_FlowItemTapped"
+							IsEnabled="false">
+							<flv:FlowListView.FlowColumnTemplate>
+								<DataTemplate> 
+									<Grid Padding="3" ColumnSpacing="0">   
+										<Grid.RowDefinitions>
+											<RowDefinition Height="*" />
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+
+										<StackLayout Orientation="Horizontal" 
+												HorizontalOptions="FillAndExpand"
+												>
+
+										<RelativeLayout
+										HeightRequest="{Binding width}"
+										WidthRequest="{Binding width}"
+										Padding="0" 
+										>   	 
+			<Frame Padding="3"
+				HasShadow="false"
+				OutlineColor="{Binding borderColor}"
+				HeightRequest="{Binding width}"
+				WidthRequest="{Binding width}"
+				HorizontalOptions="CenterAndExpand" 
+				RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+               RelativeLayout.HeightConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+					<Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+				<StackLayout VerticalOptions="FillAndExpand">  
+							<ffimageloading:CachedImage 
+							Aspect="AspectFill"  
+							DownsampleUseDipUnits="false"   
+							LoadingPlaceholder="profile.jpg"   
+							ErrorPlaceholder="profile.jpg"   
+							Source="{Binding product_image}" 
+							HorizontalOptions="FillAndExpand" 
+							HeightRequest="{Binding imageHeight}"
+							WidthRequest="{Binding columnWidth}"/> 
+					
+					<StackLayout Orientation="Horizontal" >
+					<Grid HorizontalOptions="FillAndExpand">
+					<Label Text="{Binding product_name}"    
+					FontSize="Small"
+					LineBreakMode="TailTruncation"
+					WidthRequest="60"
+					Grid.Column="0"
+					HorizontalTextAlignment="Start"/>
+
+													<Label Text="{Binding price}"
+								HorizontalTextAlignment="End"
+					FontSize="Small"
+					LineBreakMode="TailTruncation" 
+								WidthRequest="60"
+						Grid.Column="1"/>
+					</Grid> 
+					</StackLayout>
+
+				</StackLayout>
+
+					<StackLayout Orientation="Horizontal" VerticalOptions="Start">
+							<Image Source="top1" 
+			HorizontalOptions="EndAndExpand"
+			IsVisible="{Binding isTopEnable}"/> 
+						</StackLayout>								
+													</Grid>
+				</Frame>
+
+				</RelativeLayout>
+											
+					</StackLayout>	
+									
+									</Grid>
+								</DataTemplate>
+							</flv:FlowListView.FlowColumnTemplate>
+						</flv:FlowListView>
+
+
+   
+					
+    															
+											
+						<StackLayout IsVisible="true"
+												HorizontalOptions="FillAndExpand"
+												BackgroundColor="Silver"
+												x:Name="_firstAd" 
+												VerticalOptions="Center"
+												HeightRequest="40">
+							<local:AdView HorizontalOptions="FillAndExpand">
+							</local:AdView>
+						</StackLayout>
+					                   </StackLayout>
+							</StackLayout>
+										</local:CustomScrollView>
+									</Grid>
+					
+								</DataTemplate>
+							</flv:FlowListView.FlowColumnTemplate>
+						</flv:FlowListView>
+
+					</StackLayout>
+						<Button IsVisible="false" 
+					HeightRequest="50" 
+					WidthRequest="120" 
+					Text="Load more..." 
+					BackgroundColor="#EC7102" 
+					TextColor="White"
+					HorizontalOptions="Center"
+					x:Name="btnLoadMore" />
+					
+				</StackLayout> 
+			</ScrollView>
+		</StackLayout>
+		<!-- static Footer	-->
+		<RelativeLayout>
+			<StackLayout x:Name="_slFooter" HeightRequest="60" Orientation="Horizontal" BackgroundColor="#1AB4AD" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
+				<Grid HorizontalOptions="FillAndExpand" ColumnSpacing="1" RowSpacing="0">
+					<StackLayout Spacing="5" Grid.Column="0" BackgroundColor="#20D1C8" VerticalOptions="FillAndExpand">
+						<Image
+						Source="prifle_footer" VerticalOptions="CenterAndExpand"
+						/>
+						<Label Text="Profile" HorizontalOptions="Center" 
+						 TextColor="White"/>
+						<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="profile_Tapped" /> 
+				</StackLayout.GestureRecognizers>
+					</StackLayout>
+					<StackLayout  Grid.Column="1" VerticalOptions="FillAndExpand" Padding="0" Margin="0">
+						<StackLayout BackgroundColor="#12E5D9" VerticalOptions="FillAndExpand">
+							<Image Source="logo copy 2" VerticalOptions="CenterAndExpand" Margin="10" />
+						</StackLayout>
+					</StackLayout>
+					<StackLayout Spacing="5" Grid.Column="2" BackgroundColor="#20D1C8"
+						VerticalOptions="FillAndExpand">
+						<Image Source="add_bike" VerticalOptions="CenterAndExpand"
+						/>
+						<Label Text="Add Bike" 
+						HorizontalOptions="Center" 
+						 TextColor="White"/>
+						<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="add_bike_Tapped" />
+				</StackLayout.GestureRecognizers>
+					</StackLayout>
+				</Grid>
+			</StackLayout>
+		</RelativeLayout> 
+	</StackLayout>
+</ContentPage>

@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="BikeSpot.FilterPage"
+	 xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot">
+	<StackLayout>
+
+
+		
+	<StackLayout Padding="0,10,0,0" Orientation="Horizontal" HeightRequest="80" BackgroundColor="#20D1C8" >
+	<StackLayout VerticalOptions="FillAndExpand"  Orientation="Horizontal">
+				<StackLayout VerticalOptions="FillAndExpand">
+				<Image Source="back" VerticalOptions="CenterAndExpand" Margin="25,25,5,25" />
+
+				<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="back_Tapped" />
+				</StackLayout.GestureRecognizers>
+			</StackLayout>
+	
+			<Label Text="Filter" VerticalOptions="Center" 
+			FontSize="22"
+				TextColor="White"/>	
+			</StackLayout>
+			
+			<Image Source="tick"
+			Margin="20" HorizontalOptions="EndAndExpand">
+			<Image.GestureRecognizers>
+					<TapGestureRecognizer Tapped="Done_Tapped" /> 
+				</Image.GestureRecognizers>
+			</Image>
+	</StackLayout>
+	<ScrollView>
+	<StackLayout Padding="15">
+	<StackLayout>
+
+		<StackLayout VerticalOptions="Start"  Orientation="Horizontal">
+	<Image  Source="bike" VerticalOptions="CenterAndExpand" Margin="20,0,0,0"/>
+			<Label Text="Type of bike" VerticalOptions="Center" 
+			FontSize="22"
+			TextColor="Gray"
+			Margin="10,0,0,0"/>	
+			</StackLayout>
+		<Grid Margin="0,15,0,0"  Padding="10,10,10,0">
+
+						
+						<Button Text="All"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="0"
+			TextColor="Gray"
+						x:Name="btnAll"
+						HeightRequest="40"/> 
+	<Button Text="Road Bikes"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="0"
+			TextColor="Gray"
+						x:Name="btnRoadBikes"
+						HeightRequest="40"/> 
+
+						
+			<Button Text="Mountain Bikes"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="1"
+			TextColor="Gray"
+						x:Name="btnMountainBikes"
+						HeightRequest="40"	/>
+			<Button Text="Hybrid Bikes"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="1"
+			TextColor="Gray"
+						x:Name="btnHybridBikes"
+						HeightRequest="40"	/>
+
+						
+			<Button Text="Touring Bikes"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="2"
+			TextColor="Gray"
+						x:Name="btnTouringBikes"
+						HeightRequest="40"	/>
+			<Button Text="City Bikes"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="2"
+			TextColor="Gray"
+						x:Name="btnCityBikes"
+						HeightRequest="40"	/>
+
+						
+			<Button Text="Folding Bikes"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="3"
+			TextColor="Gray"
+						x:Name="btnFoldingBikes"
+						HeightRequest="40"	/>
+			<Button Text="Electric Bikes"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="3"
+			TextColor="Gray"
+						x:Name="btnElectricBikes"
+						HeightRequest="40"	/>
+						</Grid>
+<!--			more types			-->
+						<Grid IsVisible="false" x:Name="gvMoreTypes"  Padding="10,0,10,10">
+
+
+			<Button Text="Singlespeed Bikes"
+			BackgroundColor="#E5E6E7"
+				TextColor="Gray"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="0"
+						x:Name="btnSingleSpeedBikes"
+						HeightRequest="40"	
+					/>
+<Button Text="Child's Bikes"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="0"
+			TextColor="Gray"
+						HeightRequest="40"
+						x:Name="btnChildsBike"
+						/> 
+
+						
+			<Button Text="Pedelec"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="1"
+			TextColor="Gray"
+						x:Name="btnPedlec"
+						HeightRequest="40"	
+						/>
+			<Button Text="Equipment"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="1"
+			TextColor="Gray"
+						x:Name="btnEquipment"
+						HeightRequest="40"	
+						/>
+
+
+						
+			<Button Text="BMX/Dirtbike"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="2"
+			TextColor="Gray"
+						x:Name="btnBmx"
+						HeightRequest="40"	/>
+			<Button Text="Fatbike"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="2"
+			TextColor="Gray"
+						x:Name="btnFatbike"
+						HeightRequest="40"	/>
+
+						
+			<Button Text="Cruiser"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="3"
+			TextColor="Gray"
+						x:Name="btnCruiser"
+						HeightRequest="40"	/>
+			<Button Text="Dutch Roadster"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="3"
+			TextColor="Gray"
+						x:Name="btnDutch"
+						HeightRequest="40"	/>
+
+						
+			<Button Text="Tandem"
+			BackgroundColor="#E5E6E7"
+				TextColor="Gray"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="4"
+						x:Name="btnTandem"
+						HeightRequest="40"	/>
+						<Button Text="Unicycle"
+			BackgroundColor="#E5E6E7"
+				TextColor="Gray"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="4"
+						x:Name="btnUnicycle"
+						HeightRequest="40"	/>
+
+		</Grid>
+		<Button Text="more..." TextColor="#20D1C8"
+					HorizontalOptions="EndAndExpand"
+					x:Name="btnMore"
+					Margin="0,0,25,0"/>
+
+		<StackLayout Spacing="10">
+
+		<StackLayout VerticalOptions="Start"  Orientation="Horizontal" Margin="20,0,0,0">
+	<Image    Source="price" VerticalOptions="CenterAndExpand" />
+			<Label Text="Price" VerticalOptions="Center" 
+			FontSize="22"
+			TextColor="Gray"
+			Margin="10,0,0,0"/>	
+			</StackLayout>  
+
+
+		<local:RangeSlider
+			x:Name="sliderPrice" 
+			MaximumValue="10,000" 
+			MinimumValue="1" 
+
+			LowerValue="1" 
+			UpperValue="100" 
+			StepValue="250" 
+			StepValueContinuously="False" 
+			TextSize="15"
+			HorizontalOptions="FillAndExpand"
+			Margin="10">
+							
+			<!--<RangeSlider.Effects>
+			 <local:MySliderEffects />
+							</RangeSlider.Effects>-->
+						</local:RangeSlider>
+
+		<Grid Margin="20,0,20,0"> 
+		<Label Text="100" VerticalOptions="Center"
+			
+			Grid.Column="0"
+							x:Name="lblStartPriceRange"/>
+
+			<Label Text="10000" VerticalOptions="Center"
+			Margin="0,0,20,0"
+			HorizontalOptions="EndAndExpand"
+		Grid.Column="1"
+							x:Name="lblEndPriceRange"/> 
+		</Grid>
+			
+		<StackLayout Margin="20,0,0,0" VerticalOptions="Start"  Orientation="Horizontal">
+	<Image  Source="distance" VerticalOptions="CenterAndExpand" />
+			<Label Text="Distance" VerticalOptions="Center" 
+			FontSize="22"
+			TextColor="Gray"
+			Margin="10,0,0,0"/>	
+			</StackLayout>
+
+
+		<local:RangeSlider
+			x:Name="sliderDistance"
+			MaximumValue="10000" 
+							MinimumValue="1" 
+							LowerValue="1" 
+			UpperValue="100" 
+			StepValue="250" 
+			StepValueContinuously="False" 
+			TextSize="15"
+			HorizontalOptions="FillAndExpand"
+
+		Margin="10"/>
+
+		<Grid Margin="20,0,20,0">
+		<Label  Text="0 KM" VerticalOptions="Center"
+			
+			Grid.Column="0"
+							x:Name="lblStartDistanceRange"/>
+
+			<Label Text="300 KM" VerticalOptions="Center"
+
+			HorizontalOptions="EndAndExpand"
+		Grid.Column="1"
+							x:Name="lblEndDistanceRange"/>
+		</Grid>
+		</StackLayout>	
+
+		<StackLayout Orientation="Horizontal" Margin="20,10,20,0">
+		<Image  Source="bike" VerticalOptions="CenterAndExpand" />
+			<Label Text="Condition" VerticalOptions="Center" 
+			FontSize="22"
+			TextColor="Gray"
+			Margin="10,0,0,0"/>	
+			</StackLayout>
+		<Grid Margin="0,15,0,15" Padding="10">
+	<Button Text="New"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="0"
+			TextColor="Gray"
+			x:Name="btnNew"
+			HeightRequest="40"			/>
+			<Button Text="Excellent"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="0"
+			TextColor="Gray"
+						x:Name="btnLikeNew"
+						HeightRequest="40"	/>
+			<Button Text="Good"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="1"
+			TextColor="Gray"
+						x:Name="btnRidable"
+						HeightRequest="40"	/>
+			<Button Text="Fair"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="1"
+			TextColor="Gray"
+						x:Name="btnUnridable"
+						HeightRequest="40"	/>
+
+		</Grid>
+					
+			<StackLayout Orientation="Horizontal" Margin="0,10,0,0">
+		<Image  Source="bike" VerticalOptions="CenterAndExpand" Margin="20,0,0,0"/>
+			<Label Text="Retailer/Private" VerticalOptions="Center" 
+			FontSize="22"
+			TextColor="Gray"
+			/>	
+			</StackLayout>
+		<Grid Margin="0,15,0,15" Padding="10">
+	<Button Text="Retailer"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="0"
+			TextColor="Gray"
+						x:Name="btnRetailer"
+						HeightRequest="40"/>
+			<Button Text="Private"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="0"
+			TextColor="Gray"
+						x:Name="btnPrivate"
+						HeightRequest="40"/>
+
+
+		</Grid>
+						
+						<StackLayout Orientation="Horizontal" Margin="20,0,0,0">
+		<Image  Source="bike" VerticalOptions="CenterAndExpand" />
+			<Label Text="Buy/Rent" VerticalOptions="Center" 
+			FontSize="22"
+			TextColor="Gray"
+			Margin="10,0,0,0"/>	
+			</StackLayout>
+		<Grid  Padding="10">
+	<Button Text="Buy"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0" 
+			Grid.Row="0"
+			TextColor="Gray"
+						x:Name="btnBuy"
+						HeightRequest="40"/>
+			<Button Text="Rent"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="0"
+			TextColor="Gray"
+						x:Name="btnRent"
+						HeightRequest="40"/>  
+
+
+		</Grid>
+		</StackLayout>
+
+<!--Gender-->
+				<StackLayout Spacing="0">
+
+		<StackLayout Orientation="Horizontal" Margin="20,20,0,0" Spacing="0">
+		<Image  Source="gender" VerticalOptions="CenterAndExpand" />
+			<Label Text="Gender" VerticalOptions="Center" 
+			FontSize="22"
+			TextColor="Gray"
+			Margin="10,0,0,0"/>	
+			</StackLayout>
+			<StackLayout Orientation="Horizontal"
+			Spacing="10" Margin="15,0,0,0" >
+					
+			<StackLayout  Orientation="Horizontal">
+			<Button HeightRequest="20"
+			WidthRequest="20"
+			BorderColor="Black"
+			BorderWidth="2"
+			BorderRadius="10"
+			VerticalOptions="EndAndExpand"
+			Image="radio_check"
+							x:Name="btnMale_rent"/>
+			<Label Text="Man"
+		 HorizontalOptions="Center"
+		Margin="0,30,0,0"
+			VerticalOptions="Center"
+				
+				VerticalTextAlignment="Center"
+			/><StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="male_rentTapped"/> 
+    </StackLayout.GestureRecognizers>
+						</StackLayout>	
+
+					
+						<StackLayout  Orientation="Horizontal">
+							<Button HeightRequest="20"
+			WidthRequest="20"
+			BorderColor="Black"
+			BorderWidth="2"
+			BorderRadius="10"
+			VerticalOptions="EndAndExpand"
+								x:Name="btnfeMale_rent"/>
+			<Label Text="Women"
+		 HorizontalOptions="Center"
+		Margin="0,30,0,0"
+			VerticalOptions="Center"
+				
+				VerticalTextAlignment="Center"
+			/><StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="female_rentTapped"/> 
+    </StackLayout.GestureRecognizers>
+						</StackLayout>	
+
+						
+						<StackLayout  Orientation="Horizontal">
+						<Button HeightRequest="20"
+			WidthRequest="20"
+			BorderColor="Black"
+			BorderWidth="2"
+			BorderRadius="10"
+			VerticalOptions="EndAndExpand"
+								x:Name="btnother_rent"/>
+			<Label Text="Unisex"
+		 HorizontalOptions="Center"
+		Margin="0,30,0,0"
+			VerticalOptions="Center"
+				
+				VerticalTextAlignment="Center"
+			/>
+					<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="other_rentTapped"/> 
+    </StackLayout.GestureRecognizers>	</StackLayout>		
+		
+					
+						
+
+					</StackLayout>
+					</StackLayout>
+
+
+				
+		</StackLayout>
+				
+			
+		</ScrollView>
+
+	</StackLayout>
+</ContentPage>

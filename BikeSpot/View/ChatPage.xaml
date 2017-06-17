@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+	    xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot" 
+	    xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+	
+	x:Class="BikeSpot.ChatPage">
+	<StackLayout>
+	<ScrollView>
+	<StackLayout> 
+	 
+<flv:FlowListView 
+			    x:Name="listview"
+                VerticalOptions="FillAndExpand"
+                RowHeight="100"
+				FlowColumnMinWidth="320" 
+               SeparatorColor="Gray"
+					Margin="0,0,0,0"
+				HeightRequest="400"> 
+                
+
+			<flv:FlowListView.FlowColumnTemplate>
+				<DataTemplate>
+						<StackLayout
+							Orientation="Horizontal"
+							Padding="10"
+							Spacing="0">
+
+<!--	incoming cell					-->
+
+			<StackLayout 
+			IsVisible="{Binding Incoming}" 
+			Orientation="Horizontal" 
+			HorizontalOptions="FillAndExpand">
+			<Image Source="add_free.png"
+			HeightRequest="30"
+			WidthRequest="30"
+			VerticalOptions="Start"/>
+			<Frame
+				Margin="0,0,30,0"
+				Padding="5"
+				HasShadow="false"
+				BackgroundColor="#20D1C8"
+				HorizontalOptions="StartAndExpand" 
+				WidthRequest="{Binding FrameWidth}"
+				HeightRequest="{Binding FrameHeight}">
+				<Label Text="{Binding Message}"
+				Margin="5"/>
+			</Frame>
+		    </StackLayout>			
+							  
+							  <!--		outgoing cell					-->
+
+							<StackLayout
+								IsVisible="{Binding Outgoing}"
+								Orientation="Horizontal" 
+			HorizontalOptions="EndAndExpand">
+			<Frame
+				x:Name="frameOutgoing" 
+				Margin="30,0,0,0"
+				Padding="5"
+				HasShadow="false"
+				BackgroundColor="#F0F1F2"
+				HorizontalOptions="EndAndExpand" 
+				WidthRequest="{Binding FrameWidth}"
+				HeightRequest="{Binding FrameHeight}">
+				<Label Text="{Binding Message}"
+				Margin="5"/>
+			</Frame>
+			<Image Source="add_free.png"
+			HeightRequest="30"
+			WidthRequest="30"
+			HorizontalOptions="EndAndExpand"
+			VerticalOptions="Start"/>
+		    </StackLayout>		
+												
+							</StackLayout>
+					
+					</DataTemplate>
+			</flv:FlowListView.FlowColumnTemplate>
+		
+		</flv:FlowListView>
+		<StackLayout BackgroundColor="#E9EAEB" HeightRequest="60"
+					Orientation="Horizontal"
+					HorizontalOptions="FillAndExpand"
+					Padding="10">
+		<Frame HorizontalOptions="FillAndExpand" Padding="0" HasShadow="false" VerticalOptions="Center">
+						<local:MyEntry 
+				    x:Name="txtMsg"
+					Placeholder="Write here..."
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="40"
+					FontSize="14"
+				Margin="05,0,0,0"
+			VerticalOptions="Center"
+			Keyboard="Chat"
+					BackgroundColor="White"/>
+					</Frame>
+
+			<Button
+				x:Name="btnSend"
+			TextColor="Black"  
+			Image="send-btn"
+			WidthRequest="40"
+			HeightRequest="40" 
+			BorderRadius="20"
+			VerticalOptions="Center"
+			Clicked="Send_Clicked"/>
+
+		</StackLayout>
+		</StackLayout> 
+
+				
+
+		
+
+		</ScrollView>
+		</StackLayout>
+</ContentPage>

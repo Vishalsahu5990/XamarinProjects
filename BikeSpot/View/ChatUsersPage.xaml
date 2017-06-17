@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+	    xmlns:local="clr-namespace:Sonny;assembly=Sonny" 
+	    xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+	
+	x:Class="BikeSpot.ChatUsersPage"
+>
+<StackLayout>
+<flv:FlowListView 
+			    x:Name="listview"
+                VerticalOptions="FillAndExpand"
+                RowHeight="100"
+				FlowColumnMinWidth="320" 
+               SeparatorColor="Gray"
+					Margin="0,0,0,0"
+				>
+                
+
+			<flv:FlowListView.FlowColumnTemplate>
+				<DataTemplate>
+					
+            <StackLayout Padding="8" Orientation="Horizontal" VerticalOptions="Start">
+		<Image Source="add_free"
+		HeightRequest="50"/>
+		<StackLayout Padding="5">
+			<Label Text="Kristi Jackes"
+			/>
+			<Label Text="Hi, How are you?"
+			FontSize="12"
+			TextColor="#A3A4A6"/>
+		</StackLayout>
+		<Label Text="9:55 AM"
+		VerticalOptions="CenterAndExpand"
+		HorizontalOptions="EndAndExpand"
+		TextColor="#03B2C4"/>
+	</StackLayout>
+				</DataTemplate>
+			</flv:FlowListView.FlowColumnTemplate>
+		
+		</flv:FlowListView>
+	</StackLayout>
+
+</ContentPage>

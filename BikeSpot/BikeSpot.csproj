@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F28E2E94-18F6-4F51-8E82-1C281651129E}</ProjectGuid>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BikeSpot</RootNamespace>
+    <AssemblyName>BikeSpot</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App.xaml" />
+    <EmbeddedResource Include="BikeSpotPage.xaml" />
+    <EmbeddedResource Include="View\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\HomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ChoosePaymentMethodPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AddCardDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ChatUsersPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ChatPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ReviewRatingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BikeWizardStartPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BikeWizardSelectBikePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\BikeWizardFinishPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Payment_A_Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ProductDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AddProductPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MyProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\RegistrationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ForgotPasswordPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeysLocalSample.json" />
+    <EmbeddedResource Include="View\FilterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MasterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CommentsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Settings.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ChangeEmailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ChangePasswordPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Popups\SelectTypeOfBikePopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TestPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\LocationPickerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BikeSpotPage.xaml.cs">
+      <DependentUpon>BikeSpotPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomRenderer\MyEntry.cs" />
+    <Compile Include="View\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChoosePaymentMethodPage.xaml.cs">
+      <DependentUpon>ChoosePaymentMethodPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddCardDetailsPage.xaml.cs">
+      <DependentUpon>AddCardDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChatUsersPage.xaml.cs">
+      <DependentUpon>ChatUsersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChatPage.xaml.cs">
+      <DependentUpon>ChatPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ChatModel.cs" />
+    <Compile Include="View\ReviewRatingsPage.xaml.cs">
+      <DependentUpon>ReviewRatingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BikeWizardStartPage.xaml.cs">
+      <DependentUpon>BikeWizardStartPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BikeWizardSelectBikePage.xaml.cs">
+      <DependentUpon>BikeWizardSelectBikePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BikeWizardFinishPage.xaml.cs">
+      <DependentUpon>BikeWizardFinishPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Payment_A_Page.xaml.cs">
+      <DependentUpon>Payment_A_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomRenderer\CustomFrame.cs" />
+    <Compile Include="View\ProductDetailsPage.xaml.cs">
+      <DependentUpon>ProductDetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomRenderer\CustomMap.cs" />
+    <Compile Include="CustomRenderer\CustomPin.cs" />
+    <Compile Include="View\AddProductPage.xaml.cs">
+      <DependentUpon>AddProductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserProfilePage.xaml.cs">
+      <DependentUpon>UserProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MyProfilePage.xaml.cs">
+      <DependentUpon>MyProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RegistrationPage.xaml.cs">
+      <DependentUpon>RegistrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ForgotPasswordPage.xaml.cs">
+      <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\WebService.cs" />
+    <Compile Include="Data\Constants.cs" />
+    <Compile Include="Helpers\StaticMethods.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Model\LoginModel.cs" />
+    <Compile Include="Helpers\OAuthSettings.cs" />
+    <Compile Include="Model\ProductModel.cs" />
+    <Compile Include="Model\StaticDataModel.cs" />
+    <Compile Include="View\FilterPage.xaml.cs">
+      <DependentUpon>FilterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomRenderer\RangeSlider.cs" />
+    <Compile Include="View\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MasterPage.xaml.cs">
+      <DependentUpon>MasterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AutoCompleteModel.cs" />
+    <Compile Include="CustomRenderer\AdView.cs" />
+    <Compile Include="Model\ProductListModel.cs" />
+    <Compile Include="Model\ProductDetailsModel.cs" />
+    <Compile Include="View\CommentsPage.xaml.cs">
+      <DependentUpon>CommentsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CommentModel.cs" />
+    <Compile Include="ViewModel\CommentItemList.cs" />
+    <Compile Include="View\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChangeEmailPage.xaml.cs">
+      <DependentUpon>ChangeEmailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChangePasswordPage.xaml.cs">
+      <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Popups\SelectTypeOfBikePopup.xaml.cs">
+      <DependentUpon>SelectTypeOfBikePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\WrappedSelection.cs" />
+    <Compile Include="Model\TypeofBikeModel.cs" />
+    <Compile Include="ViewModel\TypeOfBikeLabelViewModel.cs" />
+    <Compile Include="CustomRenderer\MySliderEffects.cs" />
+    <Compile Include="DependencyServices\IiOSMethods.cs" />
+    <Compile Include="ViewModel\ShareImageViewModel.cs" />
+    <Compile Include="View\TestPage.xaml.cs">
+      <DependentUpon>TestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ProductItemsList.cs" />
+    <Compile Include="CustomRenderer\LocationPickerPageCS.cs" />
+    <Compile Include="View\LocationPickerPage.xaml.cs">
+      <DependentUpon>LocationPickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ProfileModel.cs" />
+    <Compile Include="Model\CategoryModel.cs" />
+    <Compile Include="CustomRenderer\CustomListview.cs" />
+    <Compile Include="CustomRenderer\CustomScrollView.cs" />
+    <Compile Include="Model\QuestionAnswerModel.cs" />
+    <Compile Include="Model\WizardResultModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="NGraphics">
+      <HintPath>..\packages\NGraphics.0.4.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\NGraphics.dll</HintPath>
+    </Reference>
+    <Reference Include="NControl">
+      <HintPath>..\packages\NControl.0.9.1.0\lib\portable-net45+wp8+wp80+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\NControl.dll</HintPath>
+    </Reference>
+    <Reference Include="NControl.Controls">
+      <HintPath>..\packages\NControl.Controls.0.9.4.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\NControl.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="DLToolkit.Forms.Controls.FlowListView">
+      <HintPath>..\packages\DLToolkit.Forms.Controls.FlowListView.2.0.4\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\DLToolkit.Forms.Controls.FlowListView.dll</HintPath>
+    </Reference>
+    <Reference Include="ImageCircle.Forms.Plugin.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Forms.ImageCircle.1.8.1\lib\portable-net45+wp80+win8+wpa81\ImageCircle.Forms.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading">
+      <HintPath>..\packages\Xamarin.FFImageLoading.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Platform">
+      <HintPath>..\packages\Xamarin.FFImageLoading.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="FFImageLoading.Forms">
+      <HintPath>..\packages\Xamarin.FFImageLoading.Forms.2.2.9\lib\portable-net45+win8+wpa81+wp8\FFImageLoading.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.231\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.231\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\packages\Xamarin.Forms.2.3.4.231\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Maps">
+      <HintPath>..\packages\Xamarin.Forms.Maps.2.3.4.231\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10\Xamarin.Forms.Maps.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat">
+      <HintPath>..\packages\Splat.1.6.2\lib\Portable-net45+win+wpa81+wp80\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.UserDialogs">
+      <HintPath>..\packages\Acr.UserDialogs.6.3.10\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Acr.UserDialogs.Interface">
+      <HintPath>..\packages\Acr.UserDialogs.6.3.10\lib\portable-win+net45+wp8+win8+wpa81\Acr.UserDialogs.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net45+win8+wpa81\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Zlib.Portable">
+      <HintPath>..\packages\Zlib.Portable.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.Media.2.6.2\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media">
+      <HintPath>..\packages\Xam.Plugin.Media.2.6.2\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.RangeSlider.Common">
+      <HintPath>..\packages\Xamarin.RangeSlider.0.6.17\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.RangeSlider.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.RangeSlider.Forms">
+      <HintPath>..\packages\Xamarin.Forms.RangeSlider.0.6.17\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.RangeSlider.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.SecureStorage.Abstractions">
+      <HintPath>..\packages\sameerIOTApps.Plugin.SecureStorage.1.2.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Plugin.SecureStorage.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.SecureStorage">
+      <HintPath>..\packages\sameerIOTApps.Plugin.SecureStorage.1.2.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Plugin.SecureStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="AdMobView.FormsPlugin.Abstractions">
+      <HintPath>..\packages\Xam.FormsPlugin.AdMobView.1.0.23\lib\portable-net45+wp8+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\AdMobView.FormsPlugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Geolocator.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.Geolocator.3.0.4\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Geolocator.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Geolocator">
+      <HintPath>..\packages\Xam.Plugin.Geolocator.3.0.4\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Geolocator.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Windows.Core">
+      <HintPath>..\packages\PInvoke.Windows.Core.0.3.2\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.Windows.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Kernel32">
+      <HintPath>..\packages\PInvoke.Kernel32.0.3.2\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.Kernel32.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.BCrypt">
+      <HintPath>..\packages\PInvoke.BCrypt.0.3.2\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.BCrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.NCrypt">
+      <HintPath>..\packages\PInvoke.NCrypt.0.3.2\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PInvoke.NCrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="Validation">
+      <HintPath>..\packages\Validation.2.2.8\lib\portable-net40+sl50+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLCrypto">
+      <HintPath>..\packages\PCLCrypto.2.0.147\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\PCLCrypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Auth">
+      <HintPath>..\packages\Xamarin.Auth.1.4.1.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+XamarinIOS10\Xamarin.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup">
+      <HintPath>..\packages\Rg.Plugins.Popup.1.0.4\lib\portable-win+net45+wp8+win8+wpa81\Rg.Plugins.Popup.dll</HintPath>
+    </Reference>
+    <Reference Include="Rg.Plugins.Popup.Platform">
+      <HintPath>..\packages\Rg.Plugins.Popup.1.0.4\lib\portable-win+net45+wp8+win8+wpa81\Rg.Plugins.Popup.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share.Abstractions">
+      <HintPath>..\packages\Plugin.Share.5.0.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Share.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share">
+      <HintPath>..\packages\Plugin.Share.5.0.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Share.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="View\" />
+    <Folder Include="ViewModel\" />
+    <Folder Include="CustomRenderer\" />
+    <Folder Include="Data\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Popups\" />
+    <Folder Include="DependencyServices\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.231\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+</Project>

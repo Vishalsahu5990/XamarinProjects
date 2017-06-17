@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot" 
+	xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView" 
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+	xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+	x:Class="BikeSpot.UserProfilePage">
+	<StackLayout Spacing="0">
+
+	<RelativeLayout HeightRequest="225"
+				x:Name="imgTopBackgroud"
+			VerticalOptions="Start">
+  <Image 
+		Source="bg_blue"
+				Aspect="AspectFill"
+	RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+               RelativeLayout.HeightConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
+
+               <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}"> 
+				
+
+				<Grid HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="FillAndExpand">
+
+
+				<StackLayout Orientation="Horizontal" VerticalOptions="Start" Padding="10">
+						<StackLayout>
+							<Image Source="back" Margin="30"/>
+							<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="back_Tapped"/> 
+    </StackLayout.GestureRecognizers>
+						</StackLayout>
+
+						<Image Source="menu-right" Margin="30" HorizontalOptions="EndAndExpand"/>
+					</StackLayout>
+					<StackLayout Orientation="Horizontal" Padding="10" VerticalOptions="EndAndExpand">
+						<controls:CircleImage
+							x:Name="imgProfile"
+							Aspect="AspectFill"
+							Source="profile.jpg"
+							HeightRequest="100"
+			WidthRequest="100"
+			VerticalOptions="Start"
+									BorderColor="Transparent"
+									BorderThickness="3"
+					HorizontalOptions="Start"/>
+					<StackLayout Grid.Column="1">
+							
+								<Label Text="Alexendra Alsop"
+							TextColor="White" 
+							FontAttributes="Bold"
+							FontSize="18"
+							x:Name="lblUserName"/>
+								
+							
+					
+							<Label Text="www.domain.com"
+							TextColor="White"
+							x:Name="lblEmail"/>
+							<Label Text="5 reviews"
+							TextColor="White"
+							x:Name="lblReviews"/>
+							<StackLayout Orientation="Horizontal" >
+								<Grid Padding="0" HorizontalOptions="Center">
+				<Image Grid.Column="0" Source="star-filled.png"
+									HeightRequest="20"
+								WidthRequest="20"
+									x:Name="imgStar1"/>
+					<Image Grid.Column="1" Source="star-filled.png"
+								HeightRequest="10"
+								WidthRequest="10"
+									x:Name="imgStar2"/>
+					<Image Grid.Column="2" Source="star-filled.png"
+								HeightRequest="10"
+								WidthRequest="10"
+									x:Name="imgStar3"/>
+				<Image Grid.Column="3" Source="star-filled.png"
+								HeightRequest="10"
+								WidthRequest="10"
+									x:Name="imgStar4"/>
+					<Image Grid.Column="4" Source="star-filled.png"
+								HeightRequest="10"
+								WidthRequest="10"
+									x:Name="imgStar5"/> 
+				</Grid>
+								<Label Text="5.0" TextColor="White"
+								x:Name="lblRating"/>
+							</StackLayout>   
+						
+							
+					</StackLayout> 
+						<Image Source="ribbon" VerticalOptions="Start"
+						x:Name="imgRibbon"/>  
+					</StackLayout> 
+				</Grid>
+			</Grid>
+          
+          </RelativeLayout>
+		<StackLayout Spacing="10" Orientation="Horizontal" Padding="10,20,10,20">
+						<Image  Source="fb copy">
+						<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="fb_Tapped"/>  
+    </Image.GestureRecognizers>
+							</Image>
+					<Image  Source="twitter">
+								<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="twitter_Tapped"/>  
+    </Image.GestureRecognizers>
+							</Image>
+					<Image  Source="insta">
+								<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="insta_Tapped"/>  
+    </Image.GestureRecognizers>
+							</Image>
+				<Image  Source="pinterest">
+								<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="pintrest_Tapped"/>  
+    </Image.GestureRecognizers>
+							</Image>
+					<Image  Source="linkedin">
+					<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="linkedin_Tapped"/>  
+    </Image.GestureRecognizers>
+							</Image>
+						</StackLayout>
+		<StackLayout Orientation="Horizontal" HeightRequest="50" BackgroundColor="#20D1C8">
+		<StackLayout HorizontalOptions="FillAndExpand" x:Name="tabSell">
+		<Button Text="Sell" 
+			TextColor="White"
+			FontSize="20"
+				x:Name="btnSell"/>
+				<BoxView BackgroundColor="#20B8AF"
+				HeightRequest="4"
+				x:Name="bxSell"/>
+				<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="SellTapped"/> 
+    </StackLayout.GestureRecognizers>
+			</StackLayout>
+
+			<StackLayout HorizontalOptions="FillAndExpand" x:Name="tabRent">
+		<Button Text="Rent" 
+			TextColor="White"
+			FontSize="20"
+				x:Name="btnRent"/>
+				<BoxView BackgroundColor="#20B8AF"
+				HeightRequest="4"
+				x:Name="bxRent"/> 
+				<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="RentTapped"/> 
+    </StackLayout.GestureRecognizers>
+			</StackLayout> 
+		</StackLayout>  
+		<StackLayout x:Name="slSell" IsVisible="false"> 
+		<StackLayout Margin="0,15,0,0" >
+				<flv:FlowListView BackgroundColor="Transparent" Margin="0,10,0,0" SeparatorVisibility="None" HasUnevenRows="true" FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowLastTappedItem="{Binding LastTappedItem}" x:Name="flowlistview" >
+							<flv:FlowListView.FlowColumnTemplate>
+								<DataTemplate>
+									<Grid Padding="10">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="*"/>
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<Frame>
+											<StackLayout>
+												<ffimageloading:CachedImage Aspect="AspectFill"
+												DownsampleUseDipUnits="false"
+													LoadingPlaceholder="profile.jpg"
+												ErrorPlaceholder="profile.jpg"
+												Source="profile.jpg"
+												HeightRequest="80" />
+												<StackLayout Orientation="Horizontal" 
+													Margin="10,0,10,0" VerticalOptions="EndAndExpand">
+													<Label Text="name" />
+													<Label Text="price" 
+													HorizontalOptions="EndAndExpand"/> 
+												</StackLayout>
+											</StackLayout>
+										</Frame>
+									</Grid>
+								</DataTemplate>
+							</flv:FlowListView.FlowColumnTemplate>
+						</flv:FlowListView>
+				</StackLayout>
+				</StackLayout>
+
+		<StackLayout x:Name="slRent" IsVisible="false"> 
+		<ScrollView>
+		<StackLayout> 
+
+				</StackLayout> 
+			</ScrollView>
+				</StackLayout>  
+
+		
+		</StackLayout>  
+</ContentPage>

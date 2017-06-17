@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	 xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot" 
+	x:Class="BikeSpot.ReviewRatingsPage"
+	>
+	<StackLayout>
+	<StackLayout Orientation="Horizontal" HeightRequest="70" BackgroundColor="#20D1C8">
+			<StackLayout VerticalOptions="FillAndExpand">
+				<Image Source="back" VerticalOptions="CenterAndExpand" Margin="25" />
+				<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="back_Tapped" />
+				</StackLayout.GestureRecognizers>
+			</StackLayout>
+			<Label Margin="0,2,0,0" Text="Review Rating" 
+			TextColor="White"
+			FontAttributes="Bold"
+			VerticalOptions="Center"/> 				
+		</StackLayout>
+		<ScrollView>
+
+	<StackLayout Padding="16">
+	<Frame HasShadow="false" 
+				BackgroundColor="#00CDC4"
+				Padding="3" 
+				HorizontalOptions="Center"
+				x:Name="_frame">
+	<Image Source="profile.jpg" Aspect="AspectFill" />
+	</Frame>
+			<Label Text="Linda Watson"
+			FontSize="20" HorizontalOptions="Center"
+			Margin="10"/>
+			<Grid Padding="40,0,40,0" HorizontalOptions="Center">
+				<Image x:Name="imgStar1" Grid.Column="0" Source="star_empty.png">
+				<Image.GestureRecognizers>
+					<TapGestureRecognizer Tapped="star1_Tapped" />
+				</Image.GestureRecognizers>
+				</Image>
+					<Image x:Name="imgStar2" Grid.Column="1" Source="star_empty.png">
+					<Image.GestureRecognizers>
+					<TapGestureRecognizer Tapped="star2_Tapped" />
+				</Image.GestureRecognizers>
+				</Image>
+					<Image x:Name="imgStar3" Grid.Column="2" Source="star_empty.png">
+					<Image.GestureRecognizers>
+					<TapGestureRecognizer Tapped="star3_Tapped" />
+				</Image.GestureRecognizers>
+				</Image>
+				<Image x:Name="imgStar4" Grid.Column="3" Source="star_empty.png">
+				<Image.GestureRecognizers>
+					<TapGestureRecognizer Tapped="star4_Tapped" />
+				</Image.GestureRecognizers>
+				</Image>
+					<Image x:Name="imgStar5" Grid.Column="4" Source="star_empty.png">
+					<Image.GestureRecognizers>
+					<TapGestureRecognizer Tapped="star5_Tapped" />
+				</Image.GestureRecognizers>
+				</Image>
+				</Grid>
+			<Label Text="Rate your experience"
+			FontSize="20" HorizontalOptions="Center"
+			Margin="10"
+			TextColor="#9C9D9D"/>
+			<Frame HasShadow="false" BackgroundColor="#F4F5F5">
+			<local:MyEntry
+					x:Name="txtReview"
+			HorizontalTextAlignment="Start"
+					Placeholder="Some words about NAME..."
+				BackgroundColor="White"
+				HorizontalOptions="FillAndExpand"
+				HeightRequest="100"/>
+			</Frame>
+			<Button
+			x:Name="btnSubmit"
+				Text="Submit"
+		FontSize="22" 
+		TextColor="White"
+		BackgroundColor="#20D0C8"
+		BorderRadius="0"
+		Margin="0,30,0,0"/>
+	</StackLayout>
+		</ScrollView>
+	</StackLayout>
+
+</ContentPage>

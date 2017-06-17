@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	   xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot" 
+	   x:Class="BikeSpot.Payment_A_Page">
+	<StackLayout>
+	<RelativeLayout HeightRequest="225"
+				x:Name="imgTopBackgroud"
+			VerticalOptions="Start">
+  <Image 
+		Source="profile.jpg"
+				Aspect="AspectFill"
+	RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+               RelativeLayout.HeightConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
+
+               <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+
+              <!--top back bar start-->
+				<StackLayout VerticalOptions="Start"  Orientation="Horizontal"  Padding="10">
+						<StackLayout VerticalOptions="FillAndExpand" Padding="10" >
+	<Image  Source="back" VerticalOptions="CenterAndExpand" />
+				<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="back_Tapped"/> 
+    </StackLayout.GestureRecognizers>
+							</StackLayout>
+						
+					</StackLayout>
+					<!--top back bar end-->
+	
+				
+				<Button Text="Make offer" 
+				BackgroundColor="#99ffffff"
+				VerticalOptions="Start"
+				WidthRequest="200"
+				Margin="50,30,50,0"
+				TextColor="Black"
+				FontSize="22"
+				HorizontalOptions="Center"/>  
+
+              <Button Text="Make offer" 
+				BackgroundColor="#99ffffff"
+				VerticalOptions="Center"
+				Margin="50,0,50,0"
+				TextColor="Black"
+				FontSize="22"/>
+				<Grid HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="EndAndExpand">
+				<Button Text="Make offer" 
+				BackgroundColor="#9934C2BA"
+				VerticalOptions="Center"
+				Grid.Column="0"
+				TextColor="Black"
+				FontSize="22"
+				BorderRadius="0"/>
+					<Button Text="Accepted" 
+				BackgroundColor="#99ffffff"
+				VerticalOptions="Center"
+				Grid.Column="1"
+				TextColor="Black"
+				FontSize="22"
+					BorderRadius="0"/>
+					<Button Text="Paid" 
+				BackgroundColor="#99ffffff"
+				VerticalOptions="Center"
+				TextColor="Black"
+				FontSize="22"
+					Grid.Column="2"
+					BorderRadius="0"/>
+				</Grid>
+			</Grid>
+          
+          </RelativeLayout>
+		
+	</StackLayout>
+
+        
+</ContentPage>

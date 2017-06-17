@@ -1,0 +1,162 @@
+﻿{
+  "Amazon": { 
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "Amazon_": {
+    "name": "Amazon Implicit",
+    "clientId": "",
+    "redirectUrl": ""
+  },
+  "Box": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "Dropbox": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "Dropbox_": {
+    "name": "Dropbox Implicit",
+    "clientId": "",
+    "redirectUrl": ""
+  },
+  "Facebook": {
+    "clientId": "1605074516186884"
+  },
+  "Foursquare": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "Foursquare_": {
+    "name": "Foursquare Version",
+    "clientId": "",
+    "clientSecret": "",
+    "version": "",
+    "redirectUrl": ""
+  },
+  "GitHub": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "Gitter": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "Google": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "Google_": {
+    "name": "Google Implicit",
+    "clientId": "",
+    "redirectUrl": ""
+  },
+  "Instagram": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "LinkedIn": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "Meetup": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "Meetup_": {
+    "name": "Meetup Implicit",
+    "clientId": "",
+    "redirectUrl": ""
+  },
+  "Microsoft_": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "Microsoft": {
+    "name": "Microsoft Implicit",
+    "clientId": "",
+    "redirectUrl": ""
+  },
+  "Microsoft__": {
+    "name": "Microsoft Offline",
+    "clientId": "",
+    "clientSecret": "",
+    "offlineAccess": true,
+    "redirectUrl": ""
+  },
+  "PayPal": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "PayPal_": {
+    "name": "PayPal Sandbox",
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": "",
+    "sandbox": true
+  },
+  "ReddIt": { //Web App
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "ReddIt_": {
+    "name": "Reddit Implicit", //Installed App
+    "clientId": "",
+    "redirectUrl": ""
+  },
+  "Salesforce": {
+    "clientId": "",
+    "clientSecret": ""
+  },
+  "Slack": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "SoundCloud": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": ""
+  },
+  "StackExchange": {
+    "clientId": "", // Server auth flow
+    "clientSecret": "",
+    "redirectUrl": "",
+    "key": "",
+    "site": ""
+  },
+  "StackExchange_": {
+    "name": "StackExchange Client",
+    "clientId": "", // Client auth flow
+    "clientSecret": "",
+    "key": "",
+    "site": ""
+  },
+  "Trello": {
+    "clientId": "",
+    "clientSecret": "",
+    "applicationName": ""
+  },
+  "VisualStudio": {
+    "clientId": "",
+    "clientSecret": "",
+    "redirectUrl": "",
+    "scopes": [
+      // must match the exact list registered for the application
+    ]
+  }
+}

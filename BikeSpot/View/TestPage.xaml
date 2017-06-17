@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="BikeSpot.TestPage"
+	xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot" 
+	xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView" 
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+	>
+	<StackLayout> 
+		
+		<local:CustomListview x:Name="flowlistviewViewCellGrid" 
+					HasUnevenRows="true"
+					>
+  <local:CustomListview.ItemTemplate>
+				
+    <DataTemplate>
+					
+      <ViewCell>
+<Grid Padding="0" >
+										<Grid.RowDefinitions>
+											<RowDefinition Height="*" />
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="100" />
+										</Grid.ColumnDefinitions>
+									
+							<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+
+			<RelativeLayout WidthRequest="130" 
+				BackgroundColor="Silver" 
+				HeightRequest="110"> 	
+			<Frame Padding="3"
+				HasShadow="false"
+				OutlineColor="Silver"
+				HeightRequest="120"
+				RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+               RelativeLayout.HeightConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+					  <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+					<StackLayout VerticalOptions="FillAndExpand"
+						>
+					<Image
+				   Source="product.jpg"
+					HorizontalOptions="FillAndExpand" 
+					Aspect="AspectFill"
+						HeightRequest="80"
+						WidthRequest="150"/>
+					
+					<StackLayout Orientation="Horizontal" IsVisible="true"
+							>
+					<Grid HorizontalOptions="FillAndExpand">
+					<Label Text="product_name"  
+					FontSize="Small"
+					LineBreakMode="TailTruncation"
+								WidthRequest="60"
+						Grid.Column="0"
+							HorizontalTextAlignment="Start"/>
+
+													<Label Text="price" 
+								HorizontalTextAlignment="End"
+					FontSize="Small"
+					LineBreakMode="TailTruncation"
+								WidthRequest="60"
+						Grid.Column="1"/>
+					</Grid>
+					</StackLayout>
+
+				</StackLayout>
+						<StackLayout Orientation="Horizontal" VerticalOptions="Start">
+							<Image Source="top" 
+			HorizontalOptions="EndAndExpand"/> 
+						</StackLayout>
+
+							</Grid>
+				</Frame>
+
+				</RelativeLayout>
+				</StackLayout>		
+								</Grid>	
+								 </ViewCell>
+						
+    </DataTemplate>
+  </local:CustomListview.ItemTemplate>
+</local:CustomListview>
+			<!--<ScrollView>
+	<flv:FlowListView BackgroundColor="Transparent"
+		Margin="0,10,0,0" 
+		SeparatorVisibility="None" 
+		HasUnevenRows="true" 
+		FlowItemTappedCommand="{Binding ItemTappedCommand}" 
+		FlowLastTappedItem="{Binding LastTappedItem}"
+		FlowItemsSource="{Binding _items.Items}"
+		x:Name="flowlistview1" 
+		FlowColumnMinWidth="320"
+		>
+							<flv:FlowListView.FlowColumnTemplate>
+								<DataTemplate>
+				
+									<Grid Padding="0" >
+										<Grid.RowDefinitions>
+											<RowDefinition Height="*" />
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+					
+										<StackLayout Orientation="Vertical" x:Name="_slViewCell" HorizontalOptions="FillAndExpand"  >
+
+						<flv:FlowListView 
+							Margin="0,5,0,0"
+							BackgroundColor="Transparent" 
+							SeparatorVisibility="None" 
+							HasUnevenRows="true"
+							FlowItemTappedCommand="{Binding ItemTappedCommand}" 
+							FlowLastTappedItem="{Binding LastTappedItem}"
+							x:Name="flowlistviewViewCellGrid" 
+							FlowItemsSource="{Binding list}"
+							FlowColumnMinWidth="{Binding columnWidth}"
+						    HeightRequest="{Binding listviewHeight}">
+							<flv:FlowListView.FlowColumnTemplate>
+								<DataTemplate> 
+									<Grid Padding="3" ColumnSpacing="0">   
+										<Grid.RowDefinitions>
+											<RowDefinition Height="*" />
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+										</Grid.ColumnDefinitions>
+										<ScrollView Orientation="Horizontal"
+						>
+										<StackLayout Orientation="Horizontal" 
+												HorizontalOptions="FillAndExpand"
+												>
+
+										<RelativeLayout
+										HeightRequest="{Binding width}"
+										WidthRequest="{Binding width}"
+										Padding="0" 
+										>   	 
+			<Frame Padding="3"
+				HasShadow="false"
+				OutlineColor="{Binding borderColor}"
+				HeightRequest="{Binding width}"
+				WidthRequest="{Binding width}"
+				HorizontalOptions="CenterAndExpand" 
+				RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+               RelativeLayout.HeightConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+					<Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+				<StackLayout VerticalOptions="FillAndExpand">  
+							<ffimageloading:CachedImage 
+							Aspect="AspectFill"  
+							DownsampleUseDipUnits="false"   
+							LoadingPlaceholder="profile.jpg"   
+							ErrorPlaceholder="profile.jpg"   
+							Source="{Binding product_image}" 
+							HorizontalOptions="FillAndExpand" 
+							HeightRequest="{Binding imageHeight}"
+							WidthRequest="{Binding columnWidth}"/> 
+					
+					<StackLayout Orientation="Horizontal" >
+					<Grid HorizontalOptions="FillAndExpand">
+					<Label Text="{Binding product_name}"    
+					FontSize="Small"
+					LineBreakMode="TailTruncation"
+					WidthRequest="60"
+					Grid.Column="0"
+					HorizontalTextAlignment="Start"/>
+
+													<Label Text="{Binding price}"
+								HorizontalTextAlignment="End"
+					FontSize="Small"
+					LineBreakMode="TailTruncation" 
+								WidthRequest="60"
+						Grid.Column="1"/>
+					</Grid> 
+					</StackLayout>
+
+				</StackLayout>
+
+					<StackLayout Orientation="Horizontal" VerticalOptions="Start">
+							<Image Source="top1" 
+			HorizontalOptions="EndAndExpand"
+			IsVisible="{Binding isTopEnable}"/> 
+						</StackLayout>								
+													</Grid>
+				</Frame>
+
+				</RelativeLayout>
+											
+					</StackLayout>	
+							</ScrollView>		
+									</Grid>
+								</DataTemplate>
+							</flv:FlowListView.FlowColumnTemplate>
+						</flv:FlowListView>
+							
+						<StackLayout IsVisible="true"
+												HorizontalOptions="FillAndExpand"
+												BackgroundColor="Silver"
+												x:Name="_firstAd" 
+												VerticalOptions="Center"
+												HeightRequest="40">
+							<local:AdView HorizontalOptions="FillAndExpand">
+							</local:AdView>
+						</StackLayout>
+					                   </StackLayout>
+						
+									</Grid>
+					
+								</DataTemplate>
+							</flv:FlowListView.FlowColumnTemplate>
+						</flv:FlowListView>
+			</ScrollView> -->
+						</StackLayout>
+</ContentPage> 

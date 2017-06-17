@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot"
+	xmlns:controls="clr-namespace:NControl.Controls;assembly=NControl.Controls"
+	x:Class="BikeSpot.AddProductPage">
+	<StackLayout Spacing="0" VerticalOptions="FillAndExpand">
+		<RelativeLayout HeightRequest="225"
+				x:Name="imgTopBackgroud"
+			VerticalOptions="Start">
+  <Image
+				x:Name="imgProduct" 
+		Source="bg_blue"
+				Aspect="AspectFill"  
+	RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+               RelativeLayout.HeightConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
+
+               <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+				
+
+				<Grid IsVisible="true"  x:Name="gvSingleImage"  HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="FillAndExpand">
+				<StackLayout Orientation="Horizontal" VerticalOptions="Start" Padding="10">
+						<StackLayout VerticalOptions="FillAndExpand" Padding="10" >
+	<Image IsVisible="false"  Source="menu" VerticalOptions="CenterAndExpand" />
+				<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="menu_Tapped"/> 
+    </StackLayout.GestureRecognizers>
+							</StackLayout>
+						<Image IsVisible="false" Source="tick" Margin="0,0,10,0" HorizontalOptions="EndAndExpand"/>
+					</StackLayout>
+					
+					<StackLayout Orientation="Horizontal" Padding="10" VerticalOptions="CenterAndExpand">
+						<StackLayout HeightRequest="100"
+							WidthRequest="100" 
+							VerticalOptions="CenterAndExpand"
+							BackgroundColor="#50ffffff"
+							HorizontalOptions="CenterAndExpand"> 
+							<Image Source="camera"/>
+							<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="cameraTapped"/> 
+    </StackLayout.GestureRecognizers> 
+						</StackLayout>
+					</StackLayout>
+				</Grid>
+
+				<Grid IsVisible="false" x:Name="gvMultipleImage" RowSpacing="5" ColumnSpacing="5" HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="FillAndExpand">
+				<StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#0ffffff" Grid.Row="0" Grid.Column="0">
+				<Image x:Name="img1" Source="camera" 
+						
+						Aspect="AspectFill"/>
+
+						<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="img1Tapped"/> 
+    </StackLayout.GestureRecognizers>
+					</StackLayout>
+					
+					<StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#0ffffff" Grid.Row="0" Grid.Column="1">
+					<Image x:Name="img2" Source="camera" Aspect="AspectFill" />
+						<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="img2Tapped"/> 
+    </StackLayout.GestureRecognizers>
+					</StackLayout>
+					
+					<StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#0ffffff" Grid.Row="1" Grid.Column="0">
+					<Image x:Name="img3" Source="camera" Aspect="AspectFill"/>
+						<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="img3Tapped"/> 
+    </StackLayout.GestureRecognizers>
+					</StackLayout>
+					
+					<StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#0ffffff"  Grid.Row="1" Grid.Column="1">
+					<Image x:Name="img4" Source="camera" Aspect="AspectFill"/>
+						<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="img4Tapped"/> 
+    </StackLayout.GestureRecognizers>
+					</StackLayout> 
+
+				</Grid> 
+			</Grid>
+           
+          </RelativeLayout> 
+		<StackLayout Orientation="Horizontal" HeightRequest="50" BackgroundColor="#20D1C8">
+		<StackLayout HorizontalOptions="FillAndExpand" x:Name="tabSell">
+		<Button Text="Sell" 
+			TextColor="White"
+			FontSize="20"
+				x:Name="btnSell"/>
+				<BoxView BackgroundColor="#20B8AF"
+				HeightRequest="4"
+				x:Name="bxSell"/>
+				<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="SellTapped"/>
+    </StackLayout.GestureRecognizers>
+			</StackLayout>
+
+			<StackLayout HorizontalOptions="FillAndExpand" x:Name="tabRent">
+		<Button Text="Rent" 
+			TextColor="White"
+			FontSize="20"
+				x:Name="btnRent"/>
+				<BoxView BackgroundColor="#20B8AF"
+				HeightRequest="4"
+				x:Name="bxRent"/> 
+				<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="RentTapped"/> 
+    </StackLayout.GestureRecognizers>
+			</StackLayout> 
+		</StackLayout>        
+		
+		<StackLayout x:Name="slSell" IsVisible="false" VerticalOptions="FillAndExpand"> 
+		<ScrollView x:Name="_scrollView" Padding="0">
+				
+		<StackLayout>
+		<local:MyEntry Placeholder="What you're selling?"
+					Margin="10"
+					x:Name="txtWhatYouAreSelling_sell"/>
+					<BoxView HeightRequest="4"
+				BackgroundColor="#F5F6F6"/>
+					<local:MyEntry Placeholder="Describe your bike..."
+					Margin="10"
+					HeightRequest="100"
+					x:Name="txtDescribe_sell"/>
+					<BoxView HeightRequest="4"
+				BackgroundColor="#F5F6F6"/>
+					<StackLayout Orientation="Horizontal">
+					<Label Text="{Binding TypeofBike}"
+							TextColor="#B9B9B9"
+					Margin="10"
+						x:Name="lblTypeofbike_sekk">
+						<Label.BindingContext>
+      <local:TypeOfBikeLabelViewModel/>
+    </Label.BindingContext>
+						</Label>
+						<Image Source="dropdown"
+						HorizontalOptions="EndAndExpand"
+						Margin="0,0,10,0"/>
+						<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="typeofbike_sellTapped"/> 
+    </StackLayout.GestureRecognizers>
+						<Picker 
+						x:Name="pickerTypeofBike_sell"
+					IsVisible="false"
+							Title="Type of bike"
+					/>
+					</StackLayout>
+					<BoxView HeightRequest="4"
+				BackgroundColor="#F5F6F6"/>
+					<StackLayout Orientation="Horizontal">
+					<Label Text="Condition"
+							TextColor="#B9B9B9"
+					Margin="10"
+						x:Name="lblCondition_sell"/>
+						<Image Source="dropdown"
+						HorizontalOptions="EndAndExpand"
+						Margin="0,0,10,0"/>
+						<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="condition_sellTapped"/> 
+    </StackLayout.GestureRecognizers>
+						<Picker 
+						x:Name="pickerCondition_sell"
+					IsVisible="false"
+							Title="Condition"
+					/>
+					</StackLayout>
+					<BoxView HeightRequest="4"
+				BackgroundColor="#F5F6F6"/>   
+					<StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand">
+					<StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand">
+					<Label Margin="10" Text="INR" TextColor="#B9B9B9" x:Name="lblInr_sell"/>
+						<Image Source="dropdown"
+						HorizontalOptions="EndAndExpand"
+						Margin="0,0,10,0"
+							/>
+							<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="inr_sellTapped"/> 
+    </StackLayout.GestureRecognizers>
+							<Picker 
+						x:Name="pickerInr_sell"
+					IsVisible="false"
+							Title="INR"
+					/>
+					</StackLayout>
+						<BoxView WidthRequest="2" BackgroundColor="#E0E1E1" 
+						VerticalOptions="FillAndExpand"
+						Margin="0"/>
+						<local:MyEntry Placeholder="Price"
+					Margin="10"
+						HorizontalOptions="FillAndExpand"
+						x:Name="txtPrice_sell"/>
+					</StackLayout>
+
+					<StackLayout Orientation="Horizontal"
+			Spacing="10" Margin="10">
+			<StackLayout  Orientation="Horizontal">
+			<Button HeightRequest="30"
+			WidthRequest="30"
+			BorderColor="Black"
+			BorderWidth="2"
+			BorderRadius="15"
+			VerticalOptions="EndAndExpand"
+			Image="radio_check"
+							x:Name="btnMale_sell"/>
+			<Label Text="male"
+		FontSize="22" HorizontalOptions="Center"
+		Margin="0,30,0,0"
+			VerticalOptions="Center"
+				
+				VerticalTextAlignment="Center"
+			/><StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="male_sellTapped"/> 
+    </StackLayout.GestureRecognizers>
+						</StackLayout>	
+						<StackLayout  Orientation="Horizontal">
+							<Button HeightRequest="30"
+			WidthRequest="30"
+			BorderColor="Black"
+			BorderWidth="2"
+			BorderRadius="15"
+			VerticalOptions="EndAndExpand"
+								x:Name="btnfeMale_sell"/>
+			<Label Text="female"
+		FontSize="22" HorizontalOptions="Center"
+		Margin="0,30,0,0"
+			VerticalOptions="Center"
+				
+				VerticalTextAlignment="Center"
+			/><StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="female_sellTapped"/> 
+    </StackLayout.GestureRecognizers>
+						</StackLayout>	
+
+						
+						<StackLayout  Orientation="Horizontal">
+						<Button HeightRequest="30"
+			WidthRequest="30"
+			BorderColor="Black"
+			BorderWidth="2"
+			BorderRadius="15"
+			VerticalOptions="EndAndExpand"
+								x:Name="btnother_sell"/>
+			<Label Text="other"
+		FontSize="22" HorizontalOptions="Center"
+		Margin="0,30,0,0"
+			VerticalOptions="Center"
+				
+				VerticalTextAlignment="Center"
+			/>
+					<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="other_sellTapped"/> 
+    </StackLayout.GestureRecognizers>	</StackLayout>		
+		
+					
+						
+
+					</StackLayout>
+					<StackLayout BackgroundColor="#F5F6F7">
+					<StackLayout Orientation="Horizontal" 
+						VerticalOptions="FillAndExpand"
+						HeightRequest="50">
+					
+					<Switch Margin="10" x:Name="switch_sell"/>
+						<Label Text="Share on facebook"
+						VerticalTextAlignment="Center"
+							TextColor="#696A6C"/>
+						</StackLayout>
+<!--				address autocomplete		-->
+						<StackLayout>
+
+						<local:MyEntry Placeholder="Enter your address"
+					Margin="10"
+					x:Name="txtAddress"/>
+					<BoxView HeightRequest="4"
+				BackgroundColor="#F5F6F6"/>
+							</StackLayout>
+
+<!-- Listview-->
+
+<ListView Margin="10,0,10,10" x:Name="lstViewSell" SeparatorColor="Gray" RowHeight="35" IsVisible="false" HeightRequest="100">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="White">
+							
+								<Label Text = "{Binding description}"  AbsoluteLayout.LayoutBounds="0.25, 0.25, 400, 40"/>
+								</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+						
+						<StackLayout Orientation="Horizontal" Padding="10" IsVisible="true">
+							<Image Source="checkbox-unchecked"
+						HorizontalOptions="Start"
+							Margin="10"
+							x:Name="imgTop_sell">
+							<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="top_sellTapped"/> 
+    </Image.GestureRecognizers>
+							</Image>
+						<Label Text="Add TOP Upgrade"
+						VerticalTextAlignment="Center"
+							TextColor="#696A6C"/>
+							<Button Text="$120"
+						BackgroundColor="#20D1C8"
+						HorizontalOptions="Start"
+						TextColor="White"
+						WidthRequest="120"
+						HeightRequest="30"
+						BorderRadius="0"
+							Margin="15,0,0,0"/>
+						</StackLayout>
+
+						
+					</StackLayout>
+					<Button BackgroundColor="#20D1C8"
+						HorizontalOptions="FillAndExpand"
+					Text="Sell it"
+						FontSize="20"
+					HeightRequest="50"
+						BorderRadius="0"
+					TextColor="White"
+					x:Name="btnSellit"
+					VerticalOptions="EndAndExpand"/>
+				</StackLayout>
+
+			</ScrollView>  
+		</StackLayout>
+
+
+		
+		<StackLayout x:Name="slRent" VerticalOptions="FillAndExpand">
+			<ScrollView x:Name="_scrollViewRent" Padding="0">    
+				
+		<StackLayout>
+		<local:MyEntry Placeholder="What you're renting?"
+					Margin="10"
+					x:Name="txtWhatYouAreSelling_rent"/>
+					<BoxView HeightRequest="4"
+				BackgroundColor="#F5F6F6"/>
+					<local:MyEntry Placeholder="Describe your bike..."
+					Margin="10"
+					HeightRequest="100"
+					x:Name="txtDescribe_rent"/>
+					<BoxView HeightRequest="4"
+				BackgroundColor="#F5F6F6"/>
+					<StackLayout Orientation="Horizontal">
+					<Label Text="Type of bike"
+							TextColor="#B9B9B9"
+					Margin="10"
+						x:Name="lblTypeofbike_rent"/>
+						<Image Source="dropdown"
+						HorizontalOptions="EndAndExpand"
+						Margin="0,0,10,0"/>
+						<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="typeofbike_rentTapped"/> 
+    </StackLayout.GestureRecognizers>
+						<Picker 
+						x:Name="pickerTypeofBike_rent"
+					IsVisible="false"
+							Title="Type of bike"
+					/>
+					</StackLayout>
+					<BoxView HeightRequest="4"
+				BackgroundColor="#F5F6F6"/>
+					<StackLayout Orientation="Horizontal">
+					<Label Text="Condition"
+							TextColor="#B9B9B9"
+					Margin="10"
+						x:Name="lblCondtition_rent"/>
+						<Image Source="dropdown"
+						HorizontalOptions="EndAndExpand"
+						Margin="0,0,10,0"/>
+						<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="condition_rentTapped"/> 
+    </StackLayout.GestureRecognizers>
+						<Picker 
+						x:Name="pickerCondition_rent"
+					IsVisible="false"
+							Title="Condition"
+					/>
+					</StackLayout>
+					<BoxView HeightRequest="4"
+				BackgroundColor="#F5F6F6"/>   
+					<StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand">
+					<StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand">
+					<Label Margin="10" Text="INR" TextColor="#B9B9B9" x:Name="lblInr_rent"/>
+						<Image Source="dropdown"
+						HorizontalOptions="EndAndExpand"
+						Margin="0,0,10,0"
+							/>
+							<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="inr_rentTapped"/> 
+    </StackLayout.GestureRecognizers> 
+							<Picker 
+						x:Name="pickerInr_rent"
+					IsVisible="false"
+							Title="INR"
+					/>
+					</StackLayout>
+						<BoxView WidthRequest="2" BackgroundColor="#E0E1E1" 
+						VerticalOptions="FillAndExpand"
+						Margin="0"/>
+						<local:MyEntry Placeholder="Price"
+					Margin="10"
+						HorizontalOptions="FillAndExpand"
+						x:Name="txtPrice_rent"
+						/>
+						<BoxView WidthRequest="2" BackgroundColor="#E0E1E1" 
+						VerticalOptions="FillAndExpand"
+						Margin="0"/>
+						<StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand">
+					<Label Margin="10" Text="Per day/hour" TextColor="#B9B9B9"
+							x:Name="lblperdayhour"/>
+						<Image Source="dropdown"
+						HorizontalOptions="EndAndExpand"
+						Margin="0,0,10,0"/> 
+							<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="perdayhour_Tapped"/> 
+    </StackLayout.GestureRecognizers>
+							<Picker 
+						x:Name="pickerPerDayHour"
+					IsVisible="false"
+							Title="Per Day/Hour"
+					/>
+					</StackLayout>
+					</StackLayout>
+
+
+
+
+					<StackLayout Orientation="Horizontal"
+			Spacing="10" Margin="10">
+			<StackLayout  Orientation="Horizontal">
+			<Button HeightRequest="30"
+			WidthRequest="30"
+			BorderColor="Black"
+			BorderWidth="2"
+			BorderRadius="15"
+			VerticalOptions="EndAndExpand"
+			Image="radio_check"
+							x:Name="btnMale_rent"/>
+			<Label Text="Man"
+		FontSize="22" HorizontalOptions="Center"
+		Margin="0,30,0,0"
+			VerticalOptions="Center"
+				
+				VerticalTextAlignment="Center"
+			/><StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="male_rentTapped"/> 
+    </StackLayout.GestureRecognizers>
+						</StackLayout>	
+						<StackLayout  Orientation="Horizontal">
+							<Button HeightRequest="30"
+			WidthRequest="30"
+			BorderColor="Black"
+			BorderWidth="2"
+			BorderRadius="15"
+			VerticalOptions="EndAndExpand"
+								x:Name="btnfeMale_rent"/>
+			<Label Text="Women"
+		FontSize="22" HorizontalOptions="Center"
+		Margin="0,30,0,0"
+			VerticalOptions="Center"
+				
+				VerticalTextAlignment="Center"
+			/><StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="female_rentTapped"/> 
+    </StackLayout.GestureRecognizers>
+						</StackLayout>	
+
+						
+						<StackLayout  Orientation="Horizontal">
+						<Button HeightRequest="30"
+			WidthRequest="30"
+			BorderColor="Black"
+			BorderWidth="2"
+			BorderRadius="15"
+			VerticalOptions="EndAndExpand"
+								x:Name="btnother_rent"/>
+			<Label Text="Unisex"
+		FontSize="22" HorizontalOptions="Center"
+		Margin="0,30,0,0"
+			VerticalOptions="Center"
+				
+				VerticalTextAlignment="Center"
+			/>
+					<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="other_rentTapped"/> 
+    </StackLayout.GestureRecognizers>	</StackLayout>		
+		
+					
+						
+
+					</StackLayout>
+
+					
+					<StackLayout BackgroundColor="#F5F6F7">
+					<StackLayout Orientation="Horizontal" 
+						VerticalOptions="FillAndExpand"
+						HeightRequest="50">
+					
+					<Switch Margin="10" x:Name="switch_rent"/>
+						<Label Text="Share on facebook"
+						VerticalTextAlignment="Center"
+							TextColor="#696A6C"/>
+						</StackLayout>
+
+						<!--				address autocomplete for rent		-->
+						<StackLayout>
+
+						<local:MyEntry Placeholder="Enter your address"
+					Margin="10"
+					x:Name="txtAddressRent"/>
+					<BoxView HeightRequest="4"
+				BackgroundColor="#F5F6F6"/>
+							</StackLayout>
+
+<!-- Listview-->
+
+<ListView Margin="10,0,10,10" x:Name="lstViewRent" SeparatorColor="Gray" RowHeight="35" IsVisible="false" HeightRequest="100">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="White">
+							
+								<Label Text = "{Binding description}"  AbsoluteLayout.LayoutBounds="0.25, 0.25, 400, 40"/>
+								</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate> 
+		</ListView>
+			
+						
+						<StackLayout Orientation="Horizontal" Padding="10" IsVisible="true">
+							<Image Source="checkbox-unchecked"
+						HorizontalOptions="Start"
+							Margin="10"
+							x:Name="imgTop_rent"> 
+							<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="top_rentTapped"/> 
+    </Image.GestureRecognizers>
+							</Image>
+						<Label Text="Add TOP Upgrade"
+						VerticalTextAlignment="Center"
+							TextColor="#696A6C"/>
+							<Button Text="$120"
+						BackgroundColor="#20D1C8"
+						HorizontalOptions="Start"
+						TextColor="White"
+						WidthRequest="120"
+						HeightRequest="30"
+						BorderRadius="0"
+							Margin="15,0,0,0"/>
+						</StackLayout>
+
+						
+					</StackLayout>
+					<Button BackgroundColor="#20D1C8"
+						HorizontalOptions="FillAndExpand"
+					Text="Rent it"
+					HeightRequest="50"
+					BorderRadius="0"
+					TextColor="White"
+						FontSize="20"
+					x:Name="btnRentit"
+					VerticalOptions="EndAndExpand"/>  
+				</StackLayout>
+
+			</ScrollView>   
+		 
+		</StackLayout>     
+		 
+		
+		</StackLayout>
+</ContentPage>
+	

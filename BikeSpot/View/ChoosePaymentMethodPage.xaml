@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="BikeSpot.ChoosePaymentMethodPage">
+	<StackLayout Padding="16">
+	<Label Text="Choose payment method"
+		FontSize="22" HorizontalOptions="Center"
+		Margin="0,30,0,0"/>
+		<StackLayout Orientation="Horizontal"
+			>
+		<Button HeightRequest="30"
+			WidthRequest="30"
+			BorderColor="Black"
+			BorderWidth="2"
+			BorderRadius="15"
+			VerticalOptions="EndAndExpand"/>
+			<Label Text="Choose payment method"
+		FontSize="22" HorizontalOptions="Center"
+		Margin="0,30,0,0"
+			VerticalOptions="Center" 
+				
+				VerticalTextAlignment="Center"
+			/>
+		</StackLayout>
+		<StackLayout Orientation="Horizontal"
+			>
+		<Button HeightRequest="30"
+			WidthRequest="30"
+			VerticalOptions="EndAndExpand"
+			Image="radio_check"/>
+			<Label Text="Choose payment method"
+		FontSize="22" HorizontalOptions="Center"
+		Margin="0,30,0,0"
+			VerticalOptions="Center"
+				
+				VerticalTextAlignment="Center"
+			/>
+		</StackLayout>
+		<Button Text="Next"
+		FontSize="22" 
+		TextColor="White"
+		BackgroundColor="#20D0C8"
+		BorderRadius="0"
+		Margin="0,30,0,0"/>
+	</StackLayout>
+</ContentPage>

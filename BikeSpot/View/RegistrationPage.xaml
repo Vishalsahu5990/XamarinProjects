@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot"
+	x:Class="BikeSpot.RegistrationPage">
+	<RelativeLayout 
+            Padding="0"
+            Margin="0"
+            x:Name="_MainLayout"
+            RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}">
+
+        <Image Source="bg"
+                x:Name="imgBG"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}"
+              RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}"/>
+
+		 <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+            <ScrollView>
+            <StackLayout x:Name="_slMainLayout" VerticalOptions="CenterAndExpand" Padding="20" Spacing="10">
+            <Image Source="logo"
+					Margin="60,0,60,0"
+					x:Name="imgLogo"/>   
+					<Label Text="Registration"
+					HorizontalOptions="CenterAndExpand"
+					FontSize="20"
+					TextColor="White"
+					x:Name="lblRegistration"
+					/>  
+
+					<StackLayout x:Name="_slName" BackgroundColor="White" 
+						HeightRequest="40" Margin="10,10,10,0" Orientation="Horizontal">
+						<StackLayout BackgroundColor="#27BB9B"
+							WidthRequest="40"
+							x:Name="_slLeftName">
+						<Image Source="email" 
+						Margin="12"
+						Aspect="AspectFit"
+							VerticalOptions="CenterAndExpand"/>
+						</StackLayout>
+						<local:MyEntry
+				x:Name="txtUsername"
+				Placeholder="Name"
+						HorizontalOptions="FillAndExpand"
+						Keyboard="Default"/>
+					</StackLayout>
+					
+					<StackLayout x:Name="_slEmail" BackgroundColor="White" 
+						HeightRequest="40" Margin="10,0,10,0" Orientation="Horizontal">
+						<StackLayout BackgroundColor="#27BB9B"
+							WidthRequest="40"
+							x:Name="_slLeftEmail">
+						<Image Source="email" 
+						Margin="12"
+						Aspect="AspectFit"
+							VerticalOptions="CenterAndExpand"/>
+						</StackLayout>
+						<local:MyEntry
+				x:Name="txtEmail"
+				Placeholder="Email Address"
+						HorizontalOptions="FillAndExpand"
+						Keyboard="Default"/>
+					</StackLayout>
+
+					
+					<StackLayout x:Name="_slPassword" BackgroundColor="White" 
+						HeightRequest="40" Margin="10,0,10,0"
+						Orientation="Horizontal">
+						<StackLayout x:Name="_slLeftPassword" 
+							BackgroundColor="#27BB9B" 
+							WidthRequest="40">
+						<Image Source="password" 
+						Margin="12"
+					    Aspect="AspectFit"
+							VerticalOptions="CenterAndExpand"/>
+						</StackLayout>
+						<local:MyEntry
+				x:Name="txtPass"
+				IsPassword="true"
+					Placeholder="Password"
+						HorizontalOptions="FillAndExpand"
+						Keyboard="Default"/>
+					</StackLayout>
+
+					<StackLayout x:Name="_slConfirmPassword" 
+						BackgroundColor="White" 
+						HeightRequest="40" Margin="10,0,10,0"
+						Orientation="Horizontal">
+						<StackLayout x:Name="_slLeftConfirmPassword"
+							BackgroundColor="#27BB9B"
+							WidthRequest="40">
+						<Image Source="password"  
+						Margin="12"
+					    Aspect="AspectFit"
+						VerticalOptions="CenterAndExpand"/> 
+						</StackLayout>
+						<local:MyEntry
+				        x:Name="txtConPass" 
+				        IsPassword="true"
+					    Placeholder="Confirm Password"
+						HorizontalOptions="FillAndExpand"
+						Keyboard="Default"/>
+					</StackLayout>  
+					   
+					<StackLayout Orientation="Horizontal"  
+						HorizontalOptions="FillAndExpand"
+						Margin="10">
+					<Button
+					x:Name="btnLogin"
+							HeightRequest="40"   
+							Text="LOGIN"
+						BorderColor="White"
+							BorderWidth="2"
+						BorderRadius="0"
+							TextColor="White"
+						HorizontalOptions="FillAndExpand"/> 
+						<Button 
+						x:Name="btnRegister"
+							HeightRequest="40" 
+							Text="REGISTER"
+						TextColor="White" 
+						BorderRadius="0"
+						BackgroundColor="#27BB9B"
+						WidthRequest="80"
+						HorizontalOptions="FillAndExpand"/>
+					</StackLayout>
+					<StackLayout HorizontalOptions="Center" Spacing="0">
+					<Label Text="FORGOT PASSWORD?"
+							TextColor="White"
+						HorizontalOptions="Center"
+						x:Name="lblFogotPassword"/>
+						<BoxView HeightRequest="1.2"
+						BackgroundColor="White"
+						/>
+						<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="forgotPasswordTapped"/> 
+    </StackLayout.GestureRecognizers> 
+					</StackLayout>
+
+					<Image Aspect="AspectFill" Source="fb" Margin="10">
+					<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="fbTapped"/> 
+    </Image.GestureRecognizers> 
+					</Image>
+					<Image Aspect="AspectFill" Source="g+" Margin="10">
+					<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="googleplusTapped"/> 
+    </Image.GestureRecognizers> 
+					</Image>
+				</StackLayout>
+			</ScrollView>
+
+
+   
+        
+		</Grid>   
+		 
+   
+            </RelativeLayout>   
+        
+
+</ContentPage>

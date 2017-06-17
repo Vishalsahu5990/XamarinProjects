@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="BikeSpot.Settings"
+	BackgroundColor="#191A1C">
+	<StackLayout VerticalOptions="FillAndExpand">
+		<StackLayout Orientation="Horizontal" HeightRequest="70" BackgroundColor="#20D1C8">
+			<StackLayout VerticalOptions="FillAndExpand">
+				<Image Source="menu" VerticalOptions="CenterAndExpand" Margin="25" />
+
+				<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="menu_Tapped" />
+				</StackLayout.GestureRecognizers>
+			</StackLayout>
+			<Label Margin="0,2,0,0" Text="Settings" 
+			TextColor="White"
+			FontAttributes="Bold"
+			VerticalOptions="Center"/> 
+				<Image Source="menu-right" Margin="0,0,20,0"
+			HorizontalOptions="EndAndExpand"/>
+			</StackLayout>
+		<StackLayout>
+
+		<ScrollView>
+				
+<!--Contents from here-->
+		<StackLayout Padding="16" Spacing="25">
+		<StackLayout HeightRequest="50" x:Name="slNotification" Orientation="Horizontal" Spacing="15">
+		<Image Source="notification"/>
+				<Label Text="Recieve Notifications"
+				VerticalOptions="Center"
+				TextColor="White"
+				FontSize="20"/>
+					<Switch HorizontalOptions="EndAndExpand" Margin="0,0,30,0"/> 
+			</StackLayout>
+
+				<StackLayout x:Name="slChangePassword" HeightRequest="50"   Orientation="Horizontal" Spacing="15">
+		<Image Source="password"/>
+				<Label Text="Change Password"
+				VerticalOptions="Center"
+				TextColor="White"
+				FontSize="20"/>
+				<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="changePassword_Tapped" />
+				</StackLayout.GestureRecognizers>		
+			</StackLayout> 
+
+
+				<StackLayout x:Name="slChangeEmail" HeightRequest="50"  Orientation="Horizontal" Spacing="15">
+		<Image Source="message-icon-png-23"/>
+				<Label Text="Change Email"
+				VerticalOptions="Center"
+				TextColor="White"
+				FontSize="20"/>
+				<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="changeEmail_Tapped" />
+				</StackLayout.GestureRecognizers>		
+			</StackLayout>
+
+				<StackLayout x:Name="slHelp" HeightRequest="50"  Orientation="Horizontal" Spacing="15">
+		<Image Source="help"/>
+				<Label Text="Help"
+				VerticalOptions="Center"
+				TextColor="White"
+				FontSize="20"/>
+					
+			</StackLayout>
+
+				<StackLayout x:Name="slCall" HeightRequest="50"  Orientation="Horizontal" Spacing="15">
+		<Image Source="call"/>
+				<Label Text="Call Us"
+				VerticalOptions="Center"
+				TextColor="White"
+				FontSize="20"/>
+					
+			</StackLayout>
+				<StackLayout x:Name="slEmailus" HeightRequest="50"  Orientation="Horizontal" Spacing="15">
+		<Image Source="email copy"/>
+				<Label Text="Email Us"
+				VerticalOptions="Center"
+				TextColor="White"
+				FontSize="20"/>
+					
+			</StackLayout>
+				<StackLayout x:Name="slReview" HeightRequest="50"  Orientation="Horizontal" Spacing="15">
+		<Image Source="review"/>
+				<Label Text="Write a Review"
+				VerticalOptions="Center"
+				TextColor="White"
+				FontSize="20"/>
+				<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="review_Tapped" />
+				</StackLayout.GestureRecognizers>	
+			</StackLayout>
+				<StackLayout x:Name="slWebsite" HeightRequest="50"  Orientation="Horizontal" Spacing="15">
+		<Image Source="website"/>
+				<Label Text="Website URL"
+				VerticalOptions="Center"
+				TextColor="White"
+				FontSize="20"/>
+					
+			</StackLayout>
+				<StackLayout x:Name="slLogout" HeightRequest="50"  Orientation="Horizontal" Spacing="15">
+		<Image Source="logout"/>
+				<Label Text="Logout"
+				VerticalOptions="Center"
+				TextColor="White"
+				FontSize="20"/>
+				<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="logout_Tapped" /> 
+				</StackLayout.GestureRecognizers>		
+			</StackLayout>
+			</StackLayout>	
+		</ScrollView>
+		</StackLayout>
+		
+		</StackLayout>
+</ContentPage>

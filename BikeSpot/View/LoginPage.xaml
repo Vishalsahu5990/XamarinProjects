@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="BikeSpot.LoginPage"
+	 xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot" >
+	<RelativeLayout 
+            Padding="0"
+            Margin="0"
+            x:Name="_MainLayout"
+            RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}">
+
+        <Image Source="bg"
+                x:Name="imgBG"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}"
+              RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}"/>
+
+		 <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+            <ScrollView>
+            <StackLayout x:Name="_slMainLayout" VerticalOptions="CenterAndExpand" Padding="20" Spacing="10">
+            <Image Source="logo"
+					Margin="60,0,60,0"
+					x:Name="imgLogo"/> 	
+					<Label Text="Login"
+					HorizontalOptions="CenterAndExpand"
+					FontSize="20"
+					TextColor="White"
+					x:Name="lblLogin"/>
+					<StackLayout BackgroundColor="White" 
+						HeightRequest="40" Margin="10" Orientation="Horizontal"
+						x:Name="_slEmail">
+						<StackLayout BackgroundColor="#27BB9B"
+							WidthRequest="40"
+							x:Name="_slLeftEmail">
+						<Image Source="email" 
+						Margin="12"
+						Aspect="AspectFit"
+							VerticalOptions="CenterAndExpand"/>
+						</StackLayout>
+						<local:MyEntry
+				x:Name="txtUsername"
+				Placeholder="Email Address"
+						HorizontalOptions="FillAndExpand"
+						Keyboard="Default"/>
+					</StackLayout>
+					<StackLayout BackgroundColor="White" 
+						HeightRequest="40" Margin="10,0,10,0"
+						Orientation="Horizontal"
+						x:Name="_slPassword">
+						<StackLayout BackgroundColor="#27BB9B" WidthRequest="40"
+							x:Name="_slLeftPassword"> 
+						<Image Source="password"  	
+						Margin="12" 
+					    Aspect="AspectFit"
+							VerticalOptions="CenterAndExpand"
+							/>
+						</StackLayout>
+						<local:MyEntry
+				x:Name="txtPass"
+				IsPassword="true"
+					Placeholder="Password"
+						HorizontalOptions="FillAndExpand"
+						Keyboard="Default"/>
+					</StackLayout>
+					<StackLayout Orientation="Horizontal"  
+						HorizontalOptions="FillAndExpand"
+						Margin="10">
+					<Button HeightRequest="40" 
+							Text="REGISTER"
+						BorderColor="White"
+							BorderWidth="2"
+						BorderRadius="0"
+							TextColor="White"
+						HorizontalOptions="FillAndExpand"
+						x:Name="btnRegister"/>
+						<Button HeightRequest="40" 
+							Text="LOGIN"
+						TextColor="White"
+						BorderRadius="0"
+						BackgroundColor="#27BB9B"
+						WidthRequest="80"
+						HorizontalOptions="FillAndExpand"
+						x:Name="btnLogin"/>
+					</StackLayout>
+					<StackLayout HorizontalOptions="Center" Spacing="0">
+					<Label Text="FORGOT PASSWORD?"
+							TextColor="White"
+						HorizontalOptions="Center"
+						x:Name="lblForgotPassword"/>
+						<BoxView HeightRequest="1.2"
+						BackgroundColor="White"/>
+						<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="forgotPasswordTapped"/> 
+    </StackLayout.GestureRecognizers> 
+					</StackLayout>
+
+					<Image Aspect="AspectFill" Source="fb.png" Margin="10">
+					<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="fbTapped"/> 
+    </Image.GestureRecognizers> 
+					</Image>
+					<Image Aspect="AspectFill" Source="g+.png" Margin="10">
+					<Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="googleplusTapped"/> 
+    </Image.GestureRecognizers> 
+					</Image>
+				</StackLayout>
+			</ScrollView>
+
+
+   
+        
+		</Grid>
+
+   
+            </RelativeLayout> 
+        
+
+</ContentPage>

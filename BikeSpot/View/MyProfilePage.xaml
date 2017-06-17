@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot" 
+	xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView" 
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+	xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+	x:Class="BikeSpot.MyProfilePage">
+	<StackLayout Spacing="0">
+
+	<RelativeLayout HeightRequest="250"
+				x:Name="_rlTopBackgroud"
+			VerticalOptions="Start"
+			BackgroundColor="#E3E4E5"
+			Padding="0"
+			Margin="0"> 
+  <Image 
+		Source="bg_blue"
+				Aspect="AspectFill"
+	RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+               RelativeLayout.HeightConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
+
+               <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}"
+				Padding="0,10,0,0"> 
+				
+
+				<Grid HorizontalOptions="FillAndExpand" Padding="0,10,0,0" VerticalOptions="FillAndExpand">
+
+
+				<StackLayout Orientation="Horizontal" VerticalOptions="Start" Padding="10,0,10,0">
+						<StackLayout Orientation="Horizontal">
+						<Image Source="back" Margin="10,0,0,0"/>
+						<Label VerticalOptions="CenterAndExpand" 
+						VerticalTextAlignment="Center" 
+						Text="My Profile"
+						TextColor="White" 
+						FontAttributes="Bold"/> 
+							<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="backTapped"/>    
+    </StackLayout.GestureRecognizers>
+						</StackLayout> 
+
+						<StackLayout Padding="10"   HorizontalOptions="EndAndExpand">
+						<Image  Source="menu-right" Margin="0,10,10,0" HorizontalOptions="EndAndExpand">
+						</Image>
+								<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="optionMenuTapped"/>  
+    </StackLayout.GestureRecognizers>
+						</StackLayout>  
+
+					</StackLayout> 
+					<StackLayout Orientation="Horizontal" Padding="10,10,10,0" VerticalOptions="CenterAndExpand">
+						<controls:CircleImage
+							x:Name="imgProfile"
+							Aspect="AspectFill"
+							Source="profile.jpg"
+							HeightRequest="100"
+			                WidthRequest="100"
+			                VerticalOptions="Start"
+									BorderColor="Transparent"
+									BorderThickness="3" 
+					HorizontalOptions="Start"/>
+					<StackLayout Grid.Column="1">
+							
+								<Label Text="Alexendra Alsop"
+							TextColor="White" 
+							FontAttributes="Bold"
+							FontSize="18"
+							x:Name="lblUserName"/>
+
+					
+							<Label Text="www.domain.com"
+							TextColor="White"
+							x:Name="lblEmail"/>
+							<Label Text="5 reviews"
+							TextColor="White"
+							x:Name="lblReviews"/>
+							<StackLayout Orientation="Horizontal" >
+								<Grid Padding="0" HorizontalOptions="Center">
+				<Image Grid.Column="0" Source="star_empty.png"
+									HeightRequest="13"
+								WidthRequest="13"
+									x:Name="imgStar1"/>
+					<Image Grid.Column="1" Source="star_empty.png"
+								HeightRequest="10"
+								WidthRequest="10"
+									x:Name="imgStar2"/>
+					<Image Grid.Column="2" Source="star_empty.png"
+								HeightRequest="10"
+								WidthRequest="10"
+									x:Name="imgStar3"/>
+				<Image Grid.Column="3" Source="star_empty.png"
+								HeightRequest="10"
+								WidthRequest="10"
+									x:Name="imgStar4"/>
+					<Image Grid.Column="4" Source="star_empty.png"
+								HeightRequest="10"
+								WidthRequest="10"
+									x:Name="imgStar5"/> 
+				</Grid>
+								<Label Text="5.0" TextColor="White"
+								x:Name="lblRating"/>
+							</StackLayout>  
+						
+							
+					</StackLayout>
+						<Image Source="ribbon" VerticalOptions="Start"
+						IsVisible="false"
+						x:Name="imgRibbon"/>
+					</StackLayout>
+
+
+<!--		Tab layout			-->
+					<StackLayout Margin="0,10,0,0" VerticalOptions="EndAndExpand" 
+						Orientation="Horizontal"  
+						Padding="0">
+		<StackLayout HorizontalOptions="FillAndExpand" x:Name="tabSell">
+		<Button Text="Offering" 
+			TextColor="White"
+			FontSize="20"
+				x:Name="btnSell"/>
+				<BoxView BackgroundColor="#20B8AF"
+				HeightRequest="4"
+				x:Name="bxSell"   
+						/>
+				<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="SellTapped"/> 
+    </StackLayout.GestureRecognizers>
+			</StackLayout>
+			<StackLayout HorizontalOptions="FillAndExpand" x:Name="tabRent">
+		<Button Text="Buying" 
+			TextColor="White"
+			FontSize="20"
+				x:Name="btnRent"/> 
+				<BoxView BackgroundColor="#20B8AF"
+				HeightRequest="4"
+				x:Name="bxRent"/> 
+				<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="RentTapped"/> 
+    </StackLayout.GestureRecognizers>
+			</StackLayout> 
+			<StackLayout HorizontalOptions="FillAndExpand" x:Name="tabProfile">
+		<Button Text="Profile" 
+			TextColor="White"
+			FontSize="20"
+				x:Name="btnProfile"/>
+				<BoxView BackgroundColor="#20B8AF"
+				HeightRequest="4"
+				x:Name="bxProfile"/> 
+				<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="ProfileTapped"/> 
+    </StackLayout.GestureRecognizers>
+			</StackLayout> 
+
+
+						
+		</StackLayout>  
+				</Grid>
+			</Grid>
+          
+          </RelativeLayout>
+
+<!--start profile tab		-->
+		<StackLayout Margin="0,20,0,0" x:Name="_slProfile" BackgroundColor="#E3E4E5">
+			<ScrollView Padding="0">
+			<StackLayout Spacing="10" >
+
+			<StackLayout Orientation="Horizontal" BackgroundColor="White">
+		<Grid Padding="10,20,10,10" HorizontalOptions="Start">
+				<Image Grid.Column="0" Source="fb copy" WidthRequest="30" HeightRequest="30"/>
+					<Image Grid.Column="1" Source="twitter" WidthRequest="20" HeightRequest="20"/>
+					<Image Grid.Column="2" Source="insta" WidthRequest="20" HeightRequest="20"/>
+				<Image Grid.Column="3" Source="pinterest" WidthRequest="20" HeightRequest="20"/>
+					<Image Grid.Column="4" Source="linkedin" WidthRequest="20" HeightRequest="20"/>
+			
+				</Grid>  
+			<Label Text="12 post left" TextColor="Black"
+			VerticalOptions="Center"
+			Margin="0,10,0,0"/> 
+		</StackLayout>
+				
+				<StackLayout Spacing="1">
+		<StackLayout BackgroundColor="White" Orientation="Horizontal" Padding="10,20,20,20">			
+		<Image Source="phone" Margin="10"/>
+					<StackLayout VerticalOptions="CenterAndExpand">
+					<Label Text="000-0000-0000"
+							TextColor="#646566"/>
+						<Label Text="Mobile" 
+							TextColor="#646566"
+							FontSize="12"/>
+					</StackLayout>
+				</StackLayout>
+					<StackLayout BackgroundColor="White" Orientation="Horizontal" Padding="10,20,20,20">			
+		<Image Source="mail" Margin="10"/>
+					<StackLayout VerticalOptions="CenterAndExpand">
+					<Label Text="Test@live.com" 
+							TextColor="#646566"/>
+						<Label Text="Personal" 
+							TextColor="#646566"
+							FontSize="12"/>
+					</StackLayout>
+				</StackLayout>
+				</StackLayout>
+
+
+
+
+				<StackLayout Spacing="1">
+					
+		<StackLayout BackgroundColor="White" Orientation="Horizontal" Padding="10,10,20,10">			
+		<Image Source="upgrade_account" Margin="10"/>
+					<StackLayout VerticalOptions="CenterAndExpand">
+					<Label Text="Upgrade Account"
+							TextColor="Black"
+							FontAttributes="Bold"/>
+						<Label Text="Become a retailer" 
+							TextColor="#646566"
+							FontSize="12"/>
+					</StackLayout>
+				</StackLayout>
+					<StackLayout BackgroundColor="White" Orientation="Horizontal" Padding="10,10,20,10">			
+		<Image Source="reviews" Margin="10"/>
+					<StackLayout VerticalOptions="CenterAndExpand">
+					<Label Text="Your Reviews" 
+							TextColor="Black"
+							FontAttributes="Bold"/>
+						<Label Text="12 reviews" 
+							TextColor="#646566"
+							FontSize="12"/>
+					</StackLayout>
+				</StackLayout>
+
+					<StackLayout BackgroundColor="White" Orientation="Horizontal" Padding="10,10,20,10">			
+		<Image Source="saved-users" Margin="10"/>
+					<StackLayout VerticalOptions="CenterAndExpand">
+					<Label Text="Saved Users"
+							TextColor="Black"
+							FontAttributes="Bold"/>
+						<Label Text="12 users" 
+							TextColor="#646566"
+							FontSize="12"/>
+					</StackLayout>
+				</StackLayout>
+					<StackLayout BackgroundColor="White" Orientation="Horizontal" Padding="10,10,20,10">			
+		<Image Source="paymen_methods" Margin="10"/>
+					<StackLayout VerticalOptions="CenterAndExpand">
+					<Label Text="Payment Methods" 
+							TextColor="Black"
+							FontAttributes="Bold"/>
+						<Label Text="Please add payment methods" 
+							TextColor="#646566"
+							FontSize="12"/>
+					</StackLayout>
+						
+				</StackLayout>
+					<StackLayout BackgroundColor="White" Orientation="Horizontal" Padding="10,10,20,10">			
+		<Image Source="settings" Margin="10"/>
+					<StackLayout VerticalOptions="CenterAndExpand">
+					<Label Text="Settings" 
+							TextColor="Black"
+							FontAttributes="Bold"/>
+						<Label Text="Change settings" 
+							TextColor="#646566"
+							FontSize="12"/>
+					</StackLayout>
+						
+				</StackLayout>
+				</StackLayout>
+
+				<StackLayout BackgroundColor="White" VerticalOptions="FillAndExpand">
+				</StackLayout>
+
+				</StackLayout>
+				</ScrollView>
+		</StackLayout>
+		<!--end  profile tab		-->
+		 
+		<!--start  Offering tab		-->
+		<StackLayout x:Name="slSell" IsVisible="false">  
+		<StackLayout Padding="10"> 
+		<Label Text="0 ITEMS" />
+				<StackLayout  HeightRequest="100">
+
+				<Grid Padding="10" >
+				<Button
+				Grid.Column="0"
+						Text="All"
+						TextColor="Black"
+					BackgroundColor="#1FD7D7"
+					BorderRadius="0"
+					HeightRequest="40"/>
+					<Button
+				Grid.Column="1"
+						Text="Rent"
+						TextColor="Black"
+					BackgroundColor="#D5D6D7"
+					BorderRadius="0"
+					HeightRequest="40"/>
+					<Button
+				Grid.Column="2"
+						Text="Sell"
+						TextColor="Black"
+					BackgroundColor="#D5D6D7"
+					BorderRadius="0"
+					HeightRequest="40"/>
+					<Button
+				Grid.Column="3"
+						Text="Sold"
+						TextColor="Black"
+					BackgroundColor="#D5D6D7"
+					BorderRadius="0"
+					HeightRequest="40"/>
+					</Grid>
+					</StackLayout>
+				<StackLayout Margin="0,15,0,0" >
+				<flv:FlowListView BackgroundColor="Transparent" Margin="0,10,0,0" SeparatorVisibility="None" HasUnevenRows="true" FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowLastTappedItem="{Binding LastTappedItem}" x:Name="flowlistview" >
+							<flv:FlowListView.FlowColumnTemplate>
+								<DataTemplate>
+									<Grid Padding="10">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="*"/>
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<Frame>
+											<StackLayout>
+												<ffimageloading:CachedImage Aspect="AspectFill"
+												DownsampleUseDipUnits="false"
+													LoadingPlaceholder="profile.jpg"
+												ErrorPlaceholder="profile.jpg"
+												Source="profile.jpg"
+												HeightRequest="80" />
+												<StackLayout Orientation="Horizontal" 
+													Margin="10,0,10,0" VerticalOptions="EndAndExpand">
+													<Label Text="name" />
+													<Label Text="price" 
+													HorizontalOptions="EndAndExpand"/> 
+												</StackLayout>
+											</StackLayout>
+										</Frame>
+									</Grid>
+								</DataTemplate>
+							</flv:FlowListView.FlowColumnTemplate>
+						</flv:FlowListView>
+				</StackLayout>
+				</StackLayout>  
+			
+				</StackLayout>
+		<!--end  Offering tab		-->
+
+
+		<!--start  Buying tab		-->
+		<StackLayout x:Name="slRent" IsVisible="false"> 
+		<ScrollView>
+		<StackLayout> 
+
+				</StackLayout> 
+			</ScrollView>
+				</StackLayout>  
+				<!--end  Buying tab		-->
+		
+		</StackLayout>  
+</ContentPage>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot"
+	xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+	x:Class="BikeSpot.MasterPage"
+	Icon="menu.png"
+	Title="menu">
+	<ContentPage.Content>
+
+
+	<StackLayout Spacing="0">
+
+	<RelativeLayout HeightRequest="250"
+				x:Name="imgTopBackgroud"
+			VerticalOptions="Start"> 
+  <Image 
+				x:Name="imgTimeline"
+		        Source="profile.jpg"
+				Aspect="AspectFill"
+	RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+               RelativeLayout.HeightConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
+
+               <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}"> 
+				
+
+				<Grid HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="FillAndExpand">
+
+
+
+					
+							<StackLayout  >
+							<StackLayout HorizontalOptions="EndAndExpand" x:Name="imgTemp" Padding="10">
+							<Image Source="settings-icon-6" VerticalOptions="Start"
+
+							/>
+							</StackLayout>
+
+								
+					<StackLayout Margin="10" VerticalOptions="Start">
+						<controls:CircleImage
+							x:Name="imgProfile"
+							Aspect="AspectFill"
+							Source="profile.jpg"
+							HeightRequest="100" 
+			WidthRequest="100"
+			VerticalOptions="Start"
+									BorderColor="Transparent"
+									BorderThickness="3"
+					HorizontalOptions="Start"
+						Margin="0,0,0,0"/> 
+
+
+						<Label Text="Alexendra Alsop"
+							TextColor="White" 
+							FontAttributes="Bold"
+							FontSize="18"
+							x:Name="lblUsername"/>
+								<Label Text="test@live.com"
+							TextColor="White"
+							x:Name="lblEmail"
+								/>		
+							
+							</StackLayout> 
+						
+							
+					</StackLayout> 
+
+				</Grid> 
+			</Grid>
+          
+          </RelativeLayout>
+
+<!-- Content view starts here		-->
+		<ScrollView>
+	<StackLayout>
+
+					
+		<StackLayout Padding="10" Margin="0,10,0,0" Spacing="25">
+		<StackLayout x:Name="slHome" Orientation="Horizontal" Spacing="15">
+		<Image Source="home"/>
+				<Label Text="Home"
+				VerticalOptions="Center"
+				TextColor="Gray"
+				FontSize="20"
+								Margin="25,0,0,0"
+							HorizontalTextAlignment="Center"/>
+			</StackLayout>
+						
+			<StackLayout x:Name="slProfile" Orientation="Horizontal" Spacing="15">
+		<Image Source="profile_nav" />
+				<Label Text="Profile"
+				VerticalOptions="Center"
+				TextColor="Gray"
+				FontSize="20"
+								Margin="25,0,0,0"
+							HorizontalTextAlignment="Center"/>
+			</StackLayout>
+		<StackLayout x:Name="slSell" Orientation="Horizontal" Spacing="15">
+		<Image Source="navigationcart"/>
+				<Label Text="Sell a bike"
+				VerticalOptions="Center"
+				TextColor="Gray"
+				FontSize="20"
+							Margin="25,0,0,0"/>
+			</StackLayout>
+			<StackLayout x:Name="slRent" Orientation="Horizontal"  Spacing="15">
+		<Image Source="navigationbike"/>
+				<Label Text="Rent a bike"
+				VerticalOptions="Center"
+				TextColor="Gray"
+				FontSize="20"
+							Margin="25,0,0,0"/>
+			</StackLayout>
+			<StackLayout x:Name="slMessages" Orientation="Horizontal" Spacing="15">
+		<Image Source="navigationenvelope"/>
+				<Label Text="Messages"
+				VerticalOptions="Center"
+				TextColor="Gray"
+				FontSize="20"
+							Margin="25,0,0,0"/>
+			</StackLayout>
+			<StackLayout x:Name="slBikeWizard" Orientation="Horizontal" Spacing="15">
+		<Image Source="navigationmagic"/>
+				<Label Text="Bike Wizard"
+				VerticalOptions="Center"
+				TextColor="Gray"
+				FontSize="20"
+							Margin="25,0,0,0"/>
+			</StackLayout>
+			<StackLayout x:Name="slUpgrades" Orientation="Horizontal" Spacing="15">
+		<Image Source="navigationwheel"/>
+				<Label Text="Upgrades"
+				VerticalOptions="Center"
+				TextColor="Gray"
+				FontSize="20"
+							Margin="25,0,0,0"/>
+			</StackLayout>
+		</StackLayout>
+		<BoxView BackgroundColor="Gray"
+			HeightRequest="1"
+			Margin="0,10,0,0"
+		/>
+
+		<StackLayout Padding="10" Margin="0,10,0,0" Spacing="25">		
+		<StackLayout x:Name="slPrivateRetailerAccount"  Orientation="Horizontal" >
+
+				<Label Text="Private / Retailer Account"
+				VerticalOptions="Center"
+				TextColor="Gray"
+				FontSize="20"/>
+			<Image Source="info-alt-128" HorizontalOptions="EndAndExpand" Margin="10"/>
+			</StackLayout>
+		<StackLayout x:Name="slFaq" Orientation="Horizontal" >
+
+				<Label Text="FAQ"
+				VerticalOptions="Center"
+				TextColor="Gray"
+				FontSize="20"/>
+			<Image Source="info-alt-128" HorizontalOptions="EndAndExpand" Margin="10"/>
+			</StackLayout>
+		<StackLayout x:Name="slContact"  Orientation="Horizontal"  >
+
+				<Label Text="Contact"
+				VerticalOptions="Center"
+				TextColor="Gray"
+				FontSize="20"/> 
+			<Image Source="info-alt-128" HorizontalOptions="EndAndExpand" Margin="10"/>
+			</StackLayout>
+		<StackLayout x:Name="slSiteNotice" Orientation="Horizontal">
+
+				<Label Text="Site Notice"
+				VerticalOptions="Center"
+				TextColor="Gray"
+				FontSize="20"/>
+			<Image Source="info-alt-128" HorizontalOptions="EndAndExpand" Margin="10"/>
+			</StackLayout>
+				</StackLayout>
+
+
+				
+			</StackLayout>
+				</ScrollView>
+		</StackLayout>  
+		</ContentPage.Content>
+</ContentPage>

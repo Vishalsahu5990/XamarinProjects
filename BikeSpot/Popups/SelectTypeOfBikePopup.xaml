@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+	xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+	x:Class="BikeSpot.SelectTypeOfBikePopup">
+
+	<StackLayout
+			Orientation="Vertical" 
+			VerticalOptions="CenterAndExpand"
+		HorizontalOptions="FillAndExpand"
+			Padding="0" Margin="20,30,20,30"> 
+		     
+			<Frame Padding="10,0,10,10" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+			<StackLayout>
+					<StackLayout Orientation="Horizontal"
+					HorizontalOptions="FillAndExpand"
+						HeightRequest="50"
+						Padding="10">
+					<Label Text="Type of Bike"
+						VerticalOptions="CenterAndExpand"/>
+						<Image Source="close"
+						HorizontalOptions="EndAndExpand"
+						HeightRequest="20">
+						  <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="close_Tapped"/>
+    </Image.GestureRecognizers>
+						</Image>
+
+					</StackLayout>
+					<StackLayout HeightRequest="200" HorizontalOptions="FillAndExpand"
+						VerticalOptions="FillAndExpand">
+						 <flv:FlowListView
+			RowHeight="60"
+			BackgroundColor="Transparent"
+			Margin="0,30,0,0"
+			SeparatorVisibility="None"
+			HasUnevenRows="true"
+			FlowItemTappedCommand="{Binding ItemTappedCommand}" 
+			FlowLastTappedItem="{Binding LastTappedItem}"
+			FlowColumnMinWidth="320"
+							
+			x:Name="flowlistview">
+
+			<flv:FlowListView.FlowColumnTemplate>
+				<DataTemplate>
+					<Grid Padding="0,10,0,10">
+						
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+			 			</Grid.ColumnDefinitions>
+										<StackLayout HorizontalOptions="FillAndExpand">
+											<StackLayout Spacing="10" Orientation="Horizontal" Padding="10">
+						<Image
+													IsVisible="{Binding IsSelected}"
+												Source="checkbox-checked"/>
+												<Image
+													Source="checkbox-unchecked"
+												
+												IsVisible="{Binding IsVisible}"/>
+
+	
+						<Label
+													
+												Margin="10,0,0,0"
+						Text="{Binding Item.name}" 
+						VerticalTextAlignment="Center"
+						HorizontalTextAlignment="End"
+												TextColor="Black"/>
+				<!--<Button Image="delete"
+								IsVisible="{Binding isVisible}"
+								x:Name="btnDeleteComment"
+								Clicked="DeleteComment_Clicked"
+								HorizontalOptions="EndAndExpand"
+								CommandParameter="{Binding user_id}"/>
+                            -->
+											
+						</StackLayout>	
+										<BoxView BackgroundColor="Black"
+											HorizontalOptions="FillAndExpand"
+											HeightRequest="1"/>
+										</StackLayout>
+						
+					</Grid>
+				</DataTemplate>
+			</flv:FlowListView.FlowColumnTemplate>
+		
+		</flv:FlowListView>
+					</StackLayout>
+					<StackLayout Margin="0,20,0,0" Spacing="20" Orientation="Horizontal" HorizontalOptions="Center">
+					<Button x:Name="btnCancel" Text="Cancel" WidthRequest="80"
+					BorderRadius="0"
+						BackgroundColor="#27BB9B"
+					Clicked="cancel_clicked"
+					TextColor="White"/>
+					<Button x:Name="btnOk" Text="Ok"
+						WidthRequest="80"
+					BorderRadius="0"
+						BackgroundColor="#27BB9B"
+					Clicked="ok_clicked"
+					TextColor="White"/>
+				</StackLayout> 
+
+				</StackLayout>
+			</Frame>
+		
+	 
+		</StackLayout>
+	
+</pages:PopupPage>

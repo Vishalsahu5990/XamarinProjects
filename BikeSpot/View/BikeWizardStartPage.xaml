@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="BikeSpot.BikeWizardStartPage">
+	<StackLayout Spacing="0">
+
+	<StackLayout Padding="0,10,0,0" Orientation="Horizontal" HeightRequest="100" BackgroundColor="#20D1C8" >
+	<StackLayout VerticalOptions="FillAndExpand"  Orientation="Horizontal">
+				<StackLayout VerticalOptions="FillAndExpand">
+				<Image Source="back" VerticalOptions="CenterAndExpand" Margin="25,25,5,25" />
+
+				<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="back_Tapped" />
+				</StackLayout.GestureRecognizers>
+			</StackLayout>
+	
+			<Label Text="Bike Wizard" VerticalOptions="Center" 
+			FontSize="22"
+				TextColor="White"/>	
+			</StackLayout>
+			</StackLayout>
+		
+	<RelativeLayout 
+            Padding="0"
+            Margin="0"
+            x:Name="_MainLayout"
+            RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}">
+
+        <Image Source="bike_bg" 
+                x:Name="imgBG" 
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Property=Width, Constant=0}"
+              RelativeLayout.WidthConstraint="{ConstraintExpression , Property=Width,Type=RelativeToParent}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression , Property=Height,Type=RelativeToParent}"/>
+
+		 <Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+            <ScrollView>
+            <StackLayout VerticalOptions="CenterAndExpand"  
+					Spacing="10" HorizontalOptions="FillAndExpand"
+					Padding="15">
+            <Label Text="Which type of bike should you choose?"
+					FontSize="24"
+					HorizontalOptions="Center"
+					HorizontalTextAlignment="Center" 
+					TextColor="White"
+					FontAttributes="Bold"
+						x:Name="lblQuestion"/>
+		<Button Text="Start"
+		FontSize="22" 
+		TextColor="White"
+		BackgroundColor="#20D0C8"
+		BorderRadius="0"
+		Margin="10,40,10,0"
+		HeightRequest="60"
+		x:Name="btnStart"
+			FontAttributes="Bold"/> 
+				</StackLayout>  
+			</ScrollView>
+
+
+   
+        
+		</Grid>
+
+   
+            </RelativeLayout> 
+        </StackLayout>
+</ContentPage>

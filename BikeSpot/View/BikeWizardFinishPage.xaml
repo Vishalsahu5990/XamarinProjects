@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="BikeSpot.BikeWizardFinishPage"> 
+	<StackLayout Spacing="0">
+
+	<StackLayout Padding="0,10,0,0" Orientation="Horizontal" HeightRequest="70" BackgroundColor="#20D1C8" >
+	<StackLayout VerticalOptions="FillAndExpand"  Orientation="Horizontal">
+				<StackLayout VerticalOptions="FillAndExpand">
+				<Image Source="back" VerticalOptions="CenterAndExpand" Margin="25,25,5,25" />
+
+				<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="back_Tapped" />
+				</StackLayout.GestureRecognizers>
+			</StackLayout>
+	
+			<Label Text="Bike Wizard" VerticalOptions="Center" 
+			FontSize="22"
+				TextColor="White"/>	
+			</StackLayout>
+			</StackLayout>
+	<ScrollView>
+	<StackLayout >
+	<Image Source="bg_makeoffer"
+			HeightRequest="250"
+			Aspect="AspectFill"
+			x:Name="imgBike"/>
+			<Label Text="Your Recommendation"
+			Margin="20"
+			FontSize="20"
+				x:Name="lblTitle"/>
+			<Label Text="Electric mountain bike"
+			Margin="20,0,20,0"
+			FontSize="30"
+				x:Name="lblBikeType"/>
+			<Label 
+			x:Name="lblDescription"
+					TextColor="Black"
+			Margin="20,0,20,0"
+			Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque suscipit massa non nibh vulputate, ac efficitur libero venenatis. Nulla pellentesque viverra rutrum. Nullam tincidunt mauris nec nulla hendrerit consectetur. Integer id semper dui, vel aliquet orci. Sed sollicitudin justo sed ligula faucibus, in vulputate massa volutpat. Phasellus consectetur ligula at varius pretium."/>
+			<StackLayout 
+			VerticalOptions="EndAndExpand"
+				Orientation="Horizontal" 
+				HorizontalOptions="FillAndExpand"
+				Margin="0,10,0,0"
+					x:Name="_slButton">
+				<Grid HorizontalOptions="FillAndExpand" ColumnSpacing="2">
+					<Button Text="SHOW BIKES"
+				HorizontalOptions="FillAndExpand"
+				BackgroundColor="#28BB9A"
+				BorderRadius="0"
+				TextColor="White"
+				FontSize="22"
+				HeightRequest="50"
+					Grid.Column="0"
+						x:Name="btnShowBikes"/>
+
+				<Button Text="FINISH"
+				HorizontalOptions="FillAndExpand"
+				BackgroundColor="#28BB9A"
+				BorderRadius="0"
+				TextColor="White"
+				FontSize="22"
+				HeightRequest="50"
+				Grid.Column="1"
+				x:Name="btnFinish"/>
+						
+				</Grid>
+
+			</StackLayout>
+		</StackLayout>
+		</ScrollView>
+		</StackLayout>
+</ContentPage>

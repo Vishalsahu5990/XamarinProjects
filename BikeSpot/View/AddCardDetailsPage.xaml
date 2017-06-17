@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="BikeSpot.AddCardDetailsPage"
+	xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot" 
+	BackgroundColor="#F5F6F7">
+	<StackLayout Padding="16" Spacing="15">
+		<Frame Padding="0" HasShadow="false" OutlineColor="#ECEDEE">
+
+	<StackLayout BackgroundColor="White" 
+						HeightRequest="40" Margin="10" Orientation="Horizontal">
+						<local:MyEntry
+				x:Name="txtUsername"
+				Placeholder="Card number"
+						HorizontalOptions="FillAndExpand"
+						Keyboard="Default"/>
+				<Grid>
+				<Image Grid.Column="0" Source="visa"/>
+					<Image Grid.Column="1" Source="master-card"/>
+					<Image Grid.Column="2" Source="paypal"/>
+				</Grid>
+					</StackLayout>
+			</Frame>
+		<Frame Padding="0" HasShadow="false" OutlineColor="#ECEDEE">
+
+	<StackLayout BackgroundColor="White" 
+						HeightRequest="40" Margin="10" Orientation="Horizontal">
+						<local:MyEntry
+				laceholder="Name on card"
+						HorizontalOptions="FillAndExpand"
+						Keyboard="Default"/>
+				
+					</StackLayout>
+			</Frame>
+		<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+		<Frame Padding="0" HasShadow="false" OutlineColor="#ECEDEE"
+				HorizontalOptions="FillAndExpand">
+
+	<StackLayout BackgroundColor="White" 
+						HeightRequest="40" Margin="10" Orientation="Horizontal">
+						<local:MyEntry
+				Placeholder="Name on card"
+						HorizontalOptions="FillAndExpand"
+						Keyboard="Default"/>
+				
+					</StackLayout>
+			</Frame>
+			<Frame Padding="0" HasShadow="false" OutlineColor="#ECEDEE"
+					HorizontalOptions="FillAndExpand">
+
+	<StackLayout BackgroundColor="White" 
+						HeightRequest="40" Margin="10" Orientation="Horizontal">
+						<local:MyEntry
+			Placeholder="Name on card"
+						HorizontalOptions="FillAndExpand"
+						Keyboard="Default"/>
+				
+					</StackLayout>
+			</Frame>
+		</StackLayout>
+		<Button Text="Save"
+		FontSize="22" 
+		TextColor="White"
+		BackgroundColor="#20D0C8"
+		BorderRadius="0"
+		Margin="0,30,0,0"/>
+	</StackLayout>
+	
+</ContentPage> 
+ 
