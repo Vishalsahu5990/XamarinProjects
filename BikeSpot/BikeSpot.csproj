@@ -355,6 +355,12 @@
     <Reference Include="Plugin.Share">
       <HintPath>..\packages\Plugin.Share.5.0.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Share.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.CrossPlacePicker.Abstractions">
+      <HintPath>..\packages\Fantacode.Plugin.CrossPlacePicker.1.0.2\lib\portable-net45+wp80+win8+wpa81\Plugin.CrossPlacePicker.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.CrossPlacePicker">
+      <HintPath>..\packages\Fantacode.Plugin.CrossPlacePicker.1.0.2\lib\portable-net45+wp80+win8+wpa81\Plugin.CrossPlacePicker.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -242,7 +242,7 @@ namespace BikeSpot
 								}
 								_items = new ProductItemsList(_listProduct);
 								flowlistview1.FlowItemsSource = _items.Items;
-						         _items.Items[0].isEnableListview = true;
+						         //_items.Items[0].isEnableListview = true;
 							}
 						}
 						catch (Exception ex)

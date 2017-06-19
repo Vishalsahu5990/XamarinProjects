@@ -14,7 +14,7 @@ using UIKit;
 using Xamarin;
 using Xamarin.Auth.Presenters;
 using Xamarin.Forms;
-
+using Plugin.CrossPlacePicker.Abstractions;
 namespace BikeSpot.iOS
 {
 	[Register("AppDelegate")]
@@ -31,13 +31,16 @@ namespace BikeSpot.iOS
 			NSUserDefaults.StandardUserDefaults.RegisterDefaults(dictionary);
 
 
+			PlacesClient.ProvideApiKey("AIzaSyBLtYoWAUYZ8IrkcmpxS84HXyWyi2XdxrI");
+            MapServices.ProvideAPIKey("AIzaSyBLtYoWAUYZ8IrkcmpxS84HXyWyi2XdxrI");
+
 			global::Xamarin.Forms.Forms.Init();
-			Xamarin.Forms.DependencyService.Register<IPlacePicker, PlatformPlacePicker>();
+
 			MobileAds.Configure("ca-app-pub-7176870068365595~1750148263");
 			FormsMaps.Init();
 			ImageCircleRenderer.Init();
 			FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
-			NControls.Init();
+
 			App.ScreenHeight = (double)UIScreen.MainScreen.Bounds.Height;
 			App.ScreenWidth = (double)UIScreen.MainScreen.Bounds.Width;
 
@@ -51,31 +54,6 @@ namespace BikeSpot.iOS
 
 			return base.FinishedLaunching(app, options);
 		}
-		public class PlatformPlacePicker : NSObject, IPlacePicker, INXPlacePickerDelegate
-		{
-			TaskCompletionSource<Place> pickPlaceTaskSource;
 
-			public void DidSelectPlace(NXPlacePickerViewController viewController, MKPlacemark place)
-			{
-				viewController.DismissViewController(true, null);
-				pickPlaceTaskSource?.TrySetResult(new Place
-				{
-					Name = place.Name
-				});
-			}
-
-			public Task<Place> PickAsync()
-			{
-				pickPlaceTaskSource?.TrySetCanceled();
-				pickPlaceTaskSource = new TaskCompletionSource<Place>();
-
-				var topVc = UIApplication.SharedApplication.GetTopViewController();
-				var vc = NXPlacePickerViewController.InitWithDelegate(this);
-				topVc.PresentViewController(vc, true, null);
-
-				return pickPlaceTaskSource.Task;
-			}
-
-		}
 	}
 }

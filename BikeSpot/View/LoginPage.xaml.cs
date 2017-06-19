@@ -9,7 +9,7 @@ using Plugin.SecureStorage;
 using Xamarin.Auth;
 using Xamarin.Forms;
 
-namespace BikeSpot
+namespace BikeSpot 
 {
 	public partial class LoginPage : ContentPage
 	{
@@ -31,8 +31,8 @@ namespace BikeSpot
 			btnLogin.Clicked += BtnLogin_Clicked;
 			btnRegister.Clicked += BtnRegister_Clicked;
 
-			txtUsername.Text = "shoeb@mailinator.com";
-			txtPass.Text = "123123"; 
+			//txtUsername.Text = "shoeb@mailinator.com";
+			//txtPass.Text = "123123"; 
 
 			if (StaticMethods.IsIpad())
 				SetupIpadUI();

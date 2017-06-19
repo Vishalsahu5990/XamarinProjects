@@ -5,6 +5,8 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using NControl.Controls;
+using Plugin.CrossPlacePicker;
+using Plugin.CrossPlacePicker.Abstractions;
 using Plugin.Media;
 using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
@@ -73,26 +75,13 @@ namespace BikeSpot
 				switch_rent.Toggled += Switch_Rent_Toggled;
 
 
-				//for sell autocomplete
-				txtAddress.TextChanged += TxtAddress_TextChanged;
-				txtAddress.Focused += TxtAddress_Focused;
-
-				lstViewSell.ItemTapped += LstViewSell_ItemTapped;
-
-				//for rent autocomplete
-
-				txtAddressRent.TextChanged += TxtAddressRent_TextChanged;
-				txtAddressRent.Focused += TxtAddressRent_Focused;
-				lstViewRent.ItemTapped += LstViewRent_ItemTapped;
+				
 
 				btnMale_sell.Clicked += BtnMale_Sell_Clicked;
 				btnfeMale_sell.Clicked += BtnfeMale_Sell_Clicked;
 				btnother_sell.Clicked += Btnother_Sell_Clicked;
 
-				btnMale_rent.Clicked += BtnMale_Rent_Clicked;
-				btnfeMale_rent.Clicked += BtnfeMale_Rent_Clicked;
-				btnother_rent.Clicked += Btnother_Rent_Clicked;
-
+				
 				PrepaireUI();
 
 
@@ -289,94 +278,25 @@ namespace BikeSpot
 				switch_rent.Toggled -= Switch_Rent_Toggled;
 
 
-				//for sell autocomplete
-				txtAddress.TextChanged -= TxtAddress_TextChanged;
-				txtAddress.Focused -= TxtAddress_Focused;
-
-				lstViewSell.ItemTapped -= LstViewSell_ItemTapped;
-
-				//for rent autocomplete
-
-				txtAddressRent.TextChanged -= TxtAddressRent_TextChanged;
-				txtAddressRent.Focused -= TxtAddressRent_Focused;
-				lstViewRent.ItemTapped -= LstViewRent_ItemTapped;
-
 				btnMale_sell.Clicked -= BtnMale_Sell_Clicked;
 				btnfeMale_sell.Clicked -= BtnfeMale_Sell_Clicked;
 				btnother_sell.Clicked -= Btnother_Sell_Clicked;
 
-				btnMale_rent.Clicked -= BtnMale_Rent_Clicked;
-				btnfeMale_rent.Clicked -= BtnfeMale_Rent_Clicked;
-				btnother_rent.Clicked -= Btnother_Rent_Clicked;
+
 
 			}
-			void TxtAddress_Focused(object sender, FocusEventArgs e)
-			{
-				_isItemSelected = false;
-			}
+			
 
-			void TxtAddress_TextChanged(object sender, TextChangedEventArgs e)
-			{
-				if (!string.IsNullOrEmpty(txtAddress.Text))
-				{
-					if (!_isItemSelected)
-						AutoComplete().Wait();
-				}
-			}
+			
 
-			void LstViewSell_ItemTapped(object sender, ItemTappedEventArgs e)
-			{
-				try
-				{
-					_isItemSelected = true;
-					var item = e.Item as AutoCompleteModel.Prediction;
-					txtAddress.Text = item.description;
-					lstViewSell.IsVisible = false;
-					_scrollView.Padding = new Thickness(0);
-
-				}
-				catch (Exception ex)
-				{
-
-				}
-			}
-
-			void TxtAddressRent_TextChanged(object sender, TextChangedEventArgs e)
-			{
-				if (!string.IsNullOrEmpty(txtAddressRent.Text))
-				{
-					if (!_isItemSelectedRent)
-						AutoCompleteRent().Wait();
-				}
-			}
-
-			void TxtAddressRent_Focused(object sender, FocusEventArgs e)
-			{
-				_isItemSelectedRent = false;
-			}
-
-			void LstViewRent_ItemTapped(object sender, ItemTappedEventArgs e)
-			{
-				try
-				{
-					_isItemSelectedRent = true;
-					var item = e.Item as AutoCompleteModel.Prediction;
-					txtAddressRent.Text = item.description;
-					lstViewRent.IsVisible = false;
-					_scrollViewRent.Padding = new Thickness(0);
-				}
-				catch (Exception ex)
-				{
-
-				}
-			}
+			
 
 			async void menu_Tapped(object sender, System.EventArgs e)
 			{
 				try
 				{
-					StaticDataModel._CurrentContext.MenuTapped.Execute(StaticDataModel._CurrentContext.MenuTapped);
-
+				//StaticDataModel._CurrentContext.MenuTapped.Execute(StaticDataModel._CurrentContext.MenuTapped);
+				await	Navigation.PopAsync();
 				}
 				catch (Exception ex)
 				{
@@ -385,6 +305,23 @@ namespace BikeSpot
 				}
 			}
 
+		async void address_rentTapped(object sender, EventArgs e)
+		{
+			
+			 try
+          {
+              var result = await CrossPlacePicker.Current.Display();
+              if (result != null)
+              {
+					lblAddress_rent.Text = result.Address;
+					lblAddress_rent.TextColor = Color.Black;
+				}
+          }
+          catch (Exception ex)
+          {
+              await DisplayAlert("Error", ex.ToString(), "Oops");
+          }
+		}
 
 			void Switch_Sell_Toggled(object sender, ToggledEventArgs e)
 			{
@@ -418,9 +355,7 @@ namespace BikeSpot
 					pickerCondition_sell.Items.Add("Ridable");
 					pickerCondition_sell.Items.Add("Unridable");
 
-					pickerInr_sell.Items.Add("INR");
-					pickerInr_sell.Items.Add("USD");
-					pickerInr_sell.Items.Add("ASR");
+					
 
 
 					pickerTypeofBike_rent.Items.Add("Road Bikes");
@@ -441,12 +376,27 @@ namespace BikeSpot
 					pickerCondition_rent.Items.Add("Ridable");
 					pickerCondition_rent.Items.Add("Unridable");
 
-					pickerInr_rent.Items.Add("INR");
+				    pickerInr_sell.Items.Add("EUR");
+					pickerInr_sell.Items.Add("CHF");
+					pickerInr_sell.Items.Add("USD");
+				    pickerInr_sell.Items.Add("GBP");
+
+					pickerInr_rent.Items.Add("EUR");
+				    pickerInr_rent.Items.Add("CHF");
 					pickerInr_rent.Items.Add("USD");
-					pickerInr_rent.Items.Add("ASR");
+					pickerInr_rent.Items.Add("GBP");
 
 					pickerPerDayHour.Items.Add("Per Day");
 					pickerPerDayHour.Items.Add("Per Hour");
+
+				pickerGender_rent.Items.Add("Man");
+				pickerGender_rent.Items.Add("Women");
+				pickerGender_rent.Items.Add("Unisex");
+
+				    pickerSize_rent.Items.Add("S");
+				    pickerSize_rent.Items.Add("M");
+pickerSize_rent.Items.Add("L");
+pickerSize_rent.Items.Add("XL");
 
 				}
 				catch (Exception ex)
@@ -496,7 +446,7 @@ namespace BikeSpot
 				{
 
 				}
-			}
+			} 
 
 			void PickerInr_Sell_SelectedIndexChanged(object sender, EventArgs e)
 			{
@@ -624,50 +574,6 @@ namespace BikeSpot
 
 
 
-			public void male_rentTapped(object sender, EventArgs e)
-			{
-				btnMale_rent.Image = "radio_check";
-				btnfeMale_rent.Image = "radio_uncheck";
-				btnother_rent.Image = "radio_uncheck";
-				gender = "male";
-			}
-			public void female_rentTapped(object sender, EventArgs e)
-			{
-				btnMale_rent.Image = "radio_uncheck";
-				btnfeMale_rent.Image = "radio_check";
-				btnother_rent.Image = "radio_uncheck";
-				gender = "female";
-			}
-			public void other_rentTapped(object sender, EventArgs e)
-			{
-				btnMale_rent.Image = "radio_uncheck";
-				btnfeMale_rent.Image = "radio_uncheck";
-				btnother_rent.Image = "radio_check";
-				gender = "other";
-			}
-			void Btnother_Rent_Clicked(object sender, EventArgs e)
-			{
-				btnMale_rent.Image = "radio_uncheck";
-				btnfeMale_rent.Image = "radio_uncheck";
-				btnother_rent.Image = "radio_check";
-				gender = "other";
-			}
-
-			void BtnfeMale_Rent_Clicked(object sender, EventArgs e)
-			{
-				btnMale_rent.Image = "radio_uncheck";
-				btnfeMale_rent.Image = "radio_check";
-				btnother_rent.Image = "radio_uncheck";
-				gender = "female";
-			}
-
-			void BtnMale_Rent_Clicked(object sender, EventArgs e)
-			{
-				btnMale_rent.Image = "radio_check";
-				btnfeMale_rent.Image = "radio_uncheck";
-				btnother_rent.Image = "radio_uncheck";
-				gender = "male";
-			}
 			async void typeofbike_sellTapped(object sender, EventArgs e)
 			{
 				Device.BeginInvokeOnMainThread(async () =>
@@ -678,6 +584,22 @@ namespace BikeSpot
 					//pickerTypeofBike_sell.Focus();
 				});
 			}
+		async void size_rentTapped(object sender, EventArgs e)
+		{
+			Device.BeginInvokeOnMainThread(async () =>
+
+			{
+				pickerSize_rent.Focus();
+			});
+		}
+		async void gender_rentTapped(object sender, EventArgs e)
+		{
+			Device.BeginInvokeOnMainThread(async () =>
+
+			{
+				pickerGender_rent.Focus();
+			});
+		}
 			async void condition_sellTapped(object sender, EventArgs e)
 			{
 				Device.BeginInvokeOnMainThread(async () =>
@@ -1038,9 +960,9 @@ namespace BikeSpot
 						lblperdayhour.TextColor = Color.Red;
 						return false;
 					}
-					else if (string.IsNullOrEmpty(txtAddressRent.Text))
+				else if (string.IsNullOrEmpty(lblAddress_rent.Text))
 					{
-						txtAddressRent.PlaceholderColor = Color.Red;
+					lblAddress_rent.TextColor = Color.Red;
 						return false;
 					}
 					else
@@ -1133,7 +1055,7 @@ namespace BikeSpot
 							um.product_name = txtWhatYouAreSelling_rent.Text;
 							um.product_description = txtDescribe_rent.Text;
 							um.type_of_bike = lblTypeofbike_rent.Text;
-							um.address = txtAddressRent.Text;
+							um.address = lblAddress_rent.Text;
 							if (profileData != null)
 							{
 								var bytearray = StaticMethods.StreamToByte(profileData.GetStream());
@@ -1223,7 +1145,7 @@ namespace BikeSpot
 						{
 
 
-							model = WebService.GetAutoCompleteLocation(txtAddressRent.Text);
+							//model = WebService.GetAutoCompleteLocation(txtAddressRent.Text);
 
 
 						}).ContinueWith(async
@@ -1231,25 +1153,17 @@ namespace BikeSpot
 			{
 				if (model != null)
 				{
-					lstViewRent.IsVisible = true;
-					lstViewRent.ItemsSource = model.predictions;
+					
 					Device.BeginInvokeOnMainThread(async () =>
 		{
-			ScrollToFeedbackRent();
+			
 		});
 				}
 
 			}, TaskScheduler.FromCurrentSynchronizationContext()
 					);
 			}
-			public async void ScrollToFeedbackRent()
-			{
-				Device.BeginInvokeOnMainThread(async () =>
-				{
-					_scrollViewRent.Padding = new Thickness(0, 0, 0, 110);
-					await _scrollViewRent.ScrollToAsync(txtAddressRent, ScrollToPosition.Start, true);
-				}); ;
-			}
+			
 		}
 	}
 
