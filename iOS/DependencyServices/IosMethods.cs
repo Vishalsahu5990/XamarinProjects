@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using BikeSpot;
 using BikeSpot.iOS;
@@ -15,7 +16,7 @@ namespace BikeSpot.iOS
 {
 	public class IosMethods : UIViewController, IiOSMethods
 	{
-private TaskCompletionSource<List< string>> taskCompletionSource;
+		private TaskCompletionSource<List<string>> taskCompletionSource;
 		public void ShareContent(string client_id, string url)
 		{
 
@@ -79,9 +80,9 @@ private TaskCompletionSource<List< string>> taskCompletionSource;
 
 			}
 		}
-public async Task <List<string>> MultiImagePicker()
+		public async Task<List<ImageSource>> MultiImagePicker()
 		{
-			List<string> path = null;
+			List<ImageSource> path = null;
 			try
 			{
 				var picker = ELCImagePickerViewController.Instance;
@@ -91,24 +92,25 @@ public async Task <List<string>> MultiImagePicker()
 				{
 					picker.BeginInvokeOnMainThread(() =>
 						{
-					//dismiss the picker
-					picker.DismissViewController(true, null);
+						//dismiss the picker
+						picker.DismissViewController(true, null);
 
-							if (t.IsCanceled || t.Exception != null)
-							{
-							}
-							else
-							{
+						if (t.IsCanceled || t.Exception != null)
+						{
+						}
+						else
+						{
 							taskCompletionSource = new TaskCompletionSource<List<string>>();
-								 path = new List<string>();
+							path = new List<ImageSource>();
 
-								var items = t.Result as List<AssetResult>;
-								foreach (var item in items)
-								{
-								path.Add(item.Path);
+							var items = t.Result as List<AssetResult>;
+							foreach (var item in items)
+							{
+								
+							path.Add(Xamarin.Forms.ImageSource.FromStream(() => (item.Image).AsPNG().AsStream()));
+
 								}
-
-
+							MessagingCenter.Send<object, List<ImageSource>>(this, "ShowAlertMessage", path);
 							}
 
 
@@ -123,13 +125,14 @@ public async Task <List<string>> MultiImagePicker()
 
 				topController.PresentViewController(picker, true, null);
 
-				}
+			}
 			catch (Exception ex)
 			{
 
 			}
 			return path;
 		}
+
 
 	}
 }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Xamarin.Forms;
 namespace BikeSpot
 {
 	public interface IiOSMethods
 	{
 		void ShareContent(string client_id,string url);
-        Task<List<string>> MultiImagePicker();
+		Task<List<ImageSource>> MultiImagePicker();
 	}
 }

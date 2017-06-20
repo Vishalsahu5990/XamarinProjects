@@ -25,7 +25,7 @@
 						  <Image.GestureRecognizers>
         <TapGestureRecognizer Tapped="close_Tapped"/>
     </Image.GestureRecognizers>
-						</Image>
+						</Image>   
 
 					</StackLayout>
 					<StackLayout HeightRequest="200" HorizontalOptions="FillAndExpand"
