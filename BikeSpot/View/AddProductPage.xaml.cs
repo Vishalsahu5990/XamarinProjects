@@ -345,6 +345,7 @@ namespace BikeSpot
 			{
 				//StaticDataModel._CurrentContext.MenuTapped.Execute(StaticDataModel._CurrentContext.MenuTapped);
 				await Navigation.PopAsync();
+
 			}
 			catch (Exception ex)
 			{

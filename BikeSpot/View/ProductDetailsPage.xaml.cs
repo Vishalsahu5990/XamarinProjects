@@ -4,11 +4,14 @@ using System.Threading.Tasks;
 using Plugin.Share;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
+using Xamarin.Forms.Xaml;
+
 
 namespace BikeSpot
 {
 	public partial class ProductDetailsPage : ContentPage
 	{
+		bool isFavourite = false;
 		Product _productModel = null;
 		Product _productDetailsModel = null;
 		public static int staticcustomPins;
@@ -51,6 +54,35 @@ namespace BikeSpot
 			try
 			{
 				await Navigation.PopAsync();
+
+			}
+			catch (Exception ex)
+			{
+
+
+			}
+		}
+		async void saveuser_Tapped(object sender, System.EventArgs e)
+		{
+			try
+			{
+				if (isFavourite)
+				{
+					var result = await DisplayAlert("Alert!", "Do you want to remove this profile?", "YES", "CANCEL");
+					if (result)
+					{
+						AddRemoveSaveUser(_productDetailsModel.user_id, "remove_save_users", "User has been removed successfully!");
+					}
+				}
+				else
+				{ 
+var result = await DisplayAlert("Alert!", "Do you want to save this profile?", "YES", "CANCEL");
+					if (result)
+					{
+                        AddRemoveSaveUser(_productDetailsModel.user_id, "save_users", "User has been saved successfully!");
+					
+					}
+				}
 
 			}
 			catch (Exception ex)
@@ -221,9 +253,11 @@ async void linkedin_Tapped(object sender, System.EventArgs e)
 								//imgProduct.Source = Constants.ImageUrl + _productDetailsModel.product_image; ;
 								lblUserName.Text = _productDetailsModel.name;
 									lblProductName.Text = _productDetailsModel.product_name;
+									lblSize.Text = _productDetailsModel.framesize;
+									lblGender.Text = _productDetailsModel.gender;
 									lblTypeofBike.Text = _productDetailsModel.type_of_bike;
 									lblCondition.Text = _productDetailsModel.condition;
-									lblPrice.Text = _productDetailsModel.price;
+									lblPrice.Text = "€"+_productDetailsModel.price;
 									lblProductDesc.Text = _productDetailsModel.product_description;
 									if (!string.IsNullOrEmpty(_productDetailsModel.lat))
 										AddBarMarkerOnMap(Convert.ToDouble(_productDetailsModel.lat), Convert.ToDouble(_productDetailsModel.@long));
@@ -231,7 +265,19 @@ async void linkedin_Tapped(object sender, System.EventArgs e)
 
 										AddBarMarkerOnMap(25.023176, 39.189978);
 
+							if (_productDetailsModel.user_id != StaticDataModel.userId.ToString())
+									{
+										imgHeart.IsVisible = true;
+
+										CheckForSavedUser(_productDetailsModel.user_id);
+									}
+									else
+									{
+										imgHeart.IsVisible = false;
+									}
+									
 								});
+
 							}
 
 						}
@@ -246,6 +292,77 @@ async void linkedin_Tapped(object sender, System.EventArgs e)
 
 					}, TaskScheduler.FromCurrentSynchronizationContext()
 				);
+		}
+		private async Task CheckForSavedUser(string userid)
+		{
+			SavedUserModel saveduserModel = null;
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(
+					// tasks allow you to use the lambda syntax to pass wor
+					() =>
+					{
+
+						saveduserModel = WebService.CheckSavedUser(userid);
+
+
+					}).ContinueWith(async
+					t =>
+					{
+						if (saveduserModel != null)
+						{
+							if (saveduserModel.data[0].user_is_favorite)
+							{
+								isFavourite = true;
+								imgHeart.Source = "h.png";
+							}
+							else
+							{
+								isFavourite = false;
+						imgHeart.Source = "h_unlike";
+							}
+						}
+						StaticMethods.DismissLoader();
+
+					}, TaskScheduler.FromCurrentSynchronizationContext()
+				);
+		}
+private async Task AddRemoveSaveUser(string userid,string method,string Responsemessage)
+{
+			string ret = string.Empty;
+	StaticMethods.ShowLoader();
+	Task.Factory.StartNew(
+			// tasks allow you to use the lambda syntax to pass wor
+			() =>
+			{
+
+				ret = WebService.SaveUnsaveUser(userid,method);
+
+
+			}).ContinueWith(async
+					t =>
+			{
+				if (ret == "success")
+				{
+					StaticMethods.ShowToast(Responsemessage);
+					if (method == "save_users")
+					{
+						isFavourite = true;
+						imgHeart.Source = "h.png";
+					}
+					else
+					{
+						isFavourite = false;
+						imgHeart.Source = "h_unlike.png";
+					}
+				}
+				else
+				{
+					StaticMethods.ShowToast("Unable to make changes, Please try again after some time.");
+				}
+				StaticMethods.DismissLoader();
+
+			}, TaskScheduler.FromCurrentSynchronizationContext()
+		);
 		}
 		private void AddBarMarkerOnMap(double lat, double lng)
 		{

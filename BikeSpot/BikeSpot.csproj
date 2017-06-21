@@ -249,6 +249,7 @@
     <Compile Include="Popups\LoginReminderPopup.xaml.cs">
       <DependentUpon>LoginReminderPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\SavedUserModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NGraphics">

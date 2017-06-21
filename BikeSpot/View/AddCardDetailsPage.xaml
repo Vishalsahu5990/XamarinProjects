@@ -26,7 +26,7 @@
 	<StackLayout BackgroundColor="White" 
 						HeightRequest="40" Margin="10" Orientation="Horizontal">
 						<local:MyEntry
-				laceholder="Name on card"
+				Placeholder="Name on card"
 						HorizontalOptions="FillAndExpand"
 						Keyboard="Default"/>
 				

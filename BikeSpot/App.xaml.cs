@@ -4,7 +4,9 @@ using Plugin.Geolocator.Abstractions;
 using Plugin.SecureStorage;
 using Xamarin.Forms;
 
+using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace BikeSpot
 {
 	public partial class App : Application
@@ -33,7 +35,7 @@ namespace BikeSpot
 
 				MainPage = new NavigationPage(new BikeSpot.MainPage());
 			}
-			//MainPage = new NavigationPage(new BikeSpot.LoginPage()); 
+			//MainPage = new NavigationPage(new BikeSpot.FilterPage());  
 		}
 
 		protected override void OnStart()

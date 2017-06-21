@@ -98,7 +98,8 @@ private async Task GetProducts()
 														 0,
 														 0,
 														 0,
-														 "",
+														null,
+				                                         null,
 														 StaticDataModel.Lattitude,
 														 StaticDataModel.Longitude);
 

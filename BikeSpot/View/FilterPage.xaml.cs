@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Plugin.CrossPlacePicker;
 using Plugin.Geolocator.Abstractions;
 using Xamarin.Forms;
 
@@ -14,6 +15,10 @@ namespace BikeSpot
 		List<string> _condition = null;
 		List<string> _retails_private = null;
 		List<string> _buy_rent = null;
+		double _lat = 0;
+		double _long = 0;
+List<string> _frameSize = null;
+List<string> _gender = null;
 
 		string gender = "male";
 		int _min_price = 0;
@@ -46,6 +51,14 @@ namespace BikeSpot
 		int countPrivate = 0;
 		int countBuy = 0;
 		int countRent = 0;
+int countS = 0;
+int countM = 0;
+int countL = 0;
+int countXL = 0;
+int countMan = 0;
+int countWoman = 0;
+int countUnisex = 0;
+
 		public FilterPage()
 		{
 			InitializeComponent();
@@ -64,50 +77,92 @@ namespace BikeSpot
 
 		}
 
-		public void male_rentTapped(object sender, EventArgs e)
+		async	void location_Tapped(object sender, EventArgs e)
 		{
-			btnMale_rent.Image = "radio_check";
-			btnfeMale_rent.Image = "radio_uncheck";
-			btnother_rent.Image = "radio_uncheck";
-			gender = "male";
+
+			try
+			{
+				var result = await CrossPlacePicker.Current.Display();
+				if (result != null)
+				{
+					lblLocation.Text = result.Address;
+					_lat=	result.Coordinates.Latitude;
+					_long=	result.Coordinates.Longitude;
+				}
+			}
+			catch (Exception ex)
+			{
+				await DisplayAlert("Error", ex.ToString(), "Oops");
+			}
 		}
-		public void female_rentTapped(object sender, EventArgs e)
+		void BtnS_Clicked(object sender, EventArgs e)
 		{
-			btnMale_rent.Image = "radio_uncheck";
-			btnfeMale_rent.Image = "radio_check";
-			btnother_rent.Image = "radio_uncheck";
-			gender = "female";
-		}
-		public void other_rentTapped(object sender, EventArgs e)
-		{
-			btnMale_rent.Image = "radio_uncheck";
-			btnfeMale_rent.Image = "radio_uncheck";
-			btnother_rent.Image = "radio_check";
-			gender = "other";
-		}
-		void Btnother_Rent_Clicked(object sender, EventArgs e)
-		{
-			btnMale_rent.Image = "radio_uncheck";
-			btnfeMale_rent.Image = "radio_uncheck";
-			btnother_rent.Image = "radio_check";
-			gender = "other";
+			if (countS % 2 == 0)
+				btnS.BackgroundColor = Color.FromHex("#20D1C8");
+			else
+				btnS.BackgroundColor = Color.FromHex("#E5E6E7");
+                countS++;
+
+
 		}
 
-		void BtnfeMale_Rent_Clicked(object sender, EventArgs e)
+		void BtnM_Clicked(object sender, EventArgs e)
 		{
-			btnMale_rent.Image = "radio_uncheck";
-			btnfeMale_rent.Image = "radio_check";
-			btnother_rent.Image = "radio_uncheck";
-			gender = "female";
+			if (countM % 2 == 0)
+				btnM.BackgroundColor = Color.FromHex("#20D1C8");
+			else
+				btnM.BackgroundColor = Color.FromHex("#E5E6E7");
+                countM++;
+
 		}
 
-		void BtnMale_Rent_Clicked(object sender, EventArgs e)
+		void BtnL_Clicked(object sender, EventArgs e)
 		{
-			btnMale_rent.Image = "radio_check";
-			btnfeMale_rent.Image = "radio_uncheck";
-			btnother_rent.Image = "radio_uncheck";
-			gender = "male";
+			if (countL % 2 == 0)
+				btnL.BackgroundColor = Color.FromHex("#20D1C8");
+			else
+				btnL.BackgroundColor = Color.FromHex("#E5E6E7");
+                countL++;
+
 		}
+
+		void BtnXl_Clicked(object sender, EventArgs e)
+		{
+			if (countXL % 2 == 0)
+				btnXl.BackgroundColor = Color.FromHex("#20D1C8");
+			else
+				btnXl.BackgroundColor = Color.FromHex("#E5E6E7");
+			countXL++;
+
+		}
+
+		void BtnMan_Clicked(object sender, EventArgs e)
+		{
+			if (countMan % 2 == 0)
+				btnMan.BackgroundColor = Color.FromHex("#20D1C8");
+			else
+				btnMan.BackgroundColor = Color.FromHex("#E5E6E7");
+			countMan++;
+		}
+
+		void BtnWomen_Clicked(object sender, EventArgs e)
+		{
+			if (countWoman % 2 == 0)
+				btnWomen.BackgroundColor = Color.FromHex("#20D1C8");
+			else
+				btnWomen.BackgroundColor = Color.FromHex("#E5E6E7");
+			countWoman++;
+		}
+
+		void BtnUnisex_Clicked(object sender, EventArgs e)
+		{
+			if (countUnisex % 2 == 0)
+				btnUnisex.BackgroundColor = Color.FromHex("#20D1C8");
+			else
+				btnUnisex.BackgroundColor = Color.FromHex("#E5E6E7");
+			countUnisex++;
+		}
+
 		void BtnUnicycle_Clicked(object sender, EventArgs e)
 		{
 			if (countUnicycle % 2 == 0)
@@ -282,11 +337,6 @@ namespace BikeSpot
 				btnMore.Text = "More...";
 			}
 			countMore++;
-//var place = await DependencyService.Get<IPlacePicker>().PickAsync();
-
-//				if (place != null) {
-//					await DisplayAlert("Place", $"You picked place {place.Name}", "Ok");
-//				}
 		}
 
 		protected override void OnDisappearing()
@@ -328,9 +378,6 @@ namespace BikeSpot
 
 			btnMore.Clicked -= BtnMore_Clicked;
 
-			btnMale_rent.Clicked -= BtnMale_Rent_Clicked;
-			btnfeMale_rent.Clicked -= BtnfeMale_Rent_Clicked;
-			btnother_rent.Clicked -= Btnother_Rent_Clicked;
 
 			sliderPrice.UpperValueChanged -= SliderPrice_UpperValueChanged;
 			sliderPrice.LowerValueChanged -= SliderPrice_LowerValueChanged;
@@ -361,6 +408,15 @@ namespace BikeSpot
 			btnTandem.Clicked += BtnTandem_Clicked;
 			btnUnicycle.Clicked += BtnUnicycle_Clicked;
 
+			btnS.Clicked+= BtnS_Clicked;
+			btnM.Clicked+= BtnM_Clicked;
+			btnL.Clicked+= BtnL_Clicked;
+			btnXl.Clicked+= BtnXl_Clicked;
+
+			btnMan.Clicked+= BtnMan_Clicked;
+			btnWomen.Clicked+= BtnWomen_Clicked;
+			btnUnisex.Clicked+= BtnUnisex_Clicked;
+
 
 			btnNew.Clicked += BtnNew_Clicked;
 			btnLikeNew.Clicked += BtnLikeNew_Clicked;
@@ -375,9 +431,6 @@ namespace BikeSpot
 
 			btnMore.Clicked += BtnMore_Clicked;
 
-			btnMale_rent.Clicked += BtnMale_Rent_Clicked;
-			btnfeMale_rent.Clicked += BtnfeMale_Rent_Clicked;
-			btnother_rent.Clicked += Btnother_Rent_Clicked;
 
 			sliderPrice.UpperValueChanged += SliderPrice_UpperValueChanged;
 			sliderPrice.LowerValueChanged += SliderPrice_LowerValueChanged;
@@ -385,6 +438,7 @@ namespace BikeSpot
 			sliderDistance.LowerValueChanged += SliderDistance_LowerValueChanged;
 			btnAll.BackgroundColor = Color.FromHex("#20D1C8");
 			_typeOfBikes = null;
+
 			StaticDataModel._CurrentContext.IsGestureEnabled = false;
 
 			if (StaticMethods.IsIpad())
@@ -420,6 +474,14 @@ namespace BikeSpot
 				btnPrivate.HeightRequest = 80;
 				btnBuy.HeightRequest = 80;
 				btnRent.HeightRequest = 80;
+				slAddress.HeightRequest = 80;
+				btnS.HeightRequest = 80;
+				btnL.HeightRequest = 80;
+				btnM.HeightRequest = 80;
+				btnXl.HeightRequest = 80;
+				btnMan.HeightRequest = 80;
+				btnWomen.HeightRequest = 80;
+				btnUnisex.HeightRequest = 80;
 			}
 			catch (Exception ex)
 			{
@@ -687,6 +749,8 @@ namespace BikeSpot
 				_condition = new List<string>();
 				_retails_private = new List<string>();
 				_buy_rent = new List<string>();
+				_gender = new List<string>();
+				_frameSize = new List<string>();
 
 				if (countRoadBikes % 2 != 0)
 				{
@@ -827,6 +891,42 @@ namespace BikeSpot
 						_buy_rent.Add("1");
 				}
 
+				if (countS % 2 != 0)
+				{
+					if (countS > 0)
+						_frameSize.Add("S");
+				}
+				if (countM % 2 != 0)
+				{
+					if (countM > 0)
+						_frameSize.Add("M");
+				}
+				if (countL % 2 != 0)
+				{
+					if (countL > 0)
+						_frameSize.Add("L");
+				}
+				if (countXL % 2 != 0)
+				{
+					if (countXL > 0)
+						_frameSize.Add("XL");
+				}
+
+				if (countMan % 2 != 0)
+				{
+					if (countMan > 0)
+						_gender.Add("Man");
+				}
+				if (countWoman % 2 != 0)
+				{
+					if (countWoman > 0)
+						_gender.Add("Women");
+				}
+				if (countUnisex % 2 != 0)
+				{
+					if (countUnisex > 0)
+						_gender.Add("Unisex");
+				}
 				_min_price = Convert.ToInt32(lblStartPriceRange.Text);
 				_max_price = Convert.ToInt32(lblEndPriceRange.Text);
 				_max_distance = Convert.ToInt32(lblEndDistanceRange.Text.Replace(" KM", ""));
@@ -856,9 +956,11 @@ namespace BikeSpot
 																 _min_price,
 																 _max_price,
 																 _max_distance,
-																 gender,
-																 StaticDataModel.Lattitude,
-																 StaticDataModel.Longitude);
+				                                                 _gender,
+				                                                 _frameSize,
+				                                                 _lat,
+				                                                 _long
+																 );
 
 
 					}).ContinueWith(async

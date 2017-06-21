@@ -35,7 +35,7 @@
 		HorizontalOptions="FillAndExpand"
 			Padding="0" Margin="20,30,20,30"> 
 			<StackLayout>
-			<Label Text="You are not registerd user. Please get register to continue."
+			<Label Text="You are not logged in. Please login to continue."
 				HorizontalTextAlignment="Center"/>
 		</StackLayout>
 		</StackLayout>
@@ -54,12 +54,12 @@
 					TextColor="White"/>
 				</StackLayout> 
 
-				</StackLayout>
+				</StackLayout> 
 			</Frame>
-		
+		 
 	 
 		</StackLayout>
 
-
+		 
 			
 </pages:PopupPage>

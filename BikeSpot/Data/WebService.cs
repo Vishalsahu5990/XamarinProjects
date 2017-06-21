@@ -332,62 +332,62 @@ namespace BikeSpot
 
 				//using (var client = new HttpClient())
 				//{
-					//client.MaxResponseContentBufferSize=int.MaxValue;
-					using (var content =
-						new MultipartFormDataContent())
+				//client.MaxResponseContentBufferSize=int.MaxValue;
+				using (var content =
+					new MultipartFormDataContent())
+				{
+
+					content.Add(new StringContent("add_product"), "method");
+					content.Add(new StringContent(pm.user_id.ToString()), "user_id");
+					//content.Add(new StringContent("3"), "user_id");
+					content.Add(new StringContent(pm.product_name), "product_name");
+					content.Add(new StringContent(pm.address), "address");
+					content.Add(new StringContent(pm.type_of_bike), "type_of_bike");
+					content.Add(new StringContent(pm.product_description), "product_description");
+					content.Add(new StringContent(pm.type.ToString()), "type");
+					content.Add(new StringContent(pm.condition), "condition");
+					content.Add(new StringContent(pm.currency), "currency");
+					content.Add(new StringContent(pm.size), "framesize");
+					content.Add(new StringContent(pm.price), "price");
+					content.Add(new StringContent(pm.gender), "rent_time");
+					content.Add(new StringContent(pm.gender), "gender");
+					content.Add(new StringContent(pm.is_facebook_sharable.ToString()), "is_facebook_sharable");
+
+					//var str = Convert.ToBase64String(pm.imageByteArray[0]);
+
+					if (pm.imageByteArray[0] != null)
+						content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[0])), "img1", "img1.jpg");
+					if (pm.imageByteArray[1] != null)
+						content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[1])), "img2", "img2.jpg");
+					if (pm.imageByteArray[2] != null)
+						content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[2])), "img3", "img3.jpg");
+					if (pm.imageByteArray[3] != null)
+						content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[3])), "img4", "img4.jpg");
+					client.Timeout = TimeSpan.FromSeconds(300);
+					using (
+
+
+					   var message =
+					await client.PostAsync("http://risensys.com/bikespot/webservice/add_product", content))
 					{
-
-						content.Add(new StringContent("add_product"), "method");
-						//content.Add(new StringContent(pm.user_id.ToString()), "user_id");
-						content.Add(new StringContent("3"), "user_id");
-						content.Add(new StringContent(pm.product_name), "product_name");
-						content.Add(new StringContent(pm.address), "address");
-						content.Add(new StringContent(pm.type_of_bike), "type_of_bike");
-						content.Add(new StringContent(pm.product_description), "product_description");
-						content.Add(new StringContent(pm.type.ToString()), "type");
-						content.Add(new StringContent(pm.condition), "condition");
-						content.Add(new StringContent(pm.currency), "currency");
-						content.Add(new StringContent(pm.size), "framesize");
-						content.Add(new StringContent(pm.price), "price");
-						content.Add(new StringContent(pm.gender), "rent_time");
-						content.Add(new StringContent(pm.gender), "gender");
-						content.Add(new StringContent(pm.is_facebook_sharable.ToString()), "is_facebook_sharable");
-
-						//var str = Convert.ToBase64String(pm.imageByteArray[0]);
-
-						if (pm.imageByteArray[0] != null)
-							content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[0])), "img1", "img1.jpg");
-						if (pm.imageByteArray[1] != null)
-							content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[1])), "img2", "img2.jpg");
-						if (pm.imageByteArray[2] != null)
-							content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[2])), "img3", "img3.jpg");
-						if (pm.imageByteArray[3] != null)
-							content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[3])), "img4", "img4.jpg");
-					     client.Timeout = TimeSpan.FromSeconds(300);
-						using (
-
-
-						   var message =
-                        await client.PostAsync("http://risensys.com/bikespot/webservice/add_product", content))
-						{
 						client.Timeout = TimeSpan.FromSeconds(300);
 						StaticMethods.DismissLoader();
 						if (message.IsSuccessStatusCode)
 						{
 							StaticMethods.ShowToast("File uploaded successfully");
 
-						} 
+						}
 						else
-						{ 
+						{
 							StaticMethods.ShowToast("Failed to upload file. Please try again after some time.");
 						}
 
-							var input = await message.Content.ReadAsStringAsync();
+						var input = await message.Content.ReadAsStringAsync();
 
-							return !string.IsNullOrWhiteSpace(input) ? Regex.Match(input, @"http://\w*\.directupload\.net/images/\d*/\w*\.[a-z]{3}").Value : null;
-						}
+						return !string.IsNullOrWhiteSpace(input) ? Regex.Match(input, @"http://\w*\.directupload\.net/images/\d*/\w*\.[a-z]{3}").Value : null;
 					}
-				
+				}
+
 
 			}
 
@@ -547,7 +547,10 @@ namespace BikeSpot
 			}
 			return _product;
 		}
-		public static List<Product> FilterProducts(List<string> type_of_bike, List<string> condition, List<string> type, int min_price, int max_price, int max_distance, string gender, double lat, double @long)
+		public static List<Product> FilterProducts(List<string> type_of_bike, List<string> condition, List<string> type,
+												   int min_price, int max_price,
+												   int max_distance, List<string> gender,
+												   List<string> framesize, double lat, double @long)
 		{
 			List<Product> _product = new List<Product>();
 			UserModel um = new UserModel();
@@ -564,7 +567,8 @@ namespace BikeSpot
 				j.Add("condition", string.Join(",", condition.ToArray()));
 				j.Add("type", string.Join(",", type.ToArray()));
 				j.Add("distance", max_distance);
-				j.Add("gender", gender);
+				j.Add("gender", string.Join(",", gender.ToArray()));
+				j.Add("framesize", string.Join(",", framesize.ToArray()));
 				j.Add("lat", lat);
 				j.Add("long", @long);
 
@@ -931,6 +935,91 @@ namespace BikeSpot
 			}
 			return wr;
 		}
+		public static SavedUserModel CheckSavedUser(string savedUserId)
+		{
+			SavedUserModel sa = new SavedUserModel();
+			try
+			{
+				string url = Constants.BaseUrl;
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", "check_saved_user_by_id");
+				j.Add("user_id", StaticDataModel.userId);
+				j.Add("saved_user_id", savedUserId);
 
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
+				{
+
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						if (jObj["result"].ToString() == "success")
+						{
+							sa.data = jObj["data"].ToObject<List<SavedUserModel.Data>>();
+						}
+
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return sa;
+		}
+		public static string SaveUnsaveUser(string savedUserId,string method_name)
+		{
+			SavedUserModel sa = new SavedUserModel();
+			string ret = string.Empty;
+			try
+			{
+				string url = Constants.BaseUrl;
+
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", method_name);
+				j.Add("user_id", StaticDataModel.userId);
+				j.Add("saved_user_id", savedUserId);
+
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
+				{
+
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						if (jObj["result"].ToString() == "success")
+						{
+							ret = "success";
+						}
+
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return ret;
+		}
 	}
 }

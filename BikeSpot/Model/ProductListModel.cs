@@ -16,6 +16,8 @@ namespace BikeSpot
 		public string listing_type { get; set; }
 		public string product_id { get; set; }
 		public string user_id { get; set; }
+		public string framesize { get; set; }
+		public string gender { get; set; }
 		public string product_name { get; set; }
 		public string product_description { get; set; }
 		public string address { get; set; }

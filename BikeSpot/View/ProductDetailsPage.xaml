@@ -6,7 +6,7 @@
 	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
 xmlns:ctrl="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
 x:Class="BikeSpot.ProductDetailsPage"
-	BackgroundColor="#E1E2E4">
+	>
 	<StackLayout VerticalOptions="FillAndExpand" Spacing="0">
 
 		<StackLayout Padding="0,10,0,0" Orientation="Horizontal" HeightRequest="80" BackgroundColor="#20D1C8">
@@ -84,7 +84,7 @@ x:Class="BikeSpot.ProductDetailsPage"
 									BorderColor="White"
 									BorderThickness="3"
 					HorizontalOptions="Start"/>
-					<StackLayout Grid.Column="1">
+					<StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand">
 					<Label
 					x:Name="lblUserName"
 								Text="John Doe"
@@ -117,84 +117,161 @@ x:Class="BikeSpot.ProductDetailsPage"
 					</StackLayout>
 				
 			</Grid>
-          
+          <StackLayout
+						 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.65}"
+				 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.8}"
+             Padding="20">
+             <Image Source="h_unlike.png" x:Name="imgHeart" IsVisible="false"/>
+						<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="saveuser_Tapped"/>  
+    </StackLayout.GestureRecognizers>
+					</StackLayout>
           </RelativeLayout>
 	<StackLayout>
 
 	<StackLayout>
 				
 					
-					<StackLayout BackgroundColor="White">
-	<StackLayout Margin="10" BackgroundColor="Gray" HorizontalOptions="FillAndExpand">
-
-						
-
-							<Grid   HorizontalOptions="FillAndExpand" ColumnSpacing="1" >
+						<StackLayout BackgroundColor="White">
+	<StackLayout Margin="10" BackgroundColor="Silver" HorizontalOptions="FillAndExpand">
+								<Grid   HorizontalOptions="FillAndExpand" ColumnSpacing="1" >
 							<StackLayout Grid.Column="0" VerticalOptions="Start" BackgroundColor="White">
-	<Label Text="Cras sagittis"  x:Name="lblProductName"/>
-								<Label Text="Special offer" 
-								TextColor="#53D9D1"
-								FontSize="14"/>
-								<StackLayout Orientation="Horizontal">
-								<Label Text="$300"
-						
-							FontAttributes="Bold"
 
-									x:Name="lblPrice"/>
-									<Label Text="$450" x:Name="lblOldPrice"/>
-								</StackLayout>
+						<Grid Margin="0,10,0,0">
+						<Label 
+						Text="Product" 
+						x:Name="lblProductName"
+							Grid.Row="0"
+							Grid.Column="0"
+							LineBreakMode="TailTruncation"
+											FontSize="Medium"/>
+								<Label Text="Price" 
+								Grid.Row="2"
+							Grid.Column="0"/>
+
+								<Label Text="€300"
+						TextColor="#53D9D1"
+							FontAttributes="Bold"
+							Grid.Row="3"
+							Grid.Column="0"
+												FontSize="Medium"
+									x:Name="lblPrice"
+							LineBreakMode="TailTruncation"/>
+
+
+
+							<Label Text="test"
+							Grid.Row="4"
+							Grid.Column="0"
+							IsVisible="false"/>
+							<Label Text="test"
+							Grid.Row="5"
+							Grid.Column="0"
+							IsVisible="false"/>
+								</Grid>
+
 							</StackLayout>
 
 
 
 							<StackLayout BackgroundColor="White" Grid.Column="1" Spacing="15"   x:Name="secondView" VerticalOptions="FillAndExpand">
 
-							<StackLayout Margin="10,0,0,0" Spacing="13" Orientation="Horizontal" >
-							<Label Text="Type of bike"
-									FontSize="12"/>
-									<Label Text="Sports" 
-										FontSize="12"
+							<Grid Margin="5,10,0,0" RowSpacing="12" HorizontalOptions="FillAndExpand">
+							<Label Text="Type"
+									Grid.Row="0"
+							Grid.Column="0"
+							LineBreakMode="TailTruncation"
+											FontSize="Medium"/>
+							<Label Text="Sports" 
+										FontSize="Small"
 								TextColor="#53D9D1" 
-										
+									Grid.Row="0"
+							Grid.Column="1"	
 									x:Name="lblTypeofBike"
-									LineBreakMode="TailTruncation"/>
+									LineBreakMode="TailTruncation"
+							/>
+
+
+							<Label Text="Condition"
+									Grid.Row="1"
+							Grid.Column="0"	
+							LineBreakMode="TailTruncation"
+											FontSize="Medium"/>
+							
+									<Label Text="Good" 
+										FontSize="Small" 
+								TextColor="#53D9D1"
+									x:Name="lblCondition"
+							Grid.Row="1"
+							Grid.Column="1"	
+							LineBreakMode="TailTruncation"/>
+
+
+								<Label Text="Size"
+									Grid.Row="2"
+							Grid.Column="0"	
+							LineBreakMode="TailTruncation"
+											FontSize="Medium"/>
+							
+									<Label Text="S" 
+										FontSize="Small" 
+								TextColor="#53D9D1"
+									x:Name="lblSize"
+							Grid.Row="2"
+							Grid.Column="1"	
+							LineBreakMode="TailTruncation"/>
+
+							<Label Text="Gender"
+									Grid.Row="3"
+							Grid.Column="0"	
+											FontSize="Medium"/>
+							
+									<Label Text="Man" 
+										FontSize="Small" 
+								TextColor="#53D9D1"
+									x:Name="lblGender"
+							Grid.Row="3"
+							Grid.Column="1"	
+							LineBreakMode="TailTruncation"/>
+						</Grid>
+
+
+
+						
+							<StackLayout Margin="10,0,0,0" Spacing="13" Orientation="Horizontal" >
+
+									
 								</StackLayout>
 								<StackLayout  Spacing="30" Orientation="Horizontal" Margin="10,0,0,0">
-							<Label Text="Condition"
-									FontSize="12"/>
-									<Label Text="Good" 
-										FontSize="12" 
-								TextColor="#53D9D1"
-									
-									x:Name="lblCondition"/>
+							
 								</StackLayout>
 							</StackLayout>	
 							</Grid>	
 					</StackLayout>
+	</StackLayout>
+	<BoxView BackgroundColor="Silver" HeightRequest="1"/>
 
-
-					
-					<StackLayout   BackgroundColor="White">
+	<StackLayout   BackgroundColor="White">
 					<Label Text="Product Description"
 							FontSize="20"
 								TextColor="#53D9D1"
 									Margin="15,15,15,0"/>
 						<BoxView HeightRequest="1"
-						BackgroundColor="Gray"
+						BackgroundColor="Silver"
 						Margin="15,0,15,0"/>
 						<Label
 							x:Name="lblProductDesc"
 						Margin="15"	
 						/> 
 
-						<Button Text="Online Store"
+						<Button Text="Website"
 						BackgroundColor="#20D1C8"
 						HorizontalOptions="Start"
 						TextColor="White"
 						WidthRequest="120"
 						HeightRequest="40"
 						BorderRadius="0"
-							FontSize="14"
+							FontSize="Medium"
 						Margin="15,0,0,10"
 						x:Name="btnOnlineStore"/> 
 					</StackLayout>
@@ -230,12 +307,12 @@ x:Class="BikeSpot.ProductDetailsPage"
         <TapGestureRecognizer Tapped="insta_Tapped"/>  
     </Image.GestureRecognizers>
 							</Image>
-				<Image  Source="pinterest">
+				<Image  Source="pinterest" IsVisible="false">
 								<Image.GestureRecognizers>
         <TapGestureRecognizer Tapped="pintrest_Tapped"/>  
     </Image.GestureRecognizers>
 							</Image>
-					<Image  Source="linkedin">
+					<Image  Source="linkedin" IsVisible="false">
 					<Image.GestureRecognizers>
         <TapGestureRecognizer Tapped="linkedin_Tapped"/>  
     </Image.GestureRecognizers>
@@ -247,7 +324,7 @@ x:Class="BikeSpot.ProductDetailsPage"
 				</StackLayout>
 			
 		</StackLayout>
-			</StackLayout>
+			
 			</ScrollView>
 		<!-- static Footer	-->
 		<RelativeLayout>

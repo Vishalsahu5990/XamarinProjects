@@ -94,7 +94,7 @@
 			Grid.Row="2"
 			TextColor="Gray"
 						x:Name="btnCityBikes"
-						HeightRequest="40"	/>
+						HeightRequest="40"/>
 
 						
 			<Button Text="Folding Bikes"
@@ -122,8 +122,8 @@
 			BackgroundColor="#E5E6E7"
 				TextColor="Gray"
 				BorderRadius="0"
-			Grid.Column="0"
-			Grid.Row="0"
+			Grid.Column="0" 
+			Grid.Row="0" 
 						x:Name="btnSingleSpeedBikes"
 						HeightRequest="40"	
 					/>
@@ -281,6 +281,23 @@
 			HorizontalOptions="FillAndExpand"
 
 		Margin="10"/>
+						<StackLayout HeightRequest="40"
+							HorizontalOptions="FillAndExpand"
+							BackgroundColor="#E5E6E7"
+							x:Name="slAddress"
+							Margin="20,15,20,15">
+							<StackLayout Orientation="Horizontal"
+								
+								VerticalOptions="CenterAndExpand">
+								<Image Source="placeholder"/>
+								<Label Text="Location"
+								x:Name="lblLocation"
+								TextColor="Gray"/>
+							</StackLayout>
+							<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="location_Tapped" />
+				</StackLayout.GestureRecognizers>
+						</StackLayout>
 
 		<Grid Margin="20,0,20,0">
 		<Label  Text="0 KM" VerticalOptions="Center"
@@ -396,84 +413,86 @@
 		</Grid>
 		</StackLayout>
 
-<!--Gender-->
-				<StackLayout Spacing="0">
 
-		<StackLayout Orientation="Horizontal" Margin="20,20,0,0" Spacing="0">
+		<StackLayout Orientation="Horizontal" Margin="20,10,20,0">
+		<Image  Source="bike" VerticalOptions="CenterAndExpand" />
+			<Label Text="Size" VerticalOptions="Center" 
+			FontSize="22"
+			TextColor="Gray"
+			Margin="10,0,0,0"/>	
+			</StackLayout>
+		<Grid Margin="0,15,0,15" Padding="10">
+	<Button Text="S"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="0"
+			TextColor="Gray"
+			x:Name="btnS"
+			HeightRequest="40"			/>
+			<Button Text="M"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="0"
+			TextColor="Gray"
+						x:Name="btnM"
+						HeightRequest="40"	/>
+			<Button Text="L"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0"
+			Grid.Row="1"
+			TextColor="Gray"
+						x:Name="btnL"
+						HeightRequest="40"	/>
+			<Button Text="XL"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="1"
+			TextColor="Gray" 
+			x:Name="btnXl"
+			HeightRequest="40"	/>  
+			 
+		</Grid>
+
+		<StackLayout Orientation="Horizontal" Margin="20,0,0,0">
 		<Image  Source="gender" VerticalOptions="CenterAndExpand" />
 			<Label Text="Gender" VerticalOptions="Center" 
 			FontSize="22"
 			TextColor="Gray"
 			Margin="10,0,0,0"/>	
 			</StackLayout>
-			<StackLayout Orientation="Horizontal"
-			Spacing="10" Margin="15,0,0,0" >
-					
-			<StackLayout  Orientation="Horizontal">
-			<Button HeightRequest="20"
-			WidthRequest="20"
-			BorderColor="Black"
-			BorderWidth="2"
-			BorderRadius="10"
-			VerticalOptions="EndAndExpand"
-			Image="radio_check"
-							x:Name="btnMale_rent"/>
-			<Label Text="Man"
-		 HorizontalOptions="Center"
-		Margin="0,30,0,0"
-			VerticalOptions="Center"
-				
-				VerticalTextAlignment="Center"
-			/><StackLayout.GestureRecognizers>
-        <TapGestureRecognizer Tapped="male_rentTapped"/> 
-    </StackLayout.GestureRecognizers>
-						</StackLayout>	
+		<Grid  Padding="10">
+	<Button Text="Man"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="0" 
+			Grid.Row="0"
+			TextColor="Gray"
+						x:Name="btnMan"
+						HeightRequest="40"/> 
+			<Button Text="Women"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="1"
+			Grid.Row="0"
+			TextColor="Gray"
+						x:Name="btnWomen"
+						HeightRequest="40"/>  
+						<Button Text="Unisex"
+			BackgroundColor="#E5E6E7"
+				BorderRadius="0"
+			Grid.Column="2"
+			Grid.Row="0"
+			TextColor="Gray"
+						x:Name="btnUnisex"
+						HeightRequest="40"/> 
 
-					
-						<StackLayout  Orientation="Horizontal">
-							<Button HeightRequest="20"
-			WidthRequest="20"
-			BorderColor="Black"
-			BorderWidth="2"
-			BorderRadius="10"
-			VerticalOptions="EndAndExpand"
-								x:Name="btnfeMale_rent"/>
-			<Label Text="Women"
-		 HorizontalOptions="Center"
-		Margin="0,30,0,0"
-			VerticalOptions="Center"
+		</Grid>
 				
-				VerticalTextAlignment="Center"
-			/><StackLayout.GestureRecognizers>
-        <TapGestureRecognizer Tapped="female_rentTapped"/> 
-    </StackLayout.GestureRecognizers>
-						</StackLayout>	
 
-						
-						<StackLayout  Orientation="Horizontal">
-						<Button HeightRequest="20"
-			WidthRequest="20"
-			BorderColor="Black"
-			BorderWidth="2"
-			BorderRadius="10"
-			VerticalOptions="EndAndExpand"
-								x:Name="btnother_rent"/>
-			<Label Text="Unisex"
-		 HorizontalOptions="Center"
-		Margin="0,30,0,0"
-			VerticalOptions="Center"
-				
-				VerticalTextAlignment="Center"
-			/>
-					<StackLayout.GestureRecognizers>
-        <TapGestureRecognizer Tapped="other_rentTapped"/> 
-    </StackLayout.GestureRecognizers>	</StackLayout>		
-		
-					
-						
-
-					</StackLayout>
-					</StackLayout>
 
 
 				
