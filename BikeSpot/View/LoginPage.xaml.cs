@@ -83,7 +83,11 @@ namespace BikeSpot
 		{
 			await Navigation.PushAsync(new ForgotPasswordPage());
 		}
-
+		async void skipTapped(object sender, EventArgs e)
+		{
+			StaticDataModel.IsAnonymousLogin = true;
+			App.Current.MainPage = new NavigationPage(new MainPage());
+		}
 		async void fbTapped(object sender, EventArgs e)
 		{
 			flag = true;
@@ -281,6 +285,7 @@ var UserInfoUrlFacebook = "https://graph.facebook.com/me?fields=email,first_name
 								CrossSecureStorage.Current.SetValue("email", model.email.ToString());
 
 							StaticMethods.ShowToast("Login successfully");
+				            StaticDataModel.IsAnonymousLogin = false;
 							App.Current.MainPage = new NavigationPage(new MainPage());
 
 						}
@@ -330,6 +335,7 @@ var UserInfoUrlFacebook = "https://graph.facebook.com/me?fields=email,first_name
 						CrossSecureStorage.Current.SetValue("lastName", model.email.ToString());
 
 					StaticMethods.ShowToast("Login successfully");
+					StaticDataModel.IsAnonymousLogin = false;
 					App.Current.MainPage = new NavigationPage(new MainPage());
 
 				}

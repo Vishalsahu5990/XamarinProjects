@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace BikeSpot
 {
 	public class ProductModel
@@ -7,7 +9,7 @@ namespace BikeSpot
 		public int user_id { get; set; }
 		public string product_name { get; set; }
 		public string product_description { get; set; }
-		public string product_image { get; set; }
+		public byte[] product_image { get; set; }
 		public string extension { get; set; }
 		public int type { get; set; }
 		public string condition { get; set; }
@@ -18,6 +20,8 @@ namespace BikeSpot
 		public string type_of_bike { get; set; }
 public string address { get; set; }
 public string gender { get; set; }
+		public List<byte[]> imageByteArray { get; set; }
+public string size { get; set; }
 		public int itemHeight { get; set; }
 
 	}

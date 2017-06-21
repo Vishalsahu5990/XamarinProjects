@@ -269,6 +269,12 @@
     <Reference Include="Plugin.CrossPlacePicker">
       <HintPath>..\packages\Fantacode.Plugin.CrossPlacePicker.1.0.2\lib\Xamarin.iOS10\Plugin.CrossPlacePicker.dll</HintPath>
     </Reference>
+    <Reference Include="CarouselView.FormsPlugin.Abstractions">
+      <HintPath>..\packages\CarouselView.FormsPlugin.4.3.0\lib\Xamarin.iOS10\CarouselView.FormsPlugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="CarouselView.FormsPlugin.iOS">
+      <HintPath>..\packages\CarouselView.FormsPlugin.4.3.0\lib\Xamarin.iOS10\CarouselView.FormsPlugin.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BikeSpot\BikeSpot.csproj">
@@ -308,6 +314,7 @@
     <Compile Include="DependencyServices\IosMethods.cs" />
     <Compile Include="CustomRenderer\MyListviewRenderer.cs" />
     <Compile Include="CustomRenderer\CustomScrollViewRenderer.cs" />
+    <Compile Include="CustomRenderer\CustomImageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\add_free.png" />
@@ -634,12 +641,6 @@
     <BundleResource Include="Resources\bg_blue%403x.png" />
     <BundleResource Include="Resources\bg_blue.png" />
     <BundleResource Include="Resources\bg_blue%402x.png" />
-    <BundleResource Include="Resources\commets.png" />
-    <BundleResource Include="Resources\commets%402x.png" />
-    <BundleResource Include="Resources\commets%403x.png" />
-    <BundleResource Include="Resources\make_offer.png" />
-    <BundleResource Include="Resources\make_offer%402x.png" />
-    <BundleResource Include="Resources\make_offer%403x.png" />
     <BundleResource Include="Resources\Wand-icon3x.png" />
     <BundleResource Include="Resources\Wand-icon3x%402x.png" />
     <BundleResource Include="Resources\Wand-icon3x%403x.png" />

@@ -115,7 +115,7 @@ async void private_Tapped(object sender, System.EventArgs e)
 		{
 			try
 			{
-				MessagingCenter.Send<ImageSource>(imgProduct.Source, "Share");
+				//MessagingCenter.Send<ImageSource>(imgProduct.Source, "Share");
 
 
 			}
@@ -129,7 +129,7 @@ async void twitter_Tapped(object sender, System.EventArgs e)
 {
 	try
 	{
-		MessagingCenter.Send<ImageSource>(imgProduct.Source, "Share");
+		//MessagingCenter.Send<ImageSource>(imgProduct.Source, "Share");
 
 
 	}
@@ -143,7 +143,7 @@ async void insta_Tapped(object sender, System.EventArgs e)
 {
 	try
 	{
-		MessagingCenter.Send<ImageSource>(imgProduct.Source, "Share");
+		//MessagingCenter.Send<ImageSource>(imgProduct.Source, "Share");
 
 
 	}
@@ -157,7 +157,7 @@ async void pintrest_Tapped(object sender, System.EventArgs e)
 {
 	try
 	{
-		MessagingCenter.Send<ImageSource>(imgProduct.Source, "Share");
+		//MessagingCenter.Send<ImageSource>(imgProduct.Source, "Share");
 
 
 	}
@@ -171,7 +171,7 @@ async void linkedin_Tapped(object sender, System.EventArgs e)
 {
 	try
 	{
-		MessagingCenter.Send<ImageSource>(imgProduct.Source, "Share");
+		//MessagingCenter.Send<ImageSource>(imgProduct.Source, "Share");
 
 
 	}
@@ -196,27 +196,53 @@ async void linkedin_Tapped(object sender, System.EventArgs e)
 					}).ContinueWith(async
 					t =>
 					{
-						if (_productDetailsModel != null)
+						try
 						{
-							Device.BeginInvokeOnMainThread(async () =>
+							if (_productDetailsModel != null)
 							{
-								imgProduct.Source = Constants.ImageUrl + _productDetailsModel.product_image; ;
-								lblUserName.Text = _productDetailsModel.name;
-								lblProductName.Text = _productDetailsModel.product_name;
-								lblTypeofBike.Text = _productDetailsModel.type_of_bike;
-								lblCondition.Text = _productDetailsModel.condition;
-								lblPrice.Text = _productDetailsModel.price;
-								lblProductDesc.Text = _productDetailsModel.product_description;
-						if(!string.IsNullOrEmpty(_productDetailsModel.lat))
-							AddBarMarkerOnMap(Convert.ToDouble(_productDetailsModel.lat), Convert.ToDouble(_productDetailsModel.@long));
-						else
-                            AddBarMarkerOnMap(25.023176, 39.189978);
+								Device.BeginInvokeOnMainThread(async () =>
+								{
+									var imageList = new List<Model>();
+									var data = _productDetailsModel.product_image;
+									if (!string.IsNullOrEmpty(_productDetailsModel.product_image))
+									{
 										
-							});
+										var imageArray = data.Split(',');
+										for (int i = 0; i < imageArray.Length; i++)
+										{
+											imageList.Add(new Model
+											{
+												image = Constants.ImageUrl + imageArray[i]
+											});
+										}
+									}
+									Carousel.ItemsSource = imageList;
+
+								//imgProduct.Source = Constants.ImageUrl + _productDetailsModel.product_image; ;
+								lblUserName.Text = _productDetailsModel.name;
+									lblProductName.Text = _productDetailsModel.product_name;
+									lblTypeofBike.Text = _productDetailsModel.type_of_bike;
+									lblCondition.Text = _productDetailsModel.condition;
+									lblPrice.Text = _productDetailsModel.price;
+									lblProductDesc.Text = _productDetailsModel.product_description;
+									if (!string.IsNullOrEmpty(_productDetailsModel.lat))
+										AddBarMarkerOnMap(Convert.ToDouble(_productDetailsModel.lat), Convert.ToDouble(_productDetailsModel.@long));
+									else
+
+										AddBarMarkerOnMap(25.023176, 39.189978);
+
+								});
+							}
+
 						}
+						catch (Exception ex)
+						{
 
-
-						StaticMethods.DismissLoader();
+						}
+						finally { 
+				StaticMethods.DismissLoader();
+				}
+						
 
 					}, TaskScheduler.FromCurrentSynchronizationContext()
 				);

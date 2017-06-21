@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net.Http;
 using System.ServiceModel;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 namespace BikeSpot
@@ -288,6 +290,7 @@ namespace BikeSpot
 				var json = JsonConvert.SerializeObject(j);
 				var content = new StringContent(json, Encoding.UTF8, "application/json");
 				response = client.PostAsync(url, content).Result;
+
 				if (response.IsSuccessStatusCode)
 				{
 
@@ -321,6 +324,82 @@ namespace BikeSpot
 				StaticMethods.DismissLoader();
 
 			}
+		}
+		public static async Task<string> AddProductUsingMultipart(ProductModel pm)
+		{
+			try
+			{
+
+				//using (var client = new HttpClient())
+				//{
+					//client.MaxResponseContentBufferSize=int.MaxValue;
+					using (var content =
+						new MultipartFormDataContent())
+					{
+
+						content.Add(new StringContent("add_product"), "method");
+						//content.Add(new StringContent(pm.user_id.ToString()), "user_id");
+						content.Add(new StringContent("3"), "user_id");
+						content.Add(new StringContent(pm.product_name), "product_name");
+						content.Add(new StringContent(pm.address), "address");
+						content.Add(new StringContent(pm.type_of_bike), "type_of_bike");
+						content.Add(new StringContent(pm.product_description), "product_description");
+						content.Add(new StringContent(pm.type.ToString()), "type");
+						content.Add(new StringContent(pm.condition), "condition");
+						content.Add(new StringContent(pm.currency), "currency");
+						content.Add(new StringContent(pm.size), "framesize");
+						content.Add(new StringContent(pm.price), "price");
+						content.Add(new StringContent(pm.gender), "rent_time");
+						content.Add(new StringContent(pm.gender), "gender");
+						content.Add(new StringContent(pm.is_facebook_sharable.ToString()), "is_facebook_sharable");
+
+						//var str = Convert.ToBase64String(pm.imageByteArray[0]);
+
+						if (pm.imageByteArray[0] != null)
+							content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[0])), "img1", "img1.jpg");
+						if (pm.imageByteArray[1] != null)
+							content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[1])), "img2", "img2.jpg");
+						if (pm.imageByteArray[2] != null)
+							content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[2])), "img3", "img3.jpg");
+						if (pm.imageByteArray[3] != null)
+							content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[3])), "img4", "img4.jpg");
+					     client.Timeout = TimeSpan.FromSeconds(300);
+						using (
+
+
+						   var message =
+                        await client.PostAsync("http://risensys.com/bikespot/webservice/add_product", content))
+						{
+						client.Timeout = TimeSpan.FromSeconds(300);
+						StaticMethods.DismissLoader();
+						if (message.IsSuccessStatusCode)
+						{
+							StaticMethods.ShowToast("File uploaded successfully");
+
+						} 
+						else
+						{ 
+							StaticMethods.ShowToast("Failed to upload file. Please try again after some time.");
+						}
+
+							var input = await message.Content.ReadAsStringAsync();
+
+							return !string.IsNullOrWhiteSpace(input) ? Regex.Match(input, @"http://\w*\.directupload\.net/images/\d*/\w*\.[a-z]{3}").Value : null;
+						}
+					}
+				
+
+			}
+
+			catch (Exception ex)
+			{
+
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+			}
+			return null;
 		}
 		public static Product GetProductDetailsbyId(int product_id)
 		{

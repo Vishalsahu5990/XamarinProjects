@@ -308,6 +308,7 @@ namespace BikeSpot
 								CrossSecureStorage.Current.SetValue("lastName", model.email.ToString());
 
 							StaticMethods.ShowToast("Login successfully");
+					        StaticDataModel.IsAnonymousLogin = false;
 							App.Current.MainPage = new NavigationPage(new MainPage());
 
 						}
@@ -357,6 +358,7 @@ namespace BikeSpot
 								CrossSecureStorage.Current.SetValue("lastName", model.email.ToString());
 
 							StaticMethods.ShowToast("Login successfully");
+					StaticDataModel.IsAnonymousLogin = false;
 							App.Current.MainPage = new NavigationPage(new MainPage());
 
 						}

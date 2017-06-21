@@ -15,6 +15,8 @@ using Xamarin;
 using Xamarin.Auth.Presenters;
 using Xamarin.Forms;
 using Plugin.CrossPlacePicker.Abstractions;
+using CarouselView.FormsPlugin.iOS;
+
 namespace BikeSpot.iOS
 {
 	[Register("AppDelegate")]
@@ -35,6 +37,7 @@ namespace BikeSpot.iOS
             MapServices.ProvideAPIKey("AIzaSyBLtYoWAUYZ8IrkcmpxS84HXyWyi2XdxrI");
 
 			global::Xamarin.Forms.Forms.Init();
+			CarouselViewRenderer.Init ();
 
 			MobileAds.Configure("ca-app-pub-7176870068365595~1750148263");
 			FormsMaps.Init();

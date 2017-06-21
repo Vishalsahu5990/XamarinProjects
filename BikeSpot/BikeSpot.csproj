@@ -114,6 +114,9 @@
     <EmbeddedResource Include="Popups\InfoHtmlPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Popups\LoginReminderPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -242,6 +245,10 @@
     <Compile Include="Popups\InfoHtmlPopup.xaml.cs">
       <DependentUpon>InfoHtmlPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomRenderer\CustomImage.cs" />
+    <Compile Include="Popups\LoginReminderPopup.xaml.cs">
+      <DependentUpon>LoginReminderPopup.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NGraphics">
@@ -366,6 +373,9 @@
     </Reference>
     <Reference Include="Plugin.CrossPlacePicker">
       <HintPath>..\packages\Fantacode.Plugin.CrossPlacePicker.1.0.2\lib\portable-net45+wp80+win8+wpa81\Plugin.CrossPlacePicker.dll</HintPath>
+    </Reference>
+    <Reference Include="CarouselView.FormsPlugin.Abstractions">
+      <HintPath>..\packages\CarouselView.FormsPlugin.4.3.0\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid10+Xamarin.iOS10\CarouselView.FormsPlugin.Abstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

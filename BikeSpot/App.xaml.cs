@@ -18,7 +18,7 @@ namespace BikeSpot
 			InitializeComponent(); 
 			 
 			//To initialize location
-			locator = CrossGeolocator.Current;
+			locator = CrossGeolocator.Current; 
 			locator.DesiredAccuracy = 50;
 
 			var exists = CrossSecureStorage.Current.HasKey("userId");
@@ -31,9 +31,9 @@ namespace BikeSpot
 				var model=StaticMethods. GetLocalSavedData();
 				StaticDataModel.userId = model.user_id;
 
-					MainPage = new NavigationPage(new BikeSpot.MainPage());
+				MainPage = new NavigationPage(new BikeSpot.MainPage());
 			}
-			//MainPage = new NavigationPage(new BikeSpot.TestPage()); 
+			//MainPage = new NavigationPage(new BikeSpot.LoginPage()); 
 		}
 
 		protected override void OnStart()

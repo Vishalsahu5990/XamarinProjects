@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+	x:Class="BikeSpot.LoginReminderPopup">
+
+	<StackLayout
+			Orientation="Vertical" 
+			VerticalOptions="CenterAndExpand"
+		HorizontalOptions="FillAndExpand"
+			Padding="0" Margin="20,30,20,30"> 
+		     
+			<Frame Padding="10,0,10,10" HorizontalOptions="FillAndExpand" BackgroundColor="White">
+			<StackLayout>
+					<StackLayout Orientation="Horizontal"
+					HorizontalOptions="FillAndExpand"
+						HeightRequest="50"
+						Padding="10">
+					<Label Text="Message"
+						VerticalOptions="CenterAndExpand"/>
+						<Image Source="close"
+						HorizontalOptions="EndAndExpand"
+						HeightRequest="20">
+						  <Image.GestureRecognizers>
+        <TapGestureRecognizer Tapped="close_Tapped"/>
+    </Image.GestureRecognizers>
+						</Image>   
+
+					</StackLayout>
+					<StackLayout  HorizontalOptions="FillAndExpand"
+						>
+				<StackLayout
+			Orientation="Vertical" 
+			VerticalOptions="CenterAndExpand"
+		HorizontalOptions="FillAndExpand"
+			Padding="0" Margin="20,30,20,30"> 
+			<StackLayout>
+			<Label Text="You are not registerd user. Please get register to continue."
+				HorizontalTextAlignment="Center"/>
+		</StackLayout>
+		</StackLayout>
+					</StackLayout>
+					<StackLayout Margin="0,20,0,0" Spacing="20" Orientation="Horizontal" HorizontalOptions="Center">
+					<Button x:Name="btnCancel" Text="Cancel" WidthRequest="80"
+					BorderRadius="0"
+						BackgroundColor="#27BB9B"
+					Clicked="cancel_clicked"
+					TextColor="White"/>
+					<Button x:Name="btnOk" Text="Register"
+						WidthRequest="80"
+					BorderRadius="0"
+						BackgroundColor="#27BB9B"
+					Clicked="ok_clicked"
+					TextColor="White"/>
+				</StackLayout> 
+
+				</StackLayout>
+			</Frame>
+		
+	 
+		</StackLayout>
+
+
+			
+</pages:PopupPage>

@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Xam.FormsPlugin.Abstractions;
 using System.Threading.Tasks;
+using Rg.Plugins.Popup.Extensions;
 
 namespace BikeSpot
 {
@@ -37,6 +38,17 @@ namespace BikeSpot
 			btnLoadMore.Clicked += BtnLoadMore_Clicked;
 			flowlistview1.FlowItemAppearing += Flowlistview1_FlowItemAppearing;
 
+			MessagingCenter.Subscribe<object, string>(this, "PopCurrentPage", (sender, msg) =>
+
+   {
+	Device.BeginInvokeOnMainThread(() =>
+	 {
+		 App.Current.MainPage = new NavigationPage(new RegistrationPage());
+
+		
+	 });
+ });
+
 		}
 		protected override void OnDisappearing()
 		{
@@ -66,11 +78,12 @@ namespace BikeSpot
 			if (currentIdx > _lastItemAppearedIdx)
 			{
 				System.Diagnostics.Debug.WriteLine("Up");
-				_items.Items[0].isEnableListview = true;
+
 			}
 			else
 			{
 				System.Diagnostics.Debug.WriteLine("Down");
+				_items.Items[0].isEnableListview = true;
 			}
 
 			_lastItemAppearedIdx = _items.Items.IndexOf(e.Item as Product);
@@ -78,6 +91,13 @@ namespace BikeSpot
 
 		async void Handle_FlowItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
 		{
+			if (StaticDataModel.IsAnonymousLogin)
+			{
+await Navigation.PushPopupAsync(new LoginReminderPopup());
+			}
+			else
+			{ 
+
 			var item = e.Item as Product;
 			if (item.listing_type == "advertisement") 
 			{
@@ -88,6 +108,7 @@ namespace BikeSpot
 			else
 			{
 				await Navigation.PushAsync(new ProductDetailsPage(item));
+			}
 			}
 		}
 
@@ -119,7 +140,14 @@ namespace BikeSpot
 		{
 			try
 			{
-				StaticDataModel._CurrentContext.MenuTapped.Execute(StaticDataModel._CurrentContext.MenuTapped);
+				if (StaticDataModel.IsAnonymousLogin)
+				{
+await Navigation.PushPopupAsync(new LoginReminderPopup());
+				}
+				else
+				{
+					StaticDataModel._CurrentContext.MenuTapped.Execute(StaticDataModel._CurrentContext.MenuTapped);
+				}
 
 			}
 			catch (Exception ex)
@@ -132,7 +160,14 @@ namespace BikeSpot
 		{
 			try
 			{
-				await Navigation.PushAsync(new FilterPage());
+				if (StaticDataModel.IsAnonymousLogin)
+				{
+await Navigation.PushPopupAsync(new LoginReminderPopup());
+				}
+				else
+				{
+					await Navigation.PushAsync(new FilterPage());
+				}
 
 			}
 			catch (Exception ex)
@@ -145,7 +180,14 @@ namespace BikeSpot
 		{
 			try
 			{
-				await Navigation.PushAsync(new AddProductPage());
+				if (StaticDataModel.IsAnonymousLogin)
+				{
+					await Navigation.PushPopupAsync(new LoginReminderPopup());
+				}
+				else
+				{
+					await Navigation.PushAsync(new AddProductPage());
+				}
 
 			}
 			catch (Exception ex)
@@ -158,7 +200,14 @@ namespace BikeSpot
 		{
 			try
 			{
-				await Navigation.PushModalAsync(new MyProfilePage());
+				if (StaticDataModel.IsAnonymousLogin)
+				{
+
+				}
+				else
+				{
+					await Navigation.PushModalAsync(new MyProfilePage());
+				}
 
 			}
 			catch (Exception ex)

@@ -41,7 +41,7 @@
 
 				<Grid IsVisible="false" x:Name="gvMultipleImage" RowSpacing="5" ColumnSpacing="5" HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="FillAndExpand">
 				<StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#0ffffff" Grid.Row="0" Grid.Column="0">
-				<Image x:Name="img1" Source="camera" 
+				<local:CustomImage x:Name="img1" Source="camera" 
 						
 						Aspect="AspectFill"/>
 
@@ -51,21 +51,21 @@
 					</StackLayout>
 					
 					<StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#0ffffff" Grid.Row="0" Grid.Column="1">
-					<Image x:Name="img2" Source="camera" Aspect="AspectFill" />
+					<local:CustomImage x:Name="img2" Source="camera" Aspect="AspectFill" />
 						<StackLayout.GestureRecognizers> 
         <TapGestureRecognizer Tapped="img2Tapped"/> 
     </StackLayout.GestureRecognizers>
 					</StackLayout>
 					
 					<StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#0ffffff" Grid.Row="1" Grid.Column="0">
-					<Image x:Name="img3" Source="camera" Aspect="AspectFill"/>
+					<local:CustomImage x:Name="img3" Source="camera" Aspect="AspectFill"/>
 						<StackLayout.GestureRecognizers> 
         <TapGestureRecognizer Tapped="img3Tapped"/> 
     </StackLayout.GestureRecognizers>
 					</StackLayout>
 					
 					<StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#0ffffff"  Grid.Row="1" Grid.Column="1">
-					<Image x:Name="img4" Source="camera" Aspect="AspectFill"/>
+					<local:CustomImage x:Name="img4" Source="camera" Aspect="AspectFill"/>
 						<StackLayout.GestureRecognizers> 
         <TapGestureRecognizer Tapped="img4Tapped"/> 
     </StackLayout.GestureRecognizers>
@@ -73,7 +73,7 @@
 
 				</Grid> 
 				<StackLayout Orientation="Horizontal" VerticalOptions="Start" Padding="10">
-						<StackLayout VerticalOptions="FillAndExpand" Padding="10" >
+						<StackLayout VerticalOptions="Start" Padding="10" >
 	<Image IsVisible="true"  Source="back" VerticalOptions="CenterAndExpand" >
 	<Image.GestureRecognizers>
         <TapGestureRecognizer Tapped="menu_Tapped"/> 

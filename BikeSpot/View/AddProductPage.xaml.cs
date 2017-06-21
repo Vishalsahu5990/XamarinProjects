@@ -13,21 +13,10 @@ using Xamarin.Forms;
 
 namespace BikeSpot
 {
-	public interface IPlacePicker
-	{
-		Task<Place> PickAsync();
-	}
-
-	public class Place
-	{
-		public string Name
-		{
-			get;
-			set;
-		}
-	}
+	
 	public partial class AddProductPage : ContentPage
 	{
+		List<byte[]> imageBytes = null;
 		bool isMultipleSelection = false;
 		int fromImageView = 1;
 		int imageFillCounter1 = 0;
@@ -205,25 +194,25 @@ namespace BikeSpot
 			{
 
 			}}
-		private void setMultipleImage(ImageSource source,int position)
-		{ 
-try
+		private void setMultipleImage(ImageSource source, int position)
+		{
+			try
 			{
 				switch (position)
-				{ 
+				{
 					case 1:
 						img1.Source = source;
 						imageFillCounter1 = 1;
 						break;
-						case 2:
+					case 2:
 						img2.Source = source;
 						imageFillCounter2 = 2;
 						break;
-						case 3:
+					case 3:
 						img3.Source = source;
 						imageFillCounter3 = 3;
 						break;
-						case 4:
+					case 4:
 						img4.Source = source;
 						imageFillCounter4 = 4;
 						break;
@@ -231,8 +220,8 @@ try
 			}
 			catch (Exception ex)
 			{
-	
-}
+
+			}
 		}
 		private void RemoveImage(int flag)
 		{
@@ -965,13 +954,19 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 
 		void BtnSellit_Clicked(object sender, EventArgs e)
 		{
+			imageBytes = new List<byte[]>();
+           // var bytes = img1.GetBytes?.Invoke();
+			imageBytes.Add(img1.GetBytes?.Invoke());
+			imageBytes.Add(img2.GetBytes?.Invoke());
+			imageBytes.Add(img3.GetBytes?.Invoke());
+			imageBytes.Add(img4.GetBytes?.Invoke());
 
 			if (IsvalidatedSellTab())
 			{
-				if (profileData != null)
+				if (imageBytes.Count>0)
 				{
 
-					AddProduct_Sell();
+					AddProduct_Sell().Wait();
 				}
 				else
 				{
@@ -983,9 +978,23 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 
 		void BtnRentit_Clicked(object sender, EventArgs e)
 		{
+			imageBytes = new List<byte[]>();
+           // var bytes = img1.GetBytes?.Invoke();
+			imageBytes.Add(img1.GetBytes?.Invoke());
+			imageBytes.Add(img2.GetBytes?.Invoke());
+			imageBytes.Add(img3.GetBytes?.Invoke());
+			imageBytes.Add(img4.GetBytes?.Invoke());
 			if (IsvalidatedRentTab())
 			{
-				AddProduct_Rent();
+				if (imageBytes.Count>0)
+				{
+
+					AddProduct_Rent().Wait();
+				}
+				else
+				{
+					StaticMethods.ShowToast("Please select or take a picture to continue!");
+				}
 			}
 		}
 		private bool IsvalidatedSellTab()
@@ -1015,9 +1024,14 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 					lblCondition_sell.TextColor = Color.Red;
 					return false;
 				}
-				else if (lblInr_sell.Text == "Currency")
+				else if (lblSize_sell.Text == "Size")
 				{
-					lblInr_sell.TextColor = Color.Red;
+					lblSize_sell.TextColor = Color.Red;
+					return false;
+				}
+				else if (lblGender_sell.Text == "Gender")
+				{
+					lblGender_sell.TextColor = Color.Red;
 					return false;
 				}
 				else if (string.IsNullOrEmpty(txtPrice_sell.Text))
@@ -1025,6 +1039,12 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 					txtPrice_sell.PlaceholderColor = Color.Red;
 					return false;
 				}
+				else if (lblInr_sell.Text == "Currency")
+				{
+					lblInr_sell.TextColor = Color.Red;
+					return false;
+				}
+
 				else if (string.IsNullOrEmpty(lblAddress_sell.Text))
 				{
 					lblAddress_sell.TextColor = Color.Red;
@@ -1073,6 +1093,16 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 					lblCondtition_rent.TextColor = Color.Red;
 					return false;
 				}
+				else if (lblSize_rent.Text == "Size")
+				{
+					lblSize_rent.TextColor = Color.Red;
+					return false;
+				}
+				else if (lblGender_rent.Text == "Gender")
+				{
+					lblGender_rent.TextColor = Color.Red;
+					return false;
+				}
 				else if (lblInr_rent.Text == "Currency")
 				{
 					lblInr_rent.TextColor = Color.Red;
@@ -1119,7 +1149,9 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 					{
 
 						um.user_id = StaticDataModel.userId;
-						um.gender = gender;
+				        um.gender = lblGender_sell.Text;
+						um.size = lblSize_sell.Text;
+				        um.imageByteArray = imageBytes;
 						um.product_name = txtWhatYouAreSelling_sell.Text;
 						um.product_description = txtDescribe_sell.Text;
 						um.type_of_bike = lblTypeofbike_sekk.Text;
@@ -1128,7 +1160,7 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 						{
 							var bytearray = StaticMethods.StreamToByte(profileData.GetStream());
 							base64 = Convert.ToBase64String(bytearray);
-							um.product_image = base64;
+							um.product_image = bytearray;
 							var extsn = Path.GetExtension(profileData.Path);
 							var str = extsn.Split('.');
 							extsn = str[1];
@@ -1145,24 +1177,24 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 							um.is_facebook_sharable = 0;
 
 
-						ret = WebService.AddProduct(um);
-
+						//ret = WebService.AddProduct(um);
+				WebService.AddProductUsingMultipart(um);
 
 
 					}).ContinueWith(async
 					t =>
 					{
-						if (ret == "success")
-						{
-							StaticMethods.ShowToast("Product added successfully");
-							await Navigation.PushAsync(new HomePage());
-						}
-						else
-						{
-							StaticMethods.ShowToast("Failed to add product, Please try after some time.");
-						}
+						//if (ret == "success")
+						//{
+						//	StaticMethods.ShowToast("Product added successfully");
+						//	await Navigation.PushAsync(new HomePage());
+						//}
+						//else
+						//{
+						//	StaticMethods.ShowToast("Failed to add product, Please try after some time.");
+						//}
 
-						StaticMethods.DismissLoader();
+						//StaticMethods.DismissLoader();
 
 					}, TaskScheduler.FromCurrentSynchronizationContext()
 				);
@@ -1179,7 +1211,9 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 					{
 						um = new ProductModel();
 						um.user_id = StaticDataModel.userId;
-						um.gender = gender;
+					    um.gender = lblGender_rent.Text;
+						um.imageByteArray = imageBytes;
+						um.size = lblSize_rent.Text;
 						um.product_name = txtWhatYouAreSelling_rent.Text;
 						um.product_description = txtDescribe_rent.Text;
 						um.type_of_bike = lblTypeofbike_rent.Text;
@@ -1188,7 +1222,7 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 						{
 							var bytearray = StaticMethods.StreamToByte(profileData.GetStream());
 							base64 = Convert.ToBase64String(bytearray);
-							um.product_image = base64;
+					um.product_image = bytearray;
 							var extsn = Path.GetExtension(profileData.Path);
 							var str = extsn.Split('.');
 							extsn = str[1];
@@ -1204,8 +1238,8 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 						else
 							um.is_facebook_sharable = 0;
 
-						ret = WebService.AddProduct(um);
-
+						//ret = WebService.AddProduct(um);
+				 WebService.AddProductUsingMultipart(um);
 
 					}).ContinueWith(async
 					t =>

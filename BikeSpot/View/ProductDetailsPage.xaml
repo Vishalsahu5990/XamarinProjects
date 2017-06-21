@@ -4,7 +4,8 @@
 	xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
 	 xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot"
 	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-	x:Class="BikeSpot.ProductDetailsPage"
+xmlns:ctrl="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+x:Class="BikeSpot.ProductDetailsPage"
 	BackgroundColor="#E1E2E4">
 	<StackLayout VerticalOptions="FillAndExpand" Spacing="0">
 
@@ -19,30 +20,47 @@
 			<Image Source="search" Margin="10,10,10,15"/>
 
 		</StackLayout>
-
+		<ScrollView>
+			<StackLayout>
 		<RelativeLayout HeightRequest="200"
 				x:Name="imgTopBackgroud"
 			VerticalOptions="Start">
 
                            
- <ffimageloading:CachedImage 
-				x:Name="imgProduct"
-                            Aspect="AspectFill"
-                            DownsampleUseDipUnits="false" 
-                            LoadingPlaceholder="bg_blue"
-                            ErrorPlaceholder="bg_blue"
-	RelativeLayout.WidthConstraint=
+ <ctrl:CarouselViewControl 
+						Orientation="Horizontal" 
+						InterPageSpacing="0"
+						Position="0" 
+						ItemsSource="{Binding imageList}"
+						VerticalOptions="FillAndExpand"
+						HorizontalOptions="FillAndExpand" 
+				x:Name="Carousel"
+				HeightRequest="200"
+				BackgroundColor="Transparent" 
+    RelativeLayout.WidthConstraint=
               "{ConstraintExpression Type=RelativeToParent, Property=Width}"
                RelativeLayout.HeightConstraint=
-                  "{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
+                  "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+                  <ctrl:CarouselViewControl.ItemTemplate>
+        <DataTemplate>
+				 <ffimageloading:CachedImage 
+				            Source="{Binding image}"
+						Aspect="AspectFill"
+							DownsampleUseDipUnits="true"/>		
+           
+        </DataTemplate>
+    </ctrl:CarouselViewControl.ItemTemplate>  
+</ctrl:CarouselViewControl>
 
-               <Grid RelativeLayout.WidthConstraint=
-              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
-            RelativeLayout.HeightConstraint=
-              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+               <Grid 
+				HeightRequest="80"
+				WidthRequest="200" 
+				 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.55}"
+				 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.0}"
+               >
 				
 
-				<Grid HorizontalOptions="FillAndExpand" Padding="10" >
+
 <!--top back bar start-->
 				<StackLayout VerticalOptions="Start"  Orientation="Horizontal"  Padding="10">
 						<StackLayout VerticalOptions="FillAndExpand" Padding="10" >
@@ -97,14 +115,15 @@
 								</StackLayout>
 					</StackLayout>
 					</StackLayout>
-				</Grid>
+				
 			</Grid>
           
           </RelativeLayout>
 	<StackLayout>
-	<ScrollView>
-	<StackLayout>
 
+	<StackLayout>
+				
+					
 					<StackLayout BackgroundColor="White">
 	<StackLayout Margin="10" BackgroundColor="Gray" HorizontalOptions="FillAndExpand">
 
@@ -226,11 +245,13 @@
 					</StackLayout>
 					
 				</StackLayout>
-			</ScrollView>
+			
 		</StackLayout>
+			</StackLayout>
+			</ScrollView>
 		<!-- static Footer	-->
 		<RelativeLayout>
-			<StackLayout x:Name="_slFooter" HeightRequest="80" Orientation="Horizontal" BackgroundColor="#1AB4AD" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
+			<StackLayout x:Name="_slFooter" HeightRequest="60" Orientation="Horizontal" BackgroundColor="#1AB4AD" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
 				<Grid HorizontalOptions="FillAndExpand" ColumnSpacing="1" RowSpacing="0">
 					<StackLayout Grid.Column="0" BackgroundColor="#20D1C8">
 						<StackLayout  VerticalOptions="CenterAndExpand">
@@ -241,7 +262,7 @@
 						</StackLayout>
 
 						<StackLayout.GestureRecognizers>
-        <TapGestureRecognizer Tapped="comment_Tapped"/>  
+        <TapGestureRecognizer Tapped="comment_Tapped"/>   
     </StackLayout.GestureRecognizers>
 					</StackLayout>
 					<StackLayout Grid.Column="1" VerticalOptions="FillAndExpand" Padding="0" Margin="0">

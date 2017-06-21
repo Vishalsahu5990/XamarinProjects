@@ -86,7 +86,19 @@
 						HorizontalOptions="FillAndExpand"
 						x:Name="btnLogin"/>
 					</StackLayout>
-					<StackLayout HorizontalOptions="Center" Spacing="0">
+					<!--<StackLayout HorizontalOptions="Center" Spacing="0">
+					<Label Text="FORGOT PASSWORD?"
+							TextColor="White"
+						HorizontalOptions="Center"
+						x:Name="lblForgotPassword"/>
+						<BoxView HeightRequest="1.2"
+						BackgroundColor="White"/>
+						<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="forgotPasswordTapped"/> 
+    </StackLayout.GestureRecognizers> 
+					</StackLayout>-->
+					<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+		<StackLayout Padding="10" HorizontalOptions="CenterAndExpand" Spacing="0">
 					<Label Text="FORGOT PASSWORD?"
 							TextColor="White"
 						HorizontalOptions="Center"
@@ -97,7 +109,16 @@
         <TapGestureRecognizer Tapped="forgotPasswordTapped"/> 
     </StackLayout.GestureRecognizers> 
 					</StackLayout>
+			<StackLayout Padding="10" Spacing="0">
+			<Label Text="Skip" TextColor="White"/>
+				<BoxView HeightRequest="1.2"
+						BackgroundColor="White"/>
+				<StackLayout.GestureRecognizers>
+        <TapGestureRecognizer Tapped="skipTapped"/> 
+    </StackLayout.GestureRecognizers> 
+			</StackLayout>
 
+		</StackLayout>
 					<Image Aspect="AspectFill" Source="fb.png" Margin="10">
 					<Image.GestureRecognizers>
         <TapGestureRecognizer Tapped="fbTapped"/> 

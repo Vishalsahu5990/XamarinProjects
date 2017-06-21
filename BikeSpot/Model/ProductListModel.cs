@@ -45,6 +45,9 @@ namespace BikeSpot
 		public bool isTopEnable { get; set; }
 		public bool isEnableListview { get; set; } 
 		public string borderColor { get; set; }
-		public List<Product> list { get; set; }    
+		public List<Product> list { get; set; }
+        public List<Model> imageList { get; set; }
 	}
-}
+	public  class Model { public string image { get; set; } }
+	}
+
