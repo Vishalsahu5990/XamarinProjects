@@ -73,20 +73,20 @@ namespace BikeSpot
 
 		void Flowlistview1_FlowItemAppearing(object sender, ItemVisibilityEventArgs e)
 		{
-			//var currentIdx = _items.Items.IndexOf(e.Item as Product);
+			var currentIdx = _items.Items.IndexOf(e.Item as Product);
 
-			//if (currentIdx > _lastItemAppearedIdx)
-			//{
-			//	System.Diagnostics.Debug.WriteLine("Up");
+			if (currentIdx > _lastItemAppearedIdx)
+			{
+				System.Diagnostics.Debug.WriteLine("Up");
 
-			//}
-			//else
-			//{
-			//	System.Diagnostics.Debug.WriteLine("Down");
-			//	_items.Items[0].isEnableListview = true;
-			//}
+			}
+			else
+			{
+				System.Diagnostics.Debug.WriteLine("Down");
+				_items.Items[0].isEnableListview = true;
+			}
 
-			//_lastItemAppearedIdx = _items.Items.IndexOf(e.Item as Product);
+			_lastItemAppearedIdx = _items.Items.IndexOf(e.Item as Product);
 		}
 
 		async void Handle_FlowItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)

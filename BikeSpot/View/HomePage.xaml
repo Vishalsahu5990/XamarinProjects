@@ -73,7 +73,7 @@
 							FlowColumnMinWidth="{Binding columnWidth}"
 						    HeightRequest="{Binding listviewHeight}"
 							FlowItemTapped="Handle_FlowItemTapped"
-							>
+							IsEnabled="{Binding isEnableListview}">
 							<flv:FlowListView.FlowColumnTemplate>
 								<DataTemplate>  
 									<Grid Padding="3" ColumnSpacing="0">   

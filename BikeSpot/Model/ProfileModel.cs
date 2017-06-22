@@ -20,6 +20,8 @@ namespace BikeSpot
 			public object website_url { get; set; }
 			public string total_reviews { get; set; }
 			public string ratings { get; set; }
+			public string saved_users { get; set; }
+
 		}
 	}
 }
