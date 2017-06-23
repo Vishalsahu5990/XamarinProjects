@@ -368,7 +368,7 @@
 			</ListView.ItemTemplate>
 		</ListView>
 						
-						<StackLayout Orientation="Horizontal" Padding="10" IsVisible="true">
+						<StackLayout Orientation="Horizontal" Padding="10" IsVisible="false">
 							<Image Source="checkbox-unchecked"
 						HorizontalOptions="Start"
 							Margin="10"
@@ -637,7 +637,7 @@
 		
 			
 						
-						<StackLayout Orientation="Horizontal" Padding="10" IsVisible="true">
+						<StackLayout Orientation="Horizontal" Padding="10" IsVisible="false">
 							<Image Source="checkbox-unchecked"
 						HorizontalOptions="Start"
 							Margin="10"

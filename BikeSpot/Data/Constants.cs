@@ -7,6 +7,8 @@ namespace BikeSpot
 		public static readonly string strAutoCompleteGoogleApi = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
 		public static readonly string apiKey = "AIzaSyBMdRUum6X87xG5QD3m0s-w8QVjDYSVFqE";
 		public static readonly string ImageUrl = "http://risensys.com/bikespot/uploads/";
+public static readonly string ProfilePicUrl = "http://risensys.com/bikespot/uploads/profile-pic/";
+public static readonly string GetChatMessagesUrl = "http://risensys.com/bikespot/webservice/get_chat_messages";
 
 
 public static string AppName = "Bikespot";

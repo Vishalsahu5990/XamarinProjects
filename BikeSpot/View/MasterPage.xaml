@@ -16,7 +16,7 @@
 			VerticalOptions="Start"> 
   <Image 
 				x:Name="imgTimeline"
-		        Source="profile.jpg"
+		        Source="green_background.png"
 				Aspect="AspectFill"
 	RelativeLayout.WidthConstraint=
               "{ConstraintExpression Type=RelativeToParent, Property=Width}"
@@ -39,7 +39,7 @@
 							<Image Source="settings-icon-6" VerticalOptions="Start"
 
 							/>
-							</StackLayout>
+							</StackLayout> 
 
 								
 					<StackLayout Margin="10" VerticalOptions="Start">
@@ -131,9 +131,9 @@
 				VerticalOptions="Center"
 				TextColor="Gray"
 				FontSize="Medium"
-							Margin="15,0,0,0"/>
+							Margin="15,0,0,0"/> 
 			</StackLayout>
-			<StackLayout x:Name="slUpgrades" Orientation="Horizontal" Spacing="15">
+			<StackLayout x:Name="slUpgrades" IsVisible="false" Orientation="Horizontal" Spacing="15">
 		<Image Source="navigationwheel"/>
 				<Label Text="Upgrades"
 				VerticalOptions="Center"

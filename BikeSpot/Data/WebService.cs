@@ -10,6 +10,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Plugin.SecureStorage;
+
 namespace BikeSpot
 {
 	public static class WebService
@@ -101,6 +103,10 @@ namespace BikeSpot
 						{
 							_loginModel = jObj["data"].ToObject<LoginModel>();
 
+						}
+						else
+						{
+							StaticMethods.ShowToast(um.responseMessage);
 						}
 
 					}
@@ -806,6 +812,113 @@ namespace BikeSpot
 			}
 			return profileData;
 		}
+		public static ProfileModel UpdateProfilePic(string pic, string ext)
+		{
+			ProfileModel profileData = new ProfileModel();
+
+			try
+			{
+				string url = Constants.BaseUrl;
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", "update_user_pic");
+				j.Add("pic", pic);
+				j.Add("ext", ext);
+				j.Add("user_id", StaticDataModel.userId);
+
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
+				{
+
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						if (jObj["result"].ToString() == "success")
+						{
+
+							var profilepic = jObj["profile-pic"].ToString();
+							if (!string.IsNullOrEmpty(profilepic))
+								CrossSecureStorage.Current.SetValue("profilePic", profilepic);
+						}
+						else
+						{
+							StaticMethods.ShowToast("Problem on uploading profile picture.");
+						}
+
+
+					}
+
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return profileData;
+		}
+		public static string UpdateProfile(ProfileModel.Datum model)
+		{
+			string ret = string.Empty;
+
+			try
+			{
+				string url = Constants.BaseUrl;
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", "edit_profile");
+				j.Add("user_id", StaticDataModel.userId);
+				j.Add("email", model.email);
+				j.Add("name", model.name);
+				j.Add("contact_number", model.mobile_no);
+				j.Add("website_url", model.website_url);
+
+
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
+				{
+
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						if (jObj["result"].ToString() == "success")
+						{
+
+
+							ret = "success";
+						}
+
+
+
+					}
+
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return ret;
+		}
 		public static CategoryModel GetCategoriesProductbyUserId(int user_id)
 		{
 			CategoryModel categoryModel = new CategoryModel();
@@ -977,7 +1090,7 @@ namespace BikeSpot
 			}
 			return sa;
 		}
-		public static string SaveUnsaveUser(string savedUserId,string method_name)
+		public static string SaveUnsaveUser(string savedUserId, string method_name)
 		{
 			SavedUserModel sa = new SavedUserModel();
 			string ret = string.Empty;
@@ -1021,5 +1134,106 @@ namespace BikeSpot
 			}
 			return ret;
 		}
-	}
+		public static MyProfileDataModel.Data GetProductByUserId()
+		{
+			MyProfileDataModel.Data _product = new MyProfileDataModel.Data();
+
+			try
+			{
+				string url = Constants.BaseUrl;
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", "get_product_by_user_id");
+				j.Add("user_id", StaticDataModel.userId);
+
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
+				{
+
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						var data = jObj["data"];
+
+						if (jObj["result"].ToString() == "success")
+						{
+
+							_product.sell = data["sell"].ToObject<List<MyProfileDataModel.Sell>>();
+							_product.rent = data["rent"].ToObject<List<MyProfileDataModel.Rent>>();
+
+
+						}
+
+
+					}
+
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return _product;
+		}
+		public static SavedUserModel GetSavedUser()
+		{
+			SavedUserModel savedUserModel = new SavedUserModel();
+
+			try
+			{
+				string url = Constants.BaseUrl;
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", "get_saved_user_by_user_id");
+				j.Add("user_id", StaticDataModel.userId);
+
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
+				{
+
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						var data = jObj["data"];
+
+						if (jObj["result"].ToString() == "success")
+						{
+
+							savedUserModel.data = data.ToObject<List<SavedUserModel.Data>>();
+
+
+						}
+
+
+					}
+
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return savedUserModel; 
+		}
+	} 
 }

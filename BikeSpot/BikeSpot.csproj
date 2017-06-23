@@ -117,6 +117,12 @@
     <EmbeddedResource Include="Popups\LoginReminderPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\UpdateProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SavedUsersPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -250,6 +256,13 @@
       <DependentUpon>LoginReminderPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\SavedUserModel.cs" />
+    <Compile Include="View\UpdateProfilePage.xaml.cs">
+      <DependentUpon>UpdateProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MyProfileDataModel.cs" />
+    <Compile Include="View\SavedUsersPage.xaml.cs">
+      <DependentUpon>SavedUsersPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NGraphics">

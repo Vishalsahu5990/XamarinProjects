@@ -704,6 +704,15 @@
     <BundleResource Include="Resources\h%40.png" />
     <BundleResource Include="Resources\h%402x.png" />
     <BundleResource Include="Resources\h%403x.png" />
+    <BundleResource Include="Resources\pencil%403x.png" />
+    <BundleResource Include="Resources\pencil%402x.png" />
+    <BundleResource Include="Resources\pencil.png" />
+    <BundleResource Include="Resources\camera1%403x.png" />
+    <BundleResource Include="Resources\camera1%402x.png" />
+    <BundleResource Include="Resources\camera1.png" />
+    <BundleResource Include="Resources\green_background%403x.png" />
+    <BundleResource Include="Resources\green_background.png" />
+    <BundleResource Include="Resources\green_background%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="elcimagepicker">

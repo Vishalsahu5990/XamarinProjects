@@ -38,6 +38,8 @@ namespace BikeSpot
 					_masterpage._lblUserName.Text = "(User Name)";
 				
 				_masterpage._lblEmail.Text = model.email;
+
+				_masterpage._imgProfile.Source = Constants.ProfilePicUrl + model.profile_pic;
 			}
 
 			//To access navigation menu on a button click

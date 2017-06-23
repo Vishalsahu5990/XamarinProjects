@@ -23,5 +23,21 @@ public string created_date { get; set; }
 public object lastsignedinon { get; set; }
 public object resetsenton { get; set; }
 public object resetpasscode { get; set; }
+
+
+public string contact_number { get; set; }
+public string website_url { get; set; }
+
+public string is_retailer { get; set; }
+public string is_social_signup { get; set; }
+
+
+public string device_type { get; set; }
+public string device_id { get; set; }
+public string subscribed_on { get; set; }
+public string expire_on { get; set; }
+public string owner_phone_number { get; set; }
+public string owner_email { get; set; }
+public string help_url { get; set; }
 	}
 }

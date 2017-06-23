@@ -297,15 +297,7 @@ namespace BikeSpot
 						if (model != null)
 						{
 							StaticDataModel.userId = Convert.ToInt32(model.user_id);
-							CrossSecureStorage.Current.SetValue("userId", model.user_id.ToString());
-							if (model.profile_pic != null)
-								CrossSecureStorage.Current.SetValue("profilePic", model.profile_pic.ToString());
-
-							if (model.name != null)
-								CrossSecureStorage.Current.SetValue("email", model.name.ToString());
-
-							if (model.email != null)
-								CrossSecureStorage.Current.SetValue("lastName", model.email.ToString());
+							StaticMethods.SaveLocalData(model);
 
 							StaticMethods.ShowToast("Login successfully");
 					        StaticDataModel.IsAnonymousLogin = false;
@@ -347,16 +339,7 @@ namespace BikeSpot
 						if (model != null)
 						{
 							StaticDataModel.userId = Convert.ToInt32(model.user_id);
-							CrossSecureStorage.Current.SetValue("userId", model.user_id.ToString());
-							if (model.profile_pic != null)
-								CrossSecureStorage.Current.SetValue("profilePic", model.profile_pic.ToString());
-
-							if (model.name != null)
-								CrossSecureStorage.Current.SetValue("email", model.name.ToString());
-
-							if (model.email != null)
-								CrossSecureStorage.Current.SetValue("lastName", model.email.ToString());
-
+							StaticMethods.SaveLocalData(model);
 							StaticMethods.ShowToast("Login successfully");
 					StaticDataModel.IsAnonymousLogin = false;
 							App.Current.MainPage = new NavigationPage(new MainPage());
