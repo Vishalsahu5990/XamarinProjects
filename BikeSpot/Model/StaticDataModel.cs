@@ -9,5 +9,6 @@ namespace BikeSpot
 		public static double Lattitude = 0;
 		public static double Longitude = 0;
 		public static bool IsAnonymousLogin = false;
+		public static string DeviceToken = string.Empty;
 	}
 }

@@ -8,5 +8,6 @@ namespace BikeSpot
 	{
 		void ShareContent(string client_id,string url);
 		Task<List<ImageSource>> MultiImagePicker();
+		void Call(string contact_no);
 	}
 }

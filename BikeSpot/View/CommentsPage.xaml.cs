@@ -10,7 +10,7 @@ namespace BikeSpot
 	{
 		CommentItemList items = null;
 		Product _product = null;
-		List<CommentModel> _listComments = null;
+		CommentModel _listComments = null;
 		public CommentsPage(Product product)
 		{
 			_product = product;
@@ -40,8 +40,10 @@ namespace BikeSpot
 		try
 			{
 				flowlistview.FlowColumnMinWidth = App.ScreenWidth;
-			flowlistview.HeightRequest = App.ScreenHeight / 2.6;
+			flowlistview.HeightRequest = App.ScreenHeight / 3;
 			imgProduct.HeightRequest = App.ScreenHeight / 4;
+
+				imgProduct.Source=	_product.product_image;
 
 				if (StaticMethods.IsIpad())
 				{
@@ -71,11 +73,11 @@ namespace BikeSpot
 		{
 			if (!string.IsNullOrEmpty(txtMsg.Text))
 			{
-				items.Items.Add(new CommentModel 
-				{
-					name="test",
-					description=txtMsg.Text
-				});
+				//items.Items.Add(new CommentModel 
+				//{
+				//	name="test",
+				//	description=txtMsg.Text
+				//});
 var lastItem = flowlistview.FlowItemsSource.OfType<object>().Last();
 Device.BeginInvokeOnMainThread(() => flowlistview.ScrollTo(lastItem, ScrollToPosition.End, false));
 				AddComment();				
@@ -118,13 +120,23 @@ Device.BeginInvokeOnMainThread(() => flowlistview.ScrollTo(lastItem, ScrollToPos
 					{
 						if (_listComments != null)
 						{
+					
 							Device.BeginInvokeOnMainThread(async () =>
 							{
+						lblProductTitle.Text = _listComments.comments[0].product_name;
 								items = new CommentItemList(_listComments);
 
 								for (int i = 0; i < items.Items.Count; i++)
 								{
-									items.Items[i].product_image = Constants.ImageUrl + items.Items[i].product_image;
+									if (items.Items[i].comment_reply.Count > 0)
+									{
+										for (int j = 0; j < items.Items[i].comment_reply.Count; i++)
+										{
+											items.Items[i].comment_reply[j].profile_pic = Constants.ProfilePicUrl + items.Items[i].comment_reply[j].profile_pic;
+								}
+							}
+		
+											items.Items[i].product_image = Constants.ImageUrl + items.Items[i].product_image;
 								}
 								flowlistview.FlowItemsSource = items.Items;
 								if (items.Items.Count > 0)

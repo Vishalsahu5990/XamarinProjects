@@ -33,9 +33,9 @@ namespace BikeSpot
 				var model=StaticMethods. GetLocalSavedData();
 				StaticDataModel.userId = model.user_id;
 
-				MainPage = new NavigationPage(new BikeSpot.MainPage());
+				MainPage = new  BikeSpot.MainPage();
 			}
-			//MainPage = new NavigationPage(new BikeSpot.FilterPage());  
+			//MainPage = new NavigationPage(new BikeSpot.Settings());  
 		}
 
 		protected override void OnStart()

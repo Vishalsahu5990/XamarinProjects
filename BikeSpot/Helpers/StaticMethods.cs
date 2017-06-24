@@ -124,7 +124,7 @@ namespace BikeSpot
 			try
 			{
 				CrossSecureStorage.Current.SetValue("userId", login_model.user_id.ToString());
-				CrossSecureStorage.Current.SetValue("profilePic", login_model.profile_pic.ToString());
+				CrossSecureStorage.Current.SetValue("profile_Pic", login_model.profile_pic.ToString());
 				CrossSecureStorage.Current.SetValue("name", login_model.name.ToString());
 				CrossSecureStorage.Current.SetValue("email", login_model.email.ToString());
 

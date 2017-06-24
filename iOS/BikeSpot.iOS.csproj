@@ -79,7 +79,7 @@
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
-    <CodesignProvision>Bikespot_ClientsAccount3</CodesignProvision>
+    <CodesignProvision>Bikespot_ClientsAccount4</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -713,6 +713,9 @@
     <BundleResource Include="Resources\green_background%403x.png" />
     <BundleResource Include="Resources\green_background.png" />
     <BundleResource Include="Resources\green_background%402x.png" />
+    <BundleResource Include="Resources\reply%403x.png" />
+    <BundleResource Include="Resources\reply%402x.png" />
+    <BundleResource Include="Resources\reply.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="elcimagepicker">

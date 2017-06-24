@@ -7,9 +7,9 @@ namespace BikeSpot
 public class CommentItemList : INotifyPropertyChanged
 {
 	public event PropertyChangedEventHandler PropertyChanged;
-		public ObservableCollection<CommentModel> _items;
+		public ObservableCollection<CommentModel.Comment> _items;
 
-	public ObservableCollection<CommentModel> Items
+		public ObservableCollection<CommentModel.Comment> Items
 	{
 		get { return _items; }
 		set { _items = value; OnPropertyChanged("Items"); }
@@ -22,10 +22,11 @@ public class CommentItemList : INotifyPropertyChanged
 		PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 	}
 
-public CommentItemList(List<CommentModel> itemList)
+public CommentItemList(CommentModel itemList)
 	{
-		Items = new ObservableCollection<CommentModel>();
-		foreach (CommentModel itm in itemList)
+			var list = itemList.comments;
+			Items = new ObservableCollection<CommentModel.Comment>();
+			foreach (CommentModel.Comment itm in list)
 		{
 			Items.Add(itm);
 		}

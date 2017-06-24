@@ -50,8 +50,8 @@
 							HeightRequest="80" 
 			WidthRequest="80"
 			VerticalOptions="Start"
-									BorderColor="Transparent" 
-									BorderThickness="3"
+									BorderColor="White" 
+									BorderThickness="1"
 					HorizontalOptions="Start"
 						Margin="0,0,0,0"/> 
 

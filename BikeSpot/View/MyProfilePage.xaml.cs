@@ -10,7 +10,7 @@ namespace BikeSpot
 	{
 		ProfileModel _profileModel = null;
 		MyProfileDataModel.Data _profileDataModel = null;
-double itemWidth = 140;
+		double itemWidth = 140;
 		public MyProfilePage()
 		{
 			InitializeComponent();
@@ -26,9 +26,12 @@ double itemWidth = 140;
 			btnRent.Clicked += BtnRent_Clicked;
 			btnProfile.Clicked += BtnProfile_Clicked;
 
-			btnOfferingRent.Clicked+= BtnOfferingRent_Clicked;
-			btnOfferingSell.Clicked+= BtnOfferingSell_Clicked;
-			btnOfferingSold.Clicked+= BtnOfferingSold_Clicked;
+			btnOfferingRent.Clicked += BtnOfferingRent_Clicked;
+			btnOfferingSell.Clicked += BtnOfferingSell_Clicked;
+			btnOfferingSold.Clicked += BtnOfferingSold_Clicked;
+
+			btnBuyingRent.Clicked += BtnBuyingRent_Clicked;
+			btnBuyingSell.Clicked += BtnBuyingSell_Clicked;
 			GetProfile().Wait();
 
 
@@ -48,6 +51,7 @@ double itemWidth = 140;
 			{
 				_rlTopBackgroud.HeightRequest = App.ScreenHeight / 2.4;
 				flowlistview.FlowColumnMinWidth = App.ScreenWidth / 2 - 50;
+				flowlistviewBuying.FlowColumnMinWidth = App.ScreenWidth / 2 - 50;
 
 				imgProfile.HeightRequest = App.ScreenWidth / 5;
 				imgProfile.WidthRequest = App.ScreenWidth / 5;
@@ -65,15 +69,41 @@ double itemWidth = 140;
 			}
 		}
 
+		void BtnBuyingRent_Clicked(object sender, EventArgs e)
+		{
+
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				btnBuyingRent.BackgroundColor = Color.FromHex("#1FD7D7");
+				btnBuyingSell.BackgroundColor = Color.FromHex("#D5D6D7");
+				GetBuyingProfileData("rent").Wait();
+
+			});
+
+		}
+
+		void BtnBuyingSell_Clicked(object sender, EventArgs e)
+		{
+
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				btnBuyingRent.BackgroundColor = Color.FromHex("#D5D6D7");
+				btnBuyingSell.BackgroundColor = Color.FromHex("#1FD7D7");
+				GetBuyingProfileData("sold").Wait();
+
+			});
+
+		}
+
 		void BtnOfferingRent_Clicked(object sender, EventArgs e)
 		{
 			Device.BeginInvokeOnMainThread(() =>
 		{
-				btnOfferingRent.BackgroundColor =Color.FromHex("#1FD7D7");
-				btnOfferingSell.BackgroundColor =Color.FromHex("#D5D6D7");
-				btnOfferingSold.BackgroundColor =Color.FromHex("#D5D6D7");
-				GetProfileData("rent").Wait();
-			
+			btnOfferingRent.BackgroundColor = Color.FromHex("#1FD7D7");
+			btnOfferingSell.BackgroundColor = Color.FromHex("#D5D6D7");
+			btnOfferingSold.BackgroundColor = Color.FromHex("#D5D6D7");
+			GetProfileData("rent").Wait();
+
 		});
 		}
 
@@ -81,11 +111,11 @@ double itemWidth = 140;
 		{
 			Device.BeginInvokeOnMainThread(() =>
 		{
-				btnOfferingRent.BackgroundColor =Color.FromHex("#D5D6D7");
-				btnOfferingSell.BackgroundColor =Color.FromHex("#1FD7D7");
-				btnOfferingSold.BackgroundColor =Color.FromHex("#D5D6D7");
-				GetProfileData("sell").Wait();
-			
+			btnOfferingRent.BackgroundColor = Color.FromHex("#D5D6D7");
+			btnOfferingSell.BackgroundColor = Color.FromHex("#1FD7D7");
+			btnOfferingSold.BackgroundColor = Color.FromHex("#D5D6D7");
+			GetProfileData("sell").Wait();
+
 		});
 		}
 
@@ -93,11 +123,11 @@ double itemWidth = 140;
 		{
 			Device.BeginInvokeOnMainThread(() =>
 		{
-					btnOfferingRent.BackgroundColor =Color.FromHex("#D5D6D7");
-				btnOfferingSell.BackgroundColor =Color.FromHex("#D5D6D7");
-				btnOfferingSold.BackgroundColor =Color.FromHex("#1FD7D7");
-				GetProfileData("sold").Wait();
-			
+			btnOfferingRent.BackgroundColor = Color.FromHex("#D5D6D7");
+			btnOfferingSell.BackgroundColor = Color.FromHex("#D5D6D7");
+			btnOfferingSold.BackgroundColor = Color.FromHex("#1FD7D7");
+			GetProfileData("sold").Wait();
+
 		});
 		}
 
@@ -109,8 +139,8 @@ double itemWidth = 140;
 		{
 			await Navigation.PushModalAsync(new UpdateProfilePage());
 		}
-async void savedusersTapped(object sender, EventArgs e)
-{
+		async void savedusersTapped(object sender, EventArgs e)
+		{
 			await Navigation.PushModalAsync(new SavedUsersPage());
 		}
 		async void BtnSell_Clicked(object sender, EventArgs e)
@@ -123,10 +153,10 @@ async void savedusersTapped(object sender, EventArgs e)
 			_slProfile.IsVisible = false;
 			Device.BeginInvokeOnMainThread(() =>
 			{
-				btnOfferingRent.BackgroundColor =Color.FromHex("#1FD7D7");
-				btnOfferingSell.BackgroundColor =Color.FromHex("#D5D6D7");
-				btnOfferingSold.BackgroundColor =Color.FromHex("#D5D6D7");
-					GetProfileData("rent").Wait();
+				btnOfferingRent.BackgroundColor = Color.FromHex("#1FD7D7");
+				btnOfferingSell.BackgroundColor = Color.FromHex("#D5D6D7");
+				btnOfferingSold.BackgroundColor = Color.FromHex("#D5D6D7");
+				GetProfileData("rent").Wait();
 
 			});
 		}
@@ -139,7 +169,15 @@ async void savedusersTapped(object sender, EventArgs e)
 			slSell.IsVisible = false;
 			slRent.IsVisible = true;
 			_slProfile.IsVisible = false;
-		
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				btnBuyingRent.BackgroundColor = Color.FromHex("#1FD7D7");
+				btnBuyingSell.BackgroundColor = Color.FromHex("#D5D6D7");
+				GetBuyingProfileData("rent").Wait();
+
+			});
+
+
 		}
 		void BtnProfile_Clicked(object sender, EventArgs e)
 		{
@@ -160,11 +198,11 @@ async void savedusersTapped(object sender, EventArgs e)
 			_slProfile.IsVisible = false;
 			Device.BeginInvokeOnMainThread(() =>
 		{
-				btnOfferingRent.BackgroundColor =Color.FromHex("#1FD7D7");
-				btnOfferingSell.BackgroundColor =Color.FromHex("#D5D6D7");
-				btnOfferingSold.BackgroundColor =Color.FromHex("#D5D6D7");
-				GetProfileData("rent").Wait();
-			
+			btnOfferingRent.BackgroundColor = Color.FromHex("#1FD7D7");
+			btnOfferingSell.BackgroundColor = Color.FromHex("#D5D6D7");
+			btnOfferingSold.BackgroundColor = Color.FromHex("#D5D6D7");
+			GetProfileData("rent").Wait();
+
 		});
 		}
 		public void RentTapped(object sender, EventArgs e)
@@ -174,6 +212,14 @@ async void savedusersTapped(object sender, EventArgs e)
 			slSell.IsVisible = false;
 			slRent.IsVisible = true;
 			_slProfile.IsVisible = false;
+			Device.BeginInvokeOnMainThread(() =>
+			{
+				btnBuyingRent.BackgroundColor = Color.FromHex("#1FD7D7");
+				btnBuyingSell.BackgroundColor = Color.FromHex("#D5D6D7");
+				GetBuyingProfileData("rent").Wait();
+
+			});
+
 
 		}
 		public void ProfileTapped(object sender, EventArgs e)
@@ -209,7 +255,7 @@ async void savedusersTapped(object sender, EventArgs e)
 
 								lblMail.Text = _profileModel.data[0].email;
 								lblContactNo.Text = _profileModel.data[0].contact_number;
-								lblSavedUser.Text = _profileModel.data[0].saved_users+" Saved Users";
+								lblSavedUser.Text = _profileModel.data[0].saved_users + " Saved Users";
 
 								if (!string.IsNullOrEmpty(_profileModel.data[0].profile_pic))
 									imgProfile.Source = Constants.ProfilePicUrl + _profileModel.data[0].profile_pic;
@@ -245,7 +291,7 @@ async void savedusersTapped(object sender, EventArgs e)
 			Task.Factory.StartNew(
 
 					() =>
-					{ 
+					{
 
 						_profileDataModel = WebService.GetProductByUserId();
 
@@ -279,7 +325,7 @@ async void savedusersTapped(object sender, EventArgs e)
 										}
 									}
 									flowlistview.FlowItemsSource = _listProduct;
-							lblItemsCount.Text = _listProduct.Count+" ITEMS";
+									lblItemsCount.Text = _listProduct.Count + " ITEMS";
 								}
 								else if (filterType == "sell")
 								{
@@ -300,15 +346,16 @@ async void savedusersTapped(object sender, EventArgs e)
 										{
 											_listProduct[i].product_image = Constants.ImageUrl + array[0];
 										}
-								flowlistview.FlowItemsSource = _listProduct;
-								lblItemsCount.Text = _listProduct.Count+" ITEMS";
+										
 									}
+							flowlistview.FlowItemsSource = _listProduct;
+										lblItemsCount.Text = _listProduct.Count + " ITEMS";
 
 								}
-						else if (filterType == "sold")
+								else if (filterType == "sold")
 								{
-									var _listProduct = _profileDataModel.sell;
-									for (int i = 0; i<_listProduct.Count; i++)
+									var _listProduct = _profileDataModel.sold;
+									for (int i = 0; i < _listProduct.Count; i++)
 									{
 
 
@@ -324,22 +371,105 @@ async void savedusersTapped(object sender, EventArgs e)
 										{
 											_listProduct[i].product_image = Constants.ImageUrl + array[0];
 										}
-								flowlistview.FlowItemsSource = _listProduct;
-								lblItemsCount.Text = _listProduct.Count+" ITEMS";
+										
 									}
+							flowlistview.FlowItemsSource = _listProduct;
+										lblItemsCount.Text = _listProduct.Count + " ITEMS";
 
 								}
-								
+
 							});
 
-						
-						
+
+
 
 
 
 							StaticMethods.DismissLoader();
 						}
-					                                       }, TaskScheduler.FromCurrentSynchronizationContext()
+					}, TaskScheduler.FromCurrentSynchronizationContext()
+				);
+		}
+		private async Task GetBuyingProfileData(string filterType)
+		{
+			string imgData = string.Empty;
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(
+
+					() =>
+					{
+
+						_profileDataModel = WebService.GetBuyingProductByUserId();
+
+
+					}).ContinueWith(async
+					t =>
+					{
+						if (_profileDataModel != null)
+						{
+							Device.BeginInvokeOnMainThread(async () =>
+							{
+
+								if (filterType == "rent")
+								{
+									var _listProduct = _profileDataModel.rent;
+									for (int i = 0; i < _listProduct.Count; i++)
+									{
+
+
+										if (!string.IsNullOrEmpty(_listProduct[i].product_image))
+										{
+											imgData = _listProduct[i].product_image;
+
+										}
+										_listProduct[i].width = itemWidth - 15;
+										_listProduct[i].imageHeight = itemWidth - 50;
+										var array = imgData.Split(',');
+										if (array != null)
+										{
+											_listProduct[i].product_image = Constants.ImageUrl + array[0];
+										}
+									}
+									flowlistviewBuying.FlowItemsSource = _listProduct;
+									lblBuyingItemsCount.Text = _listProduct.Count + " ITEMS";
+								}
+
+								else if (filterType == "sold")
+								{
+									var _listProduct = _profileDataModel.sold;
+									for (int i = 0; i < _listProduct.Count; i++)
+									{
+
+
+										if (!string.IsNullOrEmpty(_listProduct[i].product_image))
+										{
+											imgData = _listProduct[i].product_image;
+
+										}
+										_listProduct[i].width = itemWidth - 15;
+										_listProduct[i].imageHeight = itemWidth - 50;
+										var array = imgData.Split(',');
+										if (array != null)
+										{
+											_listProduct[i].product_image = Constants.ImageUrl + array[0];
+										}
+										
+									}
+						            	flowlistviewBuying.FlowItemsSource = _listProduct;
+										lblBuyingItemsCount.Text = _listProduct.Count + " ITEMS";
+
+								}
+
+							});
+
+
+
+
+
+
+							StaticMethods.DismissLoader();
+						}
+					}, TaskScheduler.FromCurrentSynchronizationContext()
 				);
 		}
 	}

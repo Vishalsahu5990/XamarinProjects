@@ -21,6 +21,20 @@ namespace BikeSpot.iOS
 		{
 
 		}
+		public void Call(string contact_no)
+		{ 
+		try
+			{
+var topController = UIApplication.SharedApplication.KeyWindow.RootViewController;
+
+				UIApplication.SharedApplication.OpenUrl(NSUrl.FromString("tel://" + contact_no));
+
+			}
+			catch (Exception ex)
+			{
+
+			}
+		}
 		async public static void Share(ImageSource imageSource)
 		{
 			try

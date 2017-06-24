@@ -417,11 +417,115 @@
 
 		<!--start  Buying tab		-->
 		<StackLayout x:Name="slRent" IsVisible="false"> 
-		<ScrollView>
-		<StackLayout> 
+		<StackLayout Padding="10"> 
+		<Label Text="0 ITEMS" x:Name="lblBuyingItemsCount"/>
+				<StackLayout  HeightRequest="100">
 
-				</StackLayout> 
-			</ScrollView>
+				<Grid Padding="10" >
+			
+					<Button
+				Grid.Column="0"
+						Text="Rent"
+						TextColor="Black"
+					BackgroundColor="#D5D6D7"
+					BorderRadius="0"
+					HeightRequest="40"
+						x:Name="btnBuyingRent"/>
+					<Button
+				Grid.Column="1"
+						Text="Sell"
+						TextColor="Black"
+					BackgroundColor="#D5D6D7"
+					BorderRadius="0"
+					HeightRequest="40"
+						x:Name="btnBuyingSell"/>
+					
+					</Grid>
+					</StackLayout>
+				<StackLayout Margin="0,15,0,0" >
+				<flv:FlowListView BackgroundColor="Transparent" Margin="0,10,0,0" SeparatorVisibility="None" HasUnevenRows="true" FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowLastTappedItem="{Binding LastTappedItem}" 
+						x:Name="flowlistviewBuying" >
+							<flv:FlowListView.FlowColumnTemplate>
+								<DataTemplate>
+									<Grid Padding="10">
+										<Grid.RowDefinitions>
+											<RowDefinition Height="*"/>
+										</Grid.RowDefinitions>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<StackLayout Orientation="Horizontal" 
+												HorizontalOptions="FillAndExpand"
+												>
+
+										<RelativeLayout
+										HeightRequest="{Binding width}"
+										WidthRequest="{Binding width}"
+										Padding="0" 
+										>   	 
+			<Frame Padding="3"
+				HasShadow="false"
+				OutlineColor="#D7D7D7"
+				HeightRequest="{Binding width}"
+				WidthRequest="{Binding width}"
+				HorizontalOptions="CenterAndExpand" 
+				RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+               RelativeLayout.HeightConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+					<Grid RelativeLayout.WidthConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint=
+              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+				<StackLayout VerticalOptions="FillAndExpand">  
+							<ffimageloading:CachedImage 
+							Aspect="AspectFill"  
+							DownsampleUseDipUnits="false"   
+							LoadingPlaceholder="profile.jpg"   
+							ErrorPlaceholder="profile.jpg"   
+							Source="{Binding product_image}" 
+							HorizontalOptions="FillAndExpand" 
+							HeightRequest="{Binding imageHeight}"
+							WidthRequest="{Binding columnWidth}"/> 
+					
+					<StackLayout Orientation="Horizontal" >
+					<Grid HorizontalOptions="FillAndExpand">
+					<Label Text="{Binding product_name}"    
+					FontSize="Small"
+					LineBreakMode="TailTruncation"
+					WidthRequest="60"
+					Grid.Column="0"
+					HorizontalTextAlignment="Start"/>
+
+													<Label Text="{Binding price}"
+								HorizontalTextAlignment="End"
+					FontSize="Small"
+					LineBreakMode="TailTruncation" 
+								WidthRequest="60"
+						Grid.Column="1"/>
+					</Grid> 
+					</StackLayout>
+
+				</StackLayout>
+
+					<StackLayout Orientation="Horizontal" VerticalOptions="Start">
+							<Image Source="top1" 
+			HorizontalOptions="EndAndExpand"
+			IsVisible="false"
+																					/> 
+						</StackLayout>								
+													</Grid>
+				</Frame>
+
+				</RelativeLayout>
+											
+					</StackLayout>	
+									</Grid>
+								</DataTemplate>
+							</flv:FlowListView.FlowColumnTemplate>
+						</flv:FlowListView>
+				</StackLayout>
+				</StackLayout>  
 				</StackLayout>  
 				<!--end  Buying tab		-->
 		

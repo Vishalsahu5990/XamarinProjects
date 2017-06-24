@@ -7,35 +7,37 @@
 	    xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
 	x:Class="BikeSpot.CommentsPage">
 
-	<ScrollView>
+
 
 	<StackLayout HorizontalOptions="FillAndExpand">
 	<StackLayout VerticalOptions="FillAndExpand" Spacing="0">
-		<StackLayout Orientation="Horizontal" HeightRequest="70" BackgroundColor="#20D1C8">
+		<StackLayout Orientation="Horizontal" HeightRequest="60" BackgroundColor="#20D1C8">
 			<StackLayout VerticalOptions="FillAndExpand">
-				<Image Source="back" VerticalOptions="CenterAndExpand" Margin="25" />
+				<Image Source="back" VerticalOptions="CenterAndExpand" Margin="25,15,0,0" />
 				<StackLayout.GestureRecognizers>
 					<TapGestureRecognizer Tapped="menu_Tapped" />
 				</StackLayout.GestureRecognizers>
 			</StackLayout>
-			<Label Margin="0,2,0,0" Text="Comments" 
+			<Label Margin="0,25,0,0" Text="Comments" 
 			TextColor="White"
 			FontAttributes="Bold"
 			VerticalOptions="Center"/> 				
 		</StackLayout>
 		<Image x:Name="imgProduct"
-					Source="profile.jpg" 
+					Source="green_background.png" 
 				HeightRequest="200"
 				Aspect="AspectFill">
 		</Image>
-			<Label Text="Product Title" FontSize="25" HorizontalOptions="Center"
+			<Label Text="Product Title" FontSize="25"
+					HorizontalOptions="Center"
+					x:Name="lblProductTitle"
 			HorizontalTextAlignment="Center"
-			Margin="5,20,5,5"/>
+			Margin="5,10,5,5"/>
 			<Label Text="Today"
 			TextColor="Gray"
 			FontAttributes="Bold"
-			FontSize="20"
-			Margin="10"/>
+			FontSize="Large"
+			Margin="10"/> 
 			</StackLayout>
 		<StackLayout>
 <flv:FlowListView 
@@ -43,33 +45,74 @@
                 VerticalOptions="FillAndExpand"
                 RowHeight="100"
 				FlowColumnMinWidth="320" 
-               SeparatorColor="Gray"
+               SeparatorColor="#F7F7F7"
 					Margin="0,0,0,0"
-				HeightRequest="200">
+				HeightRequest="200"
+				ItemsSource="{Binding _listComments}">
                 
 
 			<flv:FlowListView.FlowColumnTemplate>
 				<DataTemplate>
 					
-            <StackLayout Padding="8" Orientation="Horizontal" VerticalOptions="Start">
+            <StackLayout Padding="8" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
 		<controls:CircleImage
 							x:Name="imgProfile"
 							Aspect="AspectFill"
-							Source="{Binding product_image}"
+							Source="dummyprofile.png"
 							HeightRequest="50"
 			WidthRequest="50"
 
 									BorderColor="White"
 									BorderThickness="2"
-					
+					VerticalOptions="Center"
 						/>
-		<StackLayout Padding="5">
+		<StackLayout Padding="5" HorizontalOptions="FillAndExpand">
 			<Label Text="{Binding name}"
 			FontSize="18"/>
-			<Label Text="{Binding description}"
+									<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+										<Label Text="{Binding description}"
 			FontSize="14"
 			LineBreakMode="TailTruncation"
 			/>
+										<Button Image="reply.png" 
+										HorizontalOptions="EndAndExpand" 
+										Margin="0,0,15,0"
+										/>
+									</StackLayout>
+									<StackLayout x:Name="slListview">
+									<local:CustomListview 
+											x:Name="SupplyLevels"
+											HasUnevenRows="true"
+										ItemsSource="{Binding comment_reply}">
+  <local:CustomListview.ItemTemplate>
+    <DataTemplate>
+    <ViewCell>
+    <controls:CircleImage
+							x:Name="imgProfile"
+							Aspect="AspectFill"
+							Source="dummyprofile.png"
+							HeightRequest="50"
+			WidthRequest="50"
+
+									BorderColor="White"
+									BorderThickness="2"
+					VerticalOptions="Center"
+						/>
+		<StackLayout Padding="5" HorizontalOptions="FillAndExpand">
+			<Label Text="{Binding name}"
+			FontSize="18"/>
+										<Label Text="{Binding reply}"
+			FontSize="14"
+			LineBreakMode="TailTruncation"
+			/>
+										
+									</StackLayout>
+													</ViewCell>
+    </DataTemplate>
+  </local:CustomListview.ItemTemplate>
+</local:CustomListview>
+									</StackLayout>
+			
 		</StackLayout> 
 		</StackLayout>
 				</DataTemplate>
@@ -79,7 +122,7 @@
 	</StackLayout>
 		<!-- static Footer	-->
 		<RelativeLayout Margin="5" VerticalOptions="Start">
-			<StackLayout x:Name="_slFooter" HeightRequest="60" Orientation="Horizontal" BackgroundColor="#1AB4AD" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
+			<StackLayout x:Name="_slFooter" HeightRequest="60" Orientation="Horizontal" BackgroundColor="#F7F7F7" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
 				
 				<Frame Margin="5" HorizontalOptions="FillAndExpand" Padding="0" HasShadow="false" VerticalOptions="Center">
 						<local:MyEntry 
@@ -108,5 +151,5 @@
 			</StackLayout>
 		</RelativeLayout>
 		</StackLayout>
-		</ScrollView>
+
 </ContentPage>

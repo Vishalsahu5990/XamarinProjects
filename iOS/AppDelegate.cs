@@ -27,23 +27,21 @@ namespace BikeSpot.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 
-			//MapServices.ProvideAPIKey("AIzaSyCYs_pRMo3IVDGcVpNw96KBOWtf5Wd6mLQ");
-			// set default useragent
 			NSDictionary dictionary = NSDictionary.FromObjectAndKey(NSObject.FromObject(userAgent), NSObject.FromObject("UserAgent"));
 			NSUserDefaults.StandardUserDefaults.RegisterDefaults(dictionary);
 
 
 			PlacesClient.ProvideApiKey("AIzaSyBLtYoWAUYZ8IrkcmpxS84HXyWyi2XdxrI");
-            MapServices.ProvideAPIKey("AIzaSyBLtYoWAUYZ8IrkcmpxS84HXyWyi2XdxrI");
+			MapServices.ProvideAPIKey("AIzaSyBLtYoWAUYZ8IrkcmpxS84HXyWyi2XdxrI");
 
 			global::Xamarin.Forms.Forms.Init();
-			CarouselViewRenderer.Init ();
+			CarouselViewRenderer.Init();
 
 			MobileAds.Configure("ca-app-pub-7176870068365595~1750148263");
 			FormsMaps.Init();
 			ImageCircleRenderer.Init();
 			FFImageLoading.Forms.Touch.CachedImageRenderer.Init();
-
+			PrepareRemoteNotification();
 			App.ScreenHeight = (double)UIScreen.MainScreen.Bounds.Height;
 			App.ScreenWidth = (double)UIScreen.MainScreen.Bounds.Width;
 
@@ -56,6 +54,81 @@ namespace BikeSpot.iOS
 			LoadApplication(new App());
 
 			return base.FinishedLaunching(app, options);
+		}
+		private void PrepareRemoteNotification()
+		{
+			try
+			{
+				if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+				{
+					var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
+						UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
+						new NSSet());
+
+					UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
+					UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+					UIApplication.SharedApplication.RegisterForRemoteNotifications();
+				}
+				else
+				{
+					UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
+					UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
+
+				}
+			}
+			catch (Exception ex)
+			{
+
+			}
+		}
+		public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
+		{
+			//if (CrossPushNotification.Current is IPushNotificationHandler)
+			//{
+			//	((IPushNotificationHandler)CrossPushNotification.Current).OnErrorReceived(error);
+			//}
+		}
+
+		public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary options, Action<UIBackgroundFetchResult> completionHandler)
+		{
+			//if (CrossPushNotification.Current is IPushNotificationHandler)
+			//{
+			//	//processNotification(options, false);
+			//	((IPushNotificationHandler)CrossPushNotification.Current).OnMessageReceived(options);
+			//}
+			//StaticDataModel.IsfromNotificationTap = true;
+			//processNotification(options, false)
+		}
+		public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+		{
+			var DeviceToken = deviceToken.Description;
+			if (!string.IsNullOrWhiteSpace(DeviceToken))
+			{
+				DeviceToken = DeviceToken.Trim('<').Trim('>');
+				DeviceToken = DeviceToken.Replace(" ", "");
+				StaticDataModel.DeviceToken = DeviceToken.ToString();
+				Console.WriteLine(DeviceToken);
+			}
+
+			//if (CrossPushNotification.Current is IPushNotificationHandler)
+			//{
+			//	((IPushNotificationHandler)CrossPushNotification.Current).OnRegisteredSuccess(deviceToken);
+			//}
+		}
+
+		public override void DidRegisterUserNotificationSettings(UIApplication application, UIUserNotificationSettings notificationSettings)
+		{
+			//application.RegisterForRemoteNotifications();
+		}
+
+
+
+		public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
+		{
+			//if (CrossPushNotification.Current is IPushNotificationHandler)
+			//{
+			//	((IPushNotificationHandler)CrossPushNotification.Current).OnMessageReceived(userInfo);
+			//}
 		}
 
 	}

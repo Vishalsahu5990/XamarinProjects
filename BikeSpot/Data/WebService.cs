@@ -83,8 +83,10 @@ namespace BikeSpot
 				j.Add("method", "login");
 				j.Add("email", usermodel.name);
 				j.Add("password", usermodel.password);
+				j.Add("device_type","ios");
+				j.Add("deviceId", StaticDataModel.DeviceToken); 
 
-				var json = JsonConvert.SerializeObject(j);
+				var json = JsonConvert.SerializeObject(j); 
 				var content = new StringContent(json, Encoding.UTF8, "application/json");
 				response = client.PostAsync(url, content).Result;
 				if (response.IsSuccessStatusCode)
@@ -622,9 +624,9 @@ namespace BikeSpot
 			}
 			return _product;
 		}
-		public static List<CommentModel> GetCommentsList(int product_id)
+		public static CommentModel GetCommentsList(int product_id)
 		{
-			List<CommentModel> _comments = new List<CommentModel>();
+			CommentModel _comments = new CommentModel();
 			UserModel um = new UserModel();
 
 			try
@@ -650,8 +652,8 @@ namespace BikeSpot
 						if (jObj["result"].ToString() == "success")
 						{
 
-							_comments = data.ToObject<List<CommentModel>>();
-
+							_comments.comments = data.ToObject<List<CommentModel.Comment>>();
+							//_comments.co = data["comment_reply"].ToObject<List<CommentModel.CommentReply>>();
 
 
 						}
@@ -1163,7 +1165,7 @@ namespace BikeSpot
 
 							_product.sell = data["sell"].ToObject<List<MyProfileDataModel.Sell>>();
 							_product.rent = data["rent"].ToObject<List<MyProfileDataModel.Rent>>();
-
+							_product.sold = data["sold"].ToObject<List<MyProfileDataModel.Sold>>();
 
 						}
 
@@ -1184,6 +1186,57 @@ namespace BikeSpot
 
 			}
 			return _product;
+		}
+public static MyProfileDataModel.Data GetBuyingProductByUserId()
+{
+	MyProfileDataModel.Data _product = new MyProfileDataModel.Data();
+
+	try
+	{
+		string url = Constants.BaseUrl;
+		HttpResponseMessage response = null;
+		JObject j = new JObject();
+		j.Add("method", "user_buyingdetails");
+		j.Add("user_id", StaticDataModel.userId);
+
+		var json = JsonConvert.SerializeObject(j);
+		var content = new StringContent(json, Encoding.UTF8, "application/json");
+		response = client.PostAsync(url, content).Result;
+		if (response.IsSuccessStatusCode)
+		{
+
+			using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+			{
+				var contents = reader.ReadToEnd();
+				JObject jObj = JObject.Parse(contents);
+				var data = jObj["data"];
+
+				if (jObj["result"].ToString() == "success")
+				{
+
+					
+					_product.rent = data["rent"].ToObject<List<MyProfileDataModel.Rent>>();
+					_product.sold = data["sold"].ToObject<List<MyProfileDataModel.Sold>>();
+
+				}
+
+
+			}
+
+		}
+
+	}
+	catch (Exception ex)
+	{
+
+		Debug.WriteLine(@"ERROR {0}", ex.Message);
+	}
+	finally
+	{
+		StaticMethods.DismissLoader();
+
+	}
+	return _product;
 		}
 		public static SavedUserModel GetSavedUser()
 		{
