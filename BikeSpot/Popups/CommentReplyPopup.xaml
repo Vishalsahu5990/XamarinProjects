@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+	xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot"
+	x:Class="BikeSpot.CommentReplyPopup">
+	<StackLayout
+			Orientation="Vertical" 
+			VerticalOptions="CenterAndExpand"
+		HorizontalOptions="FillAndExpand"
+			BackgroundColor="#F7F7F7"
+		Margin="16,0,16,0"
+		HeightRequest="60">
+
+		<StackLayout x:Name="_slFooter" HeightRequest="60" Orientation="Horizontal" BackgroundColor="#F7F7F7" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
+				
+				<Frame Margin="5" HorizontalOptions="FillAndExpand" Padding="0" HasShadow="false" VerticalOptions="Center">
+						<local:MyEntry 
+				    x:Name="txtMsg"
+					Placeholder="Write here..."
+					HorizontalOptions="FillAndExpand"
+					HeightRequest="40"
+					FontSize="14"
+				Margin="05,0,0,0"
+			VerticalOptions="Center"
+			Keyboard="Chat"
+					BackgroundColor="White"/>
+					</Frame>
+
+			<Button
+				x:Name="btnSend"
+			TextColor="Black"  
+			Image="send-btn"
+			WidthRequest="40"
+			HeightRequest="40" 
+			BorderRadius="20"
+			VerticalOptions="Center"
+			Clicked="submit_Clicked"
+					Margin="5"/>
+
+			</StackLayout>
+
+	</StackLayout>
+</pages:PopupPage>

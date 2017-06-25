@@ -27,7 +27,11 @@ namespace BikeSpot
 			public string product_name { get; set; }
 			public string product_description { get; set; }
 			public string product_image { get; set; }
+            public bool isVisibleListView { get; set; }
+			public bool isProductAdminn { get; set; }
+			public double ListViewHeight { get; set; }
 			public List<CommentReply> comment_reply { get; set; }
+
 		}
 		public class CommentReply
 		{
@@ -38,6 +42,8 @@ namespace BikeSpot
 			public string created_at { get; set; }
 			public string name { get; set; }
 			public string profile_pic { get; set; }
+
+
 		}
 	}
 }

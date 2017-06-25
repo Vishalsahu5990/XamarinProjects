@@ -121,7 +121,14 @@ async void comment_Tapped(object sender, System.EventArgs e)
 		{
 			try
 			{
-				await Navigation.PushAsync(new Payment_A_Page());
+				if (_productModel.user_id == StaticDataModel.userId.ToString())
+				{
+					await DisplayAlert("Alert!", "Its your post.", "OK");
+				}
+				else
+				{
+					await Navigation.PushAsync(new Payment_A_Page(_productModel));
+				}
 
 			}
 			catch (Exception ex)

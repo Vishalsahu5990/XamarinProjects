@@ -18,16 +18,23 @@
 					<TapGestureRecognizer Tapped="menu_Tapped" />
 				</StackLayout.GestureRecognizers>
 			</StackLayout>
-			<Label Margin="0,25,0,0" Text="Comments" 
+			<Label Margin="0,15,0,0" Text="Comments" 
 			TextColor="White"
 			FontAttributes="Bold"
 			VerticalOptions="Center"/> 				
 		</StackLayout>
-		<Image x:Name="imgProduct"
+			<StackLayout>
+		<ScrollView>
+					<StackLayout>
+			<StackLayout>
+							
+		<ffimageloading:CachedImage x:Name="imgProduct"
 					Source="green_background.png" 
 				HeightRequest="200"
-				Aspect="AspectFill">
-		</Image>
+				Aspect="AspectFill"
+				LoadingPlaceholder="green_background.png"
+				ErrorPlaceholder="green_background.png"/>
+		
 			<Label Text="Product Title" FontSize="25"
 					HorizontalOptions="Center"
 					x:Name="lblProductTitle"
@@ -39,22 +46,23 @@
 			FontSize="Large"
 			Margin="10"/> 
 			</StackLayout>
+		
 		<StackLayout>
-<flv:FlowListView 
+<flv:FlowListView  
 			    x:Name="flowlistview"
                 VerticalOptions="FillAndExpand"
-                RowHeight="100"
-				FlowColumnMinWidth="320" 
-               SeparatorColor="#F7F7F7"
-					Margin="0,0,0,0"
+               FlowColumnMinWidth="320" 
+               SeparatorColor="Silver"
+				Margin="0,0,0,0"
 				HeightRequest="200"
-				ItemsSource="{Binding _listComments}">
+				ItemsSource="{Binding _listComments}"
+				HasUnevenRows="true">
                 
 
 			<flv:FlowListView.FlowColumnTemplate>
 				<DataTemplate>
-					
-            <StackLayout Padding="8" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+				<StackLayout>
+            <StackLayout BackgroundColor="Transparent" Padding="8" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
 		<controls:CircleImage
 							x:Name="imgProfile"
 							Aspect="AspectFill"
@@ -64,7 +72,7 @@
 
 									BorderColor="White"
 									BorderThickness="2"
-					VerticalOptions="Center"
+					VerticalOptions="Start"
 						/>
 		<StackLayout Padding="5" HorizontalOptions="FillAndExpand">
 			<Label Text="{Binding name}"
@@ -77,16 +85,26 @@
 										<Button Image="reply.png" 
 										HorizontalOptions="EndAndExpand" 
 										Margin="0,0,15,0"
-										/>
+										VerticalOptions="Start"
+										IsVisible="{Binding isProductAdminn}" 
+										Clicked="Reply_Clicked"
+										CommandParameter="{Binding comment_id}"/> 
 									</StackLayout>
-									<StackLayout x:Name="slListview">
+									<StackLayout x:Name="slListview"> 
 									<local:CustomListview 
+										VerticalOptions="Start"
 											x:Name="SupplyLevels"
-											HasUnevenRows="true"
-										ItemsSource="{Binding comment_reply}">
+											BackgroundColor="Transparent"
+										ItemsSource="{Binding comment_reply}"
+										HasUnevenRows="true"
+										HeightRequest="{Binding ListViewHeight}"
+										IsVisible="{Binding isVisibleListView}">
   <local:CustomListview.ItemTemplate>
     <DataTemplate>
     <ViewCell>
+	<StackLayout  Orientation="Horizontal"
+			HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+		
     <controls:CircleImage
 							x:Name="imgProfile"
 							Aspect="AspectFill"
@@ -100,13 +118,14 @@
 						/>
 		<StackLayout Padding="5" HorizontalOptions="FillAndExpand">
 			<Label Text="{Binding name}"
-			FontSize="18"/>
+			FontSize="18"/> 
 										<Label Text="{Binding reply}"
 			FontSize="14"
 			LineBreakMode="TailTruncation"
 			/>
 										
 									</StackLayout>
+														</StackLayout>
 													</ViewCell>
     </DataTemplate>
   </local:CustomListview.ItemTemplate>
@@ -115,13 +134,16 @@
 			
 		</StackLayout> 
 		</StackLayout>
+							<BoxView HeightRequest="1" BackgroundColor="Silver" HorizontalOptions="FillAndExpand"/>
+							</StackLayout>	
 				</DataTemplate>
 			</flv:FlowListView.FlowColumnTemplate> 
 		
 		</flv:FlowListView>
 	</StackLayout>
+			
 		<!-- static Footer	-->
-		<RelativeLayout Margin="5" VerticalOptions="Start">
+		<RelativeLayout Margin="0" VerticalOptions="Start">
 			<StackLayout x:Name="_slFooter" HeightRequest="60" Orientation="Horizontal" BackgroundColor="#F7F7F7" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
 				
 				<Frame Margin="5" HorizontalOptions="FillAndExpand" Padding="0" HasShadow="false" VerticalOptions="Center">
@@ -145,11 +167,15 @@
 			HeightRequest="40" 
 			BorderRadius="20"
 			VerticalOptions="Center"
-			Clicked="submit_Clicked"
+
 					Margin="5"/>
 
 			</StackLayout>
 		</RelativeLayout>
+			</StackLayout>
+			</ScrollView>
+			</StackLayout>
+			</StackLayout>
 		</StackLayout>
 
 </ContentPage>

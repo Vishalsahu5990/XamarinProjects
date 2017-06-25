@@ -123,6 +123,9 @@
     <EmbeddedResource Include="View\SavedUsersPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Popups\CommentReplyPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -263,6 +266,10 @@
     <Compile Include="View\SavedUsersPage.xaml.cs">
       <DependentUpon>SavedUsersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Popups\CommentReplyPopup.xaml.cs">
+      <DependentUpon>CommentReplyPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ChatUserModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NGraphics">

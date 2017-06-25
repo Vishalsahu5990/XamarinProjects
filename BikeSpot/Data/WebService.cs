@@ -83,10 +83,10 @@ namespace BikeSpot
 				j.Add("method", "login");
 				j.Add("email", usermodel.name);
 				j.Add("password", usermodel.password);
-				j.Add("device_type","ios");
-				j.Add("deviceId", StaticDataModel.DeviceToken); 
+				j.Add("device_type", "ios");
+				j.Add("deviceId", StaticDataModel.DeviceToken);
 
-				var json = JsonConvert.SerializeObject(j); 
+				var json = JsonConvert.SerializeObject(j);
 				var content = new StringContent(json, Encoding.UTF8, "application/json");
 				response = client.PostAsync(url, content).Result;
 				if (response.IsSuccessStatusCode)
@@ -721,6 +721,51 @@ namespace BikeSpot
 			}
 			return ret;
 		}
+		public static string CommentReply(string msg, int comment_id)
+		{
+			string ret = string.Empty;
+			try
+			{
+				string url = Constants.BaseUrl;
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", "comment_reply");
+				j.Add("reply_by", StaticDataModel.userId);
+				j.Add("comment_id", comment_id);
+				j.Add("reply", msg);
+
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
+				{
+
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						var data = jObj["comments"];
+
+						ret = jObj["result"].ToString();
+
+
+					}
+
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return ret;
+		}
 		public static string SubmitReviews(int rating, string review)
 		{
 			string ret = string.Empty;
@@ -1187,56 +1232,56 @@ namespace BikeSpot
 			}
 			return _product;
 		}
-public static MyProfileDataModel.Data GetBuyingProductByUserId()
-{
-	MyProfileDataModel.Data _product = new MyProfileDataModel.Data();
-
-	try
-	{
-		string url = Constants.BaseUrl;
-		HttpResponseMessage response = null;
-		JObject j = new JObject();
-		j.Add("method", "user_buyingdetails");
-		j.Add("user_id", StaticDataModel.userId);
-
-		var json = JsonConvert.SerializeObject(j);
-		var content = new StringContent(json, Encoding.UTF8, "application/json");
-		response = client.PostAsync(url, content).Result;
-		if (response.IsSuccessStatusCode)
+		public static MyProfileDataModel.Data GetBuyingProductByUserId()
 		{
+			MyProfileDataModel.Data _product = new MyProfileDataModel.Data();
 
-			using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+			try
 			{
-				var contents = reader.ReadToEnd();
-				JObject jObj = JObject.Parse(contents);
-				var data = jObj["data"];
+				string url = Constants.BaseUrl;
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", "user_buyingdetails");
+				j.Add("user_id", StaticDataModel.userId);
 
-				if (jObj["result"].ToString() == "success")
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
 				{
 
-					
-					_product.rent = data["rent"].ToObject<List<MyProfileDataModel.Rent>>();
-					_product.sold = data["sold"].ToObject<List<MyProfileDataModel.Sold>>();
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						var data = jObj["data"];
+
+						if (jObj["result"].ToString() == "success")
+						{
+
+
+							_product.rent = data["rent"].ToObject<List<MyProfileDataModel.Rent>>();
+							_product.sold = data["sold"].ToObject<List<MyProfileDataModel.Sold>>();
+
+						}
+
+
+					}
 
 				}
 
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
 
 			}
-
-		}
-
-	}
-	catch (Exception ex)
-	{
-
-		Debug.WriteLine(@"ERROR {0}", ex.Message);
-	}
-	finally
-	{
-		StaticMethods.DismissLoader();
-
-	}
-	return _product;
+			return _product;
 		}
 		public static SavedUserModel GetSavedUser()
 		{
@@ -1286,7 +1331,55 @@ public static MyProfileDataModel.Data GetBuyingProductByUserId()
 				StaticMethods.DismissLoader();
 
 			}
-			return savedUserModel; 
+			return savedUserModel;
 		}
-	} 
+		public static ChatUserModel GetChatUserList()
+		{
+			ChatUserModel chatModel = new ChatUserModel();
+
+			try
+			{
+				string url = Constants.BaseUrl;
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", "get_chat_user_list");
+				j.Add("sender_user_id", StaticDataModel.userId);
+
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
+				{ 
+
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						if (jObj["result"].ToString() == "success")
+						{
+							var data = jObj["data"];
+							chatModel.data = data.ToObject<List<ChatUserModel.Datum>>();
+
+
+						}
+
+
+					}
+
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return chatModel;
+		}
+	}
 }

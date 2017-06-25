@@ -121,7 +121,7 @@ tapGestureRecognizerProfile.Tapped += (s, e) =>
 			{
 				// handle the tap
 				IsPresented = false;
-				Detail = new NavigationPage((Page)Activator.CreateInstance (typeof(ChatPage)));
+				Detail = new NavigationPage((Page)Activator.CreateInstance (typeof(ChatUsersPage)));
 			};
 			_masterpage._slMessages.GestureRecognizers.Add(tapGestureRecognizer4);
 

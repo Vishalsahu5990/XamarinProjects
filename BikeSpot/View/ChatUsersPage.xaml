@@ -7,9 +7,24 @@
 	
 	x:Class="BikeSpot.ChatUsersPage"
 >
+	<StackLayout HorizontalOptions="FillAndExpand">
+	<StackLayout VerticalOptions="FillAndExpand" Spacing="0">
+	<StackLayout Orientation="Horizontal" HeightRequest="60" BackgroundColor="#20D1C8">
+			<StackLayout VerticalOptions="FillAndExpand">
+				<Image Source="back" VerticalOptions="CenterAndExpand" Margin="25,15,0,0" />
+				<StackLayout.GestureRecognizers>
+					<TapGestureRecognizer Tapped="back_Tapped" />
+				</StackLayout.GestureRecognizers>
+			</StackLayout>
+			<Label Margin="0,15,0,0" Text="Chat Users" 
+			TextColor="White"
+			FontAttributes="Bold"
+			VerticalOptions="Center"/>  				
+		</StackLayout>
+			<StackLayout>
 <StackLayout>
 <flv:FlowListView 
-			    x:Name="listview"
+			    x:Name="flowlistview"
                 VerticalOptions="FillAndExpand"
                 RowHeight="100"
 				FlowColumnMinWidth="320" 
@@ -22,12 +37,12 @@
 				<DataTemplate>
 					
             <StackLayout Padding="8" Orientation="Horizontal" VerticalOptions="Start">
-		<Image Source="add_free"
+		<Image Source="dummyprofile.png"
 		HeightRequest="50"/>
 		<StackLayout Padding="5">
-			<Label Text="Kristi Jackes"
+			<Label Text="{Binding name}"
 			/>
-			<Label Text="Hi, How are you?"
+			<Label Text="{Binding message}"
 			FontSize="12"
 			TextColor="#A3A4A6"/>
 		</StackLayout>
@@ -41,5 +56,7 @@
 		
 		</flv:FlowListView>
 	</StackLayout>
-
+	</StackLayout>
+				</StackLayout>
+			</StackLayout>
 </ContentPage>

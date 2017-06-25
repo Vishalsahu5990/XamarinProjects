@@ -79,11 +79,13 @@ namespace BikeSpot
 			{
 				System.Diagnostics.Debug.WriteLine("Up");
 
+				for (int i = 0; i<_items.Items.Count;i++)
+					_items.Items[i].isEnableListview = true;
 			}
 			else
 			{
 				System.Diagnostics.Debug.WriteLine("Down");
-				_items.Items[0].isEnableListview = true;
+
 			}
 
 			_lastItemAppearedIdx = _items.Items.IndexOf(e.Item as Product);
