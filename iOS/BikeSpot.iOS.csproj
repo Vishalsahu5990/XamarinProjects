@@ -723,6 +723,15 @@
     <BundleResource Include="Resources\incoming_arrow%403x.png" />
     <BundleResource Include="Resources\incoming_arrow%402x.png" />
     <BundleResource Include="Resources\incoming_arrow.png" />
+    <BundleResource Include="Resources\arrowright%403x.png" />
+    <BundleResource Include="Resources\arrowright%402x.png" />
+    <BundleResource Include="Resources\arrowright.png" />
+    <BundleResource Include="Resources\arrowleft%403x.png" />
+    <BundleResource Include="Resources\arrowleft%402x.png" />
+    <BundleResource Include="Resources\arrowleft.png" />
+    <BundleResource Include="Resources\make_offer_icon%403x.png" />
+    <BundleResource Include="Resources\make_offer_icon.png" />
+    <BundleResource Include="Resources\make_offer_icon%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="elcimagepicker">

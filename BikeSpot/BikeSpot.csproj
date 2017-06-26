@@ -192,7 +192,6 @@
       <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\WebService.cs" />
-    <Compile Include="Data\Constants.cs" />
     <Compile Include="Helpers\StaticMethods.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
@@ -273,6 +272,8 @@
     <Compile Include="Model\SaveChatUserModel.cs" />
     <Compile Include="ViewModel\ChatItemList.cs" />
     <Compile Include="CustomRenderer\ChatEntry.cs" />
+    <Compile Include="Model\OfferStatusModel.cs" />
+    <Compile Include="Helpers\Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NGraphics">

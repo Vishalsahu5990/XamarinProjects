@@ -91,13 +91,7 @@ namespace BikeSpot.iOS
 
 		public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary options, Action<UIBackgroundFetchResult> completionHandler)
 		{
-			//if (CrossPushNotification.Current is IPushNotificationHandler)
-			//{
-			//	//processNotification(options, false);
-			//	((IPushNotificationHandler)CrossPushNotification.Current).OnMessageReceived(options);
-			//}
-			//StaticDataModel.IsfromNotificationTap = true;
-			//processNotification(options, false)
+			MessagingCenter.Send<object,string>(this, "NotificationRecieved", "");
 		}
 		public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
 		{
@@ -110,25 +104,19 @@ namespace BikeSpot.iOS
 				Console.WriteLine(DeviceToken);
 			}
 
-			//if (CrossPushNotification.Current is IPushNotificationHandler)
-			//{
-			//	((IPushNotificationHandler)CrossPushNotification.Current).OnRegisteredSuccess(deviceToken);
-			//}
+
 		}
 
 		public override void DidRegisterUserNotificationSettings(UIApplication application, UIUserNotificationSettings notificationSettings)
 		{
-			//application.RegisterForRemoteNotifications();
+			
 		}
 
 
 
 		public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
 		{
-			//if (CrossPushNotification.Current is IPushNotificationHandler)
-			//{
-			//	((IPushNotificationHandler)CrossPushNotification.Current).OnMessageReceived(userInfo);
-			//}
+			
 		}
 
 	}

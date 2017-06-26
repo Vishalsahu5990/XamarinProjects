@@ -3,36 +3,41 @@ namespace BikeSpot
 {
 	public static class Constants
 	{
-		public static readonly string BaseUrl = "http://risensys.com/bikespot/webservice/api.php";
-		public static readonly string strAutoCompleteGoogleApi = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
-		public static readonly string apiKey = "AIzaSyBMdRUum6X87xG5QD3m0s-w8QVjDYSVFqE";
-		public static readonly string ImageUrl = "http://risensys.com/bikespot/uploads/";
-public static readonly string ProfilePicUrl = "http://risensys.com/bikespot/uploads/profile-pic/";
-public static readonly string GetChatMessagesUrl = "http://risensys.com/bikespot/webservice/get_chat_messages/";
+    public static readonly string BaseUrl = "http://server.bikespot.at/bikespot/webservice/api.php";
+    public static readonly string AddProductUrl = "http://server.bikespot.at/bikespot/webservice/add_product";
+    public static readonly string ImageUrl = "http://server.bikespot.at/bikespot/uploads/";
+    public static readonly string ProfilePicUrl = "http://server.bikespot.at/bikespot/uploads/profile-pic/";
+    public static readonly string GetChatMessagesUrl = "http://server.bikespot.at/bikespot/webservice/get_chat_messages";
+	public static readonly string strAutoCompleteGoogleApi = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
+	public static readonly string apiKey = "AIzaSyBMdRUum6X87xG5QD3m0s-w8QVjDYSVFqE";
+		
+		//public static readonly string BaseUrl = "http://risensys.com/bikespot/webservice/api.php";
+		//public static readonly string strAutoCompleteGoogleApi = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=";
+		//public static readonly string apiKey = "AIzaSyBMdRUum6X87xG5QD3m0s-w8QVjDYSVFqE";
+		//public static readonly string ImageUrl = "http://risensys.com/bikespot/uploads/";
+		//public static readonly string ProfilePicUrl = "http://risensys.com/bikespot/uploads/profile-pic/";
+		//public static readonly string GetChatMessagesUrl = "http://risensys.com/bikespot/webservice/get_chat_messages/";
 
 
-public static string AppName = "Bikespot";
-// AWS
-// Sign up for an AWS account at https://aws.amazon.com/
-// Configure at https://console.aws.amazon.com/cognito/
-public static string CognitoIdentityPoolId = "<insert_id_here>";
+		public static string AppName = "Bikespot";
 
-// OAuth
-// For Google login, configure at https://console.developers.google.com/
-public static string ClientId = "250769118368-16no493rn1t2peo8af9k6bfi9vo3lejr.apps.googleusercontent.com";
-public static string ClientIdFacebook = "1605074516186884";
+		public static string CognitoIdentityPoolId = "<insert_id_here>";
 
-public static string ClientSecret = "a20VJFFvLZK6Hj7v5bQFaKf0";
 
-// These values do not need changing 
-public static string Scope = "https://www.googleapis.com/auth/userinfo.email";
-public static string AuthorizeUrl = "https://accounts.google.com/o/oauth2/auth";
-public static string AccessTokenUrl = "https://accounts.google.com/o/oauth2/token";
-public static string UserInfoUrl = "https://www.googleapis.com/oauth2/v4/token";
+		public static string ClientId = "250769118368-16no493rn1t2peo8af9k6bfi9vo3lejr.apps.googleusercontent.com";
+		public static string ClientIdFacebook = "1605074516186884";
 
-// Set this property to the location the user will be redirected too after successfully authenticating
-public static string RedirectUrl = "https://www.youtube.com/c/HoussemDellai/";
-public static string Html_TypeofBike = @"<html>
+		public static string ClientSecret = "a20VJFFvLZK6Hj7v5bQFaKf0";
+
+		// These values do not need changing 
+		public static string Scope = "https://www.googleapis.com/auth/userinfo.email";
+		public static string AuthorizeUrl = "https://accounts.google.com/o/oauth2/auth";
+		public static string AccessTokenUrl = "https://accounts.google.com/o/oauth2/token";
+		public static string UserInfoUrl = "https://www.googleapis.com/oauth2/v4/token";
+
+		// Set this property to the location the user will be redirected too after successfully authenticating
+		public static string RedirectUrl = "https://www.youtube.com/c/HoussemDellai/";
+		public static string Html_TypeofBike = @"<html>
 <head>
 	<title>BIKE ENGLISH</title>
 	 <meta name=""viewport"" content=""width=device-width, initial-scale=1"">
@@ -113,7 +118,7 @@ public static string Html_TypeofBike = @"<html>
 
 </body>
 </html>";
-public static string Html_SizeofBike = @"<html>
+		public static string Html_SizeofBike = @"<html>
 <head>
 	<title>html</title>
 	  <meta name=""viewport"" content=""width=device-width, initial-scale=1"">
