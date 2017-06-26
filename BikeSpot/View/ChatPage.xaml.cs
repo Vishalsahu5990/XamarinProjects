@@ -7,9 +7,11 @@ namespace BikeSpot
 {
 	public partial class ChatPage : ContentPage
 	{
+		
 List<ChatModel> cm = new List<ChatModel>();
 		public ChatPage()
 		{
+			
 			InitializeComponent();
 			listview.HeightRequest = App.ScreenHeight - 150;
 			LoadPreviousChat();

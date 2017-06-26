@@ -30,6 +30,13 @@ namespace BikeSpot
 			public string offer_price { get; set; }
 			public string status { get; set; }
 			public string product_owner_id { get; set; }
+			public string sender_id { get; set; }
+			public string reciever_id { get; set; }
+			public string MessageTime { get; set; }
+			public string created_at { get; set; }
+			public string message_id { get; set; }
+
+
 		}
 	}
 }

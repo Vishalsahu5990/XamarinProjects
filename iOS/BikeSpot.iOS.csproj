@@ -315,6 +315,7 @@
     <Compile Include="CustomRenderer\MyListviewRenderer.cs" />
     <Compile Include="CustomRenderer\CustomScrollViewRenderer.cs" />
     <Compile Include="CustomRenderer\CustomImageRenderer.cs" />
+    <Compile Include="CustomRenderer\ChatEntryRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\add_free.png" />
@@ -716,6 +717,12 @@
     <BundleResource Include="Resources\reply%403x.png" />
     <BundleResource Include="Resources\reply%402x.png" />
     <BundleResource Include="Resources\reply.png" />
+    <BundleResource Include="Resources\outgoing_arrow%403x.png" />
+    <BundleResource Include="Resources\outgoing_arrow%402x.png" />
+    <BundleResource Include="Resources\outgoing_arrow.png" />
+    <BundleResource Include="Resources\incoming_arrow%403x.png" />
+    <BundleResource Include="Resources\incoming_arrow%402x.png" />
+    <BundleResource Include="Resources\incoming_arrow.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="elcimagepicker">

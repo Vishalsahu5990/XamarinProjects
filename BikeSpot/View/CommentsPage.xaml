@@ -7,8 +7,6 @@
 	    xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
 	x:Class="BikeSpot.CommentsPage">
 
-
-
 	<StackLayout HorizontalOptions="FillAndExpand">
 	<StackLayout VerticalOptions="FillAndExpand" Spacing="0">
 		<StackLayout Orientation="Horizontal" HeightRequest="60" BackgroundColor="#20D1C8">
@@ -21,7 +19,7 @@
 			<Label Margin="0,15,0,0" Text="Comments" 
 			TextColor="White"
 			FontAttributes="Bold"
-			VerticalOptions="Center"/> 				
+			VerticalOptions="Center"/>  				
 		</StackLayout>
 			<StackLayout>
 		<ScrollView>
@@ -147,21 +145,21 @@
 			<StackLayout x:Name="_slFooter" HeightRequest="60" Orientation="Horizontal" BackgroundColor="#F7F7F7" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
 				
 				<Frame Margin="5" HorizontalOptions="FillAndExpand" Padding="0" HasShadow="false" VerticalOptions="Center">
-						<local:MyEntry 
+						<local:ChatEntry 
 				    x:Name="txtMsg"
-					Placeholder="Write here..."
+					Placeholder="Write here..." 
 					HorizontalOptions="FillAndExpand"
 					HeightRequest="40"
 					FontSize="14"
 				Margin="05,0,0,0"
 			VerticalOptions="Center"
 			Keyboard="Chat"
-					BackgroundColor="White"/>
+					BackgroundColor="White"/> 
 					</Frame>
 
 			<Button
 				x:Name="btnSend"
-			TextColor="Black"  
+			TextColor="Black"    
 			Image="send-btn"
 			WidthRequest="40"
 			HeightRequest="40" 

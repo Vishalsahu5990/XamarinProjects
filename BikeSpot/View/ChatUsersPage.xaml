@@ -35,28 +35,39 @@
 
 			<flv:FlowListView.FlowColumnTemplate>
 				<DataTemplate>
-					
+					 <StackLayout HorizontalOptions="FillAndExpand">
             <StackLayout Padding="8" Orientation="Horizontal" VerticalOptions="Start">
 		<Image Source="dummyprofile.png"
 		HeightRequest="50"/>
 		<StackLayout Padding="5">
 			<Label Text="{Binding name}"
-			/>
+			LineBreakMode="TailTruncation"
+			FontSize="Medium"/>
 			<Label Text="{Binding message}"
 			FontSize="12"
 			TextColor="#A3A4A6"/>
 		</StackLayout>
-		<Label Text="9:55 AM"
-		VerticalOptions="CenterAndExpand"
+									<StackLayout
+		VerticalOptions="FillAndExpand"
 		HorizontalOptions="EndAndExpand"
-		TextColor="#03B2C4"/>
+		Padding="30,0,0,0">
+		<Label Text="{Binding last_chating_time}"
+		VerticalOptions="CenterAndExpand"
+		HorizontalOptions="CenterAndExpand"
+		TextColor="#03B2C4"
+		FontSize="14"/>    
+									</StackLayout>
+		</StackLayout>
+		<BoxView HeightRequest="1" 
+			BackgroundColor="Silver"
+			 HorizontalOptions="FillAndExpand"/>
 	</StackLayout>
-				</DataTemplate>
-			</flv:FlowListView.FlowColumnTemplate>
+				</DataTemplate> 
+			</flv:FlowListView.FlowColumnTemplate> 
 		
 		</flv:FlowListView>
 	</StackLayout>
 	</StackLayout>
-				</StackLayout>
-			</StackLayout>
+				</StackLayout>  
+			</StackLayout> 
 </ContentPage>

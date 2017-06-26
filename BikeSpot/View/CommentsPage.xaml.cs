@@ -38,6 +38,7 @@ namespace BikeSpot
 			txtMsg.Focused += TxtMsg_Focused;
 			txtMsg.Unfocused += TxtMsg_Unfocused;
 			btnSend.Clicked+= BtnSend_Clicked;
+			txtMsg.Completed+= TxtMsg_Completed;
             GetProductComments().Wait();
 
 				MessagingCenter.Subscribe<object, string>(this, "CommentReply", (sender, msg) =>
@@ -69,6 +70,8 @@ namespace BikeSpot
 			txtMsg.Focused -= TxtMsg_Focused;
 			txtMsg.Unfocused -= TxtMsg_Unfocused;
 			btnSend.Clicked-= BtnSend_Clicked;
+			txtMsg.Completed-= TxtMsg_Completed;
+			ChatEntry.keepOpen = false; 
 		}
 		private void PrepareUI()
 		{ 
@@ -118,11 +121,58 @@ var comment_id = btn.CommandParameter;
 		void TxtMsg_Focused(object sender, FocusEventArgs e)
 		{
 			//flowlistview.HeightRequest = 50;
+			ChatEntry.keepOpen = true;
 		}
 
 		void TxtMsg_Unfocused(object sender, FocusEventArgs e)
 		{
+			ChatEntry.keepOpen = false;
 			//flowlistview.HeightRequest = 300;
+		}
+
+		void TxtMsg_Completed(object sender, EventArgs e)
+		{
+			try
+			{
+				Device.BeginInvokeOnMainThread(() =>
+			{ 
+			if (!string.IsNullOrEmpty(txtMsg.Text))
+			{
+					if (items != null)
+					{
+						items.Items.Add(new CommentModel.Comment
+						{
+							name = _userName,
+							description = txtMsg.Text
+						});
+					}
+					else
+						{
+						_listComments = new CommentModel();
+var list = new List<CommentModel.Comment>();
+list.Add(new CommentModel.Comment
+						{
+							name = _userName,
+							description = txtMsg.Text
+						});
+						_listComments.comments = list;
+						items = new CommentItemList(_listComments);
+flowlistview.FlowItemsSource = items.Items;
+						}
+var lastItem = flowlistview.FlowItemsSource.OfType<object>().Last();
+flowlistview.ScrollTo(lastItem, ScrollToPosition.End, false);
+
+				AddComment(txtMsg.Text);
+txtMsg.Text = string.Empty;
+			}
+			
+			});
+			}
+			catch (Exception ex)
+			{
+
+			}
+
 		}
 
 		void BtnSend_Clicked(object sender, EventArgs e)

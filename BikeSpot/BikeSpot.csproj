@@ -270,6 +270,9 @@
       <DependentUpon>CommentReplyPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\ChatUserModel.cs" />
+    <Compile Include="Model\SaveChatUserModel.cs" />
+    <Compile Include="ViewModel\ChatItemList.cs" />
+    <Compile Include="CustomRenderer\ChatEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NGraphics">
@@ -403,6 +406,9 @@
     </Reference>
     <Reference Include="PushNotification.Plugin">
       <HintPath>..\packages\Xam.Plugin.PushNotification.1.2.4\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\PushNotification.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\portable-wp8+netcore45+net45+wp81+wpa81\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

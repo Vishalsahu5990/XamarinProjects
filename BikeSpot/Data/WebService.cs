@@ -1349,7 +1349,7 @@ namespace BikeSpot
 				var content = new StringContent(json, Encoding.UTF8, "application/json");
 				response = client.PostAsync(url, content).Result;
 				if (response.IsSuccessStatusCode)
-				{ 
+				{
 
 					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
 					{
@@ -1381,5 +1381,230 @@ namespace BikeSpot
 			}
 			return chatModel;
 		}
+		public static SaveChatUserModel SaveChatUser(int reciever_id, int product_id)
+		{
+			SaveChatUserModel chatUserModel = new SaveChatUserModel();
+
+			try
+			{
+				string url = Constants.BaseUrl;
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", "save_chat_users");
+				j.Add("sender_user_id", StaticDataModel.userId);
+				j.Add("reciever_user_id", reciever_id);
+				j.Add("product_id", product_id);
+
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
+				{
+
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						if (jObj["result"].ToString() == "success")
+						{
+
+							chatUserModel.chat_user_id = Convert.ToInt32(jObj["chat_user_id"].ToString());
+							chatUserModel.offer_status = Convert.ToInt32(jObj["offer_status"].ToString());
+							chatUserModel.msg = jObj["msg"].ToString();
+						}
+
+
+					}
+
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return chatUserModel;
+		}
+		public static string SaveChatMessage(int reciever_id, int product_id, string msg, double offer_price)
+		{
+			string ret = string.Empty;
+
+			try
+			{
+				string url = Constants.BaseUrl;
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", "save_chat_messages");
+				j.Add("sender_id", StaticDataModel.userId);
+				j.Add("reciever_id", reciever_id);
+				j.Add("product_id", product_id);
+				j.Add("message", msg);
+				j.Add("offer_price", offer_price);
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
+				{
+
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						if (jObj["result"].ToString() == "success")
+						{
+
+							ret = "success";
+						}
+
+
+					}
+
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return ret;
+		}
+		public static ChatModel GetAllChatMessage(int reciever_id, int product_id)
+		{
+			string ret = string.Empty;
+			ChatModel chatModel = new ChatModel();
+			try
+			{
+				string url = Constants.GetChatMessagesUrl;
+
+				Dictionary<string, string> parameters = new Dictionary<string, string>();
+
+				parameters.Add("method", "get_chat_messages");
+				parameters.Add("sender_id", StaticDataModel.userId.ToString());
+				parameters.Add("reciever_id", reciever_id.ToString());
+				parameters.Add("product_id", product_id.ToString());
+				using (var httpClient = new HttpClient())
+				{
+					using (var content = new FormUrlEncodedContent(parameters))
+					{
+						content.Headers.Clear();
+						content.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+
+						var response1 = httpClient.PostAsync(url, content);
+
+
+						using (StreamReader reader = new StreamReader(response1.Result.Content.ReadAsStreamAsync().Result))
+						{
+							var contents = reader.ReadToEnd();
+							JObject jObj = JObject.Parse(contents);
+							if (jObj["result"].ToString() == "success")
+							{
+
+								var data = jObj["data"];
+								chatModel.data = data.ToObject<List<ChatModel.Datum>>();
+
+							}
+
+						}
+
+					}
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return chatModel;
+		}
 	}
 }
+
+//String myId = PreferenceConnector.readString(ChatScreen.this, PreferenceConnector.USER_ID, "";
+//        if (adminId.equals(myId)) {
+//            switch (status) {
+//                case "0":
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    activityBinding.getStatus().setShowStatusTextView(true);
+//activityBinding.getStatus().setStatus("No Offer available.";
+//                    break;
+//                case "1":
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    activityBinding.getStatus().setOfferReceivedStatus(true);
+//                    break;
+//                case "2":
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    activityBinding.getStatus().setShowStatusTextView(true);
+//activityBinding.getStatus().setStatus("Offer is refuse " + offerPrice + ".";
+//                    break;
+//                case "3":
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    activityBinding.getStatus().setShowStatusTextView(true);
+//activityBinding.getStatus().setStatus("Offer accepted " + offerPrice + ".";
+//                    break;
+//                case "4":
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    activityBinding.getStatus().setReceiveMoneyStatus(true);
+//                    break;
+//                case "5"://paid
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    break;
+//                case "6": // No
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    activityBinding.getStatus().setShowStatusTextView(true);
+//activityBinding.getStatus().setStatus("Payment not received.";
+//                    break;
+//            }
+//        } else {
+//            switch (status) {
+//                case "0":  // offer not made yet (default)
+//                    activityBinding.priceTxt.setEnabled(true);
+//                    activityBinding.getStatus().setMakeOfferStatus(true);
+//                    break;
+//                case "1": // Make offer
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    activityBinding.getStatus().setShowStatusTextView(true);
+//activityBinding.getStatus().setStatus("Your Offer is pending " + offerPrice + ".";
+//                    break;
+//                case "2": // Offer refuse
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    activityBinding.getStatus().setShowStatusTextView(true);
+//activityBinding.getStatus().setStatus("Your Offer is refuse " + offerPrice + ".";
+//                    break;
+//                case "3": // Accepted
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    activityBinding.getStatus().setPaymentOptionStatus(true);
+//                    break;
+//                case "4": // Cash or online
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    activityBinding.getStatus().setShowStatusTextView(true);
+//activityBinding.getStatus().setStatus("Pending transaction " + offerPrice + ".";
+//                    break;
+//                case "5": // Paid
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    break;
+//                case "6": // No
+//                    activityBinding.priceTxt.setEnabled(false);
+//                    activityBinding.getStatus().setShowStatusTextView(true);
+//activityBinding.getStatus().setStatus("Payment not received.";
+//                    break;
+//            }
+//        }
+
