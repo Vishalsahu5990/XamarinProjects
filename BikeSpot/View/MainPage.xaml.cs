@@ -61,6 +61,7 @@ namespace BikeSpot
 var tapeventHome = new TapGestureRecognizer();
 tapeventHome.Tapped += (s, e) =>
 			{
+				
 				// handle the tap
 				IsPresented = false;
 				Detail = new NavigationPage((Page)Activator.CreateInstance (typeof(HomePage)));
@@ -96,9 +97,10 @@ var tapGestureRecognizerProfile = new TapGestureRecognizer();
 tapGestureRecognizerProfile.Tapped += (s, e) =>
 			{
 				// handle the tap
+				StaticDataModel.IsFromNavigationMenu = true;
 				IsPresented = false;
 				StaticDataModel.IsFromSell = true;
-				Detail = new NavigationPage((Page)Activator.CreateInstance (typeof(AddProductPage)));
+				Navigation.PushModalAsync(new AddProductPage());
 			};
 			_masterpage._slSell.GestureRecognizers.Add(tapGestureRecognizerProfile);
 
@@ -106,45 +108,48 @@ tapGestureRecognizerProfile.Tapped += (s, e) =>
 
 			var tapGestureRecognizer3 = new TapGestureRecognizer();
 			tapGestureRecognizer3.Tapped += (s, e) =>
-			{
+			{ 
 				// handle the tap
-				IsPresented = false;
-				StaticDataModel.IsFromSell = false;
-				Detail = new NavigationPage((Page)Activator.CreateInstance (typeof(AddProductPage)));
+				StaticDataModel.IsFromNavigationMenu = true; 
+				IsPresented = false; 
+				StaticDataModel.IsFromSell = false; 
+				Navigation.PushModalAsync(new AddProductPage());  
 			};
-			_masterpage._slRent.GestureRecognizers.Add(tapGestureRecognizer3);
-
-
-
-			var tapGestureRecognizer4 = new TapGestureRecognizer();
+			_masterpage._slRent.GestureRecognizers.Add(tapGestureRecognizer3); 
+			 
+			 
+			 
+			var tapGestureRecognizer4 = new TapGestureRecognizer();  
 			tapGestureRecognizer4.Tapped += (s, e) =>
 			{
 				// handle the tap
+				StaticDataModel.IsFromNavigationMenu = true;
 				IsPresented = false;
-				Detail = new NavigationPage((Page)Activator.CreateInstance (typeof(ChatUsersPage)));
+				Navigation.PushModalAsync(new ChatUsersPage());
 			};
-			_masterpage._slMessages.GestureRecognizers.Add(tapGestureRecognizer4);
+			_masterpage._slMessages.GestureRecognizers.Add(tapGestureRecognizer4);  
 
 
 
-			var tapGestureRecognizer5 = new TapGestureRecognizer();
-			tapGestureRecognizer5.Tapped += (s, e) =>
-			{
-				// handle the tap
-				IsPresented = false;
+			var tapGestureRecognizer5 = new TapGestureRecognizer();  
+			tapGestureRecognizer5.Tapped += (s, e) =>  
+			{  
+				// handle the tap 
+				IsPresented = false; 
 				//Detail = new NavigationPage((Page)Activator.CreateInstance (typeof(BikeWizardStartPage)));
-				Navigation.PushModalAsync(new BikeWizardStartPage());
+				Navigation.PushModalAsync(new BikeWizardStartPage()); 
 			};
-			_masterpage._slBikeWizard.GestureRecognizers.Add(tapGestureRecognizer5);
+			_masterpage._slBikeWizard.GestureRecognizers.Add(tapGestureRecognizer5); 
 
 
 
-			var tapGestureRecognizer6 = new TapGestureRecognizer();
+			var tapGestureRecognizer6 = new TapGestureRecognizer(); 
 			tapGestureRecognizer6.Tapped += (s, e) =>
-			{
-				// handle the tap
-				IsPresented = false;
-			};
+			{   
+			  	// handle the tap
+			   	IsPresented = false;
+                 DisplayAlert("Message","It will work in next version.","OK");
+			}; 
 			_masterpage._slUpgrades.GestureRecognizers.Add(tapGestureRecognizer6);
 
 
@@ -154,6 +159,7 @@ tapGestureRecognizerProfile.Tapped += (s, e) =>
 			{
 				// handle the tap
 				IsPresented = false;
+                 DisplayAlert("Message","It will work in next version.","OK");
 			};
 			_masterpage._slPrivateRetailerAccount.GestureRecognizers.Add(tapGestureRecognizer7);
 
@@ -163,6 +169,7 @@ tapGestureRecognizerProfile.Tapped += (s, e) =>
 			{
 				// handle the tap
 				IsPresented = false;
+                 DisplayAlert("Message","It will work in next version.","OK");
 			};
 			_masterpage._slFaq.GestureRecognizers.Add(tapGestureRecognizer8);
 
@@ -172,6 +179,7 @@ tapGestureRecognizerProfile.Tapped += (s, e) =>
 			{
 				// handle the tap
 				IsPresented = false;
+                 DisplayAlert("Message","It will work in next version.","OK");
 			};
 			_masterpage._slContact.GestureRecognizers.Add(tapGestureRecognizer9);
 
@@ -181,6 +189,7 @@ tapGestureRecognizerProfile.Tapped += (s, e) =>
 			{
 				// handle the tap
 				IsPresented = false;
+                 DisplayAlert("Message","It will work in next version.","OK");
 			};
 			_masterpage._slSiteNotice.GestureRecognizers.Add(tapGestureRecognizer10);
 

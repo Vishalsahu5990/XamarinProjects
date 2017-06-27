@@ -51,8 +51,8 @@ namespace BikeSpot
 
 		void BtnFinish_Clicked(object sender, EventArgs e)
 		{
-			GetProducts().Wait();
-			//App.Current.MainPage = new NavigationPage(new MainPage());
+			//GetProducts().Wait();
+			App.Current.MainPage = new MainPage();
 		}
 
 		private void PrepareUI()

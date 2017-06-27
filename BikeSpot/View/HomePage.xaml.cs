@@ -17,6 +17,7 @@ namespace BikeSpot
 		double itemWidth = 140;
 		bool flag = false;
 		private int _lastItemAppearedIdx;
+		bool isFirstLoad = false;
 		public HomePage()
 		{
 			InitializeComponent();
@@ -27,14 +28,18 @@ namespace BikeSpot
 			Title = "menu";
 
 			PrepareUI();
-
+			isFirstLoad = true;
 
 		}
 		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
-			if (!flag)
-				GetProducts().Wait();
+
+			if (isFirstLoad)
+			{
+				if (!flag)
+					GetProducts().Wait();
+			}
 			btnLoadMore.Clicked += BtnLoadMore_Clicked;
 			flowlistview1.FlowItemAppearing += Flowlistview1_FlowItemAppearing;
 
@@ -53,6 +58,7 @@ namespace BikeSpot
 		protected override void OnDisappearing()
 		{
 			base.OnDisappearing();
+			isFirstLoad = false;
 			btnLoadMore.Clicked -= BtnLoadMore_Clicked;
 			flowlistview1.FlowItemAppearing -= Flowlistview1_FlowItemAppearing;
 		}
@@ -67,7 +73,7 @@ namespace BikeSpot
 			Title = "menu";
 			NavigationPage.SetHasNavigationBar(this, false);
 			PrepareUI();
-
+			isFirstLoad = true;
 
 		}
 
@@ -281,6 +287,7 @@ await Navigation.PushPopupAsync(new LoginReminderPopup());
 											{
 												_listProduct[i].list[j].product_image = Constants.ImageUrl + array[0];
 											}
+											_listProduct[i].list[j].price = "€ " + _listProduct[i].list[j].price;
 										}
 										else
 										{

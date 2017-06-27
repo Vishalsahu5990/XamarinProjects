@@ -158,7 +158,7 @@
 			</StackLayout>
 		<StackLayout x:Name="slFaq" Orientation="Horizontal" >
 
-				<Label Text="FAQ"
+				<Label Text="Questions and Answers"
 				VerticalOptions="Center"
 				TextColor="Gray"
 				FontSize="Medium"/>
@@ -166,7 +166,7 @@
 			</StackLayout>
 		<StackLayout x:Name="slContact"  Orientation="Horizontal"  >
 
-				<Label Text="Contact"
+				<Label Text="Website"
 				VerticalOptions="Center"
 				TextColor="Gray"
 				FontSize="Medium"/> 
@@ -174,7 +174,7 @@
 			</StackLayout>
 		<StackLayout x:Name="slSiteNotice" Orientation="Horizontal">
 
-				<Label Text="Site Notice"
+				<Label Text="GTC | Site Notice"
 				VerticalOptions="Center"
 				TextColor="Gray"
 				FontSize="Medium"/>

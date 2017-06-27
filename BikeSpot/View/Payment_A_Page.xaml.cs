@@ -62,7 +62,15 @@ namespace BikeSpot
 				var imageArray = data.Split(',');
 				productModel.product_image = Constants.ImageUrl + imageArray[0];
 			}
+			if (_productModel != null)
+			{
+				_productModel = productModel;
+			}
+			else
+			{
+				_productModel = new Product();
 			_productModel = productModel;
+			}
 			NavigationPage.SetHasNavigationBar(this, false);
 			PrepareUI();
 			SetOfferStatus(offer_status);
@@ -118,8 +126,9 @@ namespace BikeSpot
             UpdateOfferStatus().Wait();
 		}
 
-		void BtnOnline_Clicked(object sender, EventArgs e)
+		async void BtnOnline_Clicked(object sender, EventArgs e)
 		{
+			await DisplayAlert("Message","It will work in next version.","OK");
 			// uncomment this section when payment success 
 			//offer_status = "4";
        //         UpdateOfferStatus().Wait(); 
@@ -230,7 +239,7 @@ namespace BikeSpot
 		{
 			try
 			{
-				await Navigation.PopAsync();
+				await Navigation.PopModalAsync();
 
 			}
 			catch (Exception ex)

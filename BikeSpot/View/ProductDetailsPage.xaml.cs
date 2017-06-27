@@ -127,7 +127,7 @@ async void comment_Tapped(object sender, System.EventArgs e)
 				}
 				else
 				{
-					await Navigation.PushAsync(new Payment_A_Page(_productModel));
+					await Navigation.PushModalAsync(new Payment_A_Page(_productModel));
 				}
 
 			}
@@ -149,7 +149,7 @@ async void private_Tapped(object sender, System.EventArgs e)
 				}
 				else
 				{
-					await Navigation.PushAsync(new Payment_A_Page(_productModel,"private_chat"));
+						await Navigation.PushModalAsync(new Payment_A_Page(_productModel,"private_chat"));
 				}
 
 			}

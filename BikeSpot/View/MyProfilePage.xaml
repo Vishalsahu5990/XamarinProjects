@@ -224,6 +224,9 @@
 							TextColor="#646566"
 							FontSize="12"/>
 					</StackLayout>
+							<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="upgradeAccountTapped"/>    
+    </StackLayout.GestureRecognizers>
 				</StackLayout>
 					<StackLayout BackgroundColor="White" Orientation="Horizontal" Padding="10,10,20,10">			
 		<Image Source="reviews" Margin="10"/>
@@ -235,6 +238,9 @@
 							TextColor="#646566"
 							FontSize="12"/>
 					</StackLayout>
+							<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="yourReviewsTapped"/>    
+    </StackLayout.GestureRecognizers>
 				</StackLayout>
 
 					<StackLayout BackgroundColor="White" Orientation="Horizontal" Padding="10,10,20,10">			
@@ -261,6 +267,9 @@
 						<Label Text="Please add payment methods" 
 							TextColor="#646566"
 							FontSize="12"/>
+								<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="paymentMethodsTapped"/>    
+    </StackLayout.GestureRecognizers>
 					</StackLayout>
 						
 				</StackLayout>
@@ -272,7 +281,10 @@
 							FontAttributes="Bold"/>
 						<Label Text="Change settings" 
 							TextColor="#646566"
-							FontSize="12"/>
+							FontSize="12"/> 
+							<StackLayout.GestureRecognizers> 
+        <TapGestureRecognizer Tapped="settingsTapped"/>    
+    </StackLayout.GestureRecognizers>	
 					</StackLayout>
 						
 				</StackLayout>
@@ -442,8 +454,8 @@
 					
 					</Grid>
 					</StackLayout>
-				<StackLayout Margin="0,15,0,0" >
-				<flv:FlowListView BackgroundColor="Transparent" Margin="0,10,0,0" SeparatorVisibility="None" HasUnevenRows="true" FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowLastTappedItem="{Binding LastTappedItem}" 
+				<StackLayout Margin="0,0,0,0" > 
+				<flv:FlowListView BackgroundColor="Transparent" Margin="0,0,0,0" SeparatorVisibility="None" HasUnevenRows="true" FlowItemTappedCommand="{Binding ItemTappedCommand}" FlowLastTappedItem="{Binding LastTappedItem}" 
 						x:Name="flowlistviewBuying" >
 							<flv:FlowListView.FlowColumnTemplate>
 								<DataTemplate>
@@ -462,7 +474,7 @@
 										HeightRequest="{Binding width}"
 										WidthRequest="{Binding width}"
 										Padding="0" 
-										>   	 
+										>    	 
 			<Frame Padding="3"
 				HasShadow="false"
 				OutlineColor="#D7D7D7"
@@ -493,7 +505,7 @@
 					<Label Text="{Binding product_name}"    
 					FontSize="Small"
 					LineBreakMode="TailTruncation"
-					WidthRequest="60"
+					WidthRequest="130"
 					Grid.Column="0"
 					HorizontalTextAlignment="Start"/>
 
@@ -502,7 +514,8 @@
 					FontSize="Small"
 					LineBreakMode="TailTruncation" 
 								WidthRequest="60"
-						Grid.Column="1"/>
+						Grid.Column="1"
+						TextColor="#53D9D1"/>
 					</Grid> 
 					</StackLayout>
 

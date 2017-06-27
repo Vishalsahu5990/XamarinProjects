@@ -9,15 +9,15 @@
 	x:Class="BikeSpot.HomePage"
 	Icon="menu.png" 
 	Title="Home"
-	> 
-	<StackLayout VerticalOptions="FillAndExpand">
-		<StackLayout Padding="0,10,0,0" Orientation="Horizontal" HeightRequest="80" BackgroundColor="#20D1C8">
+	>   
+	<StackLayout VerticalOptions="FillAndExpand"> 
+		<StackLayout Padding="0,10,0,0" Orientation="Horizontal" HeightRequest="60" BackgroundColor="#20D1C8">
 			<StackLayout VerticalOptions="FillAndExpand">
 				<Image Source="menu" VerticalOptions="CenterAndExpand" Margin="20" />
 				<StackLayout.GestureRecognizers>
 					<TapGestureRecognizer Tapped="menu_Tapped" /> 
 				</StackLayout.GestureRecognizers>
-			</StackLayout>
+ 			</StackLayout>
 			<Image Aspect="AspectFill" Margin="20" Source="logo" HorizontalOptions="CenterAndExpand" />
 			<Image Source="search" />
 			<Image Source="filter-toggle" Margin="10,10,10,15">
@@ -28,7 +28,7 @@
 		</StackLayout>  
 		<StackLayout> 
 
-				<StackLayout   Spacing="0" Padding="0,0,0,20"> 
+				<StackLayout   Spacing="0" Padding="0,0,0,0"> 
 					<StackLayout >
 					<ScrollView HorizontalOptions="FillAndExpand"> 
   <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
@@ -36,7 +36,7 @@
 
 							</StackLayout>
 					<flv:FlowListView BackgroundColor="Transparent"
-		Margin="0,10,0,0" 
+		Margin="0,0,0,0" 
 		SeparatorVisibility="None" 
 		HasUnevenRows="true" 
 		FlowItemTappedCommand="{Binding ItemTappedCommand}" 
@@ -127,26 +127,28 @@
 					<Label Text="{Binding product_name}"    
 					FontSize="Small"
 					LineBreakMode="TailTruncation"
-					WidthRequest="60"
+					WidthRequest="130"
 					Grid.Column="0"
-					HorizontalTextAlignment="Start"/>
+					HorizontalTextAlignment="Start"
+																									/>
 
 													<Label Text="{Binding price}"
 								HorizontalTextAlignment="End"
 					FontSize="Small"
 					LineBreakMode="TailTruncation" 
 								WidthRequest="60"
-						Grid.Column="1"/>
+						Grid.Column="1"
+							TextColor="#53D9D1"	/>
 					</Grid> 
-					</StackLayout>
+					</StackLayout>  
 
-				</StackLayout>
+				</StackLayout>  
 
 					<StackLayout Orientation="Horizontal" VerticalOptions="Start">
 							<Image Source="top1" 
 			HorizontalOptions="EndAndExpand"
 			IsVisible="false"
-																					/> 
+			/> 
 						</StackLayout>								
 													</Grid>
 				</Frame>
@@ -154,11 +156,10 @@
 				</RelativeLayout>
 											
 					</StackLayout>	
-									
-									</Grid>
-								</DataTemplate>
-							</flv:FlowListView.FlowColumnTemplate>
-						</flv:FlowListView>
+</Grid>
+</DataTemplate>
+</flv:FlowListView.FlowColumnTemplate>
+</flv:FlowListView>
 
 
    
@@ -176,7 +177,7 @@
 						</StackLayout>
 												
 					                   </StackLayout>
-											</ScrollView>
+											</ScrollView> 
 							</StackLayout>
 										
 									</Grid>
@@ -218,7 +219,7 @@
 					</StackLayout>
 					<StackLayout  Grid.Column="1" VerticalOptions="FillAndExpand" Padding="0" Margin="0">
 						<StackLayout BackgroundColor="#12E5D9" VerticalOptions="CenterAndExpand">
-							<Image Source="logo copy 2" VerticalOptions="CenterAndExpand" Margin="10" />
+							<Image Source="footer-logo.png" VerticalOptions="CenterAndExpand" Margin="10" />
 						</StackLayout>
 					</StackLayout>
 					<StackLayout Spacing="5" Grid.Column="2" BackgroundColor="#20D1C8"
@@ -227,14 +228,14 @@
 						<Image Source="add_bike" 
 						/>
 						<Label Text="Add Bike" 
-						HorizontalOptions="Center" 
+						HorizontalOptions="Center"  
 						 TextColor="White"
-						FontAttributes="Bold"/>
+						FontAttributes="Bold"/> 
 						</StackLayout>
 
 						<StackLayout.GestureRecognizers>
 					<TapGestureRecognizer Tapped="add_bike_Tapped" />
-				</StackLayout.GestureRecognizers>
+				</StackLayout.GestureRecognizers> 
 					</StackLayout>
 				</Grid>
 			</StackLayout>

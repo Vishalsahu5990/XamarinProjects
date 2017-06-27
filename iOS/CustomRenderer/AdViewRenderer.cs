@@ -12,7 +12,8 @@ namespace BikeSpot.iOS
 {
 public class AdViewRenderer : ViewRenderer<AdView, BannerView>
 {
-string bannerId = "ca-app-pub-7176870068365595/3226881467";
+//string bannerId = "ca-app-pub-7176870068365595/3226881467";
+string bannerId = 	"ca-app-pub-8565023384951297/6473044566";
 	BannerView adView;
 	BannerView CreateNativeControl()
 	{

@@ -222,7 +222,7 @@
 
 		<StackLayout VerticalOptions="Start"  Orientation="Horizontal" Margin="20,0,0,0">
 	<Image    Source="price" VerticalOptions="CenterAndExpand" />
-			<Label Text="Price" VerticalOptions="Center" 
+			<Label Text="Price (€)" VerticalOptions="Center" 
 			FontSize="22"
 			TextColor="Gray"
 			Margin="10,0,0,0"/>	
@@ -231,12 +231,12 @@
 
 		<local:RangeSlider
 			x:Name="sliderPrice" 
-			MaximumValue="10,000" 
+			MaximumValue="800" 
 			MinimumValue="1" 
 
 			LowerValue="1" 
-			UpperValue="100" 
-			StepValue="250" 
+			UpperValue="800" 
+			StepValue="5" 
 			StepValueContinuously="False" 
 			TextSize="15"
 			HorizontalOptions="FillAndExpand"
@@ -262,7 +262,7 @@
 			
 		<StackLayout Margin="20,0,0,0" VerticalOptions="Start"  Orientation="Horizontal">
 	<Image  Source="distance" VerticalOptions="CenterAndExpand" />
-			<Label Text="Distance" VerticalOptions="Center" 
+			<Label Text="Distance (Km)" VerticalOptions="Center" 
 			FontSize="22"
 			TextColor="Gray"
 			Margin="10,0,0,0"/>	
@@ -271,11 +271,11 @@
 
 		<local:RangeSlider
 			x:Name="sliderDistance"
-			MaximumValue="10000" 
-							MinimumValue="1" 
-							LowerValue="1" 
-			UpperValue="100" 
-			StepValue="250" 
+			MaximumValue="5000" 
+			MinimumValue="1" 
+			LowerValue="1" 
+			UpperValue="5000" 
+			StepValue="1" 
 			StepValueContinuously="False" 
 			TextSize="15"
 			HorizontalOptions="FillAndExpand"

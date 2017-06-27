@@ -26,7 +26,7 @@
 				HorizontalOptions="EndAndExpand"
 					Padding="15,0,15,0">
 				<Image
-						Source="make_offer_icon.png"  
+						Source="make.png"  
 			VerticalOptions="Center"  
 				/> 
 					<StackLayout.GestureRecognizers> 

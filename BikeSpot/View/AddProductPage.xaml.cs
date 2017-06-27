@@ -327,7 +327,7 @@ namespace BikeSpot
 			switch_sell.Toggled -= Switch_Sell_Toggled;
 			switch_rent.Toggled -= Switch_Rent_Toggled;
 
-
+			StaticDataModel.IsFromNavigationMenu = false;
 
 
 
@@ -344,7 +344,10 @@ namespace BikeSpot
 			try
 			{
 				//StaticDataModel._CurrentContext.MenuTapped.Execute(StaticDataModel._CurrentContext.MenuTapped);
-				await Navigation.PopAsync();
+				if(!StaticDataModel.IsFromNavigationMenu)
+               await Navigation.PopAsync();
+				else
+                await Navigation.PopModalAsync();
 
 			}
 			catch (Exception ex)
@@ -403,23 +406,32 @@ namespace BikeSpot
 		{
 			try
 			{
-				pickerTypeofBike_sell.Items.Add("Road Bikes");
-				pickerTypeofBike_sell.Items.Add("Mountain Bikes");
-				pickerTypeofBike_sell.Items.Add("Hybrid Bikes");
-				pickerTypeofBike_sell.Items.Add("Touring Bikes");
-				pickerTypeofBike_sell.Items.Add("City Bikes");
-				pickerTypeofBike_sell.Items.Add("Folding Bikes");
-				pickerTypeofBike_sell.Items.Add("Electric Bikes");
-				pickerTypeofBike_sell.Items.Add("Singlespeed Bikes");
+				pickerTypeofBike_sell.Items.Add("Road Bike");
+				pickerTypeofBike_sell.Items.Add("Mountain Bike");
+				pickerTypeofBike_sell.Items.Add("Hybrid Bike");
+				pickerTypeofBike_sell.Items.Add("Touring Bike");
+				pickerTypeofBike_sell.Items.Add("City Bike");
+				pickerTypeofBike_sell.Items.Add("Folding Bike");
+				pickerTypeofBike_sell.Items.Add("E-Bike");
+				pickerTypeofBike_sell.Items.Add("Singlespeed");
+
+				pickerTypeofBike_sell.Items.Add("Child's Bike");
+				pickerTypeofBike_sell.Items.Add("Pedelec");
+				pickerTypeofBike_sell.Items.Add("Equipment");
+				pickerTypeofBike_sell.Items.Add("BMX/Dirtbike");
+				pickerTypeofBike_sell.Items.Add("Fatbike");
+				pickerTypeofBike_sell.Items.Add("Cruiser");
+				pickerTypeofBike_sell.Items.Add("Tandem");
+				pickerTypeofBike_sell.Items.Add("Unicycle");
 
 
 
 
 
 				pickerCondition_sell.Items.Add("New");
-				pickerCondition_sell.Items.Add("Like New");
-				pickerCondition_sell.Items.Add("Ridable");
-				pickerCondition_sell.Items.Add("Unridable");
+				pickerCondition_sell.Items.Add("Excellent");
+				pickerCondition_sell.Items.Add("Good");
+				pickerCondition_sell.Items.Add("Fair");
 
 
 

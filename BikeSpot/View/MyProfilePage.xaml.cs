@@ -143,6 +143,22 @@ namespace BikeSpot
 		{
 			await Navigation.PushModalAsync(new SavedUsersPage());
 		}
+async void yourReviewsTapped(object sender, EventArgs e)
+{
+			await  DisplayAlert("Message","It will work in next version.","OK");
+		}
+async void upgradeAccountTapped(object sender, EventArgs e)
+		{
+await DisplayAlert("Message","It will work in next version.","OK");
+		}
+async void paymentMethodsTapped(object sender, EventArgs e)
+{
+await DisplayAlert("Message","It will work in next version.","OK");
+		}
+async void settingsTapped(object sender, EventArgs e)
+{
+			await Navigation.PushModalAsync(new Settings(true));
+		}
 		async void BtnSell_Clicked(object sender, EventArgs e)
 		{
 			bxSell.IsVisible = true;

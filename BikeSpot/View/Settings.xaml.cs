@@ -7,15 +7,24 @@ namespace BikeSpot
 {
 	public partial class Settings : ContentPage
 	{
+		bool _flag = false;
 		public Settings()
 		{
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
 			PrepareUI();
 		}
+public Settings(bool flag)
+{
+	_flag = flag;
+		InitializeComponent();
+			imgBack.Source = "back.png";
+	NavigationPage.SetHasNavigationBar(this, false);
+	PrepareUI();
+		}
 		private void PrepareUI()
-		{
-			try
+		{ 
+			try 
 			{
 				if (StaticMethods.IsIpad())
 				{
@@ -40,7 +49,10 @@ namespace BikeSpot
 		{
 			try
 			{
-				StaticDataModel._CurrentContext.MenuTapped.Execute(StaticDataModel._CurrentContext.MenuTapped);
+				if (!_flag)
+					StaticDataModel._CurrentContext.MenuTapped.Execute(StaticDataModel._CurrentContext.MenuTapped);
+				else
+					Navigation.PopModalAsync();
 
 			}
 			catch (Exception ex)

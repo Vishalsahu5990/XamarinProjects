@@ -482,6 +482,8 @@ int countUnisex = 0;
 				btnMan.HeightRequest = 80;
 				btnWomen.HeightRequest = 80;
 				btnUnisex.HeightRequest = 80;
+
+
 			}
 			catch (Exception ex)
 			{

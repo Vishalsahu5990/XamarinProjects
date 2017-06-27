@@ -6,7 +6,9 @@
 	<StackLayout VerticalOptions="FillAndExpand">
 		<StackLayout Orientation="Horizontal" HeightRequest="70" BackgroundColor="#20D1C8">
 			<StackLayout VerticalOptions="FillAndExpand">
-				<Image Source="menu" VerticalOptions="CenterAndExpand" Margin="25" />
+				<Image Source="menu" VerticalOptions="CenterAndExpand"
+				Margin="25" 
+				x:Name="imgBack"/>
 
 				<StackLayout.GestureRecognizers>
 					<TapGestureRecognizer Tapped="menu_Tapped" />
@@ -17,7 +19,8 @@
 			FontAttributes="Bold"
 			VerticalOptions="Center"/> 
 				<Image Source="menu-right" Margin="0,0,20,0"
-			HorizontalOptions="EndAndExpand"/>
+			HorizontalOptions="EndAndExpand"
+			IsVisible="false"/>
 			</StackLayout>
 		<StackLayout>
 
@@ -76,7 +79,10 @@
 				</StackLayout.GestureRecognizers>		
 			</StackLayout>
 
-				<StackLayout x:Name="slCall" HeightRequest="50"  Orientation="Horizontal" Spacing="15">
+				<StackLayout x:Name="slCall" HeightRequest="50"  
+						Orientation="Horizontal" 
+						Spacing="15"
+						IsVisible="false"> 
 		<Image Source="call"/>
 				<Label Text="Call Us"
 				VerticalOptions="Center"
@@ -93,7 +99,7 @@
 				VerticalOptions="Center"
 				TextColor="White"
 				FontSize="20"
-						Margin="10,0,0,0"/>
+				Margin="10,0,0,0"/>
 					<StackLayout.GestureRecognizers>
 					<TapGestureRecognizer Tapped="emailus_Tapped" />
 				</StackLayout.GestureRecognizers>	

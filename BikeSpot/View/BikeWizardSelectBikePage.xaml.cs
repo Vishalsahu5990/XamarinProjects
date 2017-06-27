@@ -93,9 +93,11 @@ namespace BikeSpot
 				{
 					answerArray.Add(option);
 					LoadQuestion(questionNumber);
-					questionNumber = questionNumber + 1;
+
 					if(questionNumber==6)
 						GetWizardResult().Wait();
+
+					questionNumber = questionNumber + 1;
 				}
 				else
 				{
@@ -176,6 +178,7 @@ namespace BikeSpot
 						Device.BeginInvokeOnMainThread(async () =>
 						{
 							LoadQuestion(questionNumber);
+							questionNumber++;
 						});
 
 						StaticMethods.DismissLoader();

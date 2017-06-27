@@ -28,17 +28,25 @@ bool isFirstLoad = false;
 			flowlistview.FlowItemTapped+= Flowlistview_FlowItemTapped;
 
 		}
+protected override void OnDisappearing()
+{
+			isFirstLoad = false;
+			StaticDataModel.IsFromNavigationMenu = false;
+	}
 		async void back_Tapped(object sender, System.EventArgs e)
 		{
 			try
 			{
-				await Navigation.PopAsync();
+				//if(!StaticDataModel.IsFromNavigationMenu)
+    //           await Navigation.PopAsync();
+				//else
+                await Navigation.PopModalAsync();
 
 			}
 			catch (Exception ex)
 			{
 
-
+              
 			}
 		}
 
@@ -49,7 +57,7 @@ bool isFirstLoad = false;
 				isFirstLoad = false;
 				var item = e.Item as ChatUserModel.Datum;
 				if (item != null)
-					Navigation.PushAsync(new Payment_A_Page(item));
+				Navigation.PushModalAsync(new Payment_A_Page(item));
 				else
 					StaticMethods.ShowToast("Unable to get detais. Please try again later!");
 			}
