@@ -4,67 +4,45 @@
 	x:Class="BikeSpot.AddCardDetailsPage"
 	xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot" 
 	BackgroundColor="#F5F6F7">
-	<StackLayout Padding="16" Spacing="15">
-		<Frame Padding="0" HasShadow="false" OutlineColor="#ECEDEE">
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-	<StackLayout BackgroundColor="White" 
-						HeightRequest="40" Margin="10" Orientation="Horizontal">
-						<local:MyEntry
-				x:Name="txtUsername"
-				Placeholder="Card number"
-						HorizontalOptions="FillAndExpand"
-						Keyboard="Default"/>
-				<Grid>
-				<Image Grid.Column="0" Source="visa"/>
-					<Image Grid.Column="1" Source="master-card"/>
-					<Image Grid.Column="2" Source="paypal"/>
-				</Grid>
-					</StackLayout>
-			</Frame>
-		<Frame Padding="0" HasShadow="false" OutlineColor="#ECEDEE">
-
-	<StackLayout BackgroundColor="White" 
-						HeightRequest="40" Margin="10" Orientation="Horizontal">
-						<local:MyEntry
-				Placeholder="Name on card"
-						HorizontalOptions="FillAndExpand"
-						Keyboard="Default"/>
-				
-					</StackLayout>
-			</Frame>
-		<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-		<Frame Padding="0" HasShadow="false" OutlineColor="#ECEDEE"
-				HorizontalOptions="FillAndExpand">
-
-	<StackLayout BackgroundColor="White" 
-						HeightRequest="40" Margin="10" Orientation="Horizontal">
-						<local:MyEntry
-				Placeholder="Name on card"
-						HorizontalOptions="FillAndExpand"
-						Keyboard="Default"/>
-				
-					</StackLayout>
-			</Frame>
-			<Frame Padding="0" HasShadow="false" OutlineColor="#ECEDEE"
-					HorizontalOptions="FillAndExpand">
-
-	<StackLayout BackgroundColor="White" 
-						HeightRequest="40" Margin="10" Orientation="Horizontal">
-						<local:MyEntry
-			Placeholder="Name on card"
-						HorizontalOptions="FillAndExpand"
-						Keyboard="Default"/>
-				
-					</StackLayout>
-			</Frame>
-		</StackLayout>
-		<Button Text="Save"
-		FontSize="22" 
-		TextColor="White"
-		BackgroundColor="#20D0C8"
-		BorderRadius="0"
-		Margin="0,30,0,0"/>
-	</StackLayout>
-	
+    <StackLayout Orientation="Horizontal" HeightRequest="60" BackgroundColor="#20D1C8">
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Image Source="back" VerticalOptions="CenterAndExpand" Margin="25,15,0,0" />
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="back_Tapped" />
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+            <Label Margin="0,15,0,0" Text="Add Detail" 
+            TextColor="White"
+            FontAttributes="Bold"
+            VerticalOptions="Center"/>                  
+        </StackLayout>
+        
+    <StackLayout Padding="20" Spacing="15">
+        
+    <StackLayout BackgroundColor="White" 
+                        HeightRequest="50" 
+                Orientation="Horizontal"
+                Margin="0,30,0,0">
+                        <local:MyEntry
+                    Margin="10,0,0,0"
+                x:Name="txtPaypalId"
+                Placeholder="Enter your paypal id"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Default"/>
+                
+                    </StackLayout>
+        
+        <Button Text="SAVE"
+        FontSize="Medium" 
+        TextColor="White"
+        BackgroundColor="#20D0C8"
+        BorderRadius="0"
+        HeightRequest="50"
+        Margin="0,30,0,0"
+        x:Name="btnSave"/> 
+        </StackLayout> 
+         </StackLayout>
 </ContentPage> 
  

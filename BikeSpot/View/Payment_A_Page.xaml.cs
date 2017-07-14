@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PayPal.Forms;
 using Xamarin.Forms;
 
 namespace BikeSpot
@@ -22,7 +23,8 @@ namespace BikeSpot
 		{
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false); 
-			PrepareUI(); 
+			PrepareUI();
+
 		}
 		public Payment_A_Page(Product productModel) 
 		{
@@ -54,7 +56,8 @@ namespace BikeSpot
 			productModel.product_id = model.product_id;
 			productModel.name = model.product_image;
 			productModel.price = model.offer_price;
-			productModel.user_id = model.user_id;
+            productModel.product_owner_id = model.product_owner_id;
+            productModel.user_id = model.user_id;
 			productModel.product_name = model.product_name;
 			var data = model.product_image;
 			if (!string.IsNullOrEmpty(data))
@@ -68,9 +71,9 @@ namespace BikeSpot
 			}
 			else
 			{
-				_productModel = new Product();
-			_productModel = productModel;
-			}
+			_productModel = new Product(); 
+			_productModel = productModel; 
+			} 
 			NavigationPage.SetHasNavigationBar(this, false);
 			PrepareUI();
 			SetOfferStatus(offer_status);
@@ -182,19 +185,53 @@ namespace BikeSpot
 			txtMsg.Focused += TxtMsg_Focused;
 			txtMsg.Unfocused += TxtMsg_Unfocused;
 			txtMsg.Completed += TxtMsg_Completed;
-			btnYes.Clicked+= BtnYes_Clicked;
-			btnNo.Clicked+= BtnNo_Clicked;
-			btnAccept.Clicked+= BtnAccept_Clicked;
-			btnRefuse.Clicked+= BtnRefuse_Clicked;
-			btnOk.Clicked+= BtnOk_Clicked;
-			btnCash.Clicked+= BtnCash_Clicked;
-			btnOnline.Clicked+= BtnOnline_Clicked;
-			btnMakeOffer.Clicked+= BtnMakeOffer_Clicked;
+			btnYes.Clicked += BtnYes_Clicked;
+			btnNo.Clicked += BtnNo_Clicked;
+			btnAccept.Clicked += BtnAccept_Clicked;
+			btnRefuse.Clicked += BtnRefuse_Clicked;
+			btnOk.Clicked += BtnOk_Clicked;
+			btnCash.Clicked += BtnCash_Clicked;
+			btnOnline.Clicked += BtnOnline_Clicked;
+			btnMakeOffer.Clicked += BtnMakeOffer_Clicked;
+
+			txtMsg.Focused += (sender, e) =>
+			{
+				//flowlistviewOverlay.IsVisible = true;
+			};
+			txtMsg.Unfocused += (sender, e) =>
+			{
+				//flowlistviewOverlay.IsVisible = false;
+			};
+
+			TapGestureRecognizer flowlistviewTapGesture = new TapGestureRecognizer();
+			flowlistviewTapGesture.Command = new Command(() =>
+			{
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					txtMsg.Unfocus();
+                    ChatEntry.keepOpen = false;
+				});
+			});
+			flowlistview.GestureRecognizers.Add(flowlistviewTapGesture);
+			stackContent.GestureRecognizers.Add(flowlistviewTapGesture);
+			//stackScrollContent.GestureRecognizers.Add(flowlistviewTapGesture);
+			//flowlistviewOverlay.GestureRecognizers.Add(flowlistviewTapGesture);
+
+            flowlistview.FlowItemTapped += (sender, e) =>
+			{
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					txtMsg.Unfocus();
+                    ChatEntry.keepOpen = false;
+				});
+			};
 
 			if (fromPage == "make_offer")
 			{
 				if (isFirstLoad)
-					SaveChatUser();
+				{
+					await SaveChatUser();
+				}
 			}
 			else if (fromPage == "user_list")
 			{
@@ -207,12 +244,54 @@ namespace BikeSpot
 					GetAllChatMessages().Wait();
 			}
 
-			MessagingCenter.Subscribe<object, string>(this, "NotificationRecieved", (sender, msg) =>
+			MessagingCenter.Subscribe<object, ChatModel.Datum>(this, "NotificationRecieved", (sender, model) =>
 			{
 				Device.BeginInvokeOnMainThread(() =>
-				 {
+                 {
 
+                    if (!ReferenceEquals(model,null))
+                    {
+                        if(string.Equals( model.type,"chat"))
+                        {
+                            model.Incoming = true;
+                            if(!string.IsNullOrEmpty(model.profile_pic))
+                             model.profile_pic = Constants.ProfilePicUrl + model.profile_pic;
+							 var t1 = Convert.ToDateTime(model.created_at);
+                             if (!isFromLocal)
+							 {
+								 t1 = DateTime.SpecifyKind(t1, DateTimeKind.Utc);
+								 t1 = t1.ToLocalTime();
+							 }
+							 model.MessageTime = StaticMethods.TimeAgo(Convert.ToDateTime(t1));
+							 if (items != null)
+							 {
+								 //var time = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt");
 
+                                items.Items.Add(model);
+							 }
+							 else
+							 {
+								 _chatModel = new ChatModel();
+								 var list = new List<ChatModel.Datum>();
+                                list.Add(model);
+								 _chatModel.data = list;
+								 items = new ChatItemList(_chatModel.data);
+								 flowlistview.FlowItemsSource = items.Items;
+							 }
+							 var lastItem = flowlistview.FlowItemsSource.OfType<object>().Last();
+							 flowlistview.ScrollTo(lastItem, ScrollToPosition.End, false);
+
+							
+
+						 }
+                        else
+                        {
+                             offer_status = model.status;
+							 UpdateOfferStatus().Wait();
+
+                        }
+                         lblPrice.Text = model.offer_price;
+                    }
 
 				 });
 			});
@@ -239,6 +318,10 @@ namespace BikeSpot
 		{
 			try
 			{
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					txtMsg.Unfocus();
+				});
 				await Navigation.PopModalAsync();
 
 			}
@@ -265,12 +348,23 @@ namespace BikeSpot
 							if (optionCount % 2 == 0)
 							{
 								imgTopBackgroud.IsVisible = true;
-								flowlistview.HeightRequest = App.ScreenWidth / 1.3;
+								var height = App.ScreenHeight / 1.4;
+								flowlistview.HeightRequest = height - 100;
+
+								_slChatLayout.HeightRequest = height - 100;
+								_sclChatContent.HeightRequest = height;
+								
 							}
 							else
 							{
 								imgTopBackgroud.IsVisible = false;
-								flowlistview.HeightRequest = App.ScreenHeight - 130;
+
+								var height = App.ScreenHeight / 3.4;
+								_slChatLayout.HeightRequest = App.ScreenHeight - height;
+								flowlistview.HeightRequest = App.ScreenHeight - height;
+								_sclChatContent.HeightRequest = height;
+
+								
 							}
 
 							optionCount++;
@@ -281,12 +375,23 @@ namespace BikeSpot
 						if (optionCount % 2 == 0)
 						{
 							imgTopBackgroud.IsVisible = true;
-							flowlistview.HeightRequest = App.ScreenWidth / 1.3;
+							//flowlistview.HeightRequest = App.ScreenWidth / 1.3;
+							var height = App.ScreenHeight / 1.4;
+							_slChatLayout.HeightRequest = height - 100;
+							_sclChatContent.HeightRequest = height;
+							flowlistview.HeightRequest = height - 100;
 						}
 						else
 						{
+
 							imgTopBackgroud.IsVisible = false;
-							flowlistview.HeightRequest = App.ScreenHeight - 130;
+							//flowlistview.HeightRequest = App.ScreenHeight - 130;
+							var height = App.ScreenHeight - 60;
+
+							_slChatLayout.HeightRequest = height - 100;
+							_sclChatContent.HeightRequest = height;
+							flowlistview.HeightRequest = App.ScreenHeight - height;
+
 						}
 
 						optionCount++;
@@ -388,7 +493,14 @@ namespace BikeSpot
 		{
 			try
 			{
-				lblPrice.Text = _productModel.price;
+                flowlistview.FlowColumnMinWidth = App.ScreenWidth;
+				string lblPriceText = lblPrice.Text;
+				if (!ReferenceEquals(_productModel.price, null) && _productModel.price != string.Empty)
+				{
+					lblPriceText = _productModel.price.Replace("€", string.Empty);
+					lblPriceText = lblPriceText.Replace(" ", string.Empty);
+				}
+				lblPrice.Text = lblPriceText;
 				StaticDataModel._CurrentContext.IsGestureEnabled = false;
 				imgProduct.Source = _productModel.product_image;
 				lblTitle.Text = _productModel.product_name;
@@ -406,10 +518,16 @@ namespace BikeSpot
 				bx3.WidthRequest = boxWidth;
 				bx4.WidthRequest = boxWidth;
 				//Chat intialization
-				flowlistview.HeightRequest = App.ScreenHeight - 140;
+				//flowlistview.HeightRequest = App.ScreenHeight - 140;
+				var height = App.ScreenHeight - 60;
+
+				_slChatLayout.HeightRequest = height - 100;
+				_sclChatContent.HeightRequest = height;
+
+				flowlistview.HeightRequest = height-100; 
 
 				//Circle 
-				var width = App.ScreenWidth / 4;
+				var width = App.ScreenWidth / 4; 
 				var radious = width / 2;
 
 				btnCash.HeightRequest = width;
@@ -450,14 +568,24 @@ namespace BikeSpot
 								if (_chatUserModel.result == "success")
 								{
 									offer_status = _chatUserModel.offer_status.ToString();
-									SetOfferStatus(offer_status);
 									if (_chatUserModel.msg == string.Empty)
 									{
+										_productModel.price = _productModel.price.Replace(" ", string.Empty);
+										_productModel.price = _productModel.price.Replace("€", string.Empty);
 										SendMessage("Offer posted price € " + _productModel.price, Convert.ToInt32(_productModel.price)).Wait();
 									}
 								}
-
-
+								else
+								{
+									offer_status = "0";
+									if (_chatUserModel.msg == string.Empty)
+									{
+										_productModel.price = _productModel.price.Replace(" ", string.Empty);
+										_productModel.price = _productModel.price.Replace("€", string.Empty);
+                                SendMessage("Offer posted price € " + _productModel.price, Convert.ToDouble(_productModel.price)).Wait();
+									}
+								}
+                        		SetOfferStatus(offer_status);
 							}
 						}
 						catch (Exception ex)
@@ -506,36 +634,30 @@ namespace BikeSpot
 					}, TaskScheduler.FromCurrentSynchronizationContext()
 				);
 		}
-private async Task UpdateOfferStatus()
-{
-	
+		private async Task UpdateOfferStatus()
+		{
 
-	Task.Factory.StartNew(
-			// tasks allow you to use the lambda syntax to pass wor
-			() =>
+			try
 			{
-
-				_offerstatusModel = WebService.SaveOfferStatus(Convert.ToInt32(_productModel.user_id), Convert.ToInt32(_productModel.product_id),Convert.ToDouble( lblPrice.Text),offer_status);
-
-
-			}).ContinueWith(async
-					t =>
-			{
-				try
+				string lblPriceText = lblPrice.Text;
+				lblPriceText = lblPriceText.Replace(" ", string.Empty);
+				lblPriceText = lblPriceText.Replace("€", string.Empty);
+				_offerstatusModel = WebService.SaveOfferStatus(Convert.ToInt32(_productModel.user_id), Convert.ToInt32(_productModel.product_id), Convert.ToDouble(lblPriceText), offer_status);
+				
+                if (string.Equals(_offerstatusModel.result,"success"))
 				{
-					if (_offerstatusModel!=null)
-					{
-						SetOfferStatus(offer_status);
-
-					}
-				}
-				catch (Exception ex)
-				{
+					SetOfferStatus(offer_status);
 
 				}
+                else
+                {
+                    StaticMethods.ShowToast(_offerstatusModel.responseMessage);
+                }
+			}
+			catch (Exception ex)
+			{
+			}
 
-			}, TaskScheduler.FromCurrentSynchronizationContext()
-		);
 		}
 		private async Task GetAllChatMessages()
 		{
@@ -617,7 +739,7 @@ private async Task UpdateOfferStatus()
 			try
 			{
 
-				if (Convert.ToString(StaticDataModel.userId).Equals(_productModel.user_id))
+				if (Convert.ToString(StaticDataModel.userId).Equals(_productModel.product_owner_id))
 				{
 					switch (status)
 					{
@@ -631,14 +753,14 @@ private async Task UpdateOfferStatus()
 							slAcceptRefuse.IsVisible = true;
 							break;
                 case "2":
-							lblStatusMessage.Text="Offer is refuse " + lblPrice.Text + ".";
+							lblStatusMessage.Text="Offer is refuse " + lblPrice.Text + "€.";
 							slLabelToastMessages.IsVisible = true; 
                   
 
                     break;
                 case "3":
 							slLabelToastMessages.IsVisible = true;
-							lblStatusMessage.Text="Offer accepted " + lblPrice.Text + ".";
+							lblStatusMessage.Text="Offer accepted " + lblPrice.Text + "€.";
 							btnAccepted.BackgroundColor = Color.FromHex("#36C2B5");			
                     break;
                 case "4":
@@ -674,15 +796,16 @@ private async Task UpdateOfferStatus()
 					{
 						case "0":  // offer not made yet (default)
 							offer_status = "0";
+							imgTopBackgroud.IsVisible = true;
 							slMakeOfferPriceView.IsVisible = true;
 
 							break;
 						case "1": // Make offer
-							lblStatusMessage.Text= "Your Offer is pending " + lblPrice.Text + ".";
+							lblStatusMessage.Text= "Your Offer is pending " + lblPrice.Text + "€.";
 							slLabelToastMessages.IsVisible = true;
 							break;
 						case "2": // Offer refuse
-							lblStatusMessage.Text = "Your Offer is refuse " + lblPrice.Text + ".";
+							lblStatusMessage.Text = "Your Offer is refuse " + lblPrice.Text + "€.";
 							slLabelToastMessages.IsVisible = true;
 							slOK.IsVisible = true;
 							break;
@@ -693,7 +816,7 @@ private async Task UpdateOfferStatus()
 						case "4": // Cash or online
 							
 							sLPayment.IsVisible = false;
-							lblStatusMessage.Text= "Pending transaction " + lblPrice.Text + ".";
+							lblStatusMessage.Text= "Pending transaction " + lblPrice.Text + "€.";
 							slLabelToastMessages.IsVisible = true;
 							break;
 						case "5": // Paid
@@ -707,6 +830,7 @@ private async Task UpdateOfferStatus()
 						case "6": // No
 							///
 							offer_status = "0";
+							imgTopBackgroud.IsVisible = true;
 							slMakeOfferPriceView.IsVisible = true;
 							break;
 					}
@@ -718,82 +842,82 @@ private async Task UpdateOfferStatus()
 
 			}
 		}
+        private void PaymentProcess()
+        {
 
+            try
+            {
+                CrossPayPalManager.Current.RequestFuturePayments();
+            }
+            catch (Exception ex)
+            {
 
+            }
+        }
+       
 	}
 }
 
+/*
+   * init paypal library
+   
+public void initLibrary()
+{
+	PayPal pp = PayPal.getInstance();
+	if (pp == null)
+	{  // Test to see if the library is already initialized
 
+		// This main initialization call takes your Context, AppID, and target server
+		pp = PayPal.initWithAppID(this, "APP-80W284485P519543T", PayPal.ENV_SANDBOX);
+		// Required settings:
+		// Set the language for the library
+		pp.setLanguage("en_US";
+		// Some Optional settings:
+		// Sets who pays any transaction fees. Value is:
+		// FEEPAYER_SENDER, FEEPAYER_PRIMARYRECEIVER, FEEPAYER_EACHRECEIVER, and FEEPAYER_SECONDARYONLY
+		pp.setFeesPayer(PayPal.FEEPAYER_EACHRECEIVER);
+		// true = transaction requires shipping
+		pp.setShippingEnabled(false);
+	}
+}
 
-//String myId = PreferenceConnector.readString(ChatScreen.this, PreferenceConnector.USER_ID, "";
-//        if (adminId.equals(myId)) {
-//            switch (status) {
-//                case "0":
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    activityBinding.getStatus().setShowStatusTextView(true);
-//activityBinding.getStatus().setStatus("No Offer available.";
-//                    break;
-//                case "1":
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    activityBinding.getStatus().setOfferReceivedStatus(true);
-//                    break;
-//                case "2":
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    activityBinding.getStatus().setShowStatusTextView(true);
-//activityBinding.getStatus().setStatus("Offer is refuse " + offerPrice + ".";
-//                    break;
-//                case "3":
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    activityBinding.getStatus().setShowStatusTextView(true);
-//activityBinding.getStatus().setStatus("Offer accepted " + offerPrice + ".";
-//                    break;
-//                case "4":
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    activityBinding.getStatus().setReceiveMoneyStatus(true);
-//                    break;
-//                case "5"://paid
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    break;
-//                case "6": // No
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    activityBinding.getStatus().setShowStatusTextView(true);
-//activityBinding.getStatus().setStatus("Payment not received.";
-//                    break;
-//            }
-//        } else {
-//            switch (status) {
-//                case "0":  // offer not made yet (default)
-//                    activityBinding.priceTxt.setEnabled(true);
-//                    activityBinding.getStatus().setMakeOfferStatus(true);
-//                    break;
-//                case "1": // Make offer
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    activityBinding.getStatus().setShowStatusTextView(true);
-//activityBinding.getStatus().setStatus("Your Offer is pending " + offerPrice + ".";
-//                    break;
-//                case "2": // Offer refuse
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    activityBinding.getStatus().setShowStatusTextView(true);
-//activityBinding.getStatus().setStatus("Your Offer is refuse " + offerPrice + ".";
-//                    break;
-//                case "3": // Accepted
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    activityBinding.getStatus().setPaymentOptionStatus(true);
-//                    break;
-//                case "4": // Cash or online
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    activityBinding.getStatus().setShowStatusTextView(true);
-//activityBinding.getStatus().setStatus("Pending transaction " + offerPrice + ".";
-//                    break;
-//                case "5": // Paid
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    break;
-//                case "6": // No
-//                    activityBinding.priceTxt.setEnabled(false);
-//                    activityBinding.getStatus().setShowStatusTextView(true);
-//activityBinding.getStatus().setStatus("Payment not received.";
-//                    break;
-//            }
-//        }
+     * Paypal payment method
+     *
+     * @param amount
+     * @param currency
+     * @param sellerId
+    
+    public void onBuyPressed(String amount, String currency, String sellerId)
+{
+	// Create a basic PayPal payment
+	PayPalPayment payment = new PayPalPayment();
+	// Set the currency type
+	payment.setCurrencyType(currency);
+	// Set the recipient for the payment (can be a phone number)
+	payment.setRecipient(sellerId);
+	// Set the payment amount, excluding tax and shipping costs
+	payment.setSubtotal(new BigDecimal(amount));
+	// Set the payment type--his can be PAYMENT_TYPE_GOODS,
+	// PAYMENT_TYPE_SERVICE, PAYMENT_TYPE_PERSONAL, or PAYMENT_TYPE_NONE
+	payment.setPaymentType(PayPal.PAYMENT_TYPE_GOODS);
 
-					
+	PayPal payPal = PayPal.getInstance();
+	if (payPal != null)
+	{
+		// Use checkout to create our Intent.
+		Intent checkoutIntent = payPal
+				.checkout(payment, this /*, new ResultDelegate());
+		// Use the android's startActivityForResult() and pass in our
+		// Intent.
+		// This will start the library.
+		startActivityForResult(checkoutIntent, 1011);
+		// Set the tax amount
+		//        invoice.setTax(new BigDecimal(_taxAmount));
+
+	}
+	else
+	{
+		Utility.showMsg(ChatScreen.this, getString(R.string.alert), getString(R.string.wrong));
+	}
+}
+*/

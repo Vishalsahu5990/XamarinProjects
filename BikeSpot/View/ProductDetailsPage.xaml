@@ -9,14 +9,14 @@ x:Class="BikeSpot.ProductDetailsPage"
 	>
 	<StackLayout VerticalOptions="FillAndExpand" Spacing="0">
 
-		<StackLayout Padding="0,10,0,0" Orientation="Horizontal" HeightRequest="80" BackgroundColor="#20D1C8">
+		<StackLayout Padding="0,10,0,0" Orientation="Horizontal" HeightRequest="60" BackgroundColor="#20D1C8">
 			<StackLayout VerticalOptions="FillAndExpand">
 				<Image Source="back" VerticalOptions="CenterAndExpand" Margin="20" />
 				<StackLayout.GestureRecognizers>
 					<TapGestureRecognizer Tapped="back_Tapped" /> 
 				</StackLayout.GestureRecognizers>
 			</StackLayout>
-			<Image Aspect="AspectFill" Margin="20" Source="logo" HorizontalOptions="CenterAndExpand" />
+			<Image Aspect="AspectFill" Margin="7" Source="logo" HorizontalOptions="CenterAndExpand" />
 			<Image Source="search" Margin="10,10,10,15"/>
 
 		</StackLayout>
@@ -77,7 +77,7 @@ x:Class="BikeSpot.ProductDetailsPage"
 						<controls:CircleImage
 							x:Name="imgProfile"
 							Aspect="AspectFill"
-							Source="profile.jpg"
+							Source="dummyprofile.png"
 							HeightRequest="60"
 			WidthRequest="60"
 			VerticalOptions="Start"
@@ -343,7 +343,7 @@ x:Class="BikeSpot.ProductDetailsPage"
     </StackLayout.GestureRecognizers>
 					</StackLayout>
 					<StackLayout Grid.Column="1" VerticalOptions="FillAndExpand" Padding="0" Margin="0">
-						<StackLayout BackgroundColor="#12E5D9" VerticalOptions="FillAndExpand">
+						<StackLayout BackgroundColor="#20D1C8" VerticalOptions="FillAndExpand">
 							<StackLayout  VerticalOptions="CenterAndExpand">
 							<Image Source="make_ofer" />
 						<Label Text="Make offer" HorizontalOptions="Center"

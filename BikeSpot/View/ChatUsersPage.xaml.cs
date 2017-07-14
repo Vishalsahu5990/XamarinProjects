@@ -18,7 +18,7 @@ bool isFirstLoad = false;
 			NavigationPage.SetHasNavigationBar(this, false);
 
 			flowlistview.FlowColumnMinWidth = App.ScreenWidth;
-			StaticDataModel._CurrentContext.IsGestureEnabled = false;
+			//StaticDataModel._CurrentContext.IsGestureEnabled = false;
 		}
 		protected override void OnAppearing()
 		{
@@ -84,18 +84,30 @@ protected override void OnDisappearing()
 					{
 						if (_chatUserModel != null)
 						{
-							for (int i = 0; i < _chatUserModel.data.Count; i++)
+							if (!ReferenceEquals(_chatUserModel.data, null))
 							{
-								_chatUserModel.data[i].name = _chatUserModel.data[i].name + "-" + _chatUserModel.data[i].product_name;
-								var date_time = _chatUserModel.data[i].last_chating_time;
-								if (!string.IsNullOrEmpty(date_time))
+								for (int i = 0; i < _chatUserModel.data.Count; i++)
 								{
-									var time = Convert.ToDateTime(date_time);
-								var _time=	time.ToString("hh:mm tt");
-									_chatUserModel.data[i].last_chating_time = _time;
+									_chatUserModel.data[i].name = _chatUserModel.data[i].name + "-" + _chatUserModel.data[i].product_name;
+									var date_time = _chatUserModel.data[i].last_chating_time;
+									if (!string.IsNullOrEmpty(date_time))
+									{
+										var time = Convert.ToDateTime(date_time);
+										var _time = time.ToString("hh:mm tt");
+										_chatUserModel.data[i].last_chating_time = _time;
+									}
 								}
+								flowlistview.FlowItemsSource = _chatUserModel.data;
 							}
-							flowlistview.FlowItemsSource = _chatUserModel.data;
+							else
+							{
+								
+								Device.BeginInvokeOnMainThread(() =>
+								{
+									StaticMethods.ShowToast("No User model data");
+								});
+							}
+
 						}
 					});
 						}

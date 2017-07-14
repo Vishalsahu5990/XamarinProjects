@@ -37,6 +37,63 @@ namespace BikeSpot
 			NavigationPage.SetHasNavigationBar(this, false);
 		}
 
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+
+			TapGestureRecognizer avatarTapGesture = new TapGestureRecognizer();
+			avatarTapGesture.Tapped += (sender, e) =>
+			{
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					(((Application.Current.MainPage as MasterDetailPage).Detail as NavigationPage).CurrentPage as HomePage).OpenProfileCommand.Execute(null);
+				});
+			};
+			imgProfile.GestureRecognizers.Add(avatarTapGesture);
+
+			TapGestureRecognizer slFaqTapGesture = new TapGestureRecognizer();
+			slFaqTapGesture.Tapped += (sender, e) =>
+			{
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					(((Application.Current.MainPage as MasterDetailPage).Detail as NavigationPage).CurrentPage as HomePage).OpenFAQModalCommand.Execute(null);
+				});
+			};
+			slFaq.GestureRecognizers.Add(slFaqTapGesture);
+
+
+			TapGestureRecognizer slPrivateRetailerAccountTapGesture = new TapGestureRecognizer();
+			slPrivateRetailerAccountTapGesture.Tapped += (sender, e) =>
+			{
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					DisplayAlert("", "Please contact office@bikespot.at for becoming a retailer", "OK");
+				});
+			};
+			slPrivateRetailerAccount.GestureRecognizers.Add(slPrivateRetailerAccountTapGesture);
+
+			TapGestureRecognizer slContactTapGesture = new TapGestureRecognizer();
+			slContactTapGesture.Tapped += (sender, e) =>
+			{
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					Device.OpenUri(new Uri("http://www.bikespot.at"));
+				});
+			};
+			slContact.GestureRecognizers.Add(slContactTapGesture);
+
+
+			TapGestureRecognizer slSiteNoticeTapGesture = new TapGestureRecognizer();
+			slSiteNoticeTapGesture.Tapped += (sender, e) =>
+			{
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					Device.OpenUri(new Uri("http://www.bikespot.at/agb.html"));
+				});
+			};
+			slSiteNotice.GestureRecognizers.Add(slSiteNoticeTapGesture);
+		}
+
 		void Handle_Clicked(object sender, System.EventArgs e)
 		{
 			

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+	xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot"
+	x:Class="BikeSpot.QuestionsAndAnswersPopup">
+	<StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" Margin="20,30,20,30">
+		<StackLayout HeightRequest="50" BackgroundColor="#00D6CE" Orientation="Horizontal">
+			<Label Text="Size" TextColor="White" VerticalTextAlignment="Center" Margin="10,0,0,0" FontSize="Medium" x:Name="lblTitle"/>
+			<StackLayout Padding="10" HorizontalOptions="EndAndExpand">
+				<Image Source="cross" Margin="0,0,10,0" VerticalOptions="CenterAndExpand"/>
+				<StackLayout.GestureRecognizers>
+        			<TapGestureRecognizer Tapped="cross_Tapped"/> 
+    			</StackLayout.GestureRecognizers>
+			</StackLayout>
+		</StackLayout>
+		<ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+			<StackLayout Padding="15" Orientation="Vertical" Spacing="15">
+				<StackLayout Orientation="Vertical" Spacing="3">
+					<Label Text="Warum ist die App in Englisch?" FontAttributes="Bold"></Label>
+					<Label Text="Da wir unbedingt unseren Veröffentlichungstermin einhalten wollten und die App zweisprachig mit dynamischer Sprachauswahl geplant war, haben wir dieses Feature für die erste Version weggelassen. Geschrieben wurde alles von Beginn an in Englisch, daher ist es – aber nur für ein paar Tage – Englisch."></Label>
+				</StackLayout>
+				<StackLayout Orientation="Vertical" Spacing="3">
+					<Label Text="How can I edit my posts?" FontAttributes="Bold"></Label>
+					<Label Text="We are currently working on a perfect working screen that will allow you to edit your post after submitting it. This update won’t take long. You will be able to edit them in just a few days."></Label>
+				</StackLayout>
+				<StackLayout Orientation="Vertical" Spacing="3">
+					<Label Text="Where is the difference between private and retailer?" FontAttributes="Bold"></Label>
+					<Label Text="Private-Accounts are for private users and Retailer-Accounts for businesses. Therefore, private users must have some limitations. You can also become a retailer if you are a private person; the app has no restrictions for that but any income from bike-trades might be taxable."></Label>
+				</StackLayout>
+				<StackLayout Orientation="Vertical" Spacing="3">
+					<Label Text="How can I pay with PayPal?" FontAttributes="Bold"></Label>
+					<Label Text="If a seller of a bike has a paypal account saved in the app and he accepts your offer you can choose the option “PayPal” in the Payment-Section of your chat. The money is directly transferred from your account to the sellers account without any charges from Bikespot."></Label>
+				</StackLayout>
+				<StackLayout Orientation="Vertical" Spacing="3">
+					<Label Text="Do I have to use the Payment-Section of the app?" FontAttributes="Bold"></Label>
+					<Label Text="No, you don’t have to use this section. This is just an assistance you can choose if you want pay with PayPal or if you want to complete and confirm your purchase more officially. "></Label>
+				</StackLayout>
+			</StackLayout>
+		</ScrollView>
+	</StackLayout>
+</pages:PopupPage>

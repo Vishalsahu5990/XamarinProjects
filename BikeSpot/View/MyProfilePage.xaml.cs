@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
 
 namespace BikeSpot
@@ -11,12 +12,13 @@ namespace BikeSpot
 		ProfileModel _profileModel = null;
 		MyProfileDataModel.Data _profileDataModel = null;
 		double itemWidth = 140;
+		string filterType = string.Empty;
 		public MyProfilePage()
 		{
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
 			PrepaireUI();
-			//StaticDataModel._CurrentContext.IsPresented = false;
+
 		}
 		protected override void OnAppearing()
 		{
@@ -32,6 +34,10 @@ namespace BikeSpot
 
 			btnBuyingRent.Clicked += BtnBuyingRent_Clicked;
 			btnBuyingSell.Clicked += BtnBuyingSell_Clicked;
+
+			flowlistview.FlowItemTapped += Flowlistview_FlowItemTapped;
+
+			//Getting Profile data
 			GetProfile().Wait();
 
 
@@ -43,6 +49,7 @@ namespace BikeSpot
 			btnSell.Clicked -= BtnSell_Clicked;
 			btnRent.Clicked -= BtnRent_Clicked;
 			btnProfile.Clicked -= BtnProfile_Clicked;
+			flowlistview.FlowItemTapped -= Flowlistview_FlowItemTapped;
 
 		}
 		private void PrepaireUI()
@@ -69,10 +76,53 @@ namespace BikeSpot
 			}
 		}
 
+		async void Flowlistview_FlowItemTapped(object sender, ItemTappedEventArgs e)
+		{
+			var item = e.Item as MyProfileDataModel.Sell;
+			var productModel = new Product();
+			productModel.product_id = item.product_id;
+			productModel.product_name = item.product_name;
+			productModel.gender = item.gender;
+			productModel.address = item.address;
+			productModel.lat = item.lat;
+			productModel.@long = item.@long;
+			productModel.type_of_bike = item.type_of_bike;
+			productModel.product_image = item.product_image;
+			productModel.type = item.type;
+			productModel.condition = item.condition;
+
+			productModel.currency = item.currency;
+			productModel.price = item.price.ToString();
+			productModel.rent_time = item.rent_time;
+			productModel.framesize = item.framesize;
+			productModel.add_to_top = item.add_to_top;
+
+
+			var currentPage = ((Application.Current.MainPage as MasterDetailPage).Detail as NavigationPage).CurrentPage;
+			if (!(currentPage is ProductDetailsPage))
+			{
+				await Navigation.PushModalAsync(new ProductDetailsPage(productModel, true));
+			}
+
+		}
+
+		async void Delete_Clicked(object sender, System.EventArgs e)
+		{
+			var buton = (Xamarin.Forms.Button)sender;
+			var id = buton.CommandParameter.ToString();
+			if (!string.IsNullOrEmpty(id))
+			{
+				var result = await DisplayAlert("Alert!", "Do you want to delete this?", "Yes", "No");
+				if (result)
+					DeleteProduct(id).Wait();
+			}
+
+		}
+
 		void BtnBuyingRent_Clicked(object sender, EventArgs e)
 		{
-
-			Device.BeginInvokeOnMainThread(() =>
+			filterType = "rent";
+			Device.BeginInvokeOnMainThread(() => 
 			{
 				btnBuyingRent.BackgroundColor = Color.FromHex("#1FD7D7");
 				btnBuyingSell.BackgroundColor = Color.FromHex("#D5D6D7");
@@ -84,7 +134,7 @@ namespace BikeSpot
 
 		void BtnBuyingSell_Clicked(object sender, EventArgs e)
 		{
-
+			filterType = "sold";
 			Device.BeginInvokeOnMainThread(() =>
 			{
 				btnBuyingRent.BackgroundColor = Color.FromHex("#D5D6D7");
@@ -97,6 +147,7 @@ namespace BikeSpot
 
 		void BtnOfferingRent_Clicked(object sender, EventArgs e)
 		{
+			filterType = "rent";
 			Device.BeginInvokeOnMainThread(() =>
 		{
 			btnOfferingRent.BackgroundColor = Color.FromHex("#1FD7D7");
@@ -109,6 +160,7 @@ namespace BikeSpot
 
 		void BtnOfferingSell_Clicked(object sender, EventArgs e)
 		{
+			filterType = "sell";
 			Device.BeginInvokeOnMainThread(() =>
 		{
 			btnOfferingRent.BackgroundColor = Color.FromHex("#D5D6D7");
@@ -121,6 +173,7 @@ namespace BikeSpot
 
 		void BtnOfferingSold_Clicked(object sender, EventArgs e)
 		{
+			filterType = "sold";
 			Device.BeginInvokeOnMainThread(() =>
 		{
 			btnOfferingRent.BackgroundColor = Color.FromHex("#D5D6D7");
@@ -143,20 +196,27 @@ namespace BikeSpot
 		{
 			await Navigation.PushModalAsync(new SavedUsersPage());
 		}
-async void yourReviewsTapped(object sender, EventArgs e)
-{
-			await  DisplayAlert("Message","It will work in next version.","OK");
-		}
-async void upgradeAccountTapped(object sender, EventArgs e)
+		async void yourReviewsTapped(object sender, EventArgs e)
 		{
-await DisplayAlert("Message","It will work in next version.","OK");
+            await Navigation.PushModalAsync(new MyReviewsPage());
+			//await  DisplayAlert("Message","It will work in next version.","OK");
 		}
-async void paymentMethodsTapped(object sender, EventArgs e)
-{
-await DisplayAlert("Message","It will work in next version.","OK");
+		async void upgradeAccountTapped(object sender, EventArgs e)
+		{
+			Device.BeginInvokeOnMainThread(() =>
+				{
+					DisplayAlert("", "Please contact office@bikespot.at for becoming a retailer", "OK");
+				});
+			//await DisplayAlert("Message","It will work in next version.","OK");
 		}
-async void settingsTapped(object sender, EventArgs e)
-{
+		async void paymentMethodsTapped(object sender, EventArgs e)
+		{
+			//await DisplayAlert("Message", "It will work in next version.", "OK");
+            await Navigation.PushModalAsync(new AddCardDetailsPage());
+			//await Navigation.PushPopupAsync(new ChoosePaymentMethodPopup("Payment Method"));
+		}
+		async void settingsTapped(object sender, EventArgs e)
+		{
 			await Navigation.PushModalAsync(new Settings(true));
 		}
 		async void BtnSell_Clicked(object sender, EventArgs e)
@@ -167,6 +227,7 @@ async void settingsTapped(object sender, EventArgs e)
 			slSell.IsVisible = true;
 			slRent.IsVisible = false;
 			_slProfile.IsVisible = false;
+			filterType = "rent";
 			Device.BeginInvokeOnMainThread(() =>
 			{
 				btnOfferingRent.BackgroundColor = Color.FromHex("#1FD7D7");
@@ -179,6 +240,7 @@ async void settingsTapped(object sender, EventArgs e)
 
 		void BtnRent_Clicked(object sender, EventArgs e)
 		{
+			filterType = "rent";
 			bxSell.IsVisible = false;
 			bxRent.IsVisible = true;
 			bxProfile.IsVisible = false;
@@ -206,6 +268,7 @@ async void settingsTapped(object sender, EventArgs e)
 		}
 		public void SellTapped(object sender, EventArgs e)
 		{
+			filterType = "rent";
 			bxSell.IsVisible = true;
 			bxRent.IsVisible = false;
 			bxProfile.IsVisible = false;
@@ -223,6 +286,7 @@ async void settingsTapped(object sender, EventArgs e)
 		}
 		public void RentTapped(object sender, EventArgs e)
 		{
+			filterType = "rent";
 			bxSell.IsVisible = false;
 			bxRent.IsVisible = true;
 			slSell.IsVisible = false;
@@ -268,6 +332,8 @@ async void settingsTapped(object sender, EventArgs e)
 								lblUserName.Text = _profileModel.data[0].name;
 								lblEmail.Text = _profileModel.data[0].website_url;
 								lblReviews.Text = _profileModel.data[0].total_reviews + " Reviews";
+
+                                lblMyReviews.Text=_profileModel.data[0].get_review + " Reviews";
 
 								lblMail.Text = _profileModel.data[0].email;
 								lblContactNo.Text = _profileModel.data[0].contact_number;
@@ -339,6 +405,7 @@ async void settingsTapped(object sender, EventArgs e)
 										{
 											_listProduct[i].product_image = Constants.ImageUrl + array[0];
 										}
+                                _listProduct[i].price = "€ " + _listProduct[i].price;
 									}
 									flowlistview.FlowItemsSource = _listProduct;
 									lblItemsCount.Text = _listProduct.Count + " ITEMS";
@@ -362,10 +429,10 @@ async void settingsTapped(object sender, EventArgs e)
 										{
 											_listProduct[i].product_image = Constants.ImageUrl + array[0];
 										}
-										
+										_listProduct[i].price = "€ " + _listProduct[i].price;
 									}
-							flowlistview.FlowItemsSource = _listProduct;
-										lblItemsCount.Text = _listProduct.Count + " ITEMS";
+									flowlistview.FlowItemsSource = _listProduct;
+									lblItemsCount.Text = _listProduct.Count + " ITEMS";
 
 								}
 								else if (filterType == "sold")
@@ -387,10 +454,10 @@ async void settingsTapped(object sender, EventArgs e)
 										{
 											_listProduct[i].product_image = Constants.ImageUrl + array[0];
 										}
-										
+										_listProduct[i].price = "€ " + _listProduct[i].price;
 									}
-							flowlistview.FlowItemsSource = _listProduct;
-										lblItemsCount.Text = _listProduct.Count + " ITEMS";
+									flowlistview.FlowItemsSource = _listProduct;
+									lblItemsCount.Text = _listProduct.Count + " ITEMS";
 
 								}
 
@@ -402,6 +469,10 @@ async void settingsTapped(object sender, EventArgs e)
 
 
 							StaticMethods.DismissLoader();
+						}
+						else
+						{
+							flowlistview.FlowItemsSource = null;
 						}
 					}, TaskScheduler.FromCurrentSynchronizationContext()
 				);
@@ -445,6 +516,7 @@ async void settingsTapped(object sender, EventArgs e)
 										{
 											_listProduct[i].product_image = Constants.ImageUrl + array[0];
 										}
+										_listProduct[i].price = "€ " + _listProduct[i].price;
 									}
 									flowlistviewBuying.FlowItemsSource = _listProduct;
 									lblBuyingItemsCount.Text = _listProduct.Count + " ITEMS";
@@ -469,10 +541,10 @@ async void settingsTapped(object sender, EventArgs e)
 										{
 											_listProduct[i].product_image = Constants.ImageUrl + array[0];
 										}
-										
+										_listProduct[i].price = "€ " + _listProduct[i].price;
 									}
-						            	flowlistviewBuying.FlowItemsSource = _listProduct;
-										lblBuyingItemsCount.Text = _listProduct.Count + " ITEMS";
+									flowlistviewBuying.FlowItemsSource = _listProduct;
+									lblBuyingItemsCount.Text = _listProduct.Count + " ITEMS";
 
 								}
 
@@ -487,6 +559,35 @@ async void settingsTapped(object sender, EventArgs e)
 						}
 					}, TaskScheduler.FromCurrentSynchronizationContext()
 				);
+		}
+		private async Task DeleteProduct(string product_id)
+		{
+			string ret = string.Empty;
+			StaticMethods.ShowLoader();
+			Task.Factory.StartNew(async () =>
+			{
+				ret = WebService.DeleteProductByProductId(product_id);
+			}).ContinueWith
+				((arg) =>
+			{
+				Device.BeginInvokeOnMainThread(async () =>
+
+				{
+					if (!string.IsNullOrEmpty(ret))
+					{
+						StaticMethods.ShowToast("Product has been deleted successfully");
+						GetProfileData(filterType).Wait();
+					}
+					else
+					{
+						StaticMethods.ShowToast("Failed to delete product!, Please try again later.");
+					}
+
+				});
+
+
+			});
+			StaticMethods.DismissLoader();
 		}
 	}
 }

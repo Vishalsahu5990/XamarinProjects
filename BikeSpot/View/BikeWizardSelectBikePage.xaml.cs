@@ -12,7 +12,7 @@ namespace BikeSpot
 		string option = string.Empty;
 		QuestionAnswerModel questionAnswerModel = null;
 		WizardResultModel resultModel = null;
-		List<string> answerArray = new List<string>();
+		List<string> answerArray = null;
 		public BikeWizardSelectBikePage()
 		{
 			InitializeComponent();
@@ -28,6 +28,7 @@ namespace BikeSpot
 			base.OnAppearing();
 			questionNumber = 0;
 			IsAnswerd = false;
+			answerArray  = new List<string>();
 			GetQuestionAnswers().Wait();
 		}
 		protected override void OnDisappearing()

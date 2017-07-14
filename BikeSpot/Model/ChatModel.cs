@@ -29,6 +29,7 @@ namespace BikeSpot
 			public string last_chating_time { get; set; }
 			public string offer_price { get; set; }
 			public string status { get; set; }
+            public string type { get; set; }
 			public string product_owner_id { get; set; }
 			public string sender_id { get; set; }
 			public string reciever_id { get; set; }

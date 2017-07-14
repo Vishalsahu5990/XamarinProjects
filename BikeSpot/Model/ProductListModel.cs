@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace BikeSpot
 {
@@ -15,6 +16,7 @@ namespace BikeSpot
 	{
 		public string listing_type { get; set; }
 		public string product_id { get; set; }
+        public string product_owner_id { get; set; }
 		public string user_id { get; set; }
 		public string framesize { get; set; }
 		public string gender { get; set; }
@@ -49,6 +51,8 @@ namespace BikeSpot
 		public string borderColor { get; set; }
 		public List<Product> list { get; set; }
         public List<Model> imageList { get; set; }
+
+		public ICommand ProductTappedCommand { get; set; }
 	}
 	public  class Model { public string image { get; set; } }
 	}

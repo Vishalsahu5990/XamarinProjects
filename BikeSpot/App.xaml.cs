@@ -23,19 +23,20 @@ namespace BikeSpot
 			locator = CrossGeolocator.Current; 
 			locator.DesiredAccuracy = 50;
 
-			var exists = CrossSecureStorage.Current.HasKey("userId");
-			if (!exists)
-			{ 
-				MainPage = new NavigationPage(new LoginPage()); 
-			}
-			else
-			{
-				var model=StaticMethods. GetLocalSavedData();
-				StaticDataModel.userId = model.user_id;
+            var exists = CrossSecureStorage.Current.HasKey("userId");
+            if (!exists)
+            { 
+            	MainPage = new NavigationPage(new LoginPage()); 
+            }
+            else
+            {
+            	var model=StaticMethods. GetLocalSavedData();
+            	StaticDataModel.userId = model.user_id;
 
-				MainPage = new  BikeSpot.MainPage();
-			}
-			//MainPage = new NavigationPage(new BikeSpot.Settings());  
+            	MainPage = new  BikeSpot.MainPage(); 
+            }
+            //StaticDataModel.userId = 13;
+            //MainPage = new NavigationPage(new BikeSpot.ChatUsersPage());  
 		}
 
 		protected override void OnStart()

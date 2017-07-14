@@ -13,7 +13,8 @@ List<ChatModel> cm = new List<ChatModel>();
 		{
 			
 			InitializeComponent();
-			listview.HeightRequest = App.ScreenHeight - 150;
+			//listview.HeightRequest = App.ScreenHeight - 150;
+
 			LoadPreviousChat();
 		}
 private void LoadPreviousChat()

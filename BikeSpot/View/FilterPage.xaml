@@ -115,7 +115,8 @@
 						HeightRequest="40"	/>
 						</Grid>
 <!--			more types			-->
-						<Grid IsVisible="false" x:Name="gvMoreTypes"  Padding="10,0,10,10">
+						<Grid IsVisible="false" x:Name="gvMoreTypes"
+						Padding="10,0,10,10">
 
 
 			<Button Text="Singlespeed Bikes"
@@ -248,15 +249,16 @@
 						</local:RangeSlider>
 
 		<Grid Margin="20,0,20,0"> 
-		<Label Text="100" VerticalOptions="Center"
-			
+		<Label  VerticalOptions="Center"
+			TextColor="#20D1C8"
 			Grid.Column="0"
 							x:Name="lblStartPriceRange"/>
 
-			<Label Text="10000" VerticalOptions="Center"
+			<Label  VerticalOptions="Center"
 			Margin="0,0,20,0"
 			HorizontalOptions="EndAndExpand"
 		Grid.Column="1"
+								TextColor="#20D1C8"
 							x:Name="lblEndPriceRange"/> 
 		</Grid>
 			
@@ -279,38 +281,39 @@
 			StepValueContinuously="False" 
 			TextSize="15"
 			HorizontalOptions="FillAndExpand"
+			Margin="10"/>
 
-		Margin="10"/>
+				<Grid Margin="20,0,20,0">
+					<Label   VerticalOptions="Center"
+							Grid.Column="0"
+							x:Name="lblStartDistanceRange"
+							TextColor="#20D1C8"/>
+					<Label  VerticalOptions="Center" 
+								HorizontalOptions="EndAndExpand" 
+							Grid.Column="1"
+							x:Name="lblEndDistanceRange"
+							TextColor="#20D1C8"/> 
+				</Grid>
+						
 						<StackLayout HeightRequest="40"
 							HorizontalOptions="FillAndExpand"
 							BackgroundColor="#E5E6E7"
 							x:Name="slAddress"
-							Margin="20,15,20,15">
+							Margin="10,15,10,15">
 							<StackLayout Orientation="Horizontal"
-								
-								VerticalOptions="CenterAndExpand">
+								VerticalOptions="CenterAndExpand"
+								Padding="5,0,0,0">
 								<Image Source="placeholder"/>
 								<Label Text="Location"
-								x:Name="lblLocation"
-								TextColor="Gray"/>
+									x:Name="lblLocation"
+									TextColor="Gray" />
 							</StackLayout>
 							<StackLayout.GestureRecognizers>
-					<TapGestureRecognizer Tapped="location_Tapped" />
-				</StackLayout.GestureRecognizers>
+								<TapGestureRecognizer Tapped="location_Tapped" />
+							</StackLayout.GestureRecognizers>
 						</StackLayout>
 
-		<Grid Margin="20,0,20,0">
-		<Label  Text="0 KM" VerticalOptions="Center"
-			
-			Grid.Column="0"
-							x:Name="lblStartDistanceRange"/>
-
-			<Label Text="300 KM" VerticalOptions="Center"
-
-			HorizontalOptions="EndAndExpand"
-		Grid.Column="1"
-							x:Name="lblEndDistanceRange"/>
-		</Grid>
+		
 		</StackLayout>	
 
 		<StackLayout Orientation="Horizontal" Margin="20,10,20,0">
@@ -465,7 +468,7 @@
 			Margin="10,0,0,0"/>	
 			</StackLayout>
 		<Grid  Padding="10">
-	<Button Text="Man"
+	<Button Text="Men"
 			BackgroundColor="#E5E6E7"
 				BorderRadius="0"
 			Grid.Column="0" 

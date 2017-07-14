@@ -226,42 +226,62 @@ namespace BikeSpot
 					() =>
 					{
 
-						_profileModel = WebService.GetProfile(StaticDataModel.userId);
+                _profileModel = WebService.GetProfile(_userId);
 
 
 					}).ContinueWith(async
 					t =>
 					{
-						if (_profileModel != null)
-						{
-							Device.BeginInvokeOnMainThread(async () =>
+                try
+                        {
+							if (_profileModel != null)
 							{
-								lblUserName.Text = _profileModel.data[0].name;
-								lblEmail.Text = _profileModel.data[0].website_url;
-								lblReviews.Text = _profileModel.data[0].total_reviews + " Reviews";
-
-
-								if (!string.IsNullOrEmpty(_profileModel.data[0].profile_pic))
-									imgProfile.Source = Constants.ProfilePicUrl + _profileModel.data[0].profile_pic;
-
-								if (!string.IsNullOrEmpty(_profileModel.data[0].ratings))
+								Device.BeginInvokeOnMainThread(async () =>
 								{
+									lblUserName.Text = _profileModel.data[0].name;
+									lblEmail.Text = _profileModel.data[0].website_url;
+									lblReviews.Text = _profileModel.data[0].total_reviews + " Reviews";
 
-									var val = Math.Round(Convert.ToDouble(_profileModel.data[0].ratings), 3);
-									lblRating.Text = val.ToString();
-								}
-								var model = StaticMethods.GetLocalSavedData();
-								if (model != null)
-								{
-									if (model.is_retailer == "1")
+
+									if (!string.IsNullOrEmpty(_profileModel.data[0].profile_pic))
+										imgProfile.Source = Constants.ProfilePicUrl + _profileModel.data[0].profile_pic;
+									else
+										imgProfile.Source = "dummyprofile.png";
+
+									if (!string.IsNullOrEmpty(_profileModel.data[0].ratings))
 									{
-										imgRibbon.IsVisible = true;
-									}
-								}
-								GetProfileData("rent").Wait();
-							});
-						}
 
+										var val = Math.Round(Convert.ToDouble(_profileModel.data[0].ratings), 3);
+										lblRating.Text = val.ToString();
+									}
+									var model = StaticMethods.GetLocalSavedData();
+									if (model != null)
+									{
+										if (model.is_retailer == "1")
+										{
+											imgRibbon.IsVisible = true;
+										}
+									}
+									GetProfileData("rent").Wait();
+								});
+							}
+
+						}
+                        catch (Exception ex)
+                        {
+
+                        }
+                finally
+                {
+
+							Device.BeginInvokeOnMainThread(() =>
+					{
+
+						GetProfileData("sell").Wait();
+
+					});
+                }
+						
 
 						StaticMethods.DismissLoader();
 

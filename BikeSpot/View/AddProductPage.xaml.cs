@@ -1150,13 +1150,63 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 
 			}
 		}
-		private async Task AddProduct_Sell()
+		private async Task<bool> AddProduct_Sell()
 		{
 			string base64 = string.Empty;
 			string ret = string.Empty;
 			ProductModel um = new ProductModel();
 			StaticMethods.ShowLoader();
-			Task.Factory.StartNew(
+
+			um.user_id = StaticDataModel.userId;
+			um.gender = lblGender_sell.Text;
+			um.size = lblSize_sell.Text;
+			um.imageByteArray = imageBytes;
+			um.product_name = txtWhatYouAreSelling_sell.Text;
+			um.product_description = txtDescribe_sell.Text;
+			um.type_of_bike = lblTypeofbike_sekk.Text;
+			um.address = lblAddress_sell.Text;
+			if (profileData != null)
+			{
+				var bytearray = StaticMethods.StreamToByte(profileData.GetStream());
+				base64 = Convert.ToBase64String(bytearray);
+				um.product_image = bytearray;
+				var extsn = Path.GetExtension(profileData.Path);
+				var str = extsn.Split('.');
+				extsn = str[1];
+				um.extension = extsn;
+			}
+			um.type = 0;
+			um.currency = lblInr_sell.Text;
+
+			um.price = txtPrice_sell.Text;
+			um.condition = lblCondition_sell.Text;
+			if (switchsellValue)
+				um.is_facebook_sharable = 1;
+			else
+				um.is_facebook_sharable = 0;
+
+
+			//ret = WebService.AddProduct(um);
+			string addProductResult = await WebService.AddProductUsingMultipart(um);
+			Device.BeginInvokeOnMainThread(() =>
+				{
+					StaticMethods.DismissLoader();
+				});
+			if (addProductResult == "SUCCESS")
+			{
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					((Application.Current.MainPage as MasterDetailPage).Detail as NavigationPage).PopAsync(true);
+				});
+				return true;
+			}
+			else
+			{
+			}
+
+			return false;
+
+			/*Task.Factory.StartNew(
 					// tasks allow you to use the lambda syntax to pass wor
 					() =>
 					{
@@ -1191,7 +1241,7 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 
 
 						//ret = WebService.AddProduct(um);
-				WebService.AddProductUsingMultipart(um);
+						WebService.AddProductUsingMultipart(um);
 
 
 					}).ContinueWith(async
@@ -1210,68 +1260,68 @@ var list = await DependencyService.Get<IiOSMethods>().MultiImagePicker();
 						//StaticMethods.DismissLoader();
 
 					}, TaskScheduler.FromCurrentSynchronizationContext()
-				);
+				);*/
 		}
-		private async Task AddProduct_Rent()
+		private async Task<bool> AddProduct_Rent()
 		{
 			string base64 = string.Empty;
 			ProductModel um = null;
 			string ret = string.Empty;
 			StaticMethods.ShowLoader();
-			Task.Factory.StartNew(
-					// tasks allow you to use the lambda syntax to pass wor
-					() =>
-					{
-						um = new ProductModel();
-						um.user_id = StaticDataModel.userId;
-					    um.gender = lblGender_rent.Text;
-						um.imageByteArray = imageBytes;
-						um.size = lblSize_rent.Text;
-						um.product_name = txtWhatYouAreSelling_rent.Text;
-						um.product_description = txtDescribe_rent.Text;
-						um.type_of_bike = lblTypeofbike_rent.Text;
-						um.address = lblAddress_rent.Text;
-						if (profileData != null)
-						{
-							var bytearray = StaticMethods.StreamToByte(profileData.GetStream());
-							base64 = Convert.ToBase64String(bytearray);
-					um.product_image = bytearray;
-							var extsn = Path.GetExtension(profileData.Path);
-							var str = extsn.Split('.');
-							extsn = str[1];
-							um.extension = extsn;
-						}
-						um.type = 1;
-						um.currency = lblInr_rent.Text;
 
-						um.price = txtPrice_rent.Text;
-						um.condition = lblCondtition_rent.Text;
-						if (switchrentValue)
-							um.is_facebook_sharable = 1;
-						else
-							um.is_facebook_sharable = 0;
+			um = new ProductModel();
+			um.user_id = StaticDataModel.userId;
+			um.gender = lblGender_rent.Text;
+			um.imageByteArray = imageBytes;
+			um.size = lblSize_rent.Text;
+			um.product_name = txtWhatYouAreSelling_rent.Text;
+			um.product_description = txtDescribe_rent.Text;
+			um.type_of_bike = lblTypeofbike_rent.Text;
+			um.address = lblAddress_rent.Text;
+			if (profileData != null)
+			{
+				var bytearray = StaticMethods.StreamToByte(profileData.GetStream());
+				base64 = Convert.ToBase64String(bytearray);
+				um.product_image = bytearray;
+				var extsn = Path.GetExtension(profileData.Path);
+				var str = extsn.Split('.');
+				extsn = str[1];
+				um.extension = extsn;
+			}
+			um.type = 1;
+			um.currency = lblInr_rent.Text;
 
-						//ret = WebService.AddProduct(um);
-				 WebService.AddProductUsingMultipart(um);
+			um.price = txtPrice_rent.Text;
+			um.condition = lblCondtition_rent.Text;
+			if (switchrentValue)
+				um.is_facebook_sharable = 1;
+			else
+				um.is_facebook_sharable = 0;
 
-					}).ContinueWith(async
-					t =>
-					{
-						if (ret == "success")
-						{
-							StaticMethods.ShowToast("Product added successfully");
-							await Navigation.PushAsync(new HomePage());
-						}
-						else
-						{
-							StaticMethods.ShowToast("Failed to add product, Please try after some time.");
-						}
+			//ret = WebService.AddProduct(um);
 
-						StaticMethods.DismissLoader();
 
-					}, TaskScheduler.FromCurrentSynchronizationContext()
-				);
+			string addProductResult = await WebService.AddProductUsingMultipart(um);
+			Device.BeginInvokeOnMainThread(() =>
+							{
+								StaticMethods.DismissLoader();
+							});
+			if (addProductResult == "SUCCESS")
+			{
+				Device.BeginInvokeOnMainThread(() =>
+				{
+					((Application.Current.MainPage as MasterDetailPage).Detail as NavigationPage).PopAsync(true);
+				});
+				return true;
+			}
+			else
+			{
+			}
+
+			return false;
 		}
+				 
+
 		private async Task AutoComplete()
 		{
 			string[] _autocompleteArray = null;

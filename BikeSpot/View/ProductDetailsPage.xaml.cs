@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Plugin.Share;
 using Xamarin.Forms;
@@ -12,6 +13,7 @@ namespace BikeSpot
 	public partial class ProductDetailsPage : ContentPage
 	{
 		bool isFavourite = false;
+bool isModelPage = false;
 		Product _productModel = null;
 		Product _productDetailsModel = null;
 		public static int staticcustomPins;
@@ -21,6 +23,13 @@ namespace BikeSpot
 			InitializeComponent();
 			NavigationPage.SetHasNavigationBar(this, false);
 			PrepareUI();
+		}
+public ProductDetailsPage(Product productModel,bool model_page)
+{
+	isModelPage = model_page;
+	InitializeComponent();
+	NavigationPage.SetHasNavigationBar(this, false);
+	PrepareUI();
 		}
 		public ProductDetailsPage()
 		{
@@ -50,10 +59,13 @@ namespace BikeSpot
 			}
 		}
 		async void back_Tapped(object sender, System.EventArgs e)
-		{
+		{ 
 			try
 			{
+				if(!isModelPage)
 				await Navigation.PopAsync();
+				else
+				await Navigation.PopModalAsync();
 
 			}
 			catch (Exception ex)
@@ -94,7 +106,8 @@ var result = await DisplayAlert("Alert!", "Do you want to save this profile?", "
 		async void profile_Tapped(object sender, System.EventArgs e)
 		{
 			try
-			{ 
+			{
+				var xxx = _productDetailsModel;
 				await Navigation.PushModalAsync(new UserProfilePage(Convert.ToInt32( _productModel.user_id)));
 
 			}
@@ -128,6 +141,23 @@ async void comment_Tapped(object sender, System.EventArgs e)
 				else
 				{
 					await Navigation.PushModalAsync(new Payment_A_Page(_productModel));
+					/*var chatUserList = WebService.GetChatUserList();
+					ChatUserModel.Datum chatUser = chatUserList.data.Where(w => w.user_id == _productModel.user_id).FirstOrDefault();;
+					if (!ReferenceEquals(chatUser, null))
+					{
+						Device.BeginInvokeOnMainThread(() =>
+						{
+							Navigation.PushModalAsync(new Payment_A_Page(chatUser));
+						});
+					}
+					else
+					{
+						Device.BeginInvokeOnMainThread(() =>
+						{
+							Navigation.PushModalAsync(new Payment_A_Page(_productModel));
+						});
+					}*/
+
 				}
 
 			}

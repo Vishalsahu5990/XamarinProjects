@@ -39,7 +39,10 @@ namespace BikeSpot
 				
 				_masterpage._lblEmail.Text = model.email;
 
+                if (!string.IsNullOrEmpty(model.profile_pic))
 				_masterpage._imgProfile.Source = Constants.ProfilePicUrl + model.profile_pic;
+                else
+                    _masterpage._imgProfile.Source =  "dummyprofile.png";  
 			}
 
 			//To access navigation menu on a button click

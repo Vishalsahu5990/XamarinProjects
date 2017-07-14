@@ -6,8 +6,6 @@
 	<string>BikeSpot</string>
 	<key>CFBundleName</key>
 	<string>BikeSpot</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.bikespot.ios</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -71,5 +69,11 @@
 		<string>googlechromes</string>
 		<string>comgooglemaps</string>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>1.9</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.bikespot.ios</string>
+	<key>NSLocationWhenInUsageDescription</key>
+	<string>App use location service mode in use</string>
 </dict>
 </plist>

@@ -492,24 +492,41 @@ int countUnisex = 0;
 		}
 		void SliderPrice_UpperValueChanged(object sender, EventArgs e)
 		{
+			RangeSlider rSender = ((RangeSlider)sender);
+			if (!ReferenceEquals(null, rSender))
+			{
+				lblEndPriceRange.Text = Convert.ToInt32(rSender.UpperValue).ToString();
+			}
 			lblEndPriceRange.Text = ((RangeSlider)sender).UpperValue.ToString();
 		}
 
 		void SliderPrice_LowerValueChanged(object sender, EventArgs e)
 		{
-			lblStartPriceRange.Text = ((RangeSlider)sender).LowerValue.ToString();
-
+			RangeSlider rSender = ((RangeSlider)sender);
+			if (!ReferenceEquals(null, rSender))
+			{
+				lblStartPriceRange.Text = Convert.ToInt32(rSender.LowerValue).ToString();
+			}
 		}
 
 		void SliderDistance_UpperValueChanged(object sender, EventArgs e)
 		{
-			lblEndDistanceRange.Text = ((RangeSlider)sender).UpperValue.ToString();
+			RangeSlider rSender = ((RangeSlider)sender);
+			if (!ReferenceEquals(null, rSender))
+			{
+				var d = Convert.ToInt32(rSender.UpperValue);
+				lblEndDistanceRange.Text = d.ToString();
+			}
 		}
 
 		void SliderDistance_LowerValueChanged(object sender, EventArgs e)
 		{
-			lblStartDistanceRange.Text = ((RangeSlider)sender).LowerValue.ToString();
+			RangeSlider rSender = ((RangeSlider)sender);
+			if (!ReferenceEquals(null, rSender))
+			{
+				lblStartDistanceRange.Text = Convert.ToInt32(rSender.LowerValue).ToString();
 
+			}
 		}
 
 		void BtnRoadBikes_Clicked(object sender, EventArgs e)
@@ -708,15 +725,9 @@ int countUnisex = 0;
 		{
 			try
 			{
-				if (countAll % 2 != 0)
-				{
-					_typeOfBikes = new List<string>();
-					_typeOfBikes.Add("all");
-				}
-				else
-				{
+				
 					PrepareTypeofBike();
-				}
+
 
 				GetProducts().Wait();
 		}
@@ -754,7 +765,14 @@ int countUnisex = 0;
 				_gender = new List<string>();
 				_frameSize = new List<string>();
 
-				if (countRoadBikes % 2 != 0)
+				if (countAll % 2 != 0)
+				{
+					
+					_typeOfBikes.Add("all");
+				}
+				else
+				{
+                   if (countRoadBikes % 2 != 0)
 				{
 					if (countRoadBikes > 0)
 						_typeOfBikes.Add("Road Bikes");
@@ -843,6 +861,9 @@ int countUnisex = 0;
 						_typeOfBikes.Add("Unicycle");
 				}
 
+				}
+
+
 
 
 				if (countNew % 2 != 0)
@@ -917,7 +938,7 @@ int countUnisex = 0;
 				if (countMan % 2 != 0)
 				{
 					if (countMan > 0)
-						_gender.Add("Man");
+						_gender.Add("Men");
 				}
 				if (countWoman % 2 != 0)
 				{
@@ -943,33 +964,20 @@ int countUnisex = 0;
 		{
 
 			StaticMethods.ShowLoader();
-			Task.Factory.StartNew(
-					// tasks allow you to use the lambda syntax to pass wor
-					() =>
-					{
 
-						//_listProduct = WebService.FilterProducts(_typeOfBikes,_condition,_buy_rent,
-						//                                         Convert.ToInt32(lblStartPriceRange),
-						//                                         Convert.ToInt32(lblEndPriceRange),
-						//                                         Convert.ToInt32(lblEndDistanceRange),
-						//                                         StaticDataModel.Lattitude,
-						//                                         StaticDataModel.Longitude);
-						_listProduct = WebService.FilterProducts(_typeOfBikes, _condition, _buy_rent,
+			_listProduct = WebService.FilterProducts(_typeOfBikes, _condition, _buy_rent,
 																 _min_price,
 																 _max_price,
 																 _max_distance,
-				                                                 _gender,
-				                                                 _frameSize,
-				                                                 _lat,
-				                                                 _long
-																 );
+																 _gender,
+																 _frameSize,
+																 _lat,
+																 _long
+													);
 
-
-					}).ContinueWith(async
-					t =>
-					{
-						Device.BeginInvokeOnMainThread(async () =>
+			Device.BeginInvokeOnMainThread(async() =>
 						{
+				StaticMethods.DismissLoader();
 							if (_listProduct != null)
 							{
 								if (_listProduct.Count > 0)
@@ -984,11 +992,6 @@ int countUnisex = 0;
 							}
 						});
 
-
-						StaticMethods.DismissLoader();
-
-					}, TaskScheduler.FromCurrentSynchronizationContext()
-				);
 		}
 	}
 }

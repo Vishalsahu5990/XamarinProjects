@@ -26,6 +26,7 @@ namespace BikeSpot
 
 		public static string ClientId = "250769118368-16no493rn1t2peo8af9k6bfi9vo3lejr.apps.googleusercontent.com";
 		public static string ClientIdFacebook = "1605074516186884";
+        public static string FacebookAppId_InstallCount = "338776776555125";
 
 		public static string ClientSecret = "a20VJFFvLZK6Hj7v5bQFaKf0";
 

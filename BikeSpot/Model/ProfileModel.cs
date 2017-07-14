@@ -20,8 +20,9 @@ namespace BikeSpot
 			public string contact_number { get; set; }
 			public string website_url { get; set; }
 			public string total_reviews { get; set; }
-			public string ratings { get; set; }
-			public string saved_users { get; set; }
+            public string get_review { get; set; }
+            public string ratings { get; set; }
+			public string saved_users { get; set; }  
 
 		}
 	}

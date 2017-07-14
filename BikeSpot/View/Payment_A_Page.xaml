@@ -1,496 +1,185 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-	    xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot" 
-	    xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
-	     xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+	xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+	xmlns:local="clr-namespace:BikeSpot;assembly=BikeSpot" 
+	xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+	xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
 	x:Class="BikeSpot.Payment_A_Page">
-	<StackLayout >
+	<StackLayout x:Name="stackContent">
 		<StackLayout Spacing="0">
-	<StackLayout Orientation="Horizontal" HeightRequest="60" BackgroundColor="#20D1C8">
-			<StackLayout VerticalOptions="FillAndExpand">
-				<Image Source="back" VerticalOptions="CenterAndExpand" Margin="25,15,0,0" />
-				<StackLayout.GestureRecognizers>
-        <TapGestureRecognizer Tapped="back_Tapped"/> 
-    </StackLayout.GestureRecognizers>
-			</StackLayout>
-			<Label Margin="0,15,0,0" Text="No Title" 
-			TextColor="White"
-			FontAttributes="Bold"
-			VerticalOptions="Center"
-				x:Name="lblTitle"
-				LineBreakMode="TailTruncation"/> 	
-				<StackLayout Margin="0,15,0,0"  
-					VerticalOptions="Center"
-				HorizontalOptions="EndAndExpand"
-					Padding="15,0,15,0">
-				<Image
-						Source="make.png"  
-			VerticalOptions="Center"  
-				/> 
+			<StackLayout Orientation="Horizontal" HeightRequest="60" BackgroundColor="#20D1C8">
+				<StackLayout VerticalOptions="FillAndExpand">
+					<Image Source="back" VerticalOptions="CenterAndExpand" Margin="25,15,0,0" />
+					<StackLayout.GestureRecognizers>
+        				<TapGestureRecognizer Tapped="back_Tapped"/> 
+    				</StackLayout.GestureRecognizers>
+				</StackLayout>
+				<Label Margin="0,15,0,0" Text="No Title" TextColor="White" FontAttributes="Bold" VerticalOptions="Center" x:Name="lblTitle" LineBreakMode="TailTruncation"/> 	
+				<StackLayout Margin="0,15,0,0" VerticalOptions="Center" HorizontalOptions="EndAndExpand" Padding="15,0,15,0">
+					<Image Source="make.png" VerticalOptions="Center" /> 
 					<StackLayout.GestureRecognizers> 
-        <TapGestureRecognizer Tapped="option_Tapped"/> 
-    </StackLayout.GestureRecognizers>
+       					<TapGestureRecognizer Tapped="option_Tapped"/> 
+   					</StackLayout.GestureRecognizers>
 				</StackLayout> 
-					
-		</StackLayout>
+			</StackLayout>
 			<StackLayout> 
-		<RelativeLayout HeightRequest="200"   
-				x:Name="imgTopBackgroud"
-			VerticalOptions="Start" 
-					IsVisible="false">  
-  <ffimageloading:CachedImage
-						LoadingPlaceholder="green_background"
-						ErrorPlaceholder="green_background"
-		x:Name="imgProduct"
-		Source="green_background" 
-				Aspect="AspectFill"
-	RelativeLayout.WidthConstraint= 
-              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
-               RelativeLayout.HeightConstraint=
-                  "{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
-
-               <Grid RelativeLayout.WidthConstraint=
-              "{ConstraintExpression Type=RelativeToParent, Property=Width}"
-            RelativeLayout.HeightConstraint=
-              "{ConstraintExpression Type=RelativeToParent, Property=Height}">
-
-              <!--top back bar start-->
-				
-					<!--top back bar end-->
-	<StackLayout VerticalOptions="FillAndExpand"
-							Padding="0,15,0,15">
-							<StackLayout x:Name="slMakeOfferPriceView"
-								IsVisible="false">
-
-				<Frame Padding="7" 
-								HorizontalOptions="Center"
-								BackgroundColor="Transparent"
-								OutlineColor="White"
-								>
-
-				 <Label Text="00"
-								Margin="30,0,30,0"
-								TextColor="White"
-								x:Name="lblPrice"/> 
-						</Frame>
-				 <Frame Padding="7" 
-								HorizontalOptions="Center"
-								BackgroundColor="Transparent"
-							Margin="0,10,0,0"	>
-
-				   <Button Text="Make offer" 
-				BackgroundColor="#99ffffff"
-				VerticalOptions="Center"
-				HorizontalOptions="Center"
-				TextColor="Black"
-				FontSize="Medium"
-				BorderRadius="0"
-				WidthRequest="150"
-					x:Name="btnMakeOffer"			/>
-						</Frame>
-						</StackLayout>
-							 <StackLayout>
-			 <StackLayout 
-			BackgroundColor="#90ECECEC"
-			HeightRequest="40"
-			x:Name="slLabelToastMessages"
-			HorizontalOptions="Center"
-			Padding="10,0,10,0"
-			Margin="10,0,10,0"
-			VerticalOptions="FillAndExpand"
-				IsVisible="false">
-	 <Label Text="No Offer available."
-			HorizontalTextAlignment="Center"
-			VerticalTextAlignment="Center"
-			VerticalOptions="CenterAndExpand"
-			FontAttributes="Bold"
-			TextColor="White"
-				x:Name="lblStatusMessage"/>
-
-		</StackLayout> 
-			<StackLayout Orientation="Horizontal" 
-				HorizontalOptions="Center"
-				x:Name="slAcceptRefuse"
-				IsVisible="false">
-				 <Frame Padding="7" 
-								HorizontalOptions="Center"
-								BackgroundColor="Transparent"
-							Margin="0,10,0,0"	
-					HasShadow="false">
-
-				   <Button Text="REFUSE" 
-				BackgroundColor="#00CFC6"
-				VerticalOptions="Center"
-				HorizontalOptions="Center"
-				TextColor="White"
-				FontSize="Medium"
-				BorderRadius="0"
-				WidthRequest="100"
-				FontAttributes="Bold"	
-					x:Name="btnRefuse"/>
-						</Frame>
-				<Frame Padding="7" 
-								HorizontalOptions="Center"
-								BackgroundColor="Transparent"
-							Margin="0,10,0,0"	
-					HasShadow="false">
-
-				   <Button Text="ACCEPT" 
-				BackgroundColor="#00CFC6"
-				VerticalOptions="Center"
-				HorizontalOptions="Center"
-				TextColor="White"
-				FontSize="Medium"
-				BorderRadius="0"
-				WidthRequest="100"
-				FontAttributes="Bold"
-					x:Name="btnAccept"/>
-						</Frame>
-			</StackLayout>
-			<StackLayout Orientation="Horizontal" 
-				HorizontalOptions="Center"
-				x:Name="slYesNo"
-				IsVisible="false">
-				 <Frame Padding="7" 
-								HorizontalOptions="Center"
-								BackgroundColor="Transparent"
-							Margin="0,10,0,0"	
-					HasShadow="false">
-
-				   <Button Text="YES" 
-				BackgroundColor="#00CFC6"
-				VerticalOptions="Center"
-				HorizontalOptions="Center"
-				TextColor="White"
-				FontSize="Medium"
-				BorderRadius="0"
-				WidthRequest="100"
-				FontAttributes="Bold"	
-					x:Name="btnYes"/>
-						</Frame>
-				<Frame Padding="7" 
-								HorizontalOptions="Center"
-								BackgroundColor="Transparent"
-							Margin="0,10,0,0"	
-					HasShadow="false">
-
-				   <Button Text="NO" 
-				BackgroundColor="#00CFC6"
-				VerticalOptions="Center"
-				HorizontalOptions="Center"
-				TextColor="White"
-				FontSize="Medium"
-				BorderRadius="0"
-				WidthRequest="100"
-				FontAttributes="Bold"
-					x:Name="btnNo"/>
-						</Frame>
-			</StackLayout>
-			<StackLayout Orientation="Horizontal" 
-				HorizontalOptions="Center"
-				x:Name="slOK"
-				IsVisible="false">
-				 <Frame Padding="7" 
-								HorizontalOptions="Center"
-								BackgroundColor="Transparent"
-							Margin="0,10,0,0"	
-					HasShadow="false">
-
-				   <Button Text="OK" 
-				BackgroundColor="#D6D7D7"
-				VerticalOptions="Center"
-				HorizontalOptions="Center"
-				TextColor="White"
-				FontSize="Medium"
-				BorderRadius="0"
-				WidthRequest="100"
-				FontAttributes="Bold"	
-					x:Name="btnOk"/>
-						</Frame>
-				
-			</StackLayout>
-			<StackLayout Orientation="Horizontal" 
-				HorizontalOptions="Center"
-				x:Name="sLPayment"
-				Spacing="0"
-				IsVisible="false">
-
-
-				   <Button 
-					Text="Cash" 
-				BackgroundColor="#D6D7D7"
-				VerticalOptions="Center"
-				HorizontalOptions="Center"
-				TextColor="Black"
-				FontSize="Medium"
-				BorderRadius="50"
-				WidthRequest="100"
-				HeightRequest="100"
-				FontAttributes="Bold"
-				x:Name="btnCash"
-				/>
-				<Image Source="arrow"/>
-					 <Button Text="Price" 
-				BackgroundColor="#00CFC6"
-				VerticalOptions="Center"
-				HorizontalOptions="Center"
-				TextColor="White"
-				FontSize="Medium"
-				BorderRadius="50"
-				WidthRequest="100"
-				HeightRequest="100"
-				FontAttributes="Bold"
-				x:Name="btnprice"/>
-				<Image Source="arrow"/>
-				 <Button Text="Online" 
-				BackgroundColor="#D6D7D7"
-				VerticalOptions="Center"
-				HorizontalOptions="Center"
-				TextColor="Black"
-				FontSize="Medium"
-				BorderRadius="50"
-				WidthRequest="100"
-				HeightRequest="100"
-				FontAttributes="Bold"
-				x:Name="btnOnline"/>
-				
-			</StackLayout>  
-		</StackLayout>
+				<RelativeLayout HeightRequest="200" x:Name="imgTopBackgroud" VerticalOptions="Start" IsVisible="false">  
+  					<ffimageloading:CachedImage LoadingPlaceholder="green_background" ErrorPlaceholder="green_background" x:Name="imgProduct" Source="green_background" Aspect="AspectFill" RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}" />
+               		<Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}">
+              			<!--top back bar start-->
+						<!--top back bar end-->
+						<StackLayout VerticalOptions="FillAndExpand" Padding="0,15,0,15">
+							<StackLayout x:Name="slMakeOfferPriceView" IsVisible="false">
+								<Frame Padding="7" HorizontalOptions="Center" BackgroundColor="#00000000" OutlineColor="White">
+				 					<!--<Label Text="00" Margin="30,0,30,0" TextColor="White" x:Name="lblPrice"/> -->
+                                    <local:MyEntry 
+                                    WidthRequest="80" 
+                                    x:Name="lblPrice"
+                                    HorizontalOptions="FillAndExpand"
+                                    TextColor="White"
+                                    HorizontalTextAlignment="Center"
+                                     Keyboard="Numeric"
+                                    FontSize="Small"/>
+								</Frame>
+				 				<Frame Padding="7" 
+                                    HorizontalOptions="Center" 
+                                    BackgroundColor="Transparent" Margin="0,10,0,0">
+				   					<Button Text="Make offer" BackgroundColor="#99ffffff" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" FontSize="Medium" BorderRadius="0" WidthRequest="150" x:Name="btnMakeOffer"/>
+								</Frame>
+							</StackLayout>
+							<StackLayout>
+			 					<StackLayout BackgroundColor="#90ECECEC" HeightRequest="40" x:Name="slLabelToastMessages" HorizontalOptions="Center" Padding="10,0,10,0" Margin="10,0,10,0" VerticalOptions="FillAndExpand" IsVisible="false">
+	 								<Label Text="No Offer available." HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" FontAttributes="Bold" TextColor="White" x:Name="lblStatusMessage"/>
+								</StackLayout> 
+								<StackLayout Orientation="Horizontal" HorizontalOptions="Center" x:Name="slAcceptRefuse" IsVisible="false">
+						 			<Frame Padding="7" HorizontalOptions="Center" BackgroundColor="Transparent" Margin="0,10,0,0" HasShadow="false">
+						   				<Button Text="REFUSE" BackgroundColor="#00CFC6" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontSize="Medium" BorderRadius="0" WidthRequest="100" FontAttributes="Bold" x:Name="btnRefuse"/>
+									</Frame>
+									<Frame Padding="7" HorizontalOptions="Center" BackgroundColor="Transparent" Margin="0,10,0,0" HasShadow="false">
+						   				<Button Text="ACCEPT" BackgroundColor="#00CFC6" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontSize="Medium" BorderRadius="0" WidthRequest="100" FontAttributes="Bold" x:Name="btnAccept"/>
+									</Frame>
+								</StackLayout>
+								<StackLayout Orientation="Horizontal" HorizontalOptions="Center" x:Name="slYesNo" IsVisible="false">
+						 			<Frame Padding="7" HorizontalOptions="Center" BackgroundColor="Transparent" Margin="0,10,0,0" HasShadow="false">
+						   				<Button Text="YES" BackgroundColor="#00CFC6" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontSize="Medium" BorderRadius="0" WidthRequest="100" FontAttributes="Bold" x:Name="btnYes"/>
+									</Frame>
+									<Frame Padding="7" HorizontalOptions="Center" BackgroundColor="Transparent" Margin="0,10,0,0" HasShadow="false">
+						   				<Button Text="NO" BackgroundColor="#00CFC6" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontSize="Medium" BorderRadius="0" WidthRequest="100" FontAttributes="Bold" x:Name="btnNo"/>
+									</Frame>
+								</StackLayout>
+								<StackLayout Orientation="Horizontal" HorizontalOptions="Center" x:Name="slOK" IsVisible="false">
+						 			<Frame Padding="7" HorizontalOptions="Center" BackgroundColor="Transparent" Margin="0,10,0,0" HasShadow="false">
+						   				<Button Text="OK" BackgroundColor="#D6D7D7" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontSize="Medium" BorderRadius="0" WidthRequest="100" FontAttributes="Bold" x:Name="btnOk"/>
+									</Frame>
+								</StackLayout>
+								<StackLayout Orientation="Horizontal" HorizontalOptions="Center" x:Name="sLPayment" Spacing="0" IsVisible="false">
+						   			<Button Text="Cash" BackgroundColor="#D6D7D7" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" FontSize="Medium" BorderRadius="50" WidthRequest="100" HeightRequest="100" FontAttributes="Bold" x:Name="btnCash" />
+									<Image Source="arrow"/>
+							 		<Button Text="Price" BackgroundColor="#00CFC6" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontSize="Medium" BorderRadius="50" WidthRequest="100" HeightRequest="100" FontAttributes="Bold" x:Name="btnprice"/>
+									<Image Source="arrow"/>
+						 			<Button Text="Online" BackgroundColor="#D6D7D7" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" FontSize="Medium" BorderRadius="50" WidthRequest="100" HeightRequest="100" FontAttributes="Bold" x:Name="btnOnline"/>
+								</StackLayout>  
+							</StackLayout>
 	
 
         
-					<StackLayout Spacing="0" 
-								Orientation="Horizontal" 
-								HorizontalOptions="FillAndExpand"
-								VerticalOptions="EndAndExpand">
-					<BoxView BackgroundColor="White"
-								HeightRequest="5"
-								VerticalOptions="Center"
-								HorizontalOptions="FillAndExpand"
-								x:Name="bx1"/>
-					<Button Text="Make offer" 
-				BackgroundColor="#36C2B5"
-				VerticalOptions="Center"
-				TextColor="Black"
-				FontSize="Small" 
-				BorderRadius="0"
-				x:Name="btnMakeOffer1"
-								WidthRequest="80"/>
-								<BoxView BackgroundColor="White"
-								HeightRequest="5"
-								VerticalOptions="Center"
-								HorizontalOptions="FillAndExpand"
-								x:Name="bx2"/>
-					<Button Text="Accepted" 
-				BackgroundColor="#99ffffff"
-				VerticalOptions="Center" 
-				TextColor="Black"
-				FontSize="Small"
-				BorderRadius="0"
-				WidthRequest="80"
-								x:Name="btnAccepted"/>
-								<BoxView BackgroundColor="White"
-								HeightRequest="5"
-								VerticalOptions="Center"
-								HorizontalOptions="FillAndExpand"
-								x:Name="bx3"/>
-					<Button Text="Paid" 
-				BackgroundColor="#99ffffff"
-				VerticalOptions="Center" 
-				TextColor="Black"
-				FontSize="Small" 
-					BorderRadius="0"
-					x:Name="btnPaid"
-									WidthRequest="80"/>
-								<BoxView BackgroundColor="White"
-								HeightRequest="5"
-								VerticalOptions="Center"
-								x:Name="bx4"/>
-							</StackLayout>				
-				
-			
-								
-				
-							</StackLayout> 
-			</Grid> 
-          
-          </RelativeLayout>
-
-	</StackLayout>
-		</StackLayout>
-
-<!--start Chat section		-->
-<StackLayout  Spacing="0">
-	<ScrollView>
-	<StackLayout  Spacing="0"> 
-	 
-<flv:FlowListView 
-			    x:Name="flowlistview"
-                VerticalOptions="FillAndExpand"
-                HasUnevenRows="true"
-				FlowColumnMinWidth="320" 
-               SeparatorColor="Gray"
-				Margin="0,0,0,0"
-				> 
-                
-
-			<flv:FlowListView.FlowColumnTemplate>
-				<DataTemplate>
-						<!--view cell start-->
-	<StackLayout
-							Orientation="Horizontal" 
-							Padding="10" 
-							Spacing="0"
-			HorizontalOptions="FillAndExpand"> 
-
-<!--	incoming cell					--> 
-
-			<StackLayout 
-			IsVisible="{Binding Incoming}" 
-			Orientation="Horizontal" 
-			HorizontalOptions="FillAndExpand"
-				Spacing="0">
-
-			<controls:CircleImage
-					Source="{Binding profile_pic}"
-			HeightRequest="35"
-			WidthRequest="35"
-			VerticalOptions="Start"
-			Aspect="AspectFill"
-			BorderThickness="2"
-			BorderColor="#20D1C8"
-				Margin="0,0,3,0"/> 
-				<Image Source="incoming_arrow"
-				VerticalOptions="Start"
-				Margin="0,10,0,0"/>
-			<Frame
-				Margin="0,0,30,0" 
-				Padding="5"
-				HasShadow="false" 
-				BackgroundColor="#20D1C8"
-				HorizontalOptions="StartAndExpand" 
-				WidthRequest="{Binding FrameWidth}"
-				HeightRequest="{Binding FrameHeight}">
-					<StackLayout>
-						<StackLayout HorizontalOptions="FillAndExpand">
-							<Label Text="{Binding message}"
-				Margin="5"
-					FontSize="Small"
-						TextColor="White"/>
-						</StackLayout>
-						
-						<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-						<Label Text="{Binding MessageTime}"
-						FontSize="9"
-						TextColor="White"
-							HorizontalOptions="EndAndExpand"/>
-						</StackLayout>
-				
-						
-					</StackLayout>
-				
-			</Frame>
-		    </StackLayout>	
-
-			 <!--		outgoing cell					-->
-
-							<StackLayout
-								IsVisible="{Binding Outgoing}"
-								Orientation="Horizontal" 
-			HorizontalOptions="EndAndExpand"
-			Spacing="0">
-			<Frame
-				x:Name="frameOutgoing" 
-				Margin="30,0,0,0"
-				Padding="5"
-				HasShadow="false"
-				BackgroundColor="#DFDEDF"
-				HorizontalOptions="EndAndExpand" 
-				WidthRequest="{Binding FrameWidth}"
-				HeightRequest="{Binding FrameHeight}">
-				<StackLayout>
-						<StackLayout HorizontalOptions="FillAndExpand">
-							<Label Text="{Binding message}"
-				Margin="5" 
-					FontSize="Small" 
-						TextColor="Black"/> 
-						</StackLayout>
-						
-						<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-						<Label Text="{Binding MessageTime}"
-						FontSize="9"
-						TextColor="Black"
-							HorizontalOptions="EndAndExpand"/>
-						</StackLayout>
-				
-						
-					</StackLayout>
-			</Frame>
-			<Image Source="outgoing_arrow" 
-				VerticalOptions="Start"
-				Margin="0,10,0,0"/> 
-			<controls:CircleImage
-					Source="dummyprofile.png"
-			HeightRequest="35"
-			WidthRequest="35"
-			VerticalOptions="Start"
-			Aspect="AspectFill"
-			BorderThickness="2"
-			BorderColor="#20D1C8"
-				Margin="3,0,0,0"/> 
-
-		    </StackLayout>		
-
-		</StackLayout>
-
-		 
-
-<!--	view cell end	-->
-					
-					</DataTemplate>
-			</flv:FlowListView.FlowColumnTemplate>
-		
-		</flv:FlowListView>
-		<!-- static Footer	-->
-		<RelativeLayout Margin="0" VerticalOptions="EndAndExpand">
-			<StackLayout x:Name="_slFooter" HeightRequest="60" Orientation="Horizontal" BackgroundColor="#F7F7F7" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
-				
-				<Frame Margin="5" HorizontalOptions="FillAndExpand" Padding="0" HasShadow="false" VerticalOptions="Center">
-						<local:ChatEntry
-				    x:Name="txtMsg"
-					Placeholder="Write here..."
-					HorizontalOptions="FillAndExpand"
-					HeightRequest="40"
-					FontSize="14"
-				Margin="05,0,0,0"
-			VerticalOptions="Center"
-			Keyboard="Chat"
-					BackgroundColor="White"/>
-					</Frame>
-
-			<Button
-				x:Name="btnSend"
-			TextColor="Black"  
-			Image="send-btn"
-			WidthRequest="40"
-			HeightRequest="40" 
-			BorderRadius="20"
-			VerticalOptions="Center"
-			Margin="5"
-			Clicked="Send_Clicked"/> 
-
+							<StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
+								<BoxView BackgroundColor="White" HeightRequest="5" VerticalOptions="Center" HorizontalOptions="FillAndExpand" x:Name="bx1" />
+								<Button Text="Make offer" BackgroundColor="#36C2B5" VerticalOptions="Center" TextColor="Black" FontSize="Small" BorderRadius="0" x:Name="btnMakeOffer1" WidthRequest="80" />
+								<BoxView BackgroundColor="White" HeightRequest="5" VerticalOptions="Center" HorizontalOptions="FillAndExpand" x:Name="bx2" />
+								<Button Text="Accepted" BackgroundColor="#99ffffff" VerticalOptions="Center" TextColor="Black" FontSize="Small" BorderRadius="0" WidthRequest="80" x:Name="btnAccepted" />
+								<BoxView BackgroundColor="White" HeightRequest="5" VerticalOptions="Center" HorizontalOptions="FillAndExpand" x:Name="bx3" />
+								<Button Text="Paid" BackgroundColor="#99ffffff" VerticalOptions="Center" TextColor="Black" FontSize="Small" BorderRadius="0" x:Name="btnPaid" WidthRequest="80" />
+								<BoxView BackgroundColor="White" HeightRequest="5" VerticalOptions="Center" x:Name="bx4" />
+							</StackLayout>
+						</StackLayout> 
+					</Grid> 
+          		</RelativeLayout>
 			</StackLayout>
-		</RelativeLayout>
-		</StackLayout> 
+		</StackLayout>
 
-				
+		<!--start Chat section		-->
 
+        <StackLayout>
+        <ScrollView HeightRequest="400" x:Name="_sclChatContent">  
+            
+            <StackLayout VerticalOptions="FillAndExpand"  
+                HeightRequest="300"
+                    x:Name="_slChatLayout">
+                <flv:FlowListView  x:Name="flowlistview" VerticalOptions="FillAndExpand" HasUnevenRows="true" FlowColumnMinWidth="320" SeparatorColor="Gray" Margin="0,0,0,0"> 
+                            <flv:FlowListView.FlowColumnTemplate>
+                                <DataTemplate>
+                                    <!--view cell start-->
+                                    <StackLayout Orientation="Horizontal" Padding="10" Spacing="0" HorizontalOptions="FillAndExpand"> 
+                                        <!--    incoming cell --> 
+                                        <StackLayout IsVisible="{Binding Incoming}" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="0">
+                                            <controls:CircleImage Source="{Binding profile_pic}" HeightRequest="35" WidthRequest="35" VerticalOptions="Start" Aspect="AspectFill" BorderThickness="2" BorderColor="#20D1C8" Margin="0,0,3,0"/> 
+                                            <Image Source="incoming_arrow" VerticalOptions="Start" Margin="0,10,0,0"/>
+                                            <Frame Margin="0,0,30,0" Padding="5" HasShadow="false" BackgroundColor="#20D1C8" HorizontalOptions="StartAndExpand" WidthRequest="{Binding FrameWidth}" HeightRequest="{Binding FrameHeight}">
+                                                <StackLayout>
+                                                    <StackLayout HorizontalOptions="FillAndExpand">
+                                                        <Label Text="{Binding message}" Margin="5" FontSize="Small" TextColor="White"/>
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                        <Label Text="{Binding MessageTime}" FontSize="9" TextColor="White" HorizontalOptions="EndAndExpand"/>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                        <!-- outgoing cell -->
+
+                                        <StackLayout IsVisible="{Binding Outgoing}" Orientation="Horizontal" HorizontalOptions="EndAndExpand" Spacing="0" x:Name="outgoingContainer">
+                                            <Frame x:Name="frameOutgoing" Margin="30,0,0,0" Padding="5" HasShadow="false" BackgroundColor="#DFDEDF" HorizontalOptions="EndAndExpand" WidthRequest="{Binding FrameWidth}" HeightRequest="{Binding FrameHeight}">
+                                                <StackLayout>
+                                                    <StackLayout HorizontalOptions="FillAndExpand">
+                                                        <Label Text="{Binding message}" Margin="5" FontSize="Small" TextColor="Black"/> 
+                                                    </StackLayout>
+                                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                        <Label Text="{Binding MessageTime}" FontSize="9" TextColor="Black" HorizontalOptions="EndAndExpand"/>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Frame>
+                                            <Image Source="outgoing_arrow" VerticalOptions="Start" Margin="0,10,0,0"/> 
+                                            <controls:CircleImage Source="dummyprofile.png" HeightRequest="35" WidthRequest="35" VerticalOptions="Start" Aspect="AspectFill" BorderThickness="2" BorderColor="#20D1C8" Margin="3,0,0,0"/> 
+                                        </StackLayout>      
+                                    </StackLayout>
+                                    <!--    view cell end   -->
+                                </DataTemplate>
+                            </flv:FlowListView.FlowColumnTemplate>
+                        </flv:FlowListView>
+                <StackLayout x:Name="_slFooter" HeightRequest="60" Orientation="Horizontal" BackgroundColor="#F7F7F7" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
+                                        <Frame Margin="5" HorizontalOptions="FillAndExpand" Padding="0"
+                                    HasShadow="false" VerticalOptions="Center">
+                                            <local:ChatEntry x:Name="txtMsg" Placeholder="Write here..." HorizontalOptions="FillAndExpand" HeightRequest="40" FontSize="14" Margin="05,0,0,0" VerticalOptions="Center" Keyboard="Chat" BackgroundColor="White"/>
+                                        </Frame>
+                                        <Button x:Name="btnSend" TextColor="Black" Image="send-btn" WidthRequest="40" HeightRequest="40" BorderRadius="20" VerticalOptions="Center" Margin="5" Clicked="Send_Clicked"/> 
+                                    </StackLayout>
+        
+    </StackLayout> 
+            
+        
+        </ScrollView>
+        </StackLayout>
+
+							
+
+
+								
+								
+						
+
+					<!-- static Footer	-->
+
+					<!--<RelativeLayout Margin="0" VerticalOptions="EndAndExpand">
+						<StackLayout x:Name="_slFooter" HeightRequest="60" Orientation="Horizontal" BackgroundColor="#F7F7F7" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}">
+							<Frame Margin="5" HorizontalOptions="FillAndExpand" Padding="0" HasShadow="false" VerticalOptions="Center">
+								<local:ChatEntry x:Name="txtMsg" Placeholder="Write here..." HorizontalOptions="FillAndExpand" HeightRequest="40" FontSize="14" Margin="05,0,0,0" VerticalOptions="Center" Keyboard="Chat" BackgroundColor="White"/>
+							</Frame>
+							<Button x:Name="btnSend" TextColor="Black" Image="send-btn" WidthRequest="40" HeightRequest="40" BorderRadius="20" VerticalOptions="Center" Margin="5" Clicked="Send_Clicked"/> 
+						</StackLayout>
+					</RelativeLayout>-->
+				</StackLayout> 
+			<!--</ScrollView>-->
 		
-
-		</ScrollView>
-		</StackLayout>
-<!--	end Chat section	--> 
-		</StackLayout>
 </ContentPage> 

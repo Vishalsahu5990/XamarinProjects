@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Plugin.SecureStorage;
+using Xamarin.Forms;
 
 namespace BikeSpot
 {
@@ -86,7 +87,7 @@ namespace BikeSpot
 				j.Add("email", usermodel.name);
 				j.Add("password", usermodel.password);
 				j.Add("device_type", "ios");
-				j.Add("deviceId", StaticDataModel.DeviceToken);
+				j.Add("device_id", StaticDataModel.DeviceToken);
 
 				var json = JsonConvert.SerializeObject(j);
 				var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -337,14 +338,15 @@ namespace BikeSpot
 		}
 		public static async Task<string> AddProductUsingMultipart(ProductModel pm)
 		{
+			TaskCompletionSource<string> tcs = new TaskCompletionSource<string>();
 			try
 			{
+				
 
 				//using (var client = new HttpClient())
 				//{
 				//client.MaxResponseContentBufferSize=int.MaxValue;
-				using (var content =
-					new MultipartFormDataContent())
+				using (var content = new MultipartFormDataContent())
 				{
 
 					content.Add(new StringContent("add_product"), "method");
@@ -374,43 +376,51 @@ namespace BikeSpot
 					if (pm.imageByteArray[3] != null)
 						content.Add(new StreamContent(new MemoryStream(pm.imageByteArray[3])), "img4", "img4.jpg");
 					client.Timeout = TimeSpan.FromSeconds(300);
-					using (
 
-
-					   var message =
-						await client.PostAsync(Constants.AddProductUrl, content))
+					client.PostAsync(Constants.AddProductUrl, content).ContinueWith((arg) =>
 					{
-						client.Timeout = TimeSpan.FromSeconds(300);
-						StaticMethods.DismissLoader();
-						if (message.IsSuccessStatusCode)
+						Device.BeginInvokeOnMainThread(() =>
 						{
 							StaticMethods.ShowToast("File uploaded successfully");
+							StaticMethods.DismissLoader();
+						});
+						tcs.SetResult("SUCCESS");
+					});
+					//var message = await client.PostAsync(Constants.AddProductUrl, content);
 
-						}
-						else
-						{
-							StaticMethods.ShowToast("Failed to upload file. Please try again after some time.");
-						}
+					client.Timeout = TimeSpan.FromSeconds(300);
 
-						var input = await message.Content.ReadAsStringAsync();
-
-						return !string.IsNullOrWhiteSpace(input) ? Regex.Match(input, @"http://\w*\.directupload\.net/images/\d*/\w*\.[a-z]{3}").Value : null;
+					/*if (message.IsSuccessStatusCode)
+					{
+						StaticMethods.ShowToast("File uploaded successfully");
+						return "SUCCESS";
 					}
-				}
+					else
+					{
+						StaticMethods.ShowToast("Failed to upload file. Please try again after some time.");
+					}*/
 
+					//var input = await message.Content.ReadAsStringAsync();
+
+					return tcs.Task.Result;
+					//return !string.IsNullOrWhiteSpace(input) ? Regex.Match(input, @"http://\w*\.directupload\.net/images/\d*/\w*\.[a-z]{3}").Value : null;
+
+
+
+				}
 
 			}
 
 			catch (Exception ex)
 			{
-
 			}
 			finally
 			{
 				StaticMethods.DismissLoader();
 			}
-			return null;
+			return tcs.Task.Result;
 		}
+
 		public static Product GetProductDetailsbyId(int product_id)
 		{
 
@@ -557,6 +567,62 @@ namespace BikeSpot
 			}
 			return _product;
 		}
+        public static List<Product> SearchProduct(string searchValue)
+        {
+            List<Product> _product = new List<Product>();
+            UserModel um = new UserModel();
+            ProductListModel _productModel = null;
+            try
+            {
+                string url = Constants.BaseUrl;
+                HttpResponseMessage response = null;
+                JObject j = new JObject();
+                j.Add("method", "get_productsearch");
+                j.Add("searchval", searchValue); 
+
+                var json = JsonConvert.SerializeObject(j);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                response = client.PostAsync(url, content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+
+                    using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+                    {
+                        var contents = reader.ReadToEnd();
+                        JObject jObj = JObject.Parse(contents);
+                        var data = jObj["data"]; 
+
+                        if (jObj["result"].ToString() == "success")
+                        {
+                            foreach (var item in data)
+                            {
+                                _product.Add(new Product
+                                {
+                                    list = item.ToObject<List<Product>>()
+                                });
+
+                            }
+
+                        }
+
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(@"ERROR {0}", ex.Message);
+            }
+            finally
+            {
+                StaticMethods.DismissLoader();
+
+            }
+            return _product;
+        }
 		public static List<Product> FilterProducts(List<string> type_of_bike, List<string> condition, List<string> type,
 												   int min_price, int max_price,
 												   int max_distance, List<string> gender,
@@ -1060,12 +1126,12 @@ namespace BikeSpot
 			WizardResultModel wr = new WizardResultModel();
 			try
 			{
-				string[] arrayAnswer = answer.Select(i => i.ToString()).ToArray();
+
 				string url = Constants.BaseUrl;
 				HttpResponseMessage response = null;
 				JObject j = new JObject();
-				j.Add("method", "get_wizard_result");
-				j.Add("answers", JsonConvert.SerializeObject(arrayAnswer));
+				j.Add("method", "get_wizard_result_ios");
+				j.Add("answers", string.Join(",", answer.ToArray()));
 
 				var json = JsonConvert.SerializeObject(j);
 				var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -1345,7 +1411,7 @@ namespace BikeSpot
 				HttpResponseMessage response = null;
 				JObject j = new JObject();
 				j.Add("method", "get_chat_user_list");
-				j.Add("sender_user_id", StaticDataModel.userId);
+				j.Add("sender_user_id", "13");
 
 				var json = JsonConvert.SerializeObject(j);
 				var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -1409,10 +1475,20 @@ namespace BikeSpot
 						JObject jObj = JObject.Parse(contents);
 						if (jObj["result"].ToString() == "success")
 						{
-
-							chatUserModel.chat_user_id = Convert.ToInt32(jObj["chat_user_id"].ToString());
-							chatUserModel.offer_status = Convert.ToInt32(jObj["offer_status"].ToString());
-							chatUserModel.msg = jObj["msg"].ToString();
+							var chatUserId = jObj["chat_user_id"];
+							var offerStatus = jObj["offer_status"];
+							var msg = jObj["msg"];
+							if (!ReferenceEquals(chatUserId, null))
+							{
+								chatUserModel.chat_user_id = Convert.ToInt32(chatUserId.ToString());
+							}
+							if (!ReferenceEquals(offerStatus, null))
+							{
+								chatUserModel.offer_status = Convert.ToInt32(offerStatus.ToString());
+							}
+							if (!ReferenceEquals(msg, null)){
+								chatUserModel.msg = msg.ToString();
+							}
 						}
 
 
@@ -1564,11 +1640,16 @@ OfferStatusModel offerStatusModel = new OfferStatusModel();
 						JObject jObj = JObject.Parse(contents);
 						if (jObj["result"].ToString() == "success")
 						{
-
+                            offerStatusModel.result = jObj["result"].ToString();
 							offerStatusModel.responseMessage = jObj["responseMessage"].ToString();
 							offerStatusModel.offer_id = Convert.ToInt32(jObj["offer_id"].ToString());
 							offerStatusModel.notification_response = jObj["notification_response"].ToString();
 						}
+                        else
+                        {
+							offerStatusModel.result = jObj["result"].ToString();
+                            offerStatusModel.responseMessage = jObj["responseMessage"].ToString();
+                        }
 
 
 					}
@@ -1587,6 +1668,193 @@ OfferStatusModel offerStatusModel = new OfferStatusModel();
 
 			}
 			return offerStatusModel;
+		}
+public static string DeleteProductByProductId(string product_id)
+{
+	string ret = string.Empty;
+	try
+	{
+		string url = Constants.BaseUrl;
+		HttpResponseMessage response = null;
+		JObject j = new JObject();
+		j.Add("method", "delete_product");
+		j.Add("user_id", StaticDataModel.userId);
+		j.Add("product_id", product_id);
+		
+
+		var json = JsonConvert.SerializeObject(j);
+		var content = new StringContent(json, Encoding.UTF8, "application/json");
+		response = client.PostAsync(url, content).Result;
+		if (response.IsSuccessStatusCode)
+		{
+
+			using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+			{
+				var contents = reader.ReadToEnd();
+				JObject jObj = JObject.Parse(contents);
+				
+				ret = jObj["result"].ToString(); 
+
+
+			}
+
+		}
+
+	}
+	catch (Exception ex)
+	{
+
+		Debug.WriteLine(@"ERROR {0}", ex.Message);
+	}
+	finally
+	{
+		StaticMethods.DismissLoader();
+
+	}
+	return ret;
+		}
+        public static ReviewModel GetMyReviews()
+        {
+            ReviewModel rm = new ReviewModel();
+
+
+            try
+            {
+                string url = Constants.BaseUrl;
+                HttpResponseMessage response = null;
+                JObject j = new JObject();
+                j.Add("method", "get_my_review");
+                j.Add("user_id", StaticDataModel.userId);
+
+                var json = JsonConvert.SerializeObject(j);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                response = client.PostAsync(url, content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+
+                    using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+                    {
+                        var contents = reader.ReadToEnd();
+                        JObject jObj = JObject.Parse(contents);
+                        if (jObj["result"].ToString() == "success")
+                        {
+                            var data = jObj["review_data"];
+                            rm.review_data = data.ToObject<List<ReviewModel.ReviewData>>();
+
+
+                        }
+
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(@"ERROR {0}", ex.Message);
+            }
+            finally
+            {
+                StaticMethods.DismissLoader();
+
+            }
+            return rm;
+        }
+		public static string GetPaypalId(string productUserId)
+		{
+			string ret = string.Empty;
+
+			try
+			{
+				string url = Constants.BaseUrl;
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", "get_paypaldetails");
+                j.Add("productuser_id",productUserId);
+
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
+				{
+
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						if (jObj["result"].ToString() == "success")
+						{
+
+                            ret = jObj["paypal_id"].ToString();
+						}
+
+
+					}
+
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return ret;
+		}
+		public static string SavePaypalId(string paypal_id)
+		{
+			string ret = string.Empty;
+
+			try
+			{
+				string url = Constants.BaseUrl;
+				HttpResponseMessage response = null;
+				JObject j = new JObject();
+				j.Add("method", "save_paypaldetails");
+				j.Add("user_id", StaticDataModel.userId);
+                j.Add("paypal_id",paypal_id);  
+
+
+				var json = JsonConvert.SerializeObject(j);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+				response = client.PostAsync(url, content).Result;
+				if (response.IsSuccessStatusCode)
+				{
+
+					using (StreamReader reader = new StreamReader(response.Content.ReadAsStreamAsync().Result))
+					{
+						var contents = reader.ReadToEnd();
+						JObject jObj = JObject.Parse(contents);
+						if (jObj["result"].ToString() == "success")
+						{
+
+							ret = "success";
+						}
+
+
+					}
+
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+				Debug.WriteLine(@"ERROR {0}", ex.Message);
+			}
+			finally
+			{
+				StaticMethods.DismissLoader();
+
+			}
+			return ret;
 		}
 	}
 }

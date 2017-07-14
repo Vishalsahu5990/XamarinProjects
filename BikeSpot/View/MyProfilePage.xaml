@@ -16,7 +16,7 @@
 			Margin="0"> 
   <Image 
 		Source="green_background.png"
-				Aspect="AspectFill"
+			Aspect="AspectFill"
 	RelativeLayout.WidthConstraint=
               "{ConstraintExpression Type=RelativeToParent, Property=Width}"
                RelativeLayout.HeightConstraint=
@@ -58,7 +58,7 @@
 						<controls:CircleImage
 							x:Name="imgProfile"
 							Aspect="AspectFill"
-							Source="profile.jpg"
+							Source="dummyprofile.png"
 							HeightRequest="100"
 			                WidthRequest="100"
 			                VerticalOptions="Start"
@@ -67,14 +67,14 @@
 					HorizontalOptions="Start"/>
 					<StackLayout Grid.Column="1">
 							
-								<Label Text="Alexendra Alsop"
+								<Label Text="N/A"
 							TextColor="White" 
 							FontAttributes="Bold"
 							FontSize="18"
 							x:Name="lblUserName"/>
 
 					
-							<Label Text="www.domain.com"
+							<Label Text="N/A"
 							TextColor="White"
 							x:Name="lblEmail"/>
 							<Label Text="5 reviews"
@@ -234,9 +234,10 @@
 					<Label Text="Your Reviews" 
 							TextColor="Black"
 							FontAttributes="Bold"/>
-						<Label Text="12 reviews" 
+						<Label Text="0 reviews" 
 							TextColor="#646566"
-							FontSize="12"/>
+							FontSize="12"
+                                x:Name="lblMyReviews"/>
 					</StackLayout>
 							<StackLayout.GestureRecognizers> 
         <TapGestureRecognizer Tapped="yourReviewsTapped"/>    
@@ -393,11 +394,12 @@
 					Grid.Column="0"
 					HorizontalTextAlignment="Start"/>
 
-													<Label Text="{Binding price}"
+						<Label Text="{Binding price}"
 								HorizontalTextAlignment="End"
 					FontSize="Small"
 					LineBreakMode="TailTruncation" 
 								WidthRequest="60"
+                      TextColor="#53D9D1"
 						Grid.Column="1"/>
 					</Grid> 
 					</StackLayout>
@@ -407,8 +409,20 @@
 					<StackLayout Orientation="Horizontal" VerticalOptions="Start">
 							<Image Source="top1" 
 			HorizontalOptions="EndAndExpand"
-			IsVisible="false"
-																					/> 
+			IsVisible="false"/>
+							<StackLayout
+								Padding="4"
+							HorizontalOptions="EndAndExpand"
+								BackgroundColor="#50000000"
+								VerticalOptions="Start">
+								<Button 
+									VerticalOptions="CenterAndExpand"
+								    HeightRequest="15"
+									WidthRequest="15"
+								    Image="del.png" 
+									CommandParameter="{Binding product_id}"
+									Clicked="Delete_Clicked"/>
+							</StackLayout>													
 						</StackLayout>								
 													</Grid>
 				</Frame>
